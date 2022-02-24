@@ -21,6 +21,8 @@ Verder is het mogelijk om te filteren op registratie, vliegtuigtype, luchthaven,
 
 ### Nice to have's
 Statistieken weergeven
+Foto's voor luchthavens, maatschappijen en vliegtuigtypes
+Locatie voor luchthavens, maatschappijen en vliegtuigtypes
 
 ### Voorbeeld
 Jef gaat voor het eerst gaan spotten in Brussels Airport. Als hij aankomt doet hij de app open en gaat hij naar het tabblad luchthavens. Daar ziet hij een lijst met luchthavens waar hij al geweest is. In zijn geval is dit enkel Oostende. Aangezien Brussels airport er nog niet tussen staat, voegt hij deze toe aan de app.
