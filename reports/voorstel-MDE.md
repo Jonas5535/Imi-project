@@ -14,13 +14,13 @@ Kruis minstens **1 strategie** aan met
 
 Kruis minstens **2 mobile features** aan:
 
-- [x] Xamarin Essentials
+- [x] Xamarin Essentials (Locatie)
 - [ ] Push notifications
 - [ ] 2D Graphics
 - [ ] Authentication en Authorization
 - [ ] Native Communication
 - [ ] Native Speech to Text
-- [x] Cross-platform Native Plugin
+- [x] Cross-platform Native Plugin (Een kaart met locatie aanduiding)
 - [ ] Andere, namelijk:
 
 ## Beschrijving
