@@ -88,8 +88,8 @@ Als hij bijvoorbeeld wil controleren of hij het vliegtuig van de rode duivels al
 
 ### Externe API
 
-Aviationstack API (https://aviationstack.com/documentation)\
-Cirium flightstats (https://developer.flightstats.com/api-docs/aircraft/v1)
+Meme API (https://github.com/D3vd/Meme_Api)\
+Joke api (https://rapidapi.com/LemmoTresto/api/joke3)
 
 ### ERD
 ![test](ERD-AircraftDb.png) 
