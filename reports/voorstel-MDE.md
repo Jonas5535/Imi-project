@@ -8,8 +8,7 @@ Kruis minstens **1 strategie** aan met
 - [ ] Online CRUD operaties met eenBackend Service
 - [ ] Online Fetch, Offline CRUD
 - [ ] Offline CRUD, Online Push
-- [ ] Andere, namelijk: 
-
+- [ ] Andere, namelijk:
 
 ## Mobile features
 
@@ -21,9 +20,8 @@ Kruis minstens **2 mobile features** aan:
 - [ ] Authentication en Authorization
 - [ ] Native Communication
 - [ ] Native Speech to Text
-- [ ] Cross-platform Native Plugin
-- [ ] Andere, namelijk: 
-
+- [x] Cross-platform Native Plugin
+- [ ] Andere, namelijk:
 
 ## Beschrijving
 
