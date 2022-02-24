@@ -12,7 +12,7 @@ Concreet moet het mogelijk zijn om luchthavens, vliegtuigtypes, luchtvaartmaatsc
 - een lijst van luchthavens waar ik dit vliegtuig heb gespot
 - de datum waarop ik hem voor het eerst heb gespot
 - de datum waarop ik hem voor het laatst heb gespot
-- of het vliegtuig een speciale [livery](http://dictionary.sensagent.com/Aircraft%20livery/en-en/#:~:text=Aircraft%20livery%20is%20a%20paint%20scheme%20applied%20to%20an%20aircraft%2C%20generally%20to%20fuselage%2C%20wings%2C%20empennage%20(tail%20fin)%2C%20or%20jet%20engines.%20The%20term%20aircraft%20livery%20comes%20from%20the%20more%20general%20term%20livery.) had, ja of nee.
+- of het vliegtuig een speciale [livery](https://bit.ly/3seIFHW) had, ja of nee.
 
 Ik kan deze informatie ook aanpassen en een admin kan zelfs info verwijderen. Luchthavens, maatschappijen en vliegtuigtypes kunnen enkel verwijderd worden als er geen enkel vliegtuig aan gekoppeld is.
 
