@@ -9,7 +9,12 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
     public class MockAirportService : IAirportService
     {
-        private static ObservableCollection<Airport> _airportList = new ObservableCollection<Airport>();
+        private static ObservableCollection<Airport> _airportList = new ObservableCollection<Airport>
+        {
+            new Airport{Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "Brussels Airport", IATACode = "BRU", ICAOCode = "EBBR", ElevationAMSL = 56, RunwayAmount = 3, TerminalAmount = 1, Country = "België", City = "Zaventem" },
+            new Airport{Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "Nice Côte d'Azur", IATACode = "NCE", ICAOCode = "LFMN", ElevationAMSL = 4, RunwayAmount = 2, TerminalAmount = 3, Country = "Frankrijk", City = "Nice" },
+            new Airport{Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA", ElevationAMSL = 41, RunwayAmount = 2, TerminalAmount = 3, Country = "japan", City = "Narita" }
+        };
 
         public async Task<Airport> AddAirport(Airport airport)
         {
