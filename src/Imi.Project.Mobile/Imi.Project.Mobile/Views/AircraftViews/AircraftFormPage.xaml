@@ -1,12 +1,44 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.AircraftViews.AircraftFormPage">
+             xmlns:ReusableViews="clr-namespace:Imi.Project.Mobile.Views.ReusableViews"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             x:Class="Imi.Project.Mobile.Views.AircraftViews.AircraftFormPage"
+             BackgroundColor="White">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Opslaan" Clicked="BtnSave_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout x:Name="AircraftForm">
+                    <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
+                    <Entry x:Name="txtRegistration" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                    <Label x:Name="lblErrorRegistration" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                    <Picker x:Name="pckType" Title="Kies een type" Style="{StaticResource StandardPicker}"></Picker>
+                    <Label x:Name="lblErrorType" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                    <Picker x:Name="pckAirline" Title="Kies een airline" Style="{StaticResource StandardPicker}"></Picker>
+                    <Label x:Name="lblErrorAirline" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                    <Switch x:Name="swLivery" HorizontalOptions="StartAndExpand" Margin="15,5,0,0"></Switch>
+                    <StackLayout Orientation="Horizontal">
+                        <Label Text="Eerst gezien" Style="{StaticResource FormLabel}" Margin="20,15,0,0"></Label>
+                        <Label Text="Laatst gezien" Style="{StaticResource FormLabel}" HorizontalOptions="EndAndExpand" Margin="15,15,20,0"></Label>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal">
+                        <DatePicker x:Name="dpFirstSeen" Style="{StaticResource StandardDatePicker}" MinimumDate="01/01/1950" MaximumDate="{x:Static sys:DateTime.Today}"></DatePicker>
+                        <DatePicker x:Name="dpLastSeen" HorizontalOptions="EndAndExpand" Style="{StaticResource StandardDatePicker}" MinimumDate="01/01/1950" MaximumDate="{x:Static sys:DateTime.Today}" Margin="15,0,15,0"></DatePicker>
+                    </StackLayout>
+                    <Label x:Name="lblErrorLastSeen" Text="test" HorizontalOptions="EndAndExpand" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
+                    <Label x:Name="lblErrorAirport" Style="{StaticResource ErrorMessage}"></Label>
+                    <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}" SelectedIndexChanged="pckAirport_SelectedIndexChanged"></Picker>
+                </StackLayout>
+            </ScrollView>
+            <ReusableViews:BusyView x:Name="busyIndicator"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

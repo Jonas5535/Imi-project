@@ -1,12 +1,60 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.AircraftViews.AircraftDetailPage">
+             x:Class="Imi.Project.Mobile.Views.AircraftViews.AircraftDetailPage"
+             BackgroundColor="White"
+             Title="Details">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Clicked="BtnDelete_Clicked"/>
+        <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary" Clicked="BtnEdit_Clicked"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Registratie" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
+                <Label Text="Type" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1"></Label>
+                <Label x:Name="lblRegistration" Style="{StaticResource ContentLabel}" Margin="-45,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label x:Name="lblType" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="Maatschappij" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
+                <Label Text="Special livery" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"></Label>
+                <Label x:Name="lblAirline" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="0"></Label>
+                <Label x:Name="lblLivery" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="Eerst gezien" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
+                <Label Text="Laatst gezien" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="4" Grid.Column="1"></Label>
+                <Label x:Name="lblFirstSeen" Style="{StaticResource ContentLabel}" Margin="-30,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label x:Name="lblLastSeen" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
+                <Label Text="Luchthavens" BackgroundColor="{StaticResource MainYellow}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"
+                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="6" Grid.ColumnSpan="2"/>
+                <StackLayout Grid.Row="7" Grid.ColumnSpan="2">
+                    <ListView x:Name="lvAirports" HasUnevenRows="True" SelectionMode="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <StackLayout>
+                                        <Label TextColor="Black" Text="{Binding .}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" HeightRequest="40" VerticalTextAlignment="Center"
+                                               FontSize="Medium" BackgroundColor="#feea95"/>
+                                    </StackLayout>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
