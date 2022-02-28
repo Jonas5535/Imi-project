@@ -22,6 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\AirlineViews\AirlineFormPage.xaml.cs">
+      <DependentUpon>AirlineFormPage.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
     <EmbeddedResource Update="Views\AircraftTypeViews\AircraftTypeFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -40,7 +46,7 @@
     <EmbeddedResource Update="Views\AircraftViews\FilterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AirlineViews\AirlineFormView.xaml">
+    <EmbeddedResource Update="Views\AirlineViews\AirlineFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\AirlineViews\AirlinePage.xaml">
