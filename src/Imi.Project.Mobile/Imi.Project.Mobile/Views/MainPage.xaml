@@ -1,24 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.MainPage">
+             x:Class="Imi.Project.Mobile.Views.MainPage"
+             BackgroundColor="White"
+             Title="Home">
 
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
-    </StackLayout>
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Account" IconImageSource="User.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="Welkom gebruiker" TextColor="Black" FontSize="45" HorizontalTextAlignment="Center" Margin="15, 25, 15, 25"></Label>
+                    <StackLayout Margin="0, 100, 0, 0">
+                        <Button x:Name="btnAircraft" Text="Vliegtuigen" Style="{StaticResource RoundedButton}" Clicked="btnAircraft_Clicked"></Button>
+                        <Button x:Name="btnAircraftType" Text="VliegtuigTypes" Style="{StaticResource RoundedButton}" Clicked="btnAircraftType_Clicked"></Button>
+                        <Button x:Name="btnAirport" Text="Luchthavens" Style="{StaticResource RoundedButton}" Clicked="btnAirport_Clicked"></Button>
+                        <Button x:Name="btnAirline" Text="Maatschappijen" Style="{StaticResource RoundedButton}" Clicked="btnAirline_Clicked"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
 </ContentPage>
