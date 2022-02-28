@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Imi.Project.Mobile.Views;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
 {

@@ -20,4 +20,17 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Imi.Project.Mobile.Core\Imi.Project.Mobile.Core.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\AircraftTypeViews\" />
+    <Folder Include="Views\AircraftViews\" />
+    <Folder Include="Views\AirlineViews\" />
+    <Folder Include="Views\AirportViews\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Views\ReusableViews\BusyView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>
