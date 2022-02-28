@@ -1,12 +1,25 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Imi.Project.Mobile.Views.AircraftViews.FilterPage">
+             x:Class="Imi.Project.Mobile.Views.AircraftViews.FilterPage"
+             BackgroundColor="White"
+             Title="Filters">
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout x:Name="AircraftForm">
+                <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
+                <Entry x:Name="txtRegistration" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Picker x:Name="pckType" Title="Kies een type" Style="{StaticResource StandardPicker}"></Picker>
+                <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Picker x:Name="pckAirline" Title="Kies een airline" Style="{StaticResource StandardPicker}"></Picker>
+                <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Switch x:Name="swLivery" HorizontalOptions="StartAndExpand" Margin="15,5,0,0"></Switch>
+                <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
+                <Picker x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"></Picker>
+                <Button x:Name="BtnSave" Text="Filteren" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
