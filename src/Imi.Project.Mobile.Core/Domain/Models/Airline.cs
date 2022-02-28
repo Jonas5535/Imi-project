@@ -10,6 +10,6 @@ namespace Imi.Project.Mobile.Core.Domain.Models
         public string ICAOCode { get; set; }
         public string MainAirport { get; set; }
         public string HeadQuarter { get; set; }
-        public int FleetSize { get; set; }
+        public int? FleetSize { get; set; }
     }
 }
