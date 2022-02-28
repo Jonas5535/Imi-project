@@ -9,7 +9,18 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
     public class MockAircraftService : IAircraftService
     {
-        private static ObservableCollection<Aircraft> _aircraftList;
+        private static ObservableCollection<Aircraft> _aircraftList = new ObservableCollection<Aircraft>
+        {
+            new Aircraft{ Id = Guid.Parse("00000000-0000-0000-0000-000000000001"),Registration = "OO-SNJ", AircraftType = "A320", Airline = "Brussels Airlines", HasSpecialLivery = false, FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08),
+                Airports = new ObservableCollection<string>{ "Brussels Airport", "Nice Côte d'Azur", "Tokyo Narita Intl. Airport"}
+            },
+            new Aircraft{ Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Registration = "OO-LOE", AircraftType = "B788", Airline = "TUI Fly", HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08),
+                Airports = new List<string>{ "Brussels Airport", "Nice Côte d'Azur" }
+            },
+            new Aircraft{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Registration = "D-ALCC", AircraftType = "MD11", Airline = "Lufthansa Cargo", HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25),
+                Airports = new List<string>{ "Tokyo Narita Intl. Airport" }
+            }
+        };
 
         public async Task<Aircraft> AddAircraft(Aircraft aircraft)
         {
