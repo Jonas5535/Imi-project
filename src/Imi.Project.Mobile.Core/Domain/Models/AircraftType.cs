@@ -12,6 +12,6 @@ namespace Imi.Project.Mobile.Core.Domain.Models
         public double? Lentgh { get; set; }
         public double? WingSpan { get; set; }
         public double? Height { get; set; }
-        public int? MaxCapacity { get; set; }
+        public int? EmptyWeight { get; set; }
     }
 }
