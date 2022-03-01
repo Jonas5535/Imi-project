@@ -90,9 +90,12 @@ Als hij bijvoorbeeld wil controleren of hij het vliegtuig van de rode duivels al
 | DELETE       | /api/airlines/id      | Nee               | Ja               |
 
 ### Externe API
+Ik zal één van deze api's gebruiken. Ik weet nog niet welke van deze ik effectief zal gebruiken.
 
 Meme API (https://github.com/D3vd/Meme_Api)\
 Joke api (https://rapidapi.com/LemmoTresto/api/joke3)
+Waifu pics api (https://waifu.pics/docs)
+Waifu IM Api (https://waifu.im/docs/)
 
 ### ERD
 ![test](ERD-AircraftDb.png) 
