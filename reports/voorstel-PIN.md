@@ -1,29 +1,6 @@
-# Projectvoorstel Mobile Development
-
-## Online strategie
-
-Kruis minstens **1 strategie** aan met
-
-- [x] Online CRUD operaties met eigen REST API
-- [ ] Online CRUD operaties met eenBackend Service
-- [ ] Online Fetch, Offline CRUD
-- [ ] Offline CRUD, Online Push
-- [ ] Andere, namelijk:
-
-## Mobile features
-
-Kruis minstens **2 mobile features** aan:
-
-- [x] Xamarin Essentials (Locatie)
-- [ ] Push notifications
-- [ ] 2D Graphics
-- [ ] Authentication en Authorization
-- [ ] Native Communication
-- [ ] Native Speech to Text
-- [x] Cross-platform Native Plugin (Een kaart met locatie aanduiding)
-- [ ] Andere, namelijk:
-
-## Beschrijving
+# IMI projectvoorstel PIN
+## Jonas Lampaert
+### Concept
 
 Ik wil een applicatie maken waarmee een vliegtuigspotter een collectie van vliegtuigen kan aanmaken. Op die manier kan hij snel en gemakkelijk kijken welke vliegtuigen hij in zijn collectie heeft.
 
@@ -35,7 +12,7 @@ Concreet moet het mogelijk zijn om luchthavens, vliegtuigtypes, luchtvaartmaatsc
 - een lijst van luchthavens waar ik dit vliegtuig heb gespot
 - de datum waarop ik hem voor het eerst heb gespot
 - de datum waarop ik hem voor het laatst heb gespot
-- of het vliegtuig een speciale [livery](https://bit.ly/3seIFHW) had, ja of nee.
+- of het vliegtuig een speciale [livery](https://bit.ly/3seIFHW.) had, ja of nee.
 
 Ik kan deze informatie ook aanpassen en een admin kan zelfs info verwijderen. Luchthavens, maatschappijen en vliegtuigtypes kunnen enkel verwijderd worden als er geen enkel vliegtuig aan gekoppeld is.
 
@@ -43,8 +20,6 @@ Verder is het mogelijk om te filteren op registratie, vliegtuigtype, luchthaven,
 
 ### Nice to have's
 Statistieken weergeven
-Foto's voor luchthavens, maatschappijen en vliegtuigtypes
-Locatie voor luchthavens, maatschappijen en vliegtuigtypes
 
 ### Voorbeeld
 Jef gaat voor het eerst gaan spotten in Brussels Airport. Als hij aankomt doet hij de app open en gaat hij naar het tabblad luchthavens. Daar ziet hij een lijst met luchthavens waar hij al geweest is. In zijn geval is dit enkel Oostende. Aangezien Brussels airport er nog niet tussen staat, voegt hij deze toe aan de app.
@@ -58,3 +33,11 @@ Als Jef ziet dat de info fout is of hij heeft datzelfde vliegtuig nog eens gespo
 Als Jef wil controleren hoeveel vliegtuigen van Brussels Airlines er in zijn collectie zitten, dan kan hij filteren op Brussels Airlines. Hij krijgt dan een lijst te zien van alle vliegtuigen van Brussels Airlines die hij aan de app heeft toegevoegd. Als hij dan zegt dat hij enkel de A320's van Brussels Airlines wil zien, dan kan hij een filter op Airbus A320 toevoegen en ziet hij enkel de A320's van Brussels Airlines die in de app zitten.
 
 Als hij bijvoorbeeld wil controleren of hij het vliegtuig van de rode duivels als in zijn collectie heeft, dan kan hij het registratienummer van dat vliegtuig ingeven. Als hij het al heeft dan zal zit vliegtuig verschijnen, als hij het nog niet heeft dan zal er een bericht verschijnen dat dit vliegtuig nog niet in de app zit.
+
+### CRUD onderdeel
+Voor het CRUD onderdeel zal ik de Aircraft entity uitwerken. Deze heeft relaties met alle andere tabellen in de database en is dus de perfecte entity voor dit onderdeel. Eens ik mijn applicatie met mij api zal verbinden zal ik ook een inlogpagina moeten vooorzien. Het verwijderen van data zal dan enkel mogelijk zijn voor admins (Dit moet voor PRI).
+
+### Concepts onderdeel
+Voor het onderdeel concepts ben ik van plan om een memory spel te maken met foto's van vliegtuigen. De foto's die hiervoor gebruikt zullen worden zijn ofwel standaard foto's van vliegtuigen ofwel de foto's uit de eigen collectie.
+
+Het spel zelf zal volledig singleplayer zijn. Om het spel uitdagend te maken mag de speler slechts een beperkt aantal fouten maken anders zal hij verliezen.
