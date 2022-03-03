@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
+             xmlns:ReusableViews="clr-namespace:Imi.Project.Mobile.Views.ReusableViews"
+             x:Class="Imi.Project.Mobile.Views.AirportViews.AirportPage"
+             BackgroundColor="White"
+             Title="Luchthavens">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Clicked="BtnAdd_Clicked"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <AbsoluteLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+            <StackLayout>
+                <ListView x:Name="lvAirports" Style="{StaticResource ListViewLayout}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}" Clicked="MnuEdit_Clicked"/>
+                                    <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDelete_Clicked"/>
+                                </ViewCell.ContextActions>
+                                <Frame Style="{StaticResource FrameForListView}">
+                                    <StackLayout Orientation="Vertical">
+                                        <CardView:CardView BackgroundColor="White" HeightRequest="125">
+                                            <CardView:CardView.CardViewContent>
+                                                <StackLayout Style="{StaticResource InnerStackLayoutForListView}">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="35"/>
+                                                            <RowDefinition Height="90"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Naam"/>
+                                                        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="IATA"/>
+                                                        <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="ICAO code"/>
+                                                        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Name}"/>
+                                                        <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding IATACode}"/>
+                                                        <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding ICAOCode}"/>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </CardView:CardView.CardViewContent>
+                                        </CardView:CardView>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <ReusableViews:BusyView x:Name="busyIndicator"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
