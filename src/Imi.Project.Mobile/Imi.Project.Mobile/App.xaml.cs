@@ -1,6 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Mobile.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace Imi.Project.Mobile
 {
@@ -10,7 +9,11 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            MainPage = new MainPage();
+            MainPage = new NavigationPage(new MainPage());
+
+            NavigationPage navigationPage = Current.MainPage as NavigationPage;
+            navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");
+            navigationPage.BarTextColor = Color.Black;
         }
 
         protected override void OnStart()
