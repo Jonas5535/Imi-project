@@ -14,6 +14,6 @@ namespace Imi.Project.Blazor.Core.CRUD.Models
         public Guid AirlineId { get; set; }
         public InputSelectItem[] Airlines { get; set; }
         public Guid AirportId { get; set; }
-        public InputCheckboxItem[] Airports { get; set; }
+        public InputSelectItem[] Airports { get; set; }
     }
 }
