@@ -23,20 +23,20 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="200"/>
-                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <Label Text="Registratie" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
-                <Label Text="Type" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="0" Grid.Column="1"></Label>
-                <Label x:Name="lblRegistration" Style="{StaticResource ContentLabel}" Margin="-45,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
+                <Label x:Name="lblRegistration" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
                 <Label x:Name="lblType" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="Maatschappij" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
-                <Label Text="Special livery" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="2" Grid.Column="1"></Label>
-                <Label x:Name="lblAirline" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="0"></Label>
+                <Label Text="Special livery" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
+                <Label x:Name="lblAirline" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
                 <Label x:Name="lblLivery" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Eerst gezien" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
-                <Label Text="Laatst gezien" Style="{StaticResource TitleLabel}" HorizontalOptions="Center" Grid.Row="4" Grid.Column="1"></Label>
-                <Label x:Name="lblFirstSeen" Style="{StaticResource ContentLabel}" Margin="-30,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="Laatst gezien" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
+                <Label x:Name="lblFirstSeen" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
                 <Label x:Name="lblLastSeen" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="Luchthavens" BackgroundColor="{StaticResource MainYellow}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="6" Grid.ColumnSpan="2"/>

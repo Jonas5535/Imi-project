@@ -35,6 +35,7 @@
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="VerticalOptions" Value="EndAndExpand"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
             </Style>
 
             <Style x:Key="ContentLabel" TargetType="Label">
