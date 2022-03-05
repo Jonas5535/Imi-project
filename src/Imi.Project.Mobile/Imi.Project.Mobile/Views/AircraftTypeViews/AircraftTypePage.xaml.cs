@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftTypePage : ContentPage
     {
-        private readonly IAircraftTypeService aircraftTypeService;
+        private readonly ICRUDService<AircraftType> aircraftTypeService;
 
         public AircraftTypePage()
         {
@@ -24,7 +24,7 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
         {
             //busyIndicator.IsVisible = true;
 
-            IEnumerable<AircraftType> aircraftTypes = await aircraftTypeService.GetAircraftTypes();
+            IEnumerable<AircraftType> aircraftTypes = await aircraftTypeService.ListAllAsync();
 
             lvAircraftTypes.ItemsSource = aircraftTypes;
             //busyIndicator.IsVisible = false;
@@ -52,7 +52,7 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
             //busyIndicator.IsVisible = true;
 
             AircraftType selectedType = ((MenuItem)sender).CommandParameter as AircraftType;
-            await aircraftTypeService.DeleteAircraftType(selectedType.Id);
+            await aircraftTypeService.DeleteAsync(selectedType.Id);
 
             //busyIndicator.IsVisible = false;
         }

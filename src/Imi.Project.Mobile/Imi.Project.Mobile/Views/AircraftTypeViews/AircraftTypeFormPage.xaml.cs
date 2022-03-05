@@ -13,7 +13,7 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftTypeFormPage : ContentPage
     {
-        private readonly IAircraftTypeService aircraftTypeService;
+        private readonly ICRUDService<AircraftType> aircraftTypeService;
         private AircraftType currentAircraftType;
         private bool isNew = true;
         private IValidator aircraftTypeValidator;
@@ -95,11 +95,11 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
                 if (isNew)
                 {
                     currentAircraftType.Id = Guid.NewGuid();
-                    await aircraftTypeService.AddAircraftType(currentAircraftType);
+                    await aircraftTypeService.AddAsync(currentAircraftType);
                 }
                 else
                 {
-                    await aircraftTypeService.UpdateAircraftType(currentAircraftType);
+                    await aircraftTypeService.UpdateAsync(currentAircraftType);
                 }
 
                 await DisplayAlert("Opgeslagen", $"Het vliegtuigtype {currentAircraftType.Type} is opgeslagen", "Ok");

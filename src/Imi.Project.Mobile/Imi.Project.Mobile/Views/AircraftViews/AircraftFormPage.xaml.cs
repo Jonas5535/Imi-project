@@ -16,7 +16,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
     public partial class AircraftFormPage : ContentPage
     {
         private readonly IAircraftService aircraftService;
-        private readonly IAircraftTypeService aircraftTypeService;
+        private readonly ICRUDService<AircraftType> aircraftTypeService;
         private readonly IAirlineService airlineService;
         private readonly IAirportService airportService;
         private Aircraft currentAircraft;
@@ -63,7 +63,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
 
         private async void PopulateTypePicker()
         {
-            IEnumerable<AircraftType> types = await aircraftTypeService.GetAircraftTypes();
+            IEnumerable<AircraftType> types = await aircraftTypeService.ListAllAsync();
             List<string> pickerContent = new List<string>();
 
             foreach (var type in types)

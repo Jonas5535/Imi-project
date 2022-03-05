@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAircraftTypeService : IAircraftTypeService
+    public class MockAircraftTypeService : ICRUDService<AircraftType>
     {
         private static ObservableCollection<AircraftType> _aircraftTypeList = new ObservableCollection<AircraftType>
         {
@@ -16,34 +16,34 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             new AircraftType{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11", FirstFlight = DateTime.Parse("1990/01/10"), Lentgh = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
         };
 
-        public async Task<AircraftType> AddAircraftType(AircraftType aircraftType)
+        public async Task<AircraftType> AddAsync(AircraftType entity)
         {
-            _aircraftTypeList.Add(aircraftType);
-            return await Task.FromResult(aircraftType);
+            _aircraftTypeList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<AircraftType> DeleteAircraftType(Guid aircraftTypeId)
+        public async Task<AircraftType> DeleteAsync(Guid id)
         {
-            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftTypeId);
+            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
             _aircraftTypeList.Remove(aircraftType);
             return await Task.FromResult(aircraftType);
         }
 
-        public async Task<AircraftType> GetAircraftTypeById(Guid aircraftTypeId)
+        public async Task<AircraftType> GetByIdAsync(Guid id)
         {
-            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftTypeId);
+            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(aircraftType);
         }
 
-        public async Task<IEnumerable<AircraftType>> GetAircraftTypes()
+        public async Task<IEnumerable<AircraftType>> ListAllAsync()
         {
             IEnumerable<AircraftType> aircraftTypes = _aircraftTypeList;
             return await Task.FromResult(aircraftTypes);
         }
 
-        public async Task<AircraftType> UpdateAircraftType(AircraftType aircraftType)
+        public async Task<AircraftType> UpdateAsync(AircraftType entity)
         {
-            AircraftType EditedAircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftType.Id);
+            AircraftType EditedAircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == entity.Id);
             _aircraftTypeList.Remove(EditedAircraftType);
             _aircraftTypeList.Add(EditedAircraftType);
             return await Task.FromResult(EditedAircraftType);
