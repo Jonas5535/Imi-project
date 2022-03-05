@@ -11,9 +11,12 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
     {
         private static ObservableCollection<Airline> _airlineList = new ObservableCollection<Airline>
         {
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL", MainAirport = "Brussels Airport", HeadQuarter = "Diegem, België", FleetSize = 49 },
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF", MainAirport = "Brussels Airport", HeadQuarter = "Zaventem, België", FleetSize = 32 },
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC", MainAirport = "Frankfurt am Main", HeadQuarter = "Frankfurt, Duitsland", FleetSize = 18 }
+            new Airline{ Id = Guid.NewGuid(), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL", MainAirport = "Brussels Airport",
+                HeadQuarter = "Diegem, België", FleetSize = 49 },
+            new Airline{ Id = Guid.NewGuid(), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF", MainAirport = "Brussels Airport",
+                HeadQuarter = "Zaventem, België", FleetSize = 32 },
+            new Airline{ Id = Guid.NewGuid(), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC", MainAirport = "Frankfurt am Main",
+                HeadQuarter = "Frankfurt, Duitsland", FleetSize = 18 }
         };
 
         public async Task<Airline> AddAsync(Airline entity)
