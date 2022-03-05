@@ -23,12 +23,12 @@ namespace Imi.Project.Mobile.Views.AirportViews
 
         private async Task Listinit()
         {
-            busyIndicator.IsVisible = true;
+            //busyIndicator.IsVisible = true;
 
             IEnumerable<Airport> airports = await airportService.GetAirports();
 
             lvAirports.ItemsSource = airports;
-            busyIndicator.IsVisible = false;
+            //busyIndicator.IsVisible = false;
         }
 
         protected override async void OnAppearing()
@@ -50,12 +50,12 @@ namespace Imi.Project.Mobile.Views.AirportViews
 
         private async void MnuDelete_Clicked(object sender, EventArgs e)
         {
-            busyIndicator.IsVisible = true;
+            //busyIndicator.IsVisible = true;
 
             Airport selectedAirport = ((MenuItem)sender).CommandParameter as Airport;
             await airportService.DeleteAirport(selectedAirport.Id);
 
-            busyIndicator.IsVisible = false;
+            //busyIndicator.IsVisible = false;
         }
     }
 }

@@ -22,12 +22,12 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
 
         private async Task ListInit()
         {
-            busyIndicator.IsVisible = true;
+            //busyIndicator.IsVisible = true;
 
             IEnumerable<AircraftType> aircraftTypes = await aircraftTypeService.GetAircraftTypes();
 
             lvAircraftTypes.ItemsSource = aircraftTypes;
-            busyIndicator.IsVisible = false;
+            //busyIndicator.IsVisible = false;
         }
 
         protected override async void OnAppearing()
@@ -49,12 +49,12 @@ namespace Imi.Project.Mobile.Views.AircraftTypeViews
 
         private async void MnuDeleteType_Clicked(object sender, EventArgs e)
         {
-            busyIndicator.IsVisible = true;
+            //busyIndicator.IsVisible = true;
 
             AircraftType selectedType = ((MenuItem)sender).CommandParameter as AircraftType;
             await aircraftTypeService.DeleteAircraftType(selectedType.Id);
 
-            busyIndicator.IsVisible = false;
+            //busyIndicator.IsVisible = false;
         }
     }
 }
