@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAircraftService : IAircraftService
+    public class MockAircraftService : ICRUDService<Aircraft>
     {
         private static ObservableCollection<Aircraft> _aircraftList = new ObservableCollection<Aircraft>
         {
@@ -22,34 +22,34 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             }
         };
 
-        public async Task<Aircraft> AddAircraft(Aircraft aircraft)
+        public async Task<Aircraft> AddAsync(Aircraft entity)
         {
-            _aircraftList.Add(aircraft);
-            return await Task.FromResult(aircraft);
+            _aircraftList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<Aircraft> DeleteAircraft(Guid aircraftId)
+        public async Task<Aircraft> DeleteAsync(Guid id)
         {
-            Aircraft aircraft = _aircraftList.FirstOrDefault(a => a.Id == aircraftId);
+            Aircraft aircraft = _aircraftList.FirstOrDefault(a => a.Id == id);
             _aircraftList.Remove(aircraft);
             return await Task.FromResult(aircraft);
         }
 
-        public async Task<Aircraft> GetAircraftById(Guid aircraftId)
+        public async Task<Aircraft> GetByIdAsync(Guid id)
         {
-            Aircraft aircraft = _aircraftList.FirstOrDefault(a => a.Id == aircraftId);
+            Aircraft aircraft = _aircraftList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(aircraft);
         }
 
-        public async Task<IEnumerable<Aircraft>> GetAircrafts()
+        public async Task<IEnumerable<Aircraft>> ListAllAsync()
         {
             IEnumerable<Aircraft> aircrafts = _aircraftList;
             return await Task.FromResult(aircrafts);
         }
 
-        public async Task<Aircraft> UpdateAircraft(Aircraft aircraft)
+        public async Task<Aircraft> UpdateAsync(Aircraft entity)
         {
-            Aircraft EditedAircraft = _aircraftList.FirstOrDefault(a => a.Id == aircraft.Id);
+            Aircraft EditedAircraft = _aircraftList.FirstOrDefault(a => a.Id == entity.Id);
             _aircraftList.Remove(EditedAircraft);
             _aircraftList.Add(EditedAircraft);
             return await Task.FromResult(EditedAircraft);

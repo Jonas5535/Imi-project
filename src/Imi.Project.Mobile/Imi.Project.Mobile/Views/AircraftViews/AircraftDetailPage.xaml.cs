@@ -10,7 +10,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftDetailPage : ContentPage
     {
-        private readonly IAircraftService aircraftService;
+        private readonly ICRUDService<Aircraft> aircraftService;
         private Aircraft shownAircraft;
 
         public AircraftDetailPage(Aircraft aircraft)
@@ -46,7 +46,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
 
         private async void BtnDelete_Clicked(object sender, EventArgs e)
         {
-            await aircraftService.DeleteAircraft(shownAircraft.Id);
+            await aircraftService.DeleteAsync(shownAircraft.Id);
 
             await Navigation.PopAsync();
         }

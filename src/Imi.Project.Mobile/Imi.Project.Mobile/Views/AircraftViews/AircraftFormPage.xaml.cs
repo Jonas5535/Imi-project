@@ -15,7 +15,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftFormPage : ContentPage
     {
-        private readonly IAircraftService aircraftService;
+        private readonly ICRUDService<Aircraft> aircraftService;
         private readonly ICRUDService<AircraftType> aircraftTypeService;
         private readonly ICRUDService<Airline> airlineService;
         private readonly ICRUDService<Airport> airportService;
@@ -256,11 +256,11 @@ namespace Imi.Project.Mobile.Views.AircraftViews
                 if (isNew)
                 {
                     currentAircraft.Id = Guid.NewGuid();
-                    await aircraftService.AddAircraft(currentAircraft);
+                    await aircraftService.AddAsync(currentAircraft);
                 }
                 else
                 {
-                    await aircraftService.UpdateAircraft(currentAircraft);
+                    await aircraftService.UpdateAsync(currentAircraft);
                 }
 
                 await DisplayAlert("Opgeslagen", $"het vliegtuig {currentAircraft.Registration} is opgeslagen", "Ok");
