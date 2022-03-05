@@ -29,6 +29,11 @@
                                                         <RowDefinition Height="35"/>
                                                         <RowDefinition Height="90"/>
                                                     </Grid.RowDefinitions>
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="1.1*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="*"/>
+                                                    </Grid.ColumnDefinitions>
                                                     <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Naam"/>
                                                     <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="IATA"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="ICAO code"/>
