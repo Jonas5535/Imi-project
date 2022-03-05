@@ -28,7 +28,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
             if (airport == null)
             {
                 currentAirport = new Airport();
-                Title = "Nieuw vliegtuigtype";
+                Title = "Nieuwe luchthaven";
             }
             else
             {
@@ -102,7 +102,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
                     await airportService.UpdateAirport(currentAirport);
                 }
 
-                await DisplayAlert("Opgeslagen", $"Het vliegtuigtype {currentAirport.Name} is opgeslagen", "Ok");
+                await DisplayAlert("Opgeslagen", $"De luchthaven {currentAirport.Name} is opgeslagen", "Ok");
                 await Navigation.PopAsync();
             }
             busyIndicator.IsVisible = false;

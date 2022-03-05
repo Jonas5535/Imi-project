@@ -14,7 +14,15 @@
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout x:Name="AircraftForm">
                     <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
-                    <Entry x:Name="txtRegistration" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                    <Entry x:Name="txtRegistration" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
                     <Label x:Name="lblErrorRegistration" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                     <Picker x:Name="pckType" Title="Kies een type" Style="{StaticResource StandardPicker}"></Picker>

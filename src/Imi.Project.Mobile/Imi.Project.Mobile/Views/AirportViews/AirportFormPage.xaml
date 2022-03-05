@@ -13,10 +13,26 @@
                     <Entry x:Name="txtName" Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" MaxLength="200"></Entry>
                     <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtIATA" Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" MaxLength="3"></Entry>
+                    <Entry x:Name="txtIATA" Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" MaxLength="3">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
                     <Label x:Name="lblErrorIATA" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtICAO" Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" MaxLength="4"></Entry>
+                    <Entry x:Name="txtICAO" Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" MaxLength="4">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
                     <Label x:Name="lblErrorICAO" Style="{StaticResource ErrorMessage}"></Label>
                     <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
                 </StackLayout>
