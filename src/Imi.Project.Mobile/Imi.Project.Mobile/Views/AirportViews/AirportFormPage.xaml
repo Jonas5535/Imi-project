@@ -10,7 +10,15 @@
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Naam" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtName" Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" MaxLength="200"></Entry>
+                    <Entry x:Name="txtName" Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" MaxLength="200">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
                     <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
                     <Entry x:Name="txtIATA" Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" MaxLength="3">

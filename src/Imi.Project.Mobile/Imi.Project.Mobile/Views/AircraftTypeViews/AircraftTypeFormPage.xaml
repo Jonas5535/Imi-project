@@ -10,7 +10,15 @@
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Merk" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtBrand" Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" MaxLength="50"></Entry>
+                    <Entry x:Name="txtBrand" Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" MaxLength="50">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
                     <Label x:Name="lblErrorBrand" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}"></Label>
                     <Entry x:Name="txtType" Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" MaxLength="30"></Entry>
