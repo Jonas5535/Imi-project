@@ -13,7 +13,7 @@ namespace Imi.Project.Mobile.Views.AirlineViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirlineFormPage : ContentPage
     {
-        private readonly IAirlineService airlineService;
+        private readonly ICRUDService<Airline> airlineService;
         private Airline currentAirline;
         private bool isNew = true;
         private IValidator airlineValidator;
@@ -95,11 +95,11 @@ namespace Imi.Project.Mobile.Views.AirlineViews
                 if (isNew)
                 {
                     currentAirline.Id = Guid.NewGuid();
-                    await airlineService.AddAirline(currentAirline);
+                    await airlineService.AddAsync(currentAirline);
                 }
                 else
                 {
-                    await airlineService.UpdateAirline(currentAirline);
+                    await airlineService.UpdateAsync(currentAirline);
                 }
 
                 await DisplayAlert("Opgeslagen", $"De maatschappij {currentAirline.Name} is opgeslagen", "Ok");

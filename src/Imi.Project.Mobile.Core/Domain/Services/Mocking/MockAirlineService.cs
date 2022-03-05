@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAirlineService : IAirlineService
+    public class MockAirlineService : ICRUDService<Airline>
     {
         private static ObservableCollection<Airline> _airlineList = new ObservableCollection<Airline>
         {
@@ -16,34 +16,34 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC", MainAirport = "Frankfurt am Main", HeadQuarter = "Frankfurt, Duitsland", FleetSize = 18 }
         };
 
-        public async Task<Airline> AddAirline(Airline airline)
+        public async Task<Airline> AddAsync(Airline entity)
         {
-            _airlineList.Add(airline);
-            return await Task.FromResult(airline);
+            _airlineList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<Airline> DeleteAirline(Guid airlineId)
+        public async Task<Airline> DeleteAsync(Guid id)
         {
-            Airline airline = _airlineList.FirstOrDefault(a => a.Id == airlineId);
+            Airline airline = _airlineList.FirstOrDefault(a => a.Id == id);
             _airlineList.Remove(airline);
             return await Task.FromResult(airline);
         }
 
-        public async Task<Airline> GetAirlineById(Guid airlineId)
+        public async Task<Airline> GetByIdAsync(Guid id)
         {
-            Airline airline = _airlineList.FirstOrDefault(a => a.Id == airlineId);
+            Airline airline = _airlineList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(airline);
         }
 
-        public async Task<IEnumerable<Airline>> GetAirlines()
+        public async Task<IEnumerable<Airline>> ListAllAsync()
         {
             IEnumerable<Airline> airlines = _airlineList;
             return await Task.FromResult(airlines);
         }
 
-        public async Task<Airline> UpdateAirline(Airline airline)
+        public async Task<Airline> UpdateAsync(Airline entity)
         {
-            Airline EditedAirline = _airlineList.FirstOrDefault(a => a.Id == airline.Id);
+            Airline EditedAirline = _airlineList.FirstOrDefault(a => a.Id == entity.Id);
             _airlineList.Remove(EditedAirline);
             _airlineList.Add(EditedAirline);
             return await Task.FromResult(EditedAirline);

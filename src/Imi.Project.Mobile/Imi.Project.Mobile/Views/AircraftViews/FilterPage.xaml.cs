@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
     public partial class FilterPage : ContentPage
     {
         private readonly ICRUDService<AircraftType> aircraftTypeService;
-        private readonly IAirlineService airlineService;
+        private readonly ICRUDService<Airline> airlineService;
         private readonly IAirportService airportService;
 
         public FilterPage()
@@ -48,7 +48,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
 
         private async void PopulateAirlinePicker()
         {
-            IEnumerable<Airline> airlines = await airlineService.GetAirlines();
+            IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
             List<string> pickerContent = new List<string>();
 
             foreach (var airline in airlines)

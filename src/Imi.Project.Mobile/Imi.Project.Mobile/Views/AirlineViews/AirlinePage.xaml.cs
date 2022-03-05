@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.Views.AirlineViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirlinePage : ContentPage
     {
-        private readonly IAirlineService airlineService;
+        private readonly ICRUDService<Airline> airlineService;
 
         public AirlinePage()
         {
@@ -25,7 +25,7 @@ namespace Imi.Project.Mobile.Views.AirlineViews
         {
             //busyIndicator.IsVisible = true;
 
-            IEnumerable<Airline> airlines = await airlineService.GetAirlines();
+            IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
 
             lvAirlines.ItemsSource = airlines;
             //busyIndicator.IsVisible = false;
@@ -53,7 +53,7 @@ namespace Imi.Project.Mobile.Views.AirlineViews
             //busyIndicator.IsVisible = true;
 
             Airline selectedAirline = ((MenuItem)sender).CommandParameter as Airline;
-            await airlineService.DeleteAirline(selectedAirline.Id);
+            await airlineService.DeleteAsync(selectedAirline.Id);
 
             //busyIndicator.IsVisible = false;
         }
