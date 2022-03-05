@@ -40,6 +40,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
             lblFirstSeen.Text = shownAircraft.FirstSeen.ToShortDateString();
             lblLastSeen.Text = shownAircraft.LastSeen.ToShortDateString();
 
+            lvAirports.HeightRequest = shownAircraft.Airports.Count * 41;
             lvAirports.ItemsSource = shownAircraft.Airports;
         }
 

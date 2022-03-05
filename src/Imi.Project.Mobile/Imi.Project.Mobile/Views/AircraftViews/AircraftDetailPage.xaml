@@ -39,7 +39,7 @@
                 <Label x:Name="lblFirstSeen" Style="{StaticResource ContentLabel}" Margin="-30,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
                 <Label x:Name="lblLastSeen" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="Luchthavens" BackgroundColor="{StaticResource MainYellow}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"
-                       HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="6" Grid.ColumnSpan="2"/>
+                        HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="6" Grid.ColumnSpan="2"/>
                 <StackLayout Grid.Row="7" Grid.ColumnSpan="2">
                     <ListView x:Name="lvAirports" HasUnevenRows="True" SelectionMode="None">
                         <ListView.ItemTemplate>
@@ -47,7 +47,7 @@
                                 <ViewCell>
                                     <StackLayout>
                                         <Label TextColor="Black" Text="{Binding .}" HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Center" HeightRequest="40" VerticalTextAlignment="Center"
-                                               FontSize="Medium" BackgroundColor="#feea95"/>
+                                                FontSize="Medium" BackgroundColor="#feea95"/>
                                     </StackLayout>
                                 </ViewCell>
                             </DataTemplate>
