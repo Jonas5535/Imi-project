@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:ReusableViews="clr-namespace:Imi.Project.Mobile.Views.ReusableViews"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             x:Class="Imi.Project.Mobile.Views.AircraftViews.AircraftFormPage"
+             xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
+             x:Class="Imi.Project.Mobile.Pages.AircraftFormPage"
              BackgroundColor="White">
 
     <ContentPage.ToolbarItems>
@@ -46,7 +46,7 @@
                     <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}" SelectedIndexChanged="pckAirport_SelectedIndexChanged"></Picker>
                 </StackLayout>
             </ScrollView>
-            <ReusableViews:BusyView x:Name="busyIndicator"/>
+            <Pages:BusyView x:Name="busyIndicator"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

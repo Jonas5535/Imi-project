@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentValidation" Version="10.3.6" />
+    <PackageReference Include="FreshMvvm" Version="4.0.1" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2337" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.1" />
     <PackageReference Include="XamarinForms.CardView.NetStandard" Version="1.1.1.5" />
@@ -22,43 +23,43 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\AirlineViews\AirlineFormPage.xaml.cs">
+    <Compile Update="Pages\AirlineViews\AirlineFormPage.xaml.cs">
       <DependentUpon>AirlineFormPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Views\AircraftTypeViews\AircraftTypeFormPage.xaml">
+    <EmbeddedResource Update="Pages\AircraftTypeViews\AircraftTypeFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AircraftTypeViews\AircraftTypePage.xaml">
+    <EmbeddedResource Update="Pages\AircraftTypeViews\AircraftTypePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AircraftViews\AircraftDetailPage.xaml">
+    <EmbeddedResource Update="Pages\AircraftViews\AircraftDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AircraftViews\AircraftFormPage.xaml">
+    <EmbeddedResource Update="Pages\AircraftViews\AircraftFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AircraftViews\AircraftPage.xaml">
+    <EmbeddedResource Update="Pages\AircraftViews\AircraftPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AircraftViews\FilterPage.xaml">
+    <EmbeddedResource Update="Pages\AircraftViews\FilterPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AirlineViews\AirlineFormPage.xaml">
+    <EmbeddedResource Update="Pages\AirlineViews\AirlineFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AirlineViews\AirlinePage.xaml">
+    <EmbeddedResource Update="Pages\AirlineViews\AirlinePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AirportViews\AirportFormPage.xaml">
+    <EmbeddedResource Update="Pages\AirportViews\AirportFormPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\AirportViews\AirportPage.xaml">
+    <EmbeddedResource Update="Pages\AirportViews\AirportPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\ReusableViews\BusyView.xaml">
+    <EmbeddedResource Update="Pages\ReusableViews\BusyView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>

@@ -2,43 +2,43 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
-             x:Class="Imi.Project.Mobile.Views.AircraftTypeViews.AircraftTypePage"
+             x:Class="Imi.Project.Mobile.Pages.AirportPage"
              BackgroundColor="White"
-             Title="Vliegtuigtypes">
+             Title="Luchthavens">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Clicked="BtnAddType_Clicked"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Clicked="BtnAdd_Clicked"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="lvAircraftTypes" Style="{StaticResource ListViewLayout}">
+            <ListView x:Name="lvAirports" Style="{StaticResource ListViewLayout}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}" Clicked="MnuEditType_Clicked"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDeleteType_Clicked"/>
+                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}" Clicked="MnuEdit_Clicked"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDelete_Clicked"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">
-                                    <CardView:CardView BackgroundColor="White" HeightRequest="105">
+                                    <CardView:CardView BackgroundColor="White" HeightRequest="125">
                                         <CardView:CardView.CardViewContent>
                                             <StackLayout Style="{StaticResource InnerStackLayoutForListView}">
                                                 <Grid>
                                                     <Grid.RowDefinitions>
                                                         <RowDefinition Height="35"/>
-                                                        <RowDefinition Height="70"/>
+                                                        <RowDefinition Height="90"/>
                                                     </Grid.RowDefinitions>
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="1.1*"/>
                                                         <ColumnDefinition Width="*"/>
                                                         <ColumnDefinition Width="*"/>
                                                     </Grid.ColumnDefinitions>
-                                                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Merk"/>
-                                                    <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="Type"/>
+                                                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Naam"/>
+                                                    <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="IATA"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="ICAO code"/>
-                                                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Brand}"/>
-                                                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding Type}"/>
+                                                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Name}"/>
+                                                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding IATACode}"/>
                                                     <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding ICAOCode}"/>
                                                 </Grid>
                                             </StackLayout>

@@ -1,4 +1,4 @@
-﻿using Imi.Project.Mobile.Views;
+﻿using Imi.Project.Mobile.Pages;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
