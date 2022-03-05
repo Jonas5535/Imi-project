@@ -71,7 +71,6 @@
 
             <Style x:Key="StandardDatePicker" TargetType="DatePicker">
                 <Setter Property="TextColor" Value="Black"/>
-                <Setter Property="WidthRequest" Value="130"/>
                 <Setter Property="Margin" Value="15,0,0,0"/>
             </Style>
             <!--#endregion-->
