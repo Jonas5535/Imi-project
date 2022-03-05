@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAirportService : IAirportService
+    public class MockAirportService : ICRUDService<Airport>
     {
         private static ObservableCollection<Airport> _airportList = new ObservableCollection<Airport>
         {
@@ -16,34 +16,34 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             new Airport{Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA", ElevationAMSL = 41, RunwayAmount = 2, TerminalAmount = 3, Country = "japan", City = "Narita" }
         };
 
-        public async Task<Airport> AddAirport(Airport airport)
+        public async Task<Airport> AddAsync(Airport entity)
         {
-            _airportList.Add(airport);
-            return await Task.FromResult(airport);
+            _airportList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<Airport> DeleteAirport(Guid airportId)
+        public async Task<Airport> DeleteAsync(Guid id)
         {
-            Airport airport = _airportList.FirstOrDefault(a => a.Id == airportId);
+            Airport airport = _airportList.FirstOrDefault(a => a.Id == id);
             _airportList.Remove(airport);
             return await Task.FromResult(airport);
         }
 
-        public async Task<Airport> GetAirportById(Guid airportId)
+        public async Task<Airport> GetByIdAsync(Guid id)
         {
-            Airport airport = _airportList.FirstOrDefault(a => a.Id == airportId);
+            Airport airport = _airportList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(airport);
         }
 
-        public async Task<IEnumerable<Airport>> GetAirports()
+        public async Task<IEnumerable<Airport>> ListAllAsync()
         {
             IEnumerable<Airport> airports = _airportList;
             return await Task.FromResult(airports);
         }
 
-        public async Task<Airport> UpdateAirport(Airport airport)
+        public async Task<Airport> UpdateAsync(Airport entity)
         {
-            Airport EditedAirport = _airportList.FirstOrDefault(a => a.Id == airport.Id);
+            Airport EditedAirport = _airportList.FirstOrDefault(a => a.Id == entity.Id);
             _airportList.Remove(EditedAirport);
             _airportList.Add(EditedAirport);
             return await Task.FromResult(EditedAirport);

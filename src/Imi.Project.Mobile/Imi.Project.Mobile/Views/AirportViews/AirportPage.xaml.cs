@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirportPage : ContentPage
     {
-        private readonly IAirportService airportService;
+        private readonly ICRUDService<Airport> airportService;
 
         public AirportPage()
         {
@@ -25,7 +25,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
         {
             //busyIndicator.IsVisible = true;
 
-            IEnumerable<Airport> airports = await airportService.GetAirports();
+            IEnumerable<Airport> airports = await airportService.ListAllAsync();
 
             lvAirports.ItemsSource = airports;
             //busyIndicator.IsVisible = false;
@@ -53,7 +53,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
             //busyIndicator.IsVisible = true;
 
             Airport selectedAirport = ((MenuItem)sender).CommandParameter as Airport;
-            await airportService.DeleteAirport(selectedAirport.Id);
+            await airportService.DeleteAsync(selectedAirport.Id);
 
             //busyIndicator.IsVisible = false;
         }

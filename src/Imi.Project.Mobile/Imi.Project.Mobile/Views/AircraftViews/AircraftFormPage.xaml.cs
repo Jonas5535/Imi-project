@@ -18,7 +18,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
         private readonly IAircraftService aircraftService;
         private readonly ICRUDService<AircraftType> aircraftTypeService;
         private readonly ICRUDService<Airline> airlineService;
-        private readonly IAirportService airportService;
+        private readonly ICRUDService<Airport> airportService;
         private Aircraft currentAircraft;
         private bool isNew = true;
         private List<Picker> pickers = new List<Picker>();
@@ -89,7 +89,7 @@ namespace Imi.Project.Mobile.Views.AircraftViews
 
         private async void PopulateAirportPicker(Picker picker)
         {
-            IEnumerable<Airport> airports = await airportService.GetAirports();
+            IEnumerable<Airport> airports = await airportService.ListAllAsync();
             List<string> pickerContent = new List<string>();
 
             foreach (var airport in airports)

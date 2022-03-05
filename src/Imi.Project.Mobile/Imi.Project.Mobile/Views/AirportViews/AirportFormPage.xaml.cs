@@ -13,7 +13,7 @@ namespace Imi.Project.Mobile.Views.AirportViews
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirportFormPage : ContentPage
     {
-        private readonly IAirportService airportService;
+        private readonly ICRUDService<Airport> airportService;
         private Airport currentAirport;
         private bool isNew = true;
         private IValidator airportValidator;
@@ -95,11 +95,11 @@ namespace Imi.Project.Mobile.Views.AirportViews
                 if (isNew)
                 {
                     currentAirport.Id = Guid.NewGuid();
-                    await airportService.AddAirport(currentAirport);
+                    await airportService.AddAsync(currentAirport);
                 }
                 else
                 {
-                    await airportService.UpdateAirport(currentAirport);
+                    await airportService.UpdateAsync(currentAirport);
                 }
 
                 await DisplayAlert("Opgeslagen", $"De luchthaven {currentAirport.Name} is opgeslagen", "Ok");
