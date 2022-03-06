@@ -9,7 +9,7 @@ namespace Imi.Project.Api.Core.Entities
         public string ICAOCode { get; set; }
         public string MainAirport { get; set; }
         public string HeadQuarter { get; set; }
-        public int? Fleetsize { get; set; }
+        public int? FleetSize { get; set; }
 
         //Navigation prop for aircraft
         public ICollection<Aircraft> Aircrafts { get; set; }

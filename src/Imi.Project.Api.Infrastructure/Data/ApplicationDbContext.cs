@@ -172,6 +172,13 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .Property(a => a.Latitude)
                 .HasPrecision(8, 5);
             #endregion
+
+            #region AircraftAtAirport
+            modelBuilder.Entity<AircraftAtAirport>()
+                .HasKey(aa => new { aa.AircraftId, aa.AirportId });
+            #endregion
+
+            ApplicationSeeder.Seed(modelBuilder);
         }
     }
 }
