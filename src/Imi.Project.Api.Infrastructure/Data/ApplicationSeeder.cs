@@ -73,7 +73,6 @@ namespace Imi.Project.Api.Infrastructure.Data
             modelBuilder.Entity<Airline>().HasData(airlines);
             modelBuilder.Entity<Airport>().HasData(airports);
             modelBuilder.Entity<Aircraft>().HasData(aircrafts);
-            modelBuilder.Entity<AircraftAtAirport>().HasData(aircraftsAtAirports);
             #endregion
         }
     }

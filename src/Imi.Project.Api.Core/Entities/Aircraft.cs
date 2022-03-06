@@ -12,8 +12,8 @@ namespace Imi.Project.Api.Core.Entities
         public string Image { get; set; }
 
         //This will be used to store gps location
-        public double Longitude { get; set; }
-        public double Latitude { get; set; }
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
 
         // Unshadowed property for AircraftType
         public Guid AircraftTypeId { get; set; }
