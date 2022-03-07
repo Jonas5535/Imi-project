@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Imi.Project.Mobile.ViewModels"
+             x:DataType="viewmodels:MainViewModel"
              x:Class="Imi.Project.Mobile.Pages.MainPage"
              BackgroundColor="White"
              Title="Home">
@@ -12,12 +14,12 @@
         <StackLayout>
             <ScrollView VerticalOptions="FillAndExpand">
                 <StackLayout>
-                    <Label Text="Welkom gebruiker" TextColor="Black" FontSize="45" HorizontalTextAlignment="Center" Margin="15, 25, 15, 25"></Label>
-                    <StackLayout Margin="0, 100, 0, 0">
+                    <Label Text="Avilection" TextColor="Black" FontSize="45" HorizontalTextAlignment="Center" Margin="15, 150, 15, 25"></Label>
+                    <StackLayout Margin="0, 25, 0, 0">
                         <Button x:Name="btnAircraft" Text="Vliegtuigen" Style="{StaticResource RoundedButton}" Clicked="btnAircraft_Clicked"></Button>
                         <Button x:Name="btnAircraftType" Text="VliegtuigTypes" Style="{StaticResource RoundedButton}" Clicked="btnAircraftType_Clicked"></Button>
                         <Button x:Name="btnAirport" Text="Luchthavens" Style="{StaticResource RoundedButton}" Clicked="btnAirport_Clicked"></Button>
-                        <Button x:Name="btnAirline" Text="Maatschappijen" Style="{StaticResource RoundedButton}" Clicked="btnAirline_Clicked"></Button>
+                        <Button x:Name="btnAirline" Text="Maatschappijen" Style="{StaticResource RoundedButton}" Command="{Binding OpenAirlinePageCommand}"></Button>
                     </StackLayout>
                 </StackLayout>
             </ScrollView>

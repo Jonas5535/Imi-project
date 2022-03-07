@@ -1,4 +1,5 @@
-﻿using Imi.Project.Mobile.Pages;
+﻿using FreshMvvm;
+using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
@@ -9,7 +10,7 @@ namespace Imi.Project.Mobile
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;
             navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");

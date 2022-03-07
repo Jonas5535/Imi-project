@@ -26,10 +26,5 @@ namespace Imi.Project.Mobile.Pages
         {
             await Navigation.PushAsync(new AirportPage());
         }
-
-        private async void btnAirline_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AirlinePage());
-        }
     }
 }
