@@ -1,4 +1,7 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Models;
+using Imi.Project.Mobile.Core.Domain.Services;
+using Imi.Project.Mobile.Core.Domain.Services.Mocking;
 using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
 
@@ -11,6 +14,9 @@ namespace Imi.Project.Mobile
             InitializeComponent();
 
             MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
+
+            //register dependencies
+            FreshIOC.Container.Register<ICRUDService<Airline>>(new MockAirlineService());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;
             navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");
