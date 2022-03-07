@@ -4,16 +4,18 @@ using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
     public class AirlineViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Airline> airlineService;
+        private readonly ICRUDService<Airline> _airlineService;
 
         public AirlineViewModel(ICRUDService<Airline> airlineService)
         {
-            this.airlineService = airlineService;
+            this._airlineService = airlineService;
         }
 
         private IEnumerable<Airline> airlines;
@@ -34,10 +36,24 @@ namespace Imi.Project.Mobile.ViewModels
             await ListInit();
         }
 
+        public ICommand AddAirlineCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AirlineFormViewModel>(null, false, true);
+            }
+        );
+
+        public ICommand DeleteAirlineCommand => new Command<Airline>(
+            async (Airline airline) =>
+            {
+                await _airlineService.DeleteAsync(airline.Id);
+            }    
+        );
+
         private async Task ListInit()
         {
-            var airlines = await airlineService.ListAllAsync();
-
+            var airlines = await _airlineService.ListAllAsync();
+            //Airlines = null;
             Airlines = airlines;
         }
     }

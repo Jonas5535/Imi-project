@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
              x:Class="Imi.Project.Mobile.Pages.AirlinePage"
+             x:Name="page"
              BackgroundColor="White"
              Title="Maatschappijen">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAirlineCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -17,7 +18,7 @@
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" Command="{Binding DeleteAirlineCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">

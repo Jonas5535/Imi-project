@@ -12,30 +12,10 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirlinePage : ContentPage
     {
-        //private readonly ICRUDService<Airline> airlineService;
-
         public AirlinePage()
         {
             InitializeComponent();
-
-            //airlineService = new MockAirlineService();
         }
-
-        //private async Task ListInit()
-        //{
-        //    //busyIndicator.IsVisible = true;
-
-        //    IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
-
-        //    lvAirlines.ItemsSource = airlines;
-        //    //busyIndicator.IsVisible = false;
-        //}
-
-        //protected override async void OnAppearing()
-        //{
-        //    await ListInit();
-        //    base.OnAppearing();
-        //}
 
         //private async void BtnAddAirline_Clicked(object sender, EventArgs e)
         //{
