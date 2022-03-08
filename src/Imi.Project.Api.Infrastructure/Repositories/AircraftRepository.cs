@@ -35,5 +35,37 @@ namespace Imi.Project.Api.Infrastructure.Repositories
             Aircraft aircraft = await GetAll().SingleOrDefaultAsync(a => a.Id.Equals(id));
             return aircraft;
         }
+
+        public async Task<IEnumerable<Aircraft>> FilterAsync(bool? hasSpecialLivery, string registration, string type, string airlineName, string airportName)
+        {
+            IQueryable<Aircraft> query = GetAll();
+
+            if (hasSpecialLivery != null)
+            {
+                query = query.Where(a => a.HasSpecialLivery == hasSpecialLivery);
+            }
+
+            if (!string.IsNullOrEmpty(registration))
+            {
+                query = query.Where(a => a.Registration.ToUpper().Contains(registration.ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(type))
+            {
+                query = query.Where(a => a.AircraftType.Type.ToUpper().Contains(type.ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(airlineName))
+            {
+                query = query.Where(a => a.Airline.Name.ToUpper().Contains(airlineName.ToUpper()));
+            }
+
+            if (!string.IsNullOrEmpty(airportName))
+            {
+                query = query.Where(a => a.SpottedAtAirports.SingleOrDefault().Airport.Name.ToUpper().Contains(airportName.ToUpper())); //Ik geef op
+            }
+
+            return await query.ToListAsync();
+        }
     }
 }
