@@ -1,7 +1,20 @@
 ﻿@page "/aircraft"
+@inject ICRUDService<AircraftListItem, AircraftItem> _AircraftService
 
 <h1>Vliegtuigen</h1>
 
-@code {
 
+
+@code {
+	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
+
+	protected override async Task OnInitializedAsync()
+	{
+		await ShowList();
+	}
+
+	public async Task ShowList()
+	{
+		aircrafts = await _AircraftService.ListAllAsync();
+	}
 }
