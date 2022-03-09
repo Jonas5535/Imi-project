@@ -3,7 +3,10 @@
 
 <h1>Vliegtuigen</h1>
 
-
+@foreach (var aircraft in aircrafts)
+{
+	<ItemList Model="aircraft"></ItemList>
+}
 
 @code {
 	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
