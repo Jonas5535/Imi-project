@@ -19,7 +19,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         {
             new InputSelectItem(){ Value = "1", Label = "Brussels Airlines"},
             new InputSelectItem(){ Value = "2", Label = "TUI Fly"},
-            new InputSelectItem(){ Value = "3", Label = "LuftHansa Cargo"}
+            new InputSelectItem(){ Value = "3", Label = "Lufthansa Cargo"}
         };
 
         private static InputSelectItem[] _airports = new InputSelectItem[]
@@ -71,8 +71,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                     .Where(at => at.Value == a.AircraftTypeId)
                     .Select(at => at.Label)
                     .SingleOrDefault(),
-                Airline = _aircraftTypes
-                    .Where(al => al.Value == a.AircraftTypeId)
+                Airline = _airlines
+                    .Where(al => al.Value == a.AirlineId)
                     .Select(al => al.Label)
                     .SingleOrDefault()
             }).ToList();
