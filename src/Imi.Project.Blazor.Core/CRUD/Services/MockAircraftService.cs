@@ -59,9 +59,9 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(aircraft);
         }
 
-        public async Task<AircraftListItem[]> ListAllAsync()
+        public async Task<IEnumerable<AircraftListItem>> ListAllAsync()
         {
-            AircraftListItem[] aircrafts;
+            List<AircraftListItem> aircrafts;
 
             aircrafts = _aircrafts.Select(a => new AircraftListItem()
             {
@@ -75,7 +75,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                     .Where(al => al.Value == a.AircraftTypeId)
                     .Select(al => al.Label)
                     .SingleOrDefault()
-            }).ToArray();
+            }).ToList();
 
             return await Task.FromResult(aircrafts);
         }
