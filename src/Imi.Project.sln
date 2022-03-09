@@ -27,7 +27,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Vue", "Imi.Proj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Mobile.Core", "Imi.Project.Mobile.Core\Imi.Project.Mobile.Core.csproj", "{08F6D049-ACBC-4A29-A80A-3DF713772DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Imi.Project.Blazor.Core", "Imi.Project.Blazor.Core\Imi.Project.Blazor.Core.csproj", "{D79FECAA-9939-4C9A-B907-8B29720AAAB0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Imi.Project.Blazor.Core", "Imi.Project.Blazor.Core\Imi.Project.Blazor.Core.csproj", "{D79FECAA-9939-4C9A-B907-8B29720AAAB0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
