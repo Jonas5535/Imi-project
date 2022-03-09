@@ -118,8 +118,16 @@ app {
     border-radius: 5%;
 }
 
-.card-height{
-    height: 360px;
+.card-standardsize{
+    height: 370px;
+}
+
+.card-fullsize{
+    height: 425px;
+}
+
+.hidden{
+    display: none;
 }
 
 .card:hover {
@@ -127,6 +135,17 @@ app {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
 }
+
+.btn {
+    background-color: var(--Yellow);
+    width: 150px;
+    height: 40px;
+    border-radius: 0.75rem;
+}
+
+    .btn:hover {
+        box-shadow: 2px 2px 5px #999;
+    }
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
