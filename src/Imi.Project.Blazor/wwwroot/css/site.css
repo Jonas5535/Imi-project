@@ -3,6 +3,7 @@
 :root {
     --Yellow: #fdd31d;
     --Darker-yellow: #e8bd02;
+    --Lighter-yellow: #fff7b3;
 }
 
 html, body {
@@ -114,9 +115,17 @@ app {
 
 .card{
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
+    border-radius: 5%;
 }
+
 .card-height{
     height: 360px;
+}
+
+.card:hover {
+    background-color: var(--Lighter-yellow);
+    box-shadow: 2px 12px 15px #999;
+    transform: translateY(-2px);
 }
 
 .valid.modified:not([type=checkbox]) {
