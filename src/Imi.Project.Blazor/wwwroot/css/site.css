@@ -116,7 +116,7 @@ app {
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
 }
 .card-height{
-    height: 120px;
+    height: 360px;
 }
 
 .valid.modified:not([type=checkbox]) {
