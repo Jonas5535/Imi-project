@@ -32,11 +32,14 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         private static List<AircraftItem> _aircrafts = new List<AircraftItem>()
         {
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-SNJ", AircraftTypeId = "1", AirlineId = "1", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2", "3" } },
+                FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2", "3" },
+                Image = "/Images/IMG_1974.JPG" },
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-LOE", AircraftTypeId = "2", AirlineId = "2", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2" } },
+                FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2" },
+            Image = "/Images/IMG_1891.JPG"},
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "D-ALCC", AircraftTypeId = "3", AirlineId = "3", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25), AirportIds = new List<string>{ "3", } },
+                FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25), AirportIds = new List<string>{ "3", },
+            Image = "/Images/IMG_1935.JPG"},
         };
 
         public Task AddAsync(AircraftItem item)
@@ -67,6 +70,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             {
                 Id = a.Id,
                 Registration = a.Registration,
+                Image = a.Image,
                 AircraftType = _aircraftTypes
                     .Where(at => at.Value == a.AircraftTypeId)
                     .Select(at => at.Label)

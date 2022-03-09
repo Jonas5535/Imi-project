@@ -10,6 +10,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Models
         public bool HasSpecialLivery { get; set; }
         public DateTime FirstSeen { get; set; }
         public DateTime LastSeen { get; set; }
+        public string Image { get; set; }
         public string AircraftTypeId { get; set; }
         public InputSelectItem[] AircraftTypes { get; set; }
         public string AirlineId { get; set; }
