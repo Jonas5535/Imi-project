@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
@@ -48,6 +49,23 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private string nameError;
+
+        public string NameError
+        {
+            get { return nameError; }
+            set
+            {
+                nameError = value;
+                RaisePropertyChanged(nameof(NameError));
+            }
+        }
+
+        public bool NameErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(NameError); }
+        }
+
         private string iataCode;
 
         public string IATACode
@@ -58,6 +76,23 @@ namespace Imi.Project.Mobile.ViewModels
                 iataCode = value;
                 RaisePropertyChanged(nameof(IATACode));
             }
+        }
+
+        private string iataCodeError;
+
+        public string IATACodeError
+        {
+            get { return iataCodeError; }
+            set
+            {
+                iataCodeError = value;
+                RaisePropertyChanged(nameof(IATACodeError));
+            }
+        }
+
+        public bool IATACodeErrorVisible 
+        {
+            get { return !string.IsNullOrWhiteSpace(IATACodeError); }
         }
 
         private string icaoCode;
@@ -72,6 +107,22 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private string icaoCodeError;
+
+        public string ICAOCodeError
+        {
+            get { return icaoCodeError; }
+            set
+            {
+                icaoCodeError = value;
+                RaisePropertyChanged(nameof(ICAOCodeError));
+            }
+        }
+
+        public bool ICAOCodeErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
+        }
         #endregion
 
         public async override void Init(object initData)
@@ -85,7 +136,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task RefreshAirline()
         {
-            if(_currentAirline == null)
+            if (_currentAirline == null)
             {
                 _currentAirline = new Airline();
                 _currentAirline.Id = Guid.NewGuid();
@@ -112,6 +163,29 @@ namespace Imi.Project.Mobile.ViewModels
             _currentAirline.Name = Name;
             _currentAirline.IATACode = IATACode;
             _currentAirline.ICAOCode = ICAOCode;
+        }
+
+        private bool Validate(Airline airline)
+        {
+            ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
+            ValidationResult validationResult = _airlineValidator.Validate(validationContext);
+
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(airline.Name))
+                {
+                    NameError = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(airline.IATACode))
+                {
+                    IATACodeError = error.ErrorMessage;
+                }
+                if (error.PropertyName == nameof(airline.ICAOCode))
+                {
+                    ICAOCodeError = error.ErrorMessage;
+                }
+            }
+            return validationResult.IsValid;
         }
     }
 }
