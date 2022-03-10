@@ -39,6 +39,19 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged(nameof(IsBusy));
+            }
+        }
+
+
         private string name;
 
         public string Name
@@ -163,6 +176,8 @@ namespace Imi.Project.Mobile.ViewModels
 
                 if (Validate(_currentAirline))
                 {
+                    IsBusy = true;
+
                     if (_isNew)
                     {
                         await _airlineService.AddAsync(_currentAirline);
@@ -171,6 +186,7 @@ namespace Imi.Project.Mobile.ViewModels
                     {
                         await _airlineService.UpdateAsync(_currentAirline);
                     }
+                    IsBusy = false;
 
                     MessagingCenter.Send(this, $"De maatschappij {_currentAirline.Name} is opgeslagen", _currentAirline);
 
