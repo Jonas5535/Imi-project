@@ -20,7 +20,7 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}" Text="{Binding NameError}" IsVisible="{Binding NameErrorVisible}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
                     <Entry x:Name="txtIATA" Placeholder="bv: SN" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="2">
                         <Entry.Keyboard>
@@ -31,7 +31,7 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorIATA" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label x:Name="lblErrorIATA" Style="{StaticResource ErrorMessage}" Text="{Binding IATAError}" IsVisible="{Binding IATAErrorVisible}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
                     <Entry x:Name="txtICAO" Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="3">
                         <Entry.Keyboard>
@@ -42,8 +42,8 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorICAO" Style="{StaticResource ErrorMessage}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
+                    <Label x:Name="lblErrorICAO" Style="{StaticResource ErrorMessage}" Text="{Binding ICAOError}" IsVisible="{Binding ICAOErrorVisible}"></Label>
+                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirlineCommand}"></Button>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView x:Name="busyIndicator"/>

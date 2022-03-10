@@ -58,54 +58,54 @@ namespace Imi.Project.Mobile.Pages
         //    currentAirline.ICAOCode = txtICAO.Text;
         //}
 
-        private bool Validate(Airline airline)
-        {
-            ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
-            ValidationResult validationResult = airlineValidator.Validate(validationContext);
+        //private bool Validate(Airline airline)
+        //{
+        //    ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
+        //    ValidationResult validationResult = airlineValidator.Validate(validationContext);
 
-            foreach (var error in validationResult.Errors)
-            {
-                if (error.PropertyName == nameof(airline.Name))
-                {
-                    lblErrorName.Text = error.ErrorMessage;
-                    lblErrorName.IsVisible = true;
-                }
-                if (error.PropertyName == nameof(airline.IATACode))
-                {
-                    lblErrorIATA.Text = error.ErrorMessage;
-                    lblErrorIATA.IsVisible = true;
-                }
-                if (error.PropertyName == nameof(airline.ICAOCode))
-                {
-                    lblErrorICAO.Text = error.ErrorMessage;
-                    lblErrorICAO.IsVisible = true;
-                }
-            }
-            return validationResult.IsValid;
-        }
+        //    foreach (var error in validationResult.Errors)
+        //    {
+        //        if (error.PropertyName == nameof(airline.Name))
+        //        {
+        //            lblErrorName.Text = error.ErrorMessage;
+        //            lblErrorName.IsVisible = true;
+        //        }
+        //        if (error.PropertyName == nameof(airline.IATACode))
+        //        {
+        //            lblErrorIATA.Text = error.ErrorMessage;
+        //            lblErrorIATA.IsVisible = true;
+        //        }
+        //        if (error.PropertyName == nameof(airline.ICAOCode))
+        //        {
+        //            lblErrorICAO.Text = error.ErrorMessage;
+        //            lblErrorICAO.IsVisible = true;
+        //        }
+        //    }
+        //    return validationResult.IsValid;
+        //}
 
-        private async void BtnSave_Clicked(object sender, EventArgs e)
-        {
-            busyIndicator.IsVisible = true;
+        //private async void BtnSave_Clicked(object sender, EventArgs e)
+        //{
+        //    busyIndicator.IsVisible = true;
 
-            //SaveAirlineState();
+        //    //SaveAirlineState();
 
-            if (Validate(currentAirline))
-            {
-                if (isNew)
-                {
-                    currentAirline.Id = Guid.NewGuid();
-                    await airlineService.AddAsync(currentAirline);
-                }
-                else
-                {
-                    await airlineService.UpdateAsync(currentAirline);
-                }
+        //    if (Validate(currentAirline))
+        //    {
+        //        if (isNew)
+        //        {
+        //            currentAirline.Id = Guid.NewGuid();
+        //            await airlineService.AddAsync(currentAirline);
+        //        }
+        //        else
+        //        {
+        //            await airlineService.UpdateAsync(currentAirline);
+        //        }
 
-                await DisplayAlert("Opgeslagen", $"De maatschappij {currentAirline.Name} is opgeslagen", "Ok");
-                await Navigation.PopAsync();
-            }
-            busyIndicator.IsVisible = false;
-        }
+        //        await DisplayAlert("Opgeslagen", $"De maatschappij {currentAirline.Name} is opgeslagen", "Ok");
+        //        await Navigation.PopAsync();
+        //    }
+        //    busyIndicator.IsVisible = false;
+        //}
     }
 }

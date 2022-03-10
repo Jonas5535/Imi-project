@@ -8,6 +8,8 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -150,6 +152,29 @@ namespace Imi.Project.Mobile.ViewModels
             }
             LoadAirlineState();
         }
+
+        public ICommand SaveAirlineCommand => new Command(
+            async () =>
+            {
+                SaveAirlineState();
+
+                if (Validate(_currentAirline))
+                {
+                    if (_isNew)
+                    {
+                        await _airlineService.AddAsync(_currentAirline);
+                    }
+                    else
+                    {
+                        await _airlineService.UpdateAsync(_currentAirline);
+                    }
+
+                    MessagingCenter.Send(this, $"De maatschappij {_currentAirline.Name} is opgeslagen", _currentAirline);
+
+                    await CoreMethods.PopPageModel(false, true);
+                }
+            }
+        );
 
         private void LoadAirlineState()
         {
