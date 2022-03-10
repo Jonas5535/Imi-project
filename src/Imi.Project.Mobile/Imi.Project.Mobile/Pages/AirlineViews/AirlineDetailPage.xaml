@@ -8,7 +8,7 @@
              Title="Details">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary"/>
+        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Command="{Binding DeleteAirlineCommand}"/>
         <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
