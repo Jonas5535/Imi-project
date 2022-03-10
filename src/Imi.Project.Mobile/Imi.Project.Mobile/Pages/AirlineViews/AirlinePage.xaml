@@ -12,12 +12,12 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="lvAirlines" Style="{StaticResource ListViewLayout}" ItemsSource="{Binding Airlines}">
+            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding Airlines}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" Command="{Binding BindingContext.EditAirlineCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
                                 <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" Command="{Binding BindingContext.DeleteAirlineCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">

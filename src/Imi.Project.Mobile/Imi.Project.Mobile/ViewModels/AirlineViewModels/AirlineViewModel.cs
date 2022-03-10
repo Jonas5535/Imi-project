@@ -43,12 +43,12 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
-        //public ICommand EditAirlineCommand => new Command(
-        //    async (Airline airline) =>
-        //    {
-        //        await CoreMethods.PushPageModel<AirlineFormViewModel>(airline, false, true);
-        //    }
-        //);
+        public ICommand EditAirlineCommand => new Command<Airline>(
+            async (Airline airline) =>
+            {
+                await CoreMethods.PushPageModel<AirlineFormViewModel>(airline, false, true);
+            }
+        );
 
         public ICommand DeleteAirlineCommand => new Command<Airline>(
             async (Airline airline) =>
