@@ -20,7 +20,26 @@ namespace Imi.Project.Mobile.ViewModels
         {
             base.Init(initData);
             ShownAirline = initData as Airline;
+            //RefreshData();
         }
+
+        public override void ReverseInit(object returnedData)
+        {
+            ShownAirline = null;
+            ShownAirline = returnedData as Airline;
+        }
+
+        private async void RefreshData()
+        {
+            ShownAirline = await _airlineService.GetByIdAsync(ShownAirline.Id);
+        }
+
+        public ICommand EditAirlineCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AirlineFormViewModel>(ShownAirline, false, true);
+            }
+        );
 
         public ICommand DeleteAirlineCommand => new Command(
             async () =>

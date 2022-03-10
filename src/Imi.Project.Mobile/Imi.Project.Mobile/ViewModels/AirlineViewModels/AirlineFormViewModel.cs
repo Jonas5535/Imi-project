@@ -188,7 +188,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
 
-                    await CoreMethods.PopPageModel(false, true);
+                    await CoreMethods.PopPageModel(_currentAirline, false, true);
                 }
             }
         );
