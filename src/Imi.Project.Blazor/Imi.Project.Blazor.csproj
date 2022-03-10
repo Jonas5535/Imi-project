@@ -4,4 +4,8 @@
     <TargetFramework>net5</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Imi.Project.Blazor.Core\Imi.Project.Blazor.Core.csproj" />
+  </ItemGroup>
+
 </Project>
