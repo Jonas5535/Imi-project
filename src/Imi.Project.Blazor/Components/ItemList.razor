@@ -1,6 +1,6 @@
 ﻿
 
-<div class="card mt-4 mx-1 mb-2 d-inline-block @CardCssClass" style="width: 24rem" @onmouseover="@Mouse_Over" @onmouseout="@Mouse_Out">
+<div class="card mt-4 mx-1 mb-2 d-inline-block card-height" style="width: 24rem">
 	<div class="card-body">
 		<img class="card-img-top" src="@Model.Image" alt="Foto van @Model.Registration"/>
 		<div class="row align-items-center mt-3">
@@ -12,7 +12,7 @@
 			<div class="col text-center font-weight-bold pt-2">@Model.AircraftType</div>
 			<div class="col text-center font-weight-bold pt-2">@Model.Airline</div>
 		</div>
-		<div class="row text-center mt-4 @ButtonCssClass">
+		<div class="row text-center mt-4">
 			<div class="col">
 				<button class="btn font-weight-bold oi oi-pencil" ></button>
 			</div>
@@ -24,24 +24,6 @@
 </div>
 
 @code {
-	private const string hidden = "hidden";
-	private const string standardSize = "card-standardsize";
-	private const string fullsize = "card-fullsize";
-
 	[Parameter]
 	public AircraftListItem Model { get; set; }
-	private string ButtonCssClass { get; set; } = hidden;
-	public string CardCssClass { get; set; } = standardSize;
-
-	protected void Mouse_Over(MouseEventArgs e)
-	{
-		ButtonCssClass = null;
-		CardCssClass = fullsize;
-	}
-
-	protected void Mouse_Out(MouseEventArgs e)
-	{
-		ButtonCssClass = hidden;
-		CardCssClass = standardSize;
-	}
 }

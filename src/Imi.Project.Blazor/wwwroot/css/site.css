@@ -118,16 +118,8 @@ app {
     border-radius: 5%;
 }
 
-.card-standardsize{
-    height: 370px;
-}
-
-.card-fullsize{
+.card-height{
     height: 425px;
-}
-
-.hidden{
-    display: none;
 }
 
 .card:hover {
