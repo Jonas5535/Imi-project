@@ -5,8 +5,6 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using Imi.Project.Mobile.Core.Domain.Validators;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -107,7 +105,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        public bool IATACodeErrorVisible 
+        public bool IATACodeErrorVisible
         {
             get { return !string.IsNullOrWhiteSpace(IATACodeError); }
         }
@@ -188,7 +186,7 @@ namespace Imi.Project.Mobile.ViewModels
                     }
                     IsBusy = false;
 
-                    MessagingCenter.Send(this, $"De maatschappij {_currentAirline.Name} is opgeslagen", _currentAirline);
+                    await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
 
                     await CoreMethods.PopPageModel(false, true);
                 }
@@ -214,7 +212,7 @@ namespace Imi.Project.Mobile.ViewModels
             NameError = "";
             IATACodeError = "";
             ICAOCodeError = "";
-            
+
             ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
             ValidationResult validationResult = _airlineValidator.Validate(validationContext);
 
