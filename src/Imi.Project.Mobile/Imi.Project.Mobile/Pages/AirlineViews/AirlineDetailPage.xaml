@@ -4,12 +4,41 @@
              x:Class="Imi.Project.Mobile.Pages.AirlineDetailPage"
              BackgroundColor="White"
              Title="Details">
-    
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary"/>
+        <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary"/>
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Naam" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
+                <Label Text="IATA Code" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
+                <Label Text="Brussels Airlines" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label Text="SN"  Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
+                <Label Text="Hoofdluchthaven" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
+                <Label Text="BEL" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
+                <Label Text="Brussels Airport" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="Hoofdkantoor" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
+                <Label Text="Vloot grootte" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
+                <Label Text="België" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="49" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
+            </Grid>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>
