@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AirlineFormPage"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="{Binding PageTitle}">
 
     <ContentPage.Content>
         <AbsoluteLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Naam" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtName" Placeholder="bv: Brussels Airlines" Style="{StaticResource StandardEntry}" MaxLength="150">
+                    <Entry x:Name="txtName" Placeholder="bv: Brussels Airlines" Style="{StaticResource StandardEntry}" Text="{Binding Name}" MaxLength="150">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -21,7 +22,7 @@
                     </Entry>
                     <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtIATA" Placeholder="bv: SN" Style="{StaticResource StandardEntry}" MaxLength="2">
+                    <Entry x:Name="txtIATA" Placeholder="bv: SN" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="2">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -32,7 +33,7 @@
                     </Entry>
                     <Label x:Name="lblErrorIATA" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtICAO" Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" MaxLength="3">
+                    <Entry x:Name="txtICAO" Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="3">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>

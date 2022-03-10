@@ -38,25 +38,25 @@ namespace Imi.Project.Mobile.Pages
             //}
         }
 
-        protected override void OnAppearing()
-        {
-            LoadAirlineState();
-            base.OnAppearing();
-        }
+        //protected override void OnAppearing()
+        //{
+        //    LoadAirlineState();
+        //    base.OnAppearing();
+        //}
 
-        private void LoadAirlineState()
-        {
-            txtName.Text = currentAirline.Name;
-            txtIATA.Text = currentAirline.IATACode;
-            txtICAO.Text = currentAirline.ICAOCode;
-        }
+        //private void LoadAirlineState()
+        //{
+        //    txtName.Text = currentAirline.Name;
+        //    txtIATA.Text = currentAirline.IATACode;
+        //    txtICAO.Text = currentAirline.ICAOCode;
+        //}
 
-        private void SaveAirlineState()
-        {
-            currentAirline.Name = txtName.Text;
-            currentAirline.IATACode = txtIATA.Text;
-            currentAirline.ICAOCode = txtICAO.Text;
-        }
+        //private void SaveAirlineState()
+        //{
+        //    currentAirline.Name = txtName.Text;
+        //    currentAirline.IATACode = txtIATA.Text;
+        //    currentAirline.ICAOCode = txtICAO.Text;
+        //}
 
         private bool Validate(Airline airline)
         {
@@ -88,7 +88,7 @@ namespace Imi.Project.Mobile.Pages
         {
             busyIndicator.IsVisible = true;
 
-            SaveAirlineState();
+            //SaveAirlineState();
 
             if (Validate(currentAirline))
             {

@@ -35,6 +35,43 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(PageTitle));
             }
         }
+
+        private string name;
+
+        public string Name
+        {
+            get { return name; }
+            set
+            {
+                name = value;
+                RaisePropertyChanged(nameof(Name));
+            }
+        }
+
+        private string iataCode;
+
+        public string IATACode
+        {
+            get { return iataCode; }
+            set
+            {
+                iataCode = value;
+                RaisePropertyChanged(nameof(IATACode));
+            }
+        }
+
+        private string icaoCode;
+
+        public string ICAOCode
+        {
+            get { return icaoCode; }
+            set
+            {
+                icaoCode = value;
+                RaisePropertyChanged(nameof(ICAOCode));
+            }
+        }
+
         #endregion
 
         public async override void Init(object initData)
@@ -60,6 +97,21 @@ namespace Imi.Project.Mobile.ViewModels
                 _currentAirline = await _airlineService.GetByIdAsync(_currentAirline.Id);
                 PageTitle = $"{_currentAirline.Name} bewerken";
             }
+            LoadAirlineState();
+        }
+
+        private void LoadAirlineState()
+        {
+            Name = _currentAirline.Name;
+            IATACode = _currentAirline.IATACode;
+            ICAOCode = _currentAirline.ICAOCode;
+        }
+
+        private void SaveAirlineState()
+        {
+            _currentAirline.Name = Name;
+            _currentAirline.IATACode = IATACode;
+            _currentAirline.ICAOCode = ICAOCode;
         }
     }
 }
