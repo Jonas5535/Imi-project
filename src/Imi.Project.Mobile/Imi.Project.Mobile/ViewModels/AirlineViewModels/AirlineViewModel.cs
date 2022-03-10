@@ -2,7 +2,6 @@
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -55,7 +54,7 @@ namespace Imi.Project.Mobile.ViewModels
             async (Airline airline) =>
             {
                 await _airlineService.DeleteAsync(airline.Id);
-            }    
+            }
         );
 
         private async Task ListInit()
