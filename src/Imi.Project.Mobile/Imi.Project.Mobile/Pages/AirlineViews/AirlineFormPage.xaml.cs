@@ -18,24 +18,24 @@ namespace Imi.Project.Mobile.Pages
         private bool isNew = true;
         private IValidator airlineValidator;
 
-        public AirlineFormPage(Airline airline)
+        public AirlineFormPage(/*Airline airline*/)
         {
             InitializeComponent();
 
-            airlineService = new MockAirlineService();
-            airlineValidator = new AirlineValidator();
+            //airlineService = new MockAirlineService();
+            //airlineValidator = new AirlineValidator();
 
-            if (airline == null)
-            {
-                currentAirline = new Airline();
-                Title = "Nieuwe maatschappij";
-            }
-            else
-            {
-                isNew = false;
-                currentAirline = airline;
-                Title = $"{currentAirline.Name} bewerken";
-            }
+            //if (airline == null)
+            //{
+            //    currentAirline = new Airline();
+            //    Title = "Nieuwe maatschappij";
+            //}
+            //else
+            //{
+            //    isNew = false;
+            //    currentAirline = airline;
+            //    Title = $"{currentAirline.Name} bewerken";
+            //}
         }
 
         protected override void OnAppearing()

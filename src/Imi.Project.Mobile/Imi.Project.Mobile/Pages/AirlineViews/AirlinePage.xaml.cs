@@ -17,25 +17,10 @@ namespace Imi.Project.Mobile.Pages
             InitializeComponent();
         }
 
-        //private async void BtnAddAirline_Clicked(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new AirlineFormPage(null));
-        //}
-
         //private async void MnuEditAirline_Clicked(object sender, EventArgs e)
         //{
         //    Airline selectedAirline = ((MenuItem)sender).CommandParameter as Airline;
         //    await Navigation.PushAsync(new AirlineFormPage(selectedAirline));
-        //}
-
-        //private async void MnuDeleteAirline_Clicked(object sender, EventArgs e)
-        //{
-        //    //busyIndicator.IsVisible = true;
-
-        //    Airline selectedAirline = ((MenuItem)sender).CommandParameter as Airline;
-        //    await airlineService.DeleteAsync(selectedAirline.Id);
-
-        //    //busyIndicator.IsVisible = false;
         //}
     }
 }
