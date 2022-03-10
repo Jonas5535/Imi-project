@@ -60,6 +60,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 nameError = value;
                 RaisePropertyChanged(nameof(NameError));
+                RaisePropertyChanged(nameof(NameErrorVisible));
             }
         }
 
@@ -89,6 +90,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 iataCodeError = value;
                 RaisePropertyChanged(nameof(IATACodeError));
+                RaisePropertyChanged(nameof(IATACodeErrorVisible));
             }
         }
 
@@ -118,6 +120,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 icaoCodeError = value;
                 RaisePropertyChanged(nameof(ICAOCodeError));
+                RaisePropertyChanged(nameof(ICAOCodeErrorVisible));
             }
         }
 
@@ -192,6 +195,10 @@ namespace Imi.Project.Mobile.ViewModels
 
         private bool Validate(Airline airline)
         {
+            NameError = "";
+            IATACodeError = "";
+            ICAOCodeError = "";
+            
             ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
             ValidationResult validationResult = _airlineValidator.Validate(validationContext);
 
