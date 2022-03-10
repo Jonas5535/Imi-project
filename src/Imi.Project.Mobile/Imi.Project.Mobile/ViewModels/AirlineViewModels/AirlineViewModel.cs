@@ -3,6 +3,7 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -18,9 +19,9 @@ namespace Imi.Project.Mobile.ViewModels
             this._airlineService = airlineService;
         }
 
-        private IEnumerable<Airline> airlines;
+        private ObservableCollection<Airline> airlines;
 
-        public IEnumerable<Airline> Airlines
+        public ObservableCollection<Airline> Airlines
         {
             get { return airlines; }
             set
@@ -42,6 +43,13 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.PushPageModel<AirlineFormViewModel>(null, false, true);
             }
         );
+
+        //public ICommand EditAirlineCommand => new Command(
+        //    async (Airline airline) =>
+        //    {
+        //        await CoreMethods.PushPageModel<AirlineFormViewModel>(airline, false, true);
+        //    }
+        //);
 
         public ICommand DeleteAirlineCommand => new Command<Airline>(
             async (Airline airline) =>

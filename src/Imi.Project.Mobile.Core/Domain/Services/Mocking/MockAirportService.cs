@@ -38,9 +38,9 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             return await Task.FromResult(airport);
         }
 
-        public async Task<IEnumerable<Airport>> ListAllAsync()
+        public async Task<ObservableCollection<Airport>> ListAllAsync()
         {
-            IEnumerable<Airport> airports = _airportList;
+            ObservableCollection<Airport> airports = _airportList;
             return await Task.FromResult(airports);
         }
 
