@@ -113,12 +113,11 @@ app {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.shadow {
+.shade {
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
-    border-radius: 5%;
 }
 
-.hover:hover {
+.shade:hover {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
 }
