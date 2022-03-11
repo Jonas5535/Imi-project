@@ -33,13 +33,13 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         {
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-SSL", AircraftTypeId = "1", AirlineId = "1", HasSpecialLivery = false,
                 FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "1", "2", "3" },
-                Image = "/Images/IMG_1974.JPG" },
+                Image = "/Images/CRUD/IMG_1974.JPG" },
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "N12003", AircraftTypeId = "2", AirlineId = "2", HasSpecialLivery = false,
                 FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "1", "3" },
-            Image = "/Images/IMG_1891.JPG"},
+            Image = "/Images/CRUD/IMG_1935.JPG"},
             new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-TNB", AircraftTypeId = "3", AirlineId = "3", HasSpecialLivery = false,
                 FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "2", },
-            Image = "/Images/IMG_1935.JPG"},
+            Image = "/Images/CRUD/IMG_1891.JPG"},
         };
 
         public Task AddAsync(AircraftItem item)
