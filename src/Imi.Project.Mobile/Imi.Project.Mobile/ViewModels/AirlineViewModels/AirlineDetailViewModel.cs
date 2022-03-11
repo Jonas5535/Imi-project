@@ -9,12 +9,24 @@ namespace Imi.Project.Mobile.ViewModels
     public class AirlineDetailViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airline> _airlineService;
-        public Airline ShownAirline { get; set; }
 
         public AirlineDetailViewModel(ICRUDService<Airline> airlineService)
         {
             _airlineService = airlineService;
         }
+
+        private Airline shownAirline;
+
+        public Airline ShownAirline
+        {
+            get { return shownAirline; }
+            set
+            {
+                shownAirline = value;
+                RaisePropertyChanged(nameof(ShownAirline));
+            }
+        }
+
 
         public override void Init(object initData)
         {
