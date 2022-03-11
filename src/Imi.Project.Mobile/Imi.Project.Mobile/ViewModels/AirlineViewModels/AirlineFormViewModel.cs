@@ -221,13 +221,17 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     NameError = error.ErrorMessage;
                 }
-                if (error.PropertyName == nameof(airline.IATACode))
+                else if (error.PropertyName == nameof(airline.IATACode))
                 {
                     IATACodeError = error.ErrorMessage;
                 }
-                if (error.PropertyName == nameof(airline.ICAOCode))
+                else if (error.PropertyName == nameof(airline.ICAOCode))
                 {
                     ICAOCodeError = error.ErrorMessage;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");
                 }
             }
             return validationResult.IsValid;
