@@ -3,7 +3,6 @@ using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Validators;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,10 +17,10 @@ namespace Imi.Project.Mobile.ViewModels
         private Airline _currentAirline;
         private bool _isNew = true;
 
-        public AirlineFormViewModel(ICRUDService<Airline> airlineService)
+        public AirlineFormViewModel(ICRUDService<Airline> airlineService, IValidator airlineValidator)
         {
             _airlineService = airlineService;
-            _airlineValidator = new AirlineValidator();
+            _airlineValidator = airlineValidator;
         }
 
         #region Properties
