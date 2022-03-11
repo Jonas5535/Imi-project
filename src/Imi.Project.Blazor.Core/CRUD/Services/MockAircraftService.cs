@@ -10,35 +10,35 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
     {
         private static InputSelectItem[] _aircraftTypes = new InputSelectItem[]
         {
-            new InputSelectItem() { Value = "1", Label = "A320"},
-            new InputSelectItem() { Value = "2", Label = "B788"},
-            new InputSelectItem() { Value = "3", Label = "MD11"}
+            new InputSelectItem() { Value = "1", Label = "A319"},
+            new InputSelectItem() { Value = "2", Label = "B78X"},
+            new InputSelectItem() { Value = "3", Label = "B738"}
         };
 
         private static InputSelectItem[] _airlines = new InputSelectItem[]
         {
             new InputSelectItem(){ Value = "1", Label = "Brussels Airlines"},
-            new InputSelectItem(){ Value = "2", Label = "TUI Fly"},
-            new InputSelectItem(){ Value = "3", Label = "Lufthansa Cargo"}
+            new InputSelectItem(){ Value = "2", Label = "United Airlines"},
+            new InputSelectItem(){ Value = "3", Label = "TUI Fly"}
         };
 
         private static InputSelectItem[] _airports = new InputSelectItem[]
         {
             new InputSelectItem{ Value = "1", Label = "Brussels Airport"},
             new InputSelectItem{ Value = "2", Label = "Nice Côte d'Azur"},
-            new InputSelectItem{ Value = "3", Label = "Tokyo Narita Intl. Airport"},
+            new InputSelectItem{ Value = "3", Label = "New York Newark Airport"},
         };
 
         private static List<AircraftItem> _aircrafts = new List<AircraftItem>()
         {
-            new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-SNJ", AircraftTypeId = "1", AirlineId = "1", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2", "3" },
+            new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-SSL", AircraftTypeId = "1", AirlineId = "1", HasSpecialLivery = false,
+                FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "1", "2", "3" },
                 Image = "/Images/IMG_1974.JPG" },
-            new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-LOE", AircraftTypeId = "2", AirlineId = "2", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08), AirportIds = new List<string>{ "1", "2" },
+            new AircraftItem{ Id = Guid.NewGuid(), Registration = "N12003", AircraftTypeId = "2", AirlineId = "2", HasSpecialLivery = false,
+                FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "1", "3" },
             Image = "/Images/IMG_1891.JPG"},
-            new AircraftItem{ Id = Guid.NewGuid(), Registration = "D-ALCC", AircraftTypeId = "3", AirlineId = "3", HasSpecialLivery = false,
-                FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25), AirportIds = new List<string>{ "3", },
+            new AircraftItem{ Id = Guid.NewGuid(), Registration = "OO-TNB", AircraftTypeId = "3", AirlineId = "3", HasSpecialLivery = false,
+                FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2022, 02, 11), AirportIds = new List<string>{ "2", },
             Image = "/Images/IMG_1935.JPG"},
         };
 
