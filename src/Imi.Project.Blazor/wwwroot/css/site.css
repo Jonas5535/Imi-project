@@ -113,25 +113,22 @@ app {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-.shade {
+.memory-card {
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
 }
 
-.shade:hover {
+.memory-card:hover {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
 }
 
-.card{
+.crud-card{
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
     border-radius: 5%;
-}
-
-.card-height{
     height: 425px;
 }
 
-.card:hover {
+.crud-card:hover {
     background-color: var(--Lighter-yellow);
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
