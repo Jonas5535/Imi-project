@@ -7,5 +7,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
     {
         List<MemoryCardModel> GetMemoryCards();
         void HandleSelection(MemoryCardModel card);
+        StatsModel GetStats();
+        void EndGame(bool isVictory);
     }
 }

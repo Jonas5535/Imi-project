@@ -9,6 +9,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
     {
         private List<MemoryCardModel> currentSelection = new List<MemoryCardModel>();
 
+        private StatsModel stats = new StatsModel();
+
         private readonly static ICollection<string> _images = new List<string>
         {
             "/images/Memory/Memory1.jpg",
@@ -64,6 +66,17 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                     HandleMistake();
                 }
             }
+        }
+
+        public StatsModel GetStats()
+        {
+            return stats;
+        }
+
+        //ik retourneer void omdat ik op dit moment nog niet weet of ik iets zal retourneren of niet.
+        public void EndGame(bool isVictory) 
+        {
+            throw new NotImplementedException();
         }
 
         private void HandleMistake()
