@@ -6,20 +6,39 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MemoryService
+    public class MemoryService : IMemoryService
     {
-        private static ICollection<string> _images = new List<string>
+        private readonly static ICollection<string> _images = new List<string>
         {
             "/images/Memory/Memory1.jpg",
+            "/images/Memory/Memory1.jpg",
+            "/images/Memory/Memory2.jpg",
             "/images/Memory/Memory2.jpg",
             "/images/Memory/Memory3.jpg",
+            "/images/Memory/Memory3.jpg",
+            "/images/Memory/Memory4.jpg",
             "/images/Memory/Memory4.jpg",
             "/images/Memory/Memory5.jpg",
+            "/images/Memory/Memory5.jpg",
+            "/images/Memory/Memory6.jpg",
             "/images/Memory/Memory6.jpg",
             "/images/Memory/Memory7.jpg",
+            "/images/Memory/Memory7.jpg",
+            "/images/Memory/Memory8.jpg",
             "/images/Memory/Memory8.jpg",
             "/images/Memory/Memory9.jpg",
+            "/images/Memory/Memory9.jpg",
+            "/images/Memory/Memory10.jpg",
             "/images/Memory/Memory10.jpg",
         };
+
+        public List<string> GetShuffledImages()
+        {
+            Random random = new Random();
+
+            List<string> shuffledImages = _images.OrderBy(a => random.Next()).ToList();
+
+            return shuffledImages;
+        }
     }
 }
