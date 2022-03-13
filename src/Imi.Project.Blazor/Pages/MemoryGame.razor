@@ -1,29 +1,44 @@
 ﻿@page "/memory"
+@inject IMemoryService _memoryService
 
-<h1>Memory</h1>
-<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-	<MemoryCard></MemoryCard>
-</div>
+
+@if (!HasStarted)
+{
+	<div class="card text-center justify-content-center mx-auto w-25">
+		<div class="card-title">
+			<h3 class="mt-3">Memory</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Op deze pagina kan je memory spelen met foto's van vliegtuigen. <br/> Klik op spelen om het spel te starten. <br/> Veel plezier 😀
+			</p>
+			<button class="btn" @onclick="GameInit">Spelen</button>
+		</div>
+	</div>
+}
+else
+{
+	<h1>Memory</h1>
+
+	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
+		@foreach (var image in Images)
+	   {
+			<MemoryCard ActualImage="@image"
+						CurrentImage="@image">
+			</MemoryCard>
+	   }
+	</div>
+}
 
 @code {
+	private const string coverImage = "/images/Memory/CardCover.png";
+	public bool HasStarted { get; set; } = false;
 
+	public List<string> Images { get; set; }
+
+	private void GameInit()
+	{
+		Images = _memoryService.GetShuffledImages();
+		HasStarted = true;
+	}
 }

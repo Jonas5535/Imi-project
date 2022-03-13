@@ -1,11 +1,11 @@
 ﻿
 
-<div class="row ml-4 mt-4 d-inline-block justify-content-center shade" style="width: 14rem">
+<div class="row ml-4 mt-4 d-inline-block justify-content-center memory-card" style="width: 14rem">
 	<img class="col p-0" src="@CurrentImage" />
 </div>
 
 @code {
-	public string CoverImage { get; set; } = "/images/Memory/CardCover.png";
+	[Parameter]
 	public string CurrentImage { get; set; }
 	[Parameter]
 	public string ActualImage { get; set; }

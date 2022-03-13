@@ -30,6 +30,7 @@ namespace Imi.Project.Blazor
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddTransient<ICRUDService<AircraftListItem, AircraftItem>, MockAircraftService>();
+            services.AddTransient<IMemoryService, MemoryService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
