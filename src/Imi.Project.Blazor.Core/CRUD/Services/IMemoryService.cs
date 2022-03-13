@@ -6,6 +6,6 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
     public interface IMemoryService
     {
         List<MemoryCardModel> GetMemoryCards();
-        void TurnCard(MemoryCardModel card);
+        void HandleSelection(MemoryCardModel card);
     }
 }

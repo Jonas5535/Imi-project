@@ -24,7 +24,7 @@ else
 		@foreach (var card in MemoryCards)
 		{
 			<MemoryCard Model="card"
-						OnCardClick="TurnCard">
+						OnCardClick="HandleSelection">
 			</MemoryCard>
 	   }
 	</div>
@@ -40,10 +40,10 @@ else
 		HasStarted = true;
 	}
 
-	public void TurnCard(object item)
+	public void HandleSelection(object item)
 	{
 		MemoryCardModel card = item as MemoryCardModel;
-		_memoryService.TurnCard(card);
+		_memoryService.HandleSelection(card);
 	}
 }
 

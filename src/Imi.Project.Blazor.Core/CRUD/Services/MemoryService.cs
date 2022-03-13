@@ -48,14 +48,35 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return cards;
         }
 
-        public void TurnCard(MemoryCardModel card)
+        public void HandleSelection(MemoryCardModel card)
         {
             card.CurrentImage = card.ActualImage;
-
             currentSelection.Add(card);
+
+            if (currentSelection.Count == 2)
+            {
+                if (IsPair(currentSelection))
+                {
+                    HandleCorrect();
+                }
+                else
+                {
+                    HandleMistake();
+                }
+            }
         }
 
-        private bool IsPair()
+        private void HandleMistake()
+        {
+            throw new NotImplementedException();
+        }
+
+        private void HandleCorrect()
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool IsPair(List<MemoryCardModel> currentSelection)
         {
             throw new NotImplementedException();
         }
