@@ -1,16 +1,15 @@
 ﻿@page "/memory"
 @inject IMemoryService _memoryService
 
-
 @if (!HasStarted)
 {
-	<div class="card text-center justify-content-center mx-auto w-25">
+	<div class="card text-center mx-auto w-25 memory-welcome-card">
 		<div class="card-title">
 			<h3 class="mt-3">Memory</h3>
 		</div>
 		<div class="card-body">
 			<p>
-				Op deze pagina kan je memory spelen met foto's van vliegtuigen. <br/> Klik op spelen om het spel te starten. <br/> Veel plezier 😀
+				Op deze pagina kan je memory spelen met foto's van vliegtuigen. <br /> Klik op spelen om het spel te starten. <br /> Veel plezier 😀
 			</p>
 			<button class="btn" @onclick="GameInit">Spelen</button>
 		</div>
@@ -22,14 +21,14 @@ else
 		<h1>Memory</h1>
 		<span>Aantal levens: @stats.Lives</span>
 	</div>
-	
+
 	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
 		@foreach (var card in MemoryCards)
 		{
 			<MemoryCard Model="card"
-						OnCardClick="HandleSelection">
+				OnCardClick="HandleSelection">
 			</MemoryCard>
-	   }
+		}
 	</div>
 }
 

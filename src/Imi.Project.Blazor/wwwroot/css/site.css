@@ -122,6 +122,11 @@ app {
     transform: translateY(-2px);
 }
 
+.memory-welcome-card {
+    box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
+    border-radius: 5%;
+}
+
 .crud-card{
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
     border-radius: 5%;
