@@ -1,8 +1,7 @@
-﻿using System;
+﻿using Imi.Project.Blazor.Core.CRUD.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
@@ -32,7 +31,21 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             "/images/Memory/Memory10.jpg",
         };
 
-        public List<string> GetShuffledImages()
+        public List<MemoryCardModel> GameInit()
+        {
+            List<MemoryCardModel> cards = new List<MemoryCardModel>();
+            List<string> images = GetShuffledImages();
+
+            foreach (var image in images)
+            {
+                MemoryCardModel card = new MemoryCardModel { ActualImage = image };
+                cards.Add(card);
+            }
+
+            return cards;
+        }
+
+        private List<string> GetShuffledImages()
         {
             Random random = new Random();
 
