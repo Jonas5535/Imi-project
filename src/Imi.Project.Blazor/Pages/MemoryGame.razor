@@ -21,24 +21,22 @@ else
 	<h1>Memory</h1>
 
 	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
-		@foreach (var image in Images)
+		@foreach (var card in MemoryCards)
 	   {
-			<MemoryCard ActualImage="@image"
-						CurrentImage="@image">
+			<MemoryCard Model="card">
 			</MemoryCard>
 	   }
 	</div>
 }
 
 @code {
-	private const string coverImage = "/images/Memory/CardCover.png";
 	public bool HasStarted { get; set; } = false;
 
-	public List<string> Images { get; set; }
+	public IEnumerable<MemoryCardModel> MemoryCards { get; set; }
 
 	private void GameInit()
 	{
-		Images = _memoryService.GetShuffledImages();
+		MemoryCards = _memoryService.GetMemoryCards();
 		HasStarted = true;
 	}
 }

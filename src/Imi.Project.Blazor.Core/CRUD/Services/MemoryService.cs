@@ -31,7 +31,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             "/images/Memory/Memory10.jpg",
         };
 
-        public List<MemoryCardModel> GameInit()
+        public List<MemoryCardModel> GetMemoryCards()
         {
             List<MemoryCardModel> cards = new List<MemoryCardModel>();
             List<string> images = GetShuffledImages();
@@ -45,7 +45,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return cards;
         }
 
-        private List<string> GetShuffledImages()
+        private static List<string> GetShuffledImages()
         {
             Random random = new Random();
 

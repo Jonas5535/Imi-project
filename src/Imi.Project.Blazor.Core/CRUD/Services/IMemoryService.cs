@@ -5,6 +5,6 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 {
     public interface IMemoryService
     {
-        List<MemoryCardModel> GameInit();
+        List<MemoryCardModel> GetMemoryCards();
     }
 }
