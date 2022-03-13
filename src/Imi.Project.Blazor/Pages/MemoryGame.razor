@@ -32,7 +32,6 @@ else
 
 @code {
 	public bool HasStarted { get; set; } = false;
-
 	public IEnumerable<MemoryCardModel> MemoryCards { get; set; }
 
 	private void GameInit()
@@ -44,7 +43,7 @@ else
 	public void TurnCard(object item)
 	{
 		MemoryCardModel card = item as MemoryCardModel;
-
-		card.CurrentImage = card.ActualImage;
+		_memoryService.TurnCard(card);
 	}
 }
+

@@ -7,6 +7,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 {
     public class MemoryService : IMemoryService
     {
+        private List<MemoryCardModel> currentSelection = new List<MemoryCardModel>();
+
         private readonly static ICollection<string> _images = new List<string>
         {
             "/images/Memory/Memory1.jpg",
@@ -44,6 +46,18 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             }
 
             return cards;
+        }
+
+        public void TurnCard(MemoryCardModel card)
+        {
+            card.CurrentImage = card.ActualImage;
+
+            currentSelection.Add(card);
+        }
+
+        private bool IsPair()
+        {
+            throw new NotImplementedException();
         }
 
         private static List<string> GetShuffledImages()
