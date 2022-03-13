@@ -22,8 +22,9 @@ else
 
 	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
 		@foreach (var card in MemoryCards)
-	   {
-			<MemoryCard Model="card">
+		{
+			<MemoryCard Model="card"
+						OnCardClick="TurnCard">
 			</MemoryCard>
 	   }
 	</div>
@@ -38,5 +39,12 @@ else
 	{
 		MemoryCards = _memoryService.GetMemoryCards();
 		HasStarted = true;
+	}
+
+	public void TurnCard(object item)
+	{
+		MemoryCardModel card = item as MemoryCardModel;
+
+		card.CurrentImage = card.ActualImage;
 	}
 }

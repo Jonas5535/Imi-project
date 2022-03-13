@@ -2,8 +2,8 @@
 {
     public class MemoryCardModel
     {
-        public const string CoverImage = "/images/Memory/CardCover.png";
+        public string CoverImage { get; } = "/images/Memory/CardCover.png";
         public string ActualImage { get; set; }
-        public string CurrentImage { get; set; } = CoverImage;
+        public string CurrentImage { get; set; }
     }
 }

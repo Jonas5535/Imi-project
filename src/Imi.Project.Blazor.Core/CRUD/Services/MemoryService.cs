@@ -39,6 +39,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             foreach (var image in images)
             {
                 MemoryCardModel card = new MemoryCardModel { ActualImage = image };
+                card.CurrentImage = card.CoverImage;
                 cards.Add(card);
             }
 

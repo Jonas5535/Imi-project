@@ -1,10 +1,13 @@
 ﻿
 
-<div class="row ml-4 mt-4 d-inline-block justify-content-center memory-card" style="width: 14rem">
-	<img class="col p-0" src="@Model.ActualImage"/>
+<div class="row ml-4 mt-4 d-inline-block justify-content-center memory-card" style="width: 14rem" @onclick="e => OnCardClick.InvokeAsync(Model)">
+	<img class="col p-0" src="@Model.CurrentImage"/>
 </div>
 
 @code {
 	[Parameter]
 	public MemoryCardModel Model { get; set; }
+
+	[Parameter]
+	public EventCallback<object> OnCardClick { get; set; }
 }
