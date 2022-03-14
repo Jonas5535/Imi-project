@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Imi.Project.Mobile.ViewModels"
+             x:DataType="viewmodels:AirportDetailViewModel"
              x:Class="Imi.Project.Mobile.Pages.AirportDetailPage"
              BackgroundColor="White"
              Title="Details">
@@ -30,20 +32,21 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="Naam" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
                 <Label Text="IATA Code" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
-                <Label Text="Brussels Airport" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
-                <Label Text="BRU" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAirport.Name}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownAirport.IATACode}" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Hoogte AMSL" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
-                <Label Text="EBBR" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
-                <Label Text="56 m" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAirport.ICAOCode}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownAirport.ElevationAMSL}" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="m" Style="{StaticResource ContentLabel}" Margin="0,0,-70,0" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Landingsbanen" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Terminals" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
-                <Label Text="3" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
-                <Label Text="1" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAirport.RunwayAmount}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownAirport.TerminalAmount}" Style="{StaticResource ContentLabel}" Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="Land" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="6" Grid.Column="0"></Label>
                 <Label Text="Stad" Style="{StaticResource TitleLabel}" Grid.Row="6" Grid.Column="1"></Label>
-                <Label Text="België" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
-                <Label Text="Zaventem" Style="{StaticResource ContentLabel}" Grid.Row="7" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAirport.Country}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownAirport.City}" Style="{StaticResource ContentLabel}" Grid.Row="7" Grid.Column="1"></Label>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
