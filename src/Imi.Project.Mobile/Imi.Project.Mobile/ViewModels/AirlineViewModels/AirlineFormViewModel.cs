@@ -199,9 +199,9 @@ namespace Imi.Project.Mobile.ViewModels
             get { return !string.IsNullOrWhiteSpace(HeadQuarterError); }
         }
 
-        private int fleetSize;
+        private int? fleetSize;
 
-        public int FleetSize
+        public int? FleetSize
         {
             get { return fleetSize; }
             set
@@ -287,6 +287,9 @@ namespace Imi.Project.Mobile.ViewModels
             Name = _currentAirline.Name;
             IATACode = _currentAirline.IATACode;
             ICAOCode = _currentAirline.ICAOCode;
+            MainAirport = _currentAirline.MainAirport;
+            HeadQuarter = _currentAirline.HeadQuarter;
+            FleetSize = _currentAirline.FleetSize;
         }
 
         private void SaveAirlineState()
@@ -294,6 +297,9 @@ namespace Imi.Project.Mobile.ViewModels
             _currentAirline.Name = Name;
             _currentAirline.IATACode = IATACode;
             _currentAirline.ICAOCode = ICAOCode;
+            _currentAirline.MainAirport = MainAirport;
+            _currentAirline.HeadQuarter = HeadQuarter;
+            _currentAirline.FleetSize = FleetSize;
         }
 
         private bool Validate(Airline airline)
@@ -301,6 +307,9 @@ namespace Imi.Project.Mobile.ViewModels
             NameError = "";
             IATACodeError = "";
             ICAOCodeError = "";
+            MainAirportError = "";
+            HeadQuarterError = "";
+            FleetSizeError = "";
 
             ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
             ValidationResult validationResult = _airlineValidator.Validate(validationContext);
