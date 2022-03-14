@@ -1,15 +1,17 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.ViewModels
 {
-    public class AiportViewModel : FreshBasePageModel
+    public class AirportViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airport> _airportService;
 
-        public AiportViewModel(ICRUDService<Airport> airportService)
+        public AirportViewModel(ICRUDService<Airport> airportService)
         {
             _airportService = airportService;
         }
@@ -26,5 +28,17 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        protected async override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+            await ListInit();
+        }
+
+        private async Task ListInit()
+        {
+            ObservableCollection<Airport> airports = await _airportService.ListAllAsync();
+            Airports = null;
+            Airports = airports;
+        }
     }
 }

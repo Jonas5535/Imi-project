@@ -66,7 +66,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
-            var airlines = await _airlineService.ListAllAsync();
+            ObservableCollection<Airline> airlines = await _airlineService.ListAllAsync();
             Airlines = null;
             Airlines = airlines;
         }

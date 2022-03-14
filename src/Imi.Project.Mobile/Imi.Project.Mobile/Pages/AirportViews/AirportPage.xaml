@@ -11,7 +11,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="lvAirports" Style="{StaticResource ListViewLayout}">
+            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding Airports}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -2,8 +2,6 @@
 using Imi.Project.Mobile.Core.Domain.Services;
 using Imi.Project.Mobile.Core.Domain.Services.Mocking;
 using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,22 +17,6 @@ namespace Imi.Project.Mobile.Pages
             InitializeComponent();
 
             airportService = new MockAirportService();
-        }
-
-        private async Task Listinit()
-        {
-            //busyIndicator.IsVisible = true;
-
-            IEnumerable<Airport> airports = await airportService.ListAllAsync();
-
-            lvAirports.ItemsSource = airports;
-            //busyIndicator.IsVisible = false;
-        }
-
-        protected override async void OnAppearing()
-        {
-            await Listinit();
-            base.OnAppearing();
         }
 
         private void BtnAdd_Clicked(object sender, EventArgs e)
