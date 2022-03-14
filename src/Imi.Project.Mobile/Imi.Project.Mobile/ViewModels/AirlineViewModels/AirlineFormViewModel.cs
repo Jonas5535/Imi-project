@@ -3,7 +3,6 @@ using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Validators;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -18,10 +17,10 @@ namespace Imi.Project.Mobile.ViewModels
         private Airline _currentAirline;
         private bool _isNew = true;
 
-        public AirlineFormViewModel(ICRUDService<Airline> airlineService)
+        public AirlineFormViewModel(ICRUDService<Airline> airlineService, IValidator airlineValidator)
         {
             _airlineService = airlineService;
-            _airlineValidator = new AirlineValidator();
+            _airlineValidator = airlineValidator;
         }
 
         #region Properties
@@ -139,6 +138,96 @@ namespace Imi.Project.Mobile.ViewModels
         {
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
+
+        private string mainAirport;
+
+        public string MainAirport
+        {
+            get { return mainAirport; }
+            set
+            {
+                mainAirport = value;
+                RaisePropertyChanged(nameof(MainAirport));
+            }
+        }
+
+        private string mainAirportError;
+
+        public string MainAirportError
+        {
+            get { return mainAirportError; }
+            set
+            {
+                mainAirportError = value;
+                RaisePropertyChanged(nameof(MainAirportError));
+                RaisePropertyChanged(nameof(MainAirportErrorVisible));
+            }
+        }
+
+        public bool MainAirportErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(MainAirportError); }
+        }
+
+        private string headQuarter;
+
+        public string HeadQuarter
+        {
+            get { return headQuarter; }
+            set
+            {
+                headQuarter = value;
+                RaisePropertyChanged(nameof(HeadQuarter));
+            }
+        }
+
+        private string headQuarterError;
+
+        public string HeadQuarterError
+        {
+            get { return headQuarterError; }
+            set
+            {
+                headQuarterError = value;
+                RaisePropertyChanged(nameof(HeadQuarterError));
+                RaisePropertyChanged(nameof(HeadQuarterErrorVisible));
+            }
+        }
+
+        public bool HeadQuarterErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(HeadQuarterError); }
+        }
+
+        private int? fleetSize;
+
+        public int? FleetSize
+        {
+            get { return fleetSize; }
+            set
+            {
+                fleetSize = value;
+                RaisePropertyChanged(nameof(FleetSize));
+            }
+        }
+
+        private string fleetSizeError;
+
+        public string FleetSizeError
+        {
+            get { return fleetSizeError; }
+            set
+            {
+                fleetSizeError = value;
+                RaisePropertyChanged(nameof(FleetSizeError));
+                RaisePropertyChanged(nameof(FleetSizeErrorVisible));
+            }
+        }
+
+        public bool FleetSizeErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(FleetSizeError); }
+        }
         #endregion
 
         public async override void Init(object initData)
@@ -188,7 +277,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
 
-                    await CoreMethods.PopPageModel(false, true);
+                    await CoreMethods.PopPageModel(_currentAirline, false, true);
                 }
             }
         );
@@ -198,13 +287,19 @@ namespace Imi.Project.Mobile.ViewModels
             Name = _currentAirline.Name;
             IATACode = _currentAirline.IATACode;
             ICAOCode = _currentAirline.ICAOCode;
+            MainAirport = _currentAirline.MainAirport;
+            HeadQuarter = _currentAirline.HeadQuarter;
+            FleetSize = _currentAirline.FleetSize;
         }
 
         private void SaveAirlineState()
         {
             _currentAirline.Name = Name;
-            _currentAirline.IATACode = IATACode;
-            _currentAirline.ICAOCode = ICAOCode;
+            _currentAirline.IATACode = IATACode.ToUpper();
+            _currentAirline.ICAOCode = ICAOCode.ToUpper();
+            _currentAirline.MainAirport = MainAirport;
+            _currentAirline.HeadQuarter = HeadQuarter;
+            _currentAirline.FleetSize = FleetSize;
         }
 
         private bool Validate(Airline airline)
@@ -212,6 +307,9 @@ namespace Imi.Project.Mobile.ViewModels
             NameError = "";
             IATACodeError = "";
             ICAOCodeError = "";
+            MainAirportError = "";
+            HeadQuarterError = "";
+            FleetSizeError = "";
 
             ValidationContext<Airline> validationContext = new ValidationContext<Airline>(airline);
             ValidationResult validationResult = _airlineValidator.Validate(validationContext);
@@ -222,13 +320,21 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     NameError = error.ErrorMessage;
                 }
-                if (error.PropertyName == nameof(airline.IATACode))
+                else if (error.PropertyName == nameof(airline.IATACode))
                 {
                     IATACodeError = error.ErrorMessage;
                 }
-                if (error.PropertyName == nameof(airline.ICAOCode))
+                else if (error.PropertyName == nameof(airline.ICAOCode))
                 {
                     ICAOCodeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airline.FleetSize))
+                {
+                    FleetSizeError = error.ErrorMessage;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");
                 }
             }
             return validationResult.IsValid;
