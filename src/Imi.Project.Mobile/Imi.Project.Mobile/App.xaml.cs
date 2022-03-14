@@ -19,6 +19,7 @@ namespace Imi.Project.Mobile
 
             //register dependencies
             FreshIOC.Container.Register<ICRUDService<Airline>>(new MockAirlineService());
+            FreshIOC.Container.Register<ICRUDService<Airport>>(new MockAirportService());
             FreshIOC.Container.Register<IValidator>(new AirlineValidator());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;

@@ -15,5 +15,12 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.PushPageModel<AirlineViewModel>(true);
             }
         );
+
+        public ICommand OpenAirportPageCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AirportViewModel>(true);
+            }
+        );
     }
 }
