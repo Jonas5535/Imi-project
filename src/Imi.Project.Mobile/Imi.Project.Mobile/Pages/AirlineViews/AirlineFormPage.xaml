@@ -43,6 +43,31 @@
                         </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
+                    <Label Text="Hoofdluchthaven" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" MaxLength="150">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Hoofdkantoor" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: Diegem, België" Style="{StaticResource StandardEntry}" MaxLength="200">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Text="Vloot grootte" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 49" Style="{StaticResource StandardEntry}" Keyboard="Numeric"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"></Label>
                     <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirlineCommand}"></Button>
                 </StackLayout>
             </ScrollView>

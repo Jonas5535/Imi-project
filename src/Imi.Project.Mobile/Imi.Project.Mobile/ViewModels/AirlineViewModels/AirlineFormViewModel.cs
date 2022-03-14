@@ -138,6 +138,96 @@ namespace Imi.Project.Mobile.ViewModels
         {
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
+
+        private string mainAirport;
+
+        public string MainAirport
+        {
+            get { return mainAirport; }
+            set
+            {
+                mainAirport = value;
+                RaisePropertyChanged(nameof(MainAirport));
+            }
+        }
+
+        private string mainAirportError;
+
+        public string MainAirportError
+        {
+            get { return mainAirportError; }
+            set
+            {
+                mainAirportError = value;
+                RaisePropertyChanged(nameof(MainAirportError));
+                RaisePropertyChanged(nameof(MainAirportErrorVisible));
+            }
+        }
+
+        public bool MainAirportErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(MainAirportError); }
+        }
+
+        private string headQuarter;
+
+        public string HeadQuarter
+        {
+            get { return headQuarter; }
+            set
+            {
+                headQuarter = value;
+                RaisePropertyChanged(nameof(HeadQuarter));
+            }
+        }
+
+        private string headQuarterError;
+
+        public string HeadQuarterError
+        {
+            get { return headQuarterError; }
+            set
+            {
+                headQuarterError = value;
+                RaisePropertyChanged(nameof(HeadQuarterError));
+                RaisePropertyChanged(nameof(HeadQuarterErrorVisible));
+            }
+        }
+
+        public bool HeadQuarterErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(HeadQuarterError); }
+        }
+
+        private int fleetSize;
+
+        public int FleetSize
+        {
+            get { return fleetSize; }
+            set
+            {
+                fleetSize = value;
+                RaisePropertyChanged(nameof(FleetSize));
+            }
+        }
+
+        private string fleetSizeError;
+
+        public string FleetSizeError
+        {
+            get { return fleetSizeError; }
+            set
+            {
+                fleetSizeError = value;
+                RaisePropertyChanged(nameof(FleetSizeError));
+                RaisePropertyChanged(nameof(FleetSizeErrorVisible));
+            }
+        }
+
+        public bool FleetSizeErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(FleetSizeError); }
+        }
         #endregion
 
         public async override void Init(object initData)
