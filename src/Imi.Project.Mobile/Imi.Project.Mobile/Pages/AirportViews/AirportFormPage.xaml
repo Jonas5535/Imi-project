@@ -33,7 +33,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding IATACodeError}" IsVisible="{Binding IATACodeErrorVisible}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4" ReturnType="Next">
+                    <Entry Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -43,10 +43,10 @@
                         </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}"></Button>
+                    <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirportCommand}"></Button>
                 </StackLayout>
             </ScrollView>
-            <Pages:BusyView x:Name="busyIndicator"/>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

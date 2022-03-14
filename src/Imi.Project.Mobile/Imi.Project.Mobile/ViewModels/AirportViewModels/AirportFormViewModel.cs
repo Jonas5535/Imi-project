@@ -5,6 +5,8 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -102,7 +104,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         public bool IATACodeErrorVisible
         {
-            get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
+            get { return !string.IsNullOrWhiteSpace(IATACodeError); }
         }
 
         private string icaoCode;
@@ -146,6 +148,32 @@ namespace Imi.Project.Mobile.ViewModels
             await RefreshAirport();
         }
 
+        public ICommand SaveAirportCommand => new Command(
+            async () =>
+            {
+                SaveAirportState();
+
+                if (Validate(_currentAirport))
+                {
+                    IsBusy = true;
+
+                    if (_isNew)
+                    {
+                        await _airportService.AddAsync(_currentAirport);
+                    }
+                    else
+                    {
+                        await _airportService.UpdateAsync(_currentAirport);
+                    }
+                    IsBusy = false;
+
+                    await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
+
+                    await CoreMethods.PopPageModel(_currentAirport, false, true);
+                }
+            }
+        );
+
         private async Task RefreshAirport()
         {
             if (_currentAirport == null)
@@ -168,6 +196,13 @@ namespace Imi.Project.Mobile.ViewModels
             Name = _currentAirport.Name;
             IATACode = _currentAirport.IATACode;
             ICAOCode = _currentAirport.ICAOCode;
+        }
+
+        private void SaveAirportState()
+        {
+            _currentAirport.Name = Name;
+            _currentAirport.IATACode = IATACode;
+            _currentAirport.ICAOCode = ICAOCode;
         }
 
         private bool Validate(Airport airport)
