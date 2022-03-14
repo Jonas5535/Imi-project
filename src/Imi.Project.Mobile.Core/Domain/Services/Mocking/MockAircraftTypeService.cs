@@ -12,11 +12,11 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
         private static ObservableCollection<AircraftType> _aircraftTypeList = new ObservableCollection<AircraftType>
         {
             new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320", FirstFlight = DateTime.Parse("1987/02/22"),
-                Lentgh = 37.57D, WingSpan = 34.10D, Height = 11.76D, EmptyWeight = 42400 },
+                Length = 37.57D, WingSpan = 34.10D, Height = 11.76D, EmptyWeight = 42400 },
             new AircraftType{ Id = Guid.NewGuid(), Brand = "Boeing", Type = "787-8", ICAOCode = "B788", FirstFlight = DateTime.Parse("2009/12/15"),
-                Lentgh = 56.7D, WingSpan = 60.1D, Height = 16.9D, EmptyWeight = 118000 },
+                Length = 56.7D, WingSpan = 60.1D, Height = 16.9D, EmptyWeight = 118000 },
             new AircraftType{ Id = Guid.NewGuid(), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11", FirstFlight = DateTime.Parse("1990/01/10"),
-                Lentgh = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
+                Length = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
         };
 
         public async Task<AircraftType> AddAsync(AircraftType entity)
