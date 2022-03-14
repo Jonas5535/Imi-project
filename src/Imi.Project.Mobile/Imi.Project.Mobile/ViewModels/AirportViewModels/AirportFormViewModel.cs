@@ -201,8 +201,8 @@ namespace Imi.Project.Mobile.ViewModels
         private void SaveAirportState()
         {
             _currentAirport.Name = Name;
-            _currentAirport.IATACode = IATACode;
-            _currentAirport.ICAOCode = ICAOCode;
+            _currentAirport.IATACode = IATACode.ToUpper();
+            _currentAirport.ICAOCode = ICAOCode.ToUpper();
         }
 
         private bool Validate(Airport airport)
