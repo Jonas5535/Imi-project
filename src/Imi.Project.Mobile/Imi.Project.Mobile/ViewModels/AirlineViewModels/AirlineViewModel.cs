@@ -46,7 +46,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand AddAirlineCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirlineFormViewModel>(null, false, true);
+                await CoreMethods.PushPageModel<AirlineFormViewModel>(true);
             }
         );
 

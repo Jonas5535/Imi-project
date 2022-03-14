@@ -7,7 +7,7 @@
              Title="Luchthavens">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Clicked="BtnAdd_Clicked"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAirportCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>

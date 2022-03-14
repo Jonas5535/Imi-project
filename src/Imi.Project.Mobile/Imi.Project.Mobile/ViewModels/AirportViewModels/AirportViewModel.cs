@@ -4,6 +4,8 @@ using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -33,6 +35,13 @@ namespace Imi.Project.Mobile.ViewModels
             base.ViewIsAppearing(sender, e);
             await ListInit();
         }
+
+        public ICommand AddAirportCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AirportFormViewModel>(true);
+            }
+        );
 
         private async Task ListInit()
         {

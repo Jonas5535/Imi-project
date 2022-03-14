@@ -19,11 +19,6 @@ namespace Imi.Project.Mobile.Pages
             airportService = new MockAirportService();
         }
 
-        private void BtnAdd_Clicked(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new AirportFormPage(null));
-        }
-
         private async void MnuEdit_Clicked(object sender, EventArgs e)
         {
             Airport selectedAirport = ((MenuItem)sender).CommandParameter as Airport;
