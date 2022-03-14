@@ -119,7 +119,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-
         private string icaoCodeError;
 
         public string ICAOCodeError
@@ -136,6 +135,120 @@ namespace Imi.Project.Mobile.ViewModels
         public bool ICAOCodeErrorVisible
         {
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
+        }
+
+        private int? elevationAMSL;
+
+        public int? ElevationAMSL
+        {
+            get { return elevationAMSL; }
+            set
+            {
+                elevationAMSL = value;
+                RaisePropertyChanged(nameof(ElevationAMSL));
+            }
+        }
+
+        private string elevationAMSLError;
+
+        public string ElevationAMSLError
+        {
+            get { return elevationAMSLError; }
+            set
+            {
+                elevationAMSLError = value;
+                RaisePropertyChanged(nameof(ElevationAMSLError));
+                RaisePropertyChanged(nameof(ElevationAMSLErrorVisible));
+            }
+        }
+
+        public bool ElevationAMSLErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(ElevationAMSLError); }
+        }
+
+        private int? runwayAmount;
+
+        public int? RunwayAmount
+        {
+            get { return runwayAmount; }
+            set
+            {
+                runwayAmount = value;
+                RaisePropertyChanged(nameof(RunwayAmount));
+            }
+        }
+
+        private string runwayAmountError;
+
+        public string RunwayAmountError
+        {
+            get { return runwayAmountError; }
+            set
+            {
+                runwayAmountError = value;
+                RaisePropertyChanged(nameof(RunwayAmountError));
+                RaisePropertyChanged(nameof(RunwayAmountErrorVisible));
+            }
+        }
+
+        public bool RunwayAmountErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(RunwayAmountError); }
+        }
+
+        private int? terminalAmount;
+
+        public int? TerminalAmount
+        {
+            get { return terminalAmount; }
+            set
+            {
+                terminalAmount = value;
+                RaisePropertyChanged(nameof(TerminalAmount));
+            }
+        }
+
+        private string terminalAmountError;
+
+        public string TerminalAmountError
+        {
+            get { return terminalAmountError; }
+            set
+            {
+                terminalAmountError = value;
+                RaisePropertyChanged(nameof(TerminalAmountError));
+                RaisePropertyChanged(nameof(TerminalAmountErrorVisible));
+            }
+        }
+
+        public bool TerminalAmountErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(TerminalAmountError); }
+        }
+
+        private string country;
+
+        public string Country
+        {
+            get { return country; }
+            set
+            {
+                country = value;
+                RaisePropertyChanged(nameof(Country));
+            }
+        }
+
+        private string city;
+
+        public string City
+        {
+            get { return city; }
+            set
+            {
+                city = value;
+                RaisePropertyChanged(nameof(City));
+            }
         }
         #endregion
 
