@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
@@ -167,6 +168,37 @@ namespace Imi.Project.Mobile.ViewModels
             Name = _currentAirport.Name;
             IATACode = _currentAirport.IATACode;
             ICAOCode = _currentAirport.ICAOCode;
+        }
+
+        private bool Validate(Airport airport)
+        {
+            NameError = "";
+            IATACodeError = "";
+            ICAOCodeError = "";
+
+            ValidationContext<Airport> validationContext = new ValidationContext<Airport>(airport);
+            ValidationResult validationResult = _airportValidator.Validate(validationContext);
+
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(airport.Name))
+                {
+                    NameError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.IATACode))
+                {
+                    IATACodeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.ICAOCode))
+                {
+                    ICAOCodeError = error.ErrorMessage;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");
+                }
+            }
+            return validationResult.IsValid;
         }
     }
 }

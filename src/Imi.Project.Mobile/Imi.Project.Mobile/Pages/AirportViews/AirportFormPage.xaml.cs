@@ -1,9 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
-using System;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Imi.Project.Mobile.Pages
@@ -11,10 +6,10 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AirportFormPage : ContentPage
     {
-        private readonly ICRUDService<Airport> airportService;
-        private Airport currentAirport;
-        private bool isNew = true;
-        private IValidator airportValidator;
+        //private readonly ICRUDService<Airport> airportService;
+        //private Airport currentAirport;
+        //private bool isNew = true;
+        //private IValidator airportValidator;
 
         public AirportFormPage()
         {
