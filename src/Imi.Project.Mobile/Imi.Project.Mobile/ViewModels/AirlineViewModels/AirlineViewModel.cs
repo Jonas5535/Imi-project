@@ -15,7 +15,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         public AirlineViewModel(ICRUDService<Airline> airlineService)
         {
-            this._airlineService = airlineService;
+            _airlineService = airlineService;
         }
 
         private ObservableCollection<Airline> airlines;
