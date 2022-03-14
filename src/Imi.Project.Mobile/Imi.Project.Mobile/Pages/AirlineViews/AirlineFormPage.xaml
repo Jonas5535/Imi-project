@@ -11,7 +11,7 @@
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Naam" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: Brussels Airlines" Style="{StaticResource StandardEntry}" Text="{Binding Name}" MaxLength="150">
+                    <Entry Placeholder="bv: Brussels Airlines" Style="{StaticResource StandardEntry}" Text="{Binding Name}" MaxLength="150" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -22,7 +22,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding NameError}" IsVisible="{Binding NameErrorVisible}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: SN" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="2">
+                    <Entry Placeholder="bv: SN" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="2" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -33,7 +33,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding IATACodeError}" IsVisible="{Binding IATACodeErrorVisible}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="3">
+                    <Entry Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="3" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -44,7 +44,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
                     <Label Text="Hoofdluchthaven" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding MainAirport}" MaxLength="150">
+                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding MainAirport}" MaxLength="150" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -55,7 +55,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding MainAirportError}" IsVisible="{Binding MainAirportErrorVisible}"></Label>
                     <Label Text="Hoofdkantoor" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: Diegem, België" Style="{StaticResource StandardEntry}" Text="{Binding HeadQuarter}" MaxLength="200">
+                    <Entry Placeholder="bv: Diegem, België" Style="{StaticResource StandardEntry}" Text="{Binding HeadQuarter}" MaxLength="200" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
