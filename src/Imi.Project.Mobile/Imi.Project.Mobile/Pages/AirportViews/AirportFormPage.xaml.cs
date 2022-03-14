@@ -2,8 +2,6 @@
 using FluentValidation.Results;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Services.Mocking;
-using Imi.Project.Mobile.Core.Domain.Validators;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -18,94 +16,66 @@ namespace Imi.Project.Mobile.Pages
         private bool isNew = true;
         private IValidator airportValidator;
 
-        public AirportFormPage(Airport airport)
+        public AirportFormPage()
         {
             InitializeComponent();
-
-            airportService = new MockAirportService();
-            airportValidator = new AirportValidator();
-
-            if (airport == null)
-            {
-                currentAirport = new Airport();
-                Title = "Nieuwe luchthaven";
-            }
-            else
-            {
-                isNew = false;
-                currentAirport = airport;
-                Title = $"{currentAirport.Name} bewerken";
-            }
         }
 
-        protected override void OnAppearing()
-        {
-            LoadAirportState();
-            base.OnAppearing();
-        }
+        //private void SaveAirportState()
+        //{
+        //    currentAirport.Name = txtName.Text;
+        //    currentAirport.IATACode = txtIATA.Text;
+        //    currentAirport.ICAOCode = txtICAO.Text;
+        //}
 
-        private void LoadAirportState()
-        {
-            txtName.Text = currentAirport.Name;
-            txtIATA.Text = currentAirport.IATACode;
-            txtICAO.Text = currentAirport.ICAOCode;
-        }
+        //private bool Validate(Airport airport)
+        //{
+        //    ValidationContext<Airport> validationContext = new ValidationContext<Airport>(airport);
+        //    ValidationResult validationResult = airportValidator.Validate(validationContext);
 
-        private void SaveAirportState()
-        {
-            currentAirport.Name = txtName.Text;
-            currentAirport.IATACode = txtIATA.Text;
-            currentAirport.ICAOCode = txtICAO.Text;
-        }
+        //    foreach (var error in validationResult.Errors)
+        //    {
+        //        if (error.PropertyName == nameof(airport.Name))
+        //        {
+        //            lblErrorName.Text = error.ErrorMessage;
+        //            lblErrorName.IsVisible = true;
+        //        }
+        //        if (error.PropertyName == nameof(airport.IATACode))
+        //        {
+        //            lblErrorIATA.Text = error.ErrorMessage;
+        //            lblErrorIATA.IsVisible = true;
+        //        }
+        //        if (error.PropertyName == nameof(airport.ICAOCode))
+        //        {
+        //            lblErrorICAO.Text = error.ErrorMessage;
+        //            lblErrorICAO.IsVisible = true;
+        //        }
+        //    }
+        //    return validationResult.IsValid;
+        //}
 
-        private bool Validate(Airport airport)
-        {
-            ValidationContext<Airport> validationContext = new ValidationContext<Airport>(airport);
-            ValidationResult validationResult = airportValidator.Validate(validationContext);
+        //private async void BtnSave_Clicked(object sender, EventArgs e)
+        //{
+        //    busyIndicator.IsVisible = true;
 
-            foreach (var error in validationResult.Errors)
-            {
-                if (error.PropertyName == nameof(airport.Name))
-                {
-                    lblErrorName.Text = error.ErrorMessage;
-                    lblErrorName.IsVisible = true;
-                }
-                if (error.PropertyName == nameof(airport.IATACode))
-                {
-                    lblErrorIATA.Text = error.ErrorMessage;
-                    lblErrorIATA.IsVisible = true;
-                }
-                if (error.PropertyName == nameof(airport.ICAOCode))
-                {
-                    lblErrorICAO.Text = error.ErrorMessage;
-                    lblErrorICAO.IsVisible = true;
-                }
-            }
-            return validationResult.IsValid;
-        }
+        //    SaveAirportState();
 
-        private async void BtnSave_Clicked(object sender, EventArgs e)
-        {
-            busyIndicator.IsVisible = true;
+        //    if (Validate(currentAirport))
+        //    {
+        //        if (isNew)
+        //        {
+        //            currentAirport.Id = Guid.NewGuid();
+        //            await airportService.AddAsync(currentAirport);
+        //        }
+        //        else
+        //        {
+        //            await airportService.UpdateAsync(currentAirport);
+        //        }
 
-            SaveAirportState();
-
-            if (Validate(currentAirport))
-            {
-                if (isNew)
-                {
-                    currentAirport.Id = Guid.NewGuid();
-                    await airportService.AddAsync(currentAirport);
-                }
-                else
-                {
-                    await airportService.UpdateAsync(currentAirport);
-                }
-
-                await DisplayAlert("Opgeslagen", $"De luchthaven {currentAirport.Name} is opgeslagen", "Ok");
-                await Navigation.PopAsync();
-            }
-            busyIndicator.IsVisible = false;
-        }
+        //        await DisplayAlert("Opgeslagen", $"De luchthaven {currentAirport.Name} is opgeslagen", "Ok");
+        //        await Navigation.PopAsync();
+        //    }
+        //    busyIndicator.IsVisible = false;
+        //}
     }
 }

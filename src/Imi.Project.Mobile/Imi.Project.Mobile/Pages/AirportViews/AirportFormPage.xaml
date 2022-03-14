@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AirportFormPage"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="{Binding PageTitle}">
 
     <ContentPage.Content>
         <AbsoluteLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Naam" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtName" Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" MaxLength="200">
+                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding Name}" MaxLength="200" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -19,9 +20,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorName" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding NameError}" IsVisible="{Binding NameErrorVisible}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtIATA" Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" MaxLength="3">
+                    <Entry Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="3" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -30,9 +31,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorIATA" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding IATACodeError}" IsVisible="{Binding IATACodeErrorVisible}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtICAO" Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" MaxLength="4">
+                    <Entry Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -41,8 +42,8 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorICAO" Style="{StaticResource ErrorMessage}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
+                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}"></Button>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView x:Name="busyIndicator"/>
