@@ -1,6 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -21,8 +23,14 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 shownAirport = value;
-                RaisePropertyChanged(nameof(shownAirport));
+                RaisePropertyChanged(nameof(ShownAirport));
+                RaisePropertyChanged(nameof(UnitLabelVisible));
             }
+        }
+
+        public bool UnitLabelVisible
+        {
+            get { return ShownAirport.ElevationAMSL != null; }
         }
 
         public override void Init(object initData)
@@ -36,5 +44,20 @@ namespace Imi.Project.Mobile.ViewModels
             ShownAirport = null;
             ShownAirport = returnedData as Airport;
         }
+
+        public ICommand EditAirportCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AirportFormViewModel>(ShownAirport, false, true);
+            }
+        );
+
+        public ICommand DeleteAirportCommand => new Command(
+            async () =>
+            {
+                await _AirportService.DeleteAsync(ShownAirport.Id);
+                await CoreMethods.PopPageModel(false, true);
+            }
+        );
     }
 }
