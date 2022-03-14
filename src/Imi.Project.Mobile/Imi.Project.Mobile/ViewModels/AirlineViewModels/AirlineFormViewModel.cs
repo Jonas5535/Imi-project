@@ -328,6 +328,10 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     ICAOCodeError = error.ErrorMessage;
                 }
+                else if (error.PropertyName == nameof(airline.FleetSize))
+                {
+                    FleetSizeError = error.ErrorMessage;
+                }
                 else
                 {
                     throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");

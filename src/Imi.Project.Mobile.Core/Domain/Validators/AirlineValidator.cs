@@ -9,7 +9,9 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
         {
             RuleFor(airline => airline.Name)
                 .NotEmpty()
-                .WithMessage("De naam mag niet leeg zijn");
+                .WithMessage("De naam mag niet leeg zijn")
+                .MinimumLength(3)
+                .WithMessage("De naam mag niet kleiner zijn dan 3 karakters");
 
             RuleFor(airline => airline.IATACode)
                 .NotEmpty()
@@ -22,6 +24,9 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .WithMessage("De ICAO code mag niet leeg zijn")
                 .Length(3)
                 .WithMessage("De ICAO code van een maatschappij moet 3 karakters hebben");
+            RuleFor(airline => airline.FleetSize)
+                .GreaterThan(0)
+                .WithMessage("De vloot grootte moet groter zijn dan 0");
         }
     }
 }
