@@ -43,6 +43,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand EditAirportCommand => new Command<Airport>(
+            async (Airport airport) =>
+            {
+                await CoreMethods.PushPageModel<AirportFormViewModel>(airport, false, true);
+            }
+        );
+
         private async Task ListInit()
         {
             ObservableCollection<Airport> airports = await _airportService.ListAllAsync();
