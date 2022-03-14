@@ -309,6 +309,11 @@ namespace Imi.Project.Mobile.ViewModels
             Name = _currentAirport.Name;
             IATACode = _currentAirport.IATACode;
             ICAOCode = _currentAirport.ICAOCode;
+            ElevationAMSL = _currentAirport.ElevationAMSL;
+            RunwayAmount = _currentAirport.RunwayAmount;
+            TerminalAmount = _currentAirport.TerminalAmount;
+            Country = _currentAirport.Country;
+            City = _currentAirport.City;
         }
 
         private void SaveAirportState()
@@ -316,6 +321,11 @@ namespace Imi.Project.Mobile.ViewModels
             _currentAirport.Name = Name;
             _currentAirport.IATACode = IATACode.ToUpper();
             _currentAirport.ICAOCode = ICAOCode.ToUpper();
+            _currentAirport.ElevationAMSL = ElevationAMSL;
+            _currentAirport.RunwayAmount = RunwayAmount;
+            _currentAirport.TerminalAmount = TerminalAmount;
+            _currentAirport.Country = Country;
+            _currentAirport.City = City;
         }
 
         private bool Validate(Airport airport)
