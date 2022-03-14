@@ -18,7 +18,7 @@
                         <ViewCell>
                             <ViewCell.ContextActions>
                                 <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" Command="{Binding BindingContext.EditAirportCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDelete_Clicked"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" Command="{Binding BindingContext.DeleteAirportCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">

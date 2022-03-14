@@ -50,6 +50,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand DeleteAirportCommand => new Command<Airport>(
+            async (Airport airport) =>
+            {
+                await _airportService.DeleteAsync(airport.Id);
+            }
+        );
+
         private async Task ListInit()
         {
             ObservableCollection<Airport> airports = await _airportService.ListAllAsync();
