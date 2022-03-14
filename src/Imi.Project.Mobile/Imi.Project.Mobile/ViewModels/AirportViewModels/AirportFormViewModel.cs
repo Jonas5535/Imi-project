@@ -2,6 +2,8 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -102,6 +104,19 @@ namespace Imi.Project.Mobile.ViewModels
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
 
+        private string icaoCode;
+
+        public string ICAOCode
+        {
+            get { return icaoCode; }
+            set
+            {
+                icaoCode = value;
+                RaisePropertyChanged(nameof(ICAOCode));
+            }
+        }
+
+
         private string icaoCodeError;
 
         public string ICAOCodeError
@@ -120,5 +135,38 @@ namespace Imi.Project.Mobile.ViewModels
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
         #endregion
+
+        public async override void Init(object initData)
+        {
+            base.Init(initData);
+
+            _currentAirport = initData as Airport;
+
+            await RefreshAirport();
+        }
+
+        private async Task RefreshAirport()
+        {
+            if (_currentAirport == null)
+            {
+                _currentAirport = new Airport();
+                _currentAirport.Id = Guid.NewGuid();
+                PageTitle = "Nieuwe luchthaven";
+            }
+            else
+            {
+                _isNew = false;
+                _currentAirport = await _airportService.GetByIdAsync(_currentAirport.Id);
+                PageTitle = $"{_currentAirport.Name} bewerken";
+            }
+            LoadAirportState();
+        }
+
+        private void LoadAirportState()
+        {
+            Name = _currentAirport.Name;
+            IATACode = _currentAirport.IATACode;
+            ICAOCode = _currentAirport.ICAOCode;
+        }
     }
 }
