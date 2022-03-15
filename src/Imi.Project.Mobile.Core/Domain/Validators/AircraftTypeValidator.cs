@@ -15,7 +15,9 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
 
             RuleFor(aircraftType => aircraftType.Type)
                 .NotEmpty()
-                .WithMessage("Het type mag niet leeg zijn");
+                .WithMessage("Het type mag niet leeg zijn")
+                .MinimumLength(3)
+                .WithMessage("Het type moet minstens 3 karakters lang zijn");
 
             RuleFor(aircraftType => aircraftType.ICAOCode)
                 .NotEmpty()

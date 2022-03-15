@@ -5,6 +5,8 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -145,6 +147,32 @@ namespace Imi.Project.Mobile.ViewModels
             await RefreshAircraftType();
         }
 
+        public ICommand SaveAircraftTypeCommand => new Command(
+            async () =>
+            {
+                SaveAircraftTypeState();
+
+                if (Validate(_currentAircraftType))
+                {
+                    IsBusy = true;
+
+                    if (_isNew)
+                    {
+                        await _aircraftTypeService.AddAsync(_currentAircraftType);
+                    }
+                    else
+                    {
+                        await _aircraftTypeService.UpdateAsync(_currentAircraftType);
+                    }
+                    IsBusy = false;
+
+                    await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuigtype {_currentAircraftType.Type} is opgeslagen", "Ok");
+
+                    await CoreMethods.PopPageModel(_currentAircraftType, false, true);
+                }
+            }
+        );
+
         private async Task RefreshAircraftType()
         {
             if (_currentAircraftType == null)
@@ -167,6 +195,13 @@ namespace Imi.Project.Mobile.ViewModels
             Brand = _currentAircraftType.Brand;
             Type = _currentAircraftType.Type;
             ICAOCode = _currentAircraftType.ICAOCode;
+        }
+
+        private void SaveAircraftTypeState()
+        {
+            _currentAircraftType.Brand = Brand;
+            _currentAircraftType.Type = Type?.ToUpper();
+            _currentAircraftType.ICAOCode = ICAOCode?.ToUpper();
         }
 
         private bool Validate(AircraftType aircraftType)

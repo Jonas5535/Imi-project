@@ -23,6 +23,7 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<ICRUDService<AircraftType>>(new MockAircraftTypeService());
             FreshIOC.Container.Register<IValidator>(new AirlineValidator());
             FreshIOC.Container.Register<IValidator>(new AirportValidator());
+            FreshIOC.Container.Register<IValidator>(new AircraftTypeValidator());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;
             navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");

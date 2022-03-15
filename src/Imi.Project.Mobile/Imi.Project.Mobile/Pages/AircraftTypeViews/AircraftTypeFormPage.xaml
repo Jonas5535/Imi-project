@@ -11,7 +11,7 @@
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Merk" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" Text="{Binding Brand}" MaxLength="50">
+                    <Entry Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" Text="{Binding Brand}" MaxLength="50" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -22,7 +22,7 @@
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding BrandError}" IsVisible="{Binding BrandErrorVisible}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" Text="{Binding Type}" MaxLength="30">
+                    <Entry Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" Text="{Binding Type}" MaxLength="30" ReturnType="Next">
                     <Entry.Keyboard>
                         <Keyboard x:FactoryMethod="Create">
                             <x:Arguments>
@@ -43,7 +43,7 @@
                         </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}"></Button>
+                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAircraftTypeCommand}"></Button>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView IsVisible="{Binding IsBusy}"/>
