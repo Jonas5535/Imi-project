@@ -333,6 +333,9 @@ namespace Imi.Project.Mobile.ViewModels
             NameError = "";
             IATACodeError = "";
             ICAOCodeError = "";
+            ElevationAMSLError = "";
+            RunwayAmountError = "";
+            TerminalAmountError = "";
 
             ValidationContext<Airport> validationContext = new ValidationContext<Airport>(airport);
             ValidationResult validationResult = _airportValidator.Validate(validationContext);
@@ -350,6 +353,18 @@ namespace Imi.Project.Mobile.ViewModels
                 else if (error.PropertyName == nameof(airport.ICAOCode))
                 {
                     ICAOCodeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.ElevationAMSL))
+                {
+                    ElevationAMSLError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.RunwayAmount))
+                {
+                    RunwayAmountError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.TerminalAmount))
+                {
+                    TerminalAmountError = error.ErrorMessage;
                 }
                 else
                 {
