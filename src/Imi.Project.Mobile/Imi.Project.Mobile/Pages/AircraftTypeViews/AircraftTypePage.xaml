@@ -3,21 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
              x:Class="Imi.Project.Mobile.Pages.AircraftTypePage"
+             x:Name="page"
              BackgroundColor="White"
              Title="Vliegtuigtypes">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Clicked="BtnAddType_Clicked"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="lvAircraftTypes" Style="{StaticResource ListViewLayout}">
+            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding AircraftTypes}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}" Clicked="MnuEditType_Clicked"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDeleteType_Clicked"/>
+                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" />
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">
