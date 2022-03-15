@@ -2,6 +2,8 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -133,5 +135,37 @@ namespace Imi.Project.Mobile.ViewModels
             get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
         #endregion
+
+        public async override void Init(object initData)
+        {
+            base.Init(initData);
+            _currentAircraftType = initData as AircraftType;
+
+            await RefreshAircraftType();
+        }
+
+        private async Task RefreshAircraftType()
+        {
+            if (_currentAircraftType == null)
+            {
+                _currentAircraftType = new AircraftType();
+                _currentAircraftType.Id = Guid.NewGuid();
+                PageTitle = "Nieuw vliegtuigtype";
+            }
+            else
+            {
+                _isNew = false;
+                _currentAircraftType = await _aircraftTypeService.GetByIdAsync(_currentAircraftType.Id);
+                PageTitle = $"{_currentAircraftType.Type} bewerken";
+            }
+            LoadAircraftTypeState();
+        }
+
+        private void LoadAircraftTypeState()
+        {
+            Brand = _currentAircraftType.Brand;
+            Type = _currentAircraftType.Type;
+            ICAOCode = _currentAircraftType.ICAOCode;
+        }
     }
 }

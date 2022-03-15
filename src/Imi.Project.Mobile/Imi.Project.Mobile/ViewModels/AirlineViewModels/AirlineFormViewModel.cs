@@ -238,23 +238,6 @@ namespace Imi.Project.Mobile.ViewModels
             await RefreshAirline();
         }
 
-        private async Task RefreshAirline()
-        {
-            if (_currentAirline == null)
-            {
-                _currentAirline = new Airline();
-                _currentAirline.Id = Guid.NewGuid();
-                PageTitle = "Nieuwe maatschappij";
-            }
-            else
-            {
-                _isNew = false;
-                _currentAirline = await _airlineService.GetByIdAsync(_currentAirline.Id);
-                PageTitle = $"{_currentAirline.Name} bewerken";
-            }
-            LoadAirlineState();
-        }
-
         public ICommand SaveAirlineCommand => new Command(
             async () =>
             {
@@ -280,6 +263,23 @@ namespace Imi.Project.Mobile.ViewModels
                 }
             }
         );
+
+        private async Task RefreshAirline()
+        {
+            if (_currentAirline == null)
+            {
+                _currentAirline = new Airline();
+                _currentAirline.Id = Guid.NewGuid();
+                PageTitle = "Nieuwe maatschappij";
+            }
+            else
+            {
+                _isNew = false;
+                _currentAirline = await _airlineService.GetByIdAsync(_currentAirline.Id);
+                PageTitle = $"{_currentAirline.Name} bewerken";
+            }
+            LoadAirlineState();
+        }
 
         private void LoadAirlineState()
         {

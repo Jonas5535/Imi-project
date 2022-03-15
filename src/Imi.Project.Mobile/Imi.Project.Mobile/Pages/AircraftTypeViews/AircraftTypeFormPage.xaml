@@ -4,7 +4,7 @@
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AircraftTypeFormPage"
              BackgroundColor="White"
-             Title="PageTitle">
+             Title="{Binding PageTitle}">
 
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -43,10 +43,10 @@
                         </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
+                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}"></Button>
                 </StackLayout>
             </ScrollView>
-            <Pages:BusyView x:Name="busyIndicator"/>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
