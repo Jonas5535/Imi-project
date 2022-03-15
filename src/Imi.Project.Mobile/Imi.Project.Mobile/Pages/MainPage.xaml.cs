@@ -16,10 +16,5 @@ namespace Imi.Project.Mobile.Pages
         {
             await Navigation.PushAsync(new AircraftPage());
         }
-
-        private async void btnAircraftType_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AircraftTypePage());
-        }
     }
 }

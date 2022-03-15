@@ -20,6 +20,7 @@ namespace Imi.Project.Mobile
             //register dependencies
             FreshIOC.Container.Register<ICRUDService<Airline>>(new MockAirlineService());
             FreshIOC.Container.Register<ICRUDService<Airport>>(new MockAirportService());
+            FreshIOC.Container.Register<ICRUDService<AircraftType>>(new MockAircraftTypeService());
             FreshIOC.Container.Register<IValidator>(new AirlineValidator());
             FreshIOC.Container.Register<IValidator>(new AirportValidator());
 
