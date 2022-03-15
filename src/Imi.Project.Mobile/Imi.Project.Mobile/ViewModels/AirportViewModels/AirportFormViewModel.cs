@@ -356,8 +356,8 @@ namespace Imi.Project.Mobile.ViewModels
         private void SaveAirportState()
         {
             _currentAirport.Name = Name;
-            _currentAirport.IATACode = IATACode.ToUpper();
-            _currentAirport.ICAOCode = ICAOCode.ToUpper();
+            _currentAirport.IATACode = IATACode?.ToUpper();
+            _currentAirport.ICAOCode = ICAOCode?.ToUpper();
             _currentAirport.ElevationAMSL = ElevationAMSL;
             _currentAirport.RunwayAmount = RunwayAmount;
             _currentAirport.TerminalAmount = TerminalAmount;

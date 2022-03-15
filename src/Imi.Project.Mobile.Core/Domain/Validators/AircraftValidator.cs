@@ -11,11 +11,11 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .NotEmpty()
                 .WithMessage("Het registratienummer mag niet leeg zijn")
                 .Length(6)
-                .WithMessage("Het registratienummer moet 6 karakters hebben");
+                .WithMessage("Het registratienummer moet 6 karakters lang zijn");
 
             RuleFor(aircraft => aircraft.AircraftType)
                 .NotEmpty()
-                .WithMessage("Het vliegtuigtype mag mag niet leeg zijn");
+                .WithMessage("Het vliegtuigtype mag niet leeg zijn");
 
             RuleFor(aircraft => aircraft.Airline)
                 .NotEmpty()

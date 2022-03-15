@@ -11,7 +11,7 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .NotEmpty()
                 .WithMessage("Het merk mag niet leeg zijn")
                 .MinimumLength(3)
-                .WithMessage("Het merk moet langer zijn dan 3 tekens");
+                .WithMessage("Het merk moet minstens 3 karakters lang zijn");
 
             RuleFor(aircraftType => aircraftType.Type)
                 .NotEmpty()
@@ -21,7 +21,7 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .NotEmpty()
                 .WithMessage("De ICAO code mag niet leeg zijn")
                 .Length(4)
-                .WithMessage("De ICAO code van een vliegtuigtype moet 4 tekens bevatten");
+                .WithMessage("De ICAO code van een vliegtuigtype moet 4 karakters lang zijn");
         }
     }
 }

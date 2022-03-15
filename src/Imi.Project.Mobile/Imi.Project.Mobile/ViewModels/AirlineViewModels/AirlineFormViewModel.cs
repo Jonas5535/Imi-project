@@ -295,8 +295,8 @@ namespace Imi.Project.Mobile.ViewModels
         private void SaveAirlineState()
         {
             _currentAirline.Name = Name;
-            _currentAirline.IATACode = IATACode.ToUpper();
-            _currentAirline.ICAOCode = ICAOCode.ToUpper();
+            _currentAirline.IATACode = IATACode?.ToUpper();
+            _currentAirline.ICAOCode = ICAOCode?.ToUpper();
             _currentAirline.MainAirport = MainAirport;
             _currentAirline.HeadQuarter = HeadQuarter;
             _currentAirline.FleetSize = FleetSize;
