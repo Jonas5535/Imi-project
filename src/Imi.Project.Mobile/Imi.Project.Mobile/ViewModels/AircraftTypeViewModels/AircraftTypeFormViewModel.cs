@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
@@ -166,6 +167,37 @@ namespace Imi.Project.Mobile.ViewModels
             Brand = _currentAircraftType.Brand;
             Type = _currentAircraftType.Type;
             ICAOCode = _currentAircraftType.ICAOCode;
+        }
+
+        private bool Validate(AircraftType aircraftType)
+        {
+            BrandError = "";
+            TypeError = "";
+            ICAOCodeError = "";
+
+            ValidationContext<AircraftType> validationContext = new ValidationContext<AircraftType>(aircraftType);
+            ValidationResult validationResult = _aircraftTypeValidator.Validate(validationContext);
+
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(aircraftType.Brand))
+                {
+                    BrandError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.Type))
+                {
+                    TypeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.ICAOCode))
+                {
+                    ICAOCodeError = error.ErrorMessage;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");
+                }
+            }
+            return validationResult.IsValid;
         }
     }
 }
