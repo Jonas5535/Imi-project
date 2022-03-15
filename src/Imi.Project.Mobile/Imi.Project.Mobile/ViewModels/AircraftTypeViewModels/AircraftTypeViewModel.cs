@@ -43,6 +43,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand EditAircraftTypeCommand => new Command<AircraftType>(
+            async (AircraftType aircraftType) =>
+            {
+                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>(aircraftType, false, true);
+            }
+        );
+
         private async Task ListInit()
         {
             ObservableCollection<AircraftType> aircraftTypes = await _aircraftTypeService.ListAllAsync();
