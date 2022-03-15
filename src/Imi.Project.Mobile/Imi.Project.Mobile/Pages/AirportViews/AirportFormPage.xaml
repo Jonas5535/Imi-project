@@ -62,6 +62,7 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding CountryError}" IsVisible="{Binding CountryErrorVisible}"></Label>
                     <Label Text="Stad" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: Zaventem" Style="{StaticResource StandardEntry}" Text="{Binding City}">
                         <Entry.Keyboard>
@@ -72,6 +73,7 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding CityError}" IsVisible="{Binding CityErrorVisible}"></Label>
                     <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirportCommand}"></Button>
                 </StackLayout>
             </ScrollView>

@@ -239,6 +239,24 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private string countryError;
+
+        public string CountryError
+        {
+            get { return countryError; }
+            set
+            {
+                countryError = value;
+                RaisePropertyChanged(nameof(CountryError));
+                RaisePropertyChanged(nameof(CountryErrorVisible));
+            }
+        }
+
+        public bool CountryErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(CountryError); }
+        }
+
         private string city;
 
         public string City
@@ -250,6 +268,25 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged(nameof(City));
             }
         }
+
+        private string cityError;
+
+        public string CityError
+        {
+            get { return cityError; }
+            set
+            {
+                cityError = value;
+                RaisePropertyChanged(nameof(CityError));
+                RaisePropertyChanged(nameof(CityErrorVisible));
+            }
+        }
+
+        public bool CityErrorVisible
+        {
+            get { return !string.IsNullOrWhiteSpace(CityError); }
+        }
+
         #endregion
 
         public async override void Init(object initData)
@@ -336,6 +373,8 @@ namespace Imi.Project.Mobile.ViewModels
             ElevationAMSLError = "";
             RunwayAmountError = "";
             TerminalAmountError = "";
+            CountryError = "";
+            CityError = "";
 
             ValidationContext<Airport> validationContext = new ValidationContext<Airport>(airport);
             ValidationResult validationResult = _airportValidator.Validate(validationContext);
@@ -365,6 +404,14 @@ namespace Imi.Project.Mobile.ViewModels
                 else if (error.PropertyName == nameof(airport.TerminalAmount))
                 {
                     TerminalAmountError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.Country))
+                {
+                    CountryError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(airport.City))
+                {
+                    CityError = error.ErrorMessage;
                 }
                 else
                 {
