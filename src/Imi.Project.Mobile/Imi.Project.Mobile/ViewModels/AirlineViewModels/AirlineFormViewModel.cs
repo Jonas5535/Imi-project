@@ -48,7 +48,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-
         private string name;
 
         public string Name

@@ -3,14 +3,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AircraftTypeFormPage"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="PageTitle">
 
     <ContentPage.Content>
         <AbsoluteLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <StackLayout>
                     <Label Text="Merk" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtBrand" Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" MaxLength="50">
+                    <Entry Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" Text="{Binding Brand}" MaxLength="50">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
@@ -19,13 +20,29 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label x:Name="lblErrorBrand" Style="{StaticResource ErrorMessage}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding BrandError}" IsVisible="{Binding BrandErrorVisible}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtType" Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" MaxLength="30"></Entry>
-                    <Label x:Name="lblErrorType" Style="{StaticResource ErrorMessage}"></Label>
+                    <Entry Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" Text="{Binding Type}" MaxLength="30">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding TypeError}" IsVisible="{Binding TypeErrorVisible}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
-                    <Entry x:Name="txtICAO" Placeholder="bv: B788" Style="{StaticResource StandardEntry}" MaxLength="4"></Entry>
-                    <Label x:Name="lblErrorICAO" Style="{StaticResource ErrorMessage}"></Label>
+                    <Entry Placeholder="bv: B788" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
                     <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
                 </StackLayout>
             </ScrollView>
