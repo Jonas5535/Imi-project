@@ -50,6 +50,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand DeleteAircraftTypeCommand => new Command<AircraftType>(
+            async (AircraftType aircraftType) =>
+            {
+                await _aircraftTypeService.DeleteAsync(aircraftType.Id);
+            }
+        );
+
         private async Task ListInit()
         {
             ObservableCollection<AircraftType> aircraftTypes = await _aircraftTypeService.ListAllAsync();
