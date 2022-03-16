@@ -12,7 +12,6 @@
     <Folder Include="Dtos\Aircraft\" />
     <Folder Include="Dtos\AircraftType\" />
     <Folder Include="Dtos\Airline\" />
-    <Folder Include="Dtos\Airport\" />
     <Folder Include="Services\" />
   </ItemGroup>
 
