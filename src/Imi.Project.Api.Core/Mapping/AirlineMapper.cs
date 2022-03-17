@@ -25,7 +25,7 @@ namespace Imi.Project.Api.Core.Mapping
 
         public static AirlineDetailResponseDto MapToDetailDto(this Airline airlineEntity)
         {
-            return new AirlineDetailResponseDto
+            AirlineDetailResponseDto dto = new AirlineDetailResponseDto
             {
                 Id = airlineEntity.Id,
                 Name = airlineEntity.Name,
@@ -35,6 +35,7 @@ namespace Imi.Project.Api.Core.Mapping
                 HeadQuarter = airlineEntity.HeadQuarter,
                 FleetSize = airlineEntity.FleetSize,
             };
+            return dto;
         }
 
         public static Airline MapToEntity(this AirlineRequestDto requestDto)
@@ -63,7 +64,6 @@ namespace Imi.Project.Api.Core.Mapping
                 HeadQuarter = requestDto.HeadQuarter,
                 FleetSize = requestDto.FleetSize,
             };
-
             return airlineEntity;
         }
     }
