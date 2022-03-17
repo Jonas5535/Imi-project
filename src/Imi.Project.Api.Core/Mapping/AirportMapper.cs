@@ -10,10 +10,10 @@ namespace Imi.Project.Api.Core.Mapping
     {
         public static IEnumerable<AirportListResponseDto> MapToListDto(this IEnumerable<Airport> airportEntities)
         {
-            return airportEntities.Select(ae => ae.MapToDtoSingle());
+            return airportEntities.Select(ae => ae.MapToListDtoSingle());
         }
 
-        public static AirportListResponseDto MapToDtoSingle(this Airport airportEntity)
+        public static AirportListResponseDto MapToListDtoSingle(this Airport airportEntity)
         {
             AirportListResponseDto dto = new AirportListResponseDto
             {

@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Imi.Project.Api.Core.Dtos.Aircraft
 {
-    public class AircraftDetailResponseDto
+    public class AircraftDetailResponseDto : BaseDto
     {
         public string Registration { get; set; }
         public bool HasSpecialLivery { get; set; }
