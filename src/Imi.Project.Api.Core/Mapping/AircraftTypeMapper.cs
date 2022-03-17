@@ -52,8 +52,8 @@ namespace Imi.Project.Api.Core.Mapping
                 {
                     Id = requestDto.Id,
                     Brand = requestDto.Brand,
-                    Type = requestDto.Type,
-                    ICAOCode = requestDto.ICAOCode,
+                    Type = requestDto.Type?.ToUpper(),
+                    ICAOCode = requestDto.ICAOCode?.ToUpper(),
                     EmptyWeight = requestDto.EmptyWeight,
                     FirstFlight = requestDto.FirstFlight,
                     Height = requestDto.Height,
@@ -66,8 +66,8 @@ namespace Imi.Project.Api.Core.Mapping
             AircraftType aircraftTypeEntity = new AircraftType
             {
                 Brand = requestDto.Brand,
-                Type = requestDto.Type,
-                ICAOCode = requestDto.ICAOCode,
+                Type = requestDto.Type?.ToUpper(),
+                ICAOCode = requestDto.ICAOCode?.ToUpper(),
                 EmptyWeight = requestDto.EmptyWeight,
                 FirstFlight = requestDto.FirstFlight,
                 Height = requestDto.Height,
