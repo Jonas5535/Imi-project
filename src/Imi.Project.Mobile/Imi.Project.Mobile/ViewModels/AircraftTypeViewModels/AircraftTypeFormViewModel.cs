@@ -13,11 +13,11 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftTypeFormViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<AircraftType> _aircraftTypeService;
-        private readonly IValidator _aircraftTypeValidator;
+        private readonly IValidator<AircraftType> _aircraftTypeValidator;
         private AircraftType _currentAircraftType;
         private bool _isNew = true;
 
-        public AircraftTypeFormViewModel(ICRUDService<AircraftType> aircraftTypeService, IValidator aircraftTypeValidator)
+        public AircraftTypeFormViewModel(ICRUDService<AircraftType> aircraftTypeService, IValidator<AircraftType> aircraftTypeValidator)
         {
             _aircraftTypeService = aircraftTypeService;
             _aircraftTypeValidator = aircraftTypeValidator;

@@ -13,10 +13,10 @@ namespace Imi.Project.Mobile.ViewModels
     public class AirportFormViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airport> _airportService;
-        private readonly IValidator _airportValidator;
+        private readonly IValidator<Airport> _airportValidator;
         private Airport _currentAirport;
         private bool _isNew = true;
-        public AirportFormViewModel(ICRUDService<Airport> airportService, IValidator airportValidator)
+        public AirportFormViewModel(ICRUDService<Airport> airportService, IValidator<Airport> airportValidator)
         {
             _airportService = airportService;
             _airportValidator = airportValidator;
