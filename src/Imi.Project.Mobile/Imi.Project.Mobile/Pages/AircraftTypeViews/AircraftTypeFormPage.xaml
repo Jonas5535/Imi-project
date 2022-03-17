@@ -20,7 +20,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding BrandError}" IsVisible="{Binding BrandErrorVisible}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding BrandError}"
+                           IsVisible="{Binding BrandError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" Text="{Binding Type}" MaxLength="30" ReturnType="Next">
                     <Entry.Keyboard>
@@ -31,7 +33,9 @@
                         </Keyboard>
                     </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding TypeError}" IsVisible="{Binding TypeErrorVisible}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding TypeError}"
+                           IsVisible="{Binding TypeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: B788" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4">
                         <Entry.Keyboard>
@@ -42,7 +46,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeErrorVisible}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding ICAOCodeError}"
+                           IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAircraftTypeCommand}"></Button>
                 </StackLayout>
             </ScrollView>

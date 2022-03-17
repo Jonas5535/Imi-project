@@ -69,13 +69,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 brandError = value;
                 RaisePropertyChanged(nameof(BrandError));
-                RaisePropertyChanged(nameof(BrandErrorVisible));
             }
-        }
-
-        public bool BrandErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(BrandError); }
         }
 
         private string type;
@@ -99,13 +93,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 typeError = value;
                 RaisePropertyChanged(nameof(TypeError));
-                RaisePropertyChanged(nameof(TypeErrorVisible));
             }
-        }
-
-        public bool TypeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(TypeError); }
         }
 
         private string icaoCode;
@@ -129,13 +117,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 icaoCodeError = value;
                 RaisePropertyChanged(nameof(ICAOCodeError));
-                RaisePropertyChanged(nameof(ICAOCodeErrorVisible));
             }
-        }
-
-        public bool ICAOCodeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
         #endregion
 
