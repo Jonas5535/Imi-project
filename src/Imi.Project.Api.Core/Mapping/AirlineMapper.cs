@@ -7,21 +7,20 @@ using System.Linq;
 namespace Imi.Project.Api.Core.Mapping
 {
     public static class AirlineMapper
-    { // Voor optimalisatie vatbaar!!
+    {
         public static IEnumerable<AirlineListResponseDto> MapToListDto(this IEnumerable<Airline> airlineEntities)
         {
-            return airlineEntities.Select(ae => ae.MapToListDto());
-        }
-
-        public static AirlineListResponseDto MapToListDto(this Airline airlineEntity)
-        {
-            return new AirlineListResponseDto
+            IEnumerable<AirlineListResponseDto> dtos = airlineEntities.Select(ae =>
+            new AirlineListResponseDto
             {
-                Id = airlineEntity.Id,
-                Name = airlineEntity.Name,
-                IATACode = airlineEntity.IATACode,
-                ICAOCode = airlineEntity.ICAOCode,
-            };
+                Id = ae.Id,
+                Name = ae.Name,
+                IATACode = ae.IATACode,
+                ICAOCode = ae.ICAOCode,
+                AddedOn = ae.AddedOn,
+                ModifiedOn = ae.ModifiedOn,
+            });
+            return dtos;
         }
 
         public static AirlineDetailResponseDto MapToDetailDto(this Airline airlineEntity)
