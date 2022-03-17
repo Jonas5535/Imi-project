@@ -10,17 +10,21 @@ namespace Imi.Project.Api.Core.Mapping
     {
         public static IEnumerable<AirportListResponseDto> MapToListDto(this IEnumerable<Airport> airportEntities)
         {
-            IEnumerable<AirportListResponseDto> dtos = airportEntities.Select(ae =>
-                new AirportListResponseDto
-                {
-                    Id = ae.Id,
-                    Name = ae.Name,
-                    IATACode = ae.IATACode,
-                    ICAOCode = ae.ICAOCode,
-                    AddedOn = ae.AddedOn,
-                    ModifiedOn = ae.ModifiedOn,
-                });
-            return dtos;
+            return airportEntities.Select(ae => ae.MapToDtoSingle());
+        }
+
+        public static AirportListResponseDto MapToDtoSingle(this Airport airportEntity)
+        {
+            AirportListResponseDto dto = new AirportListResponseDto
+            {
+                Id = airportEntity.Id,
+                Name = airportEntity.Name,
+                IATACode = airportEntity.IATACode,
+                ICAOCode = airportEntity.ICAOCode,
+                AddedOn = airportEntity.AddedOn,
+                ModifiedOn = airportEntity.ModifiedOn,
+            };
+            return dto;
         }
 
         public static AirportDetailResponseDto MapToDetailDto(this Airport airportEntity)
@@ -48,8 +52,8 @@ namespace Imi.Project.Api.Core.Mapping
                 {
                     Id = requestDto.Id,
                     Name = requestDto.Name,
-                    IATACode = requestDto.IATACode,
-                    ICAOCode = requestDto.ICAOCode,
+                    IATACode = requestDto.IATACode?.ToUpper(),
+                    ICAOCode = requestDto.ICAOCode?.ToUpper(),
                     ElevationAMSL = requestDto.ElevationAMSL,
                     RunwayAmount = requestDto.RunwayAmount,
                     TerminalAmount = requestDto.TerminalAmount,
@@ -62,8 +66,8 @@ namespace Imi.Project.Api.Core.Mapping
             Airport airportEntity = new Airport
             {
                 Name = requestDto.Name,
-                IATACode = requestDto.IATACode,
-                ICAOCode = requestDto.ICAOCode,
+                IATACode = requestDto.IATACode?.ToUpper(),
+                ICAOCode = requestDto.ICAOCode?.ToUpper(),
                 ElevationAMSL = requestDto.ElevationAMSL,
                 RunwayAmount = requestDto.RunwayAmount,
                 TerminalAmount = requestDto.TerminalAmount,
