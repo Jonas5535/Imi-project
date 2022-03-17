@@ -3,10 +3,13 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:windows="clr-namespace:Xamarin.Forms.PlatformConfiguration.WindowsSpecific;assembly=Xamarin.Forms.Core"
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
+             xmlns:conv="clr-namespace:Imi.Project.Mobile.Converters"
              x:Class="Imi.Project.Mobile.App"
              windows:Application.ImageDirectory="Images">
     <Application.Resources>
         <ResourceDictionary>
+            <conv:ErrorToVisibleConverter x:Key="ErrorLabelVisibilty"/>
+
             <Color x:Key="MainYellow">#fdd31d</Color>
 
             <Style x:Key="RoundedButton" TargetType="Button">
