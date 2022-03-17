@@ -10,17 +10,21 @@ namespace Imi.Project.Api.Core.Mapping
     {
         public static IEnumerable<AirlineListResponseDto> MapToListDto(this IEnumerable<Airline> airlineEntities)
         {
-            IEnumerable<AirlineListResponseDto> dtos = airlineEntities.Select(ae =>
-            new AirlineListResponseDto
+            return airlineEntities.Select(ae => ae.MapToListDtoSingle());
+        }
+
+        public static AirlineListResponseDto MapToListDtoSingle(this Airline airlineEntity)
+        {
+            AirlineListResponseDto dto = new AirlineListResponseDto
             {
-                Id = ae.Id,
-                Name = ae.Name,
-                IATACode = ae.IATACode,
-                ICAOCode = ae.ICAOCode,
-                AddedOn = ae.AddedOn,
-                ModifiedOn = ae.ModifiedOn,
-            });
-            return dtos;
+                Id = airlineEntity.Id,
+                Name = airlineEntity.Name,
+                IATACode = airlineEntity.IATACode,
+                ICAOCode = airlineEntity.ICAOCode,
+                AddedOn = airlineEntity.AddedOn,
+                ModifiedOn = airlineEntity.ModifiedOn,
+            };
+            return dto;
         }
 
         public static AirlineDetailResponseDto MapToDetailDto(this Airline airlineEntity)
