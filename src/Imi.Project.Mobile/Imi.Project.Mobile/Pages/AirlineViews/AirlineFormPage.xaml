@@ -20,7 +20,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding NameError}" IsVisible="{Binding NameError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding NameError}"
+                           IsVisible="{Binding NameError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: SN" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="2" ReturnType="Next">
                         <Entry.Keyboard>
@@ -31,7 +33,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding IATACodeError}" IsVisible="{Binding IATACodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding IATACodeError}"
+                           IsVisible="{Binding IATACodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: BEL" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="3" ReturnType="Next">
                         <Entry.Keyboard>
@@ -42,7 +46,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding ICAOCodeError}" IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding ICAOCodeError}"
+                           IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Hoofdluchthaven" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding MainAirport}" MaxLength="150" ReturnType="Next">
                         <Entry.Keyboard>
@@ -53,7 +59,9 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding MainAirportError}" IsVisible="{Binding MainAirportError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding MainAirportError}"
+                           IsVisible="{Binding MainAirportError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Hoofdkantoor" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: Diegem, België" Style="{StaticResource StandardEntry}" Text="{Binding HeadQuarter}" MaxLength="200" ReturnType="Next">
                         <Entry.Keyboard>
@@ -64,10 +72,14 @@
                             </Keyboard>
                         </Entry.Keyboard>
                     </Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding HeadQuarterError}" IsVisible="{Binding HeadQuarterError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding HeadQuarterError}"
+                           IsVisible="{Binding HeadQuarterError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Vloot grootte" Style="{StaticResource FormLabel}"></Label>
                     <Entry Placeholder="bv: 49" Style="{StaticResource StandardEntry}" Text="{Binding FleetSize}" Keyboard="Numeric"></Entry>
-                    <Label Style="{StaticResource ErrorMessage}" Text="{Binding FleetSizeError}" IsVisible="{Binding FleetSizeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding FleetSizeError}"
+                           IsVisible="{Binding FleetSizeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirlineCommand}"></Button>
                 </StackLayout>
             </ScrollView>

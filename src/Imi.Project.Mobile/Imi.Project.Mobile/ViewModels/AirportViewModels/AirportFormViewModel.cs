@@ -68,13 +68,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 nameError = value;
                 RaisePropertyChanged(nameof(NameError));
-                RaisePropertyChanged(nameof(NameErrorVisible));
             }
-        }
-
-        public bool NameErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(NameError); }
         }
 
         private string iataCode;
@@ -98,13 +92,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 iataCodeError = value;
                 RaisePropertyChanged(nameof(IATACodeError));
-                RaisePropertyChanged(nameof(IATACodeErrorVisible));
             }
-        }
-
-        public bool IATACodeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(IATACodeError); }
         }
 
         private string icaoCode;
@@ -128,13 +116,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 icaoCodeError = value;
                 RaisePropertyChanged(nameof(ICAOCodeError));
-                RaisePropertyChanged(nameof(ICAOCodeErrorVisible));
             }
-        }
-
-        public bool ICAOCodeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
 
         private int? elevationAMSL;
@@ -158,13 +140,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 elevationAMSLError = value;
                 RaisePropertyChanged(nameof(ElevationAMSLError));
-                RaisePropertyChanged(nameof(ElevationAMSLErrorVisible));
             }
-        }
-
-        public bool ElevationAMSLErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(ElevationAMSLError); }
         }
 
         private int? runwayAmount;
@@ -188,13 +164,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 runwayAmountError = value;
                 RaisePropertyChanged(nameof(RunwayAmountError));
-                RaisePropertyChanged(nameof(RunwayAmountErrorVisible));
             }
-        }
-
-        public bool RunwayAmountErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(RunwayAmountError); }
         }
 
         private int? terminalAmount;
@@ -218,13 +188,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 terminalAmountError = value;
                 RaisePropertyChanged(nameof(TerminalAmountError));
-                RaisePropertyChanged(nameof(TerminalAmountErrorVisible));
             }
-        }
-
-        public bool TerminalAmountErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(TerminalAmountError); }
         }
 
         private string country;
@@ -248,13 +212,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 countryError = value;
                 RaisePropertyChanged(nameof(CountryError));
-                RaisePropertyChanged(nameof(CountryErrorVisible));
             }
-        }
-
-        public bool CountryErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(CountryError); }
         }
 
         private string city;
@@ -278,15 +236,8 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 cityError = value;
                 RaisePropertyChanged(nameof(CityError));
-                RaisePropertyChanged(nameof(CityErrorVisible));
             }
         }
-
-        public bool CityErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(CityError); }
-        }
-
         #endregion
 
         public async override void Init(object initData)

@@ -13,10 +13,6 @@ namespace Imi.Project.Mobile
     {
         public App()
         {
-            InitializeComponent();
-
-            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
-
             //register dependencies
             FreshIOC.Container.Register<ICRUDService<Airline>, MockAirlineService>();
             FreshIOC.Container.Register<ICRUDService<Airport>, MockAirportService>();
@@ -24,6 +20,10 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
             FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();
             FreshIOC.Container.Register<IValidator<AircraftType>, AircraftTypeValidator>();
+
+            InitializeComponent();
+
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;
             navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");
