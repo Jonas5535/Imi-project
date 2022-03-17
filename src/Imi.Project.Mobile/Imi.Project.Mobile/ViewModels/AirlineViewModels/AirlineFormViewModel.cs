@@ -327,6 +327,14 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     ICAOCodeError = error.ErrorMessage;
                 }
+                else if (error.PropertyName == nameof(airline.MainAirport))
+                {
+                    MainAirportError = error.ErrorMessage;
+                }
+                else if (error.PropertyName ==  nameof(airline.HeadQuarter))
+                {
+                    HeadQuarterError = error.ErrorMessage;
+                }
                 else if (error.PropertyName == nameof(airline.FleetSize))
                 {
                     FleetSizeError = error.ErrorMessage;
