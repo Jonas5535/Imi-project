@@ -69,13 +69,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 nameError = value;
                 RaisePropertyChanged(nameof(NameError));
-                RaisePropertyChanged(nameof(NameErrorVisible));
             }
-        }
-
-        public bool NameErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(NameError); }
         }
 
         private string iataCode;
@@ -99,13 +93,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 iataCodeError = value;
                 RaisePropertyChanged(nameof(IATACodeError));
-                RaisePropertyChanged(nameof(IATACodeErrorVisible));
             }
-        }
-
-        public bool IATACodeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(IATACodeError); }
         }
 
         private string icaoCode;
@@ -129,13 +117,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 icaoCodeError = value;
                 RaisePropertyChanged(nameof(ICAOCodeError));
-                RaisePropertyChanged(nameof(ICAOCodeErrorVisible));
             }
-        }
-
-        public bool ICAOCodeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(ICAOCodeError); }
         }
 
         private string mainAirport;
@@ -159,13 +141,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 mainAirportError = value;
                 RaisePropertyChanged(nameof(MainAirportError));
-                RaisePropertyChanged(nameof(MainAirportErrorVisible));
             }
-        }
-
-        public bool MainAirportErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(MainAirportError); }
         }
 
         private string headQuarter;
@@ -189,13 +165,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 headQuarterError = value;
                 RaisePropertyChanged(nameof(HeadQuarterError));
-                RaisePropertyChanged(nameof(HeadQuarterErrorVisible));
             }
-        }
-
-        public bool HeadQuarterErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(HeadQuarterError); }
         }
 
         private int? fleetSize;
@@ -219,13 +189,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 fleetSizeError = value;
                 RaisePropertyChanged(nameof(FleetSizeError));
-                RaisePropertyChanged(nameof(FleetSizeErrorVisible));
             }
-        }
-
-        public bool FleetSizeErrorVisible
-        {
-            get { return !string.IsNullOrWhiteSpace(FleetSizeError); }
         }
         #endregion
 
