@@ -119,6 +119,126 @@ namespace Imi.Project.Mobile.ViewModels
                 RaisePropertyChanged();
             }
         }
+
+        private DateTime? firstFlight;
+
+        public DateTime? FirstFlight
+        {
+            get { return firstFlight; }
+            set
+            {
+                firstFlight = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string firstFlightError;
+
+        public string FirstFlightError
+        {
+            get { return firstFlightError; }
+            set
+            {
+                firstFlightError = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double? length;
+
+        public double? Length
+        {
+            get { return length; }
+            set
+            {
+                length = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string lengthError;
+
+        public string LengthError
+        {
+            get { return lengthError; }
+            set
+            {
+                lengthError = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double? wingSpan;
+
+        public double? WingSpan
+        {
+            get { return wingSpan; }
+            set
+            {
+                wingSpan = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string wingSpanError;
+
+        public string WingSpanError
+        {
+            get { return wingSpanError; }
+            set
+            {
+                wingSpanError = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double? height;
+
+        public double? Height
+        {
+            get { return height; }
+            set
+            { 
+                height = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string heightError;
+
+        public string HeightError
+        {
+            get { return heightError; }
+            set
+            {
+                heightError = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private int? emptyWeight;
+
+        public int? EmptyWeight
+        {
+            get { return emptyWeight; }
+            set
+            {
+                emptyWeight = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string emptyWeightError;
+
+        public string EmptyWeightError
+        {
+            get { return emptyWeightError; }
+            set
+            {
+                emptyWeightError = value;
+                RaisePropertyChanged();
+            }
+        }
         #endregion
 
         public async override void Init(object initData)
@@ -177,6 +297,11 @@ namespace Imi.Project.Mobile.ViewModels
             Brand = _currentAircraftType.Brand;
             Type = _currentAircraftType.Type;
             ICAOCode = _currentAircraftType.ICAOCode;
+            FirstFlight = _currentAircraftType.FirstFlight;
+            Length = _currentAircraftType.Length;
+            WingSpan = _currentAircraftType.WingSpan;
+            Height = _currentAircraftType.Height;
+            EmptyWeight = _currentAircraftType.EmptyWeight;
         }
 
         private void SaveAircraftTypeState()
