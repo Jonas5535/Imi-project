@@ -1,9 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -39,5 +38,20 @@ namespace Imi.Project.Mobile.ViewModels
             ShownType = null;
             ShownType = returnedData as AircraftType;
         }
+
+        public ICommand EditAircraftTypeCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>(ShownType);
+            }
+        );
+
+        public ICommand DeleteAircraftTypeCommand => new Command(
+            async () =>
+            {
+                await _aircraftTypeService.DeleteAsync(ShownType.Id);
+                await CoreMethods.PopPageModel();
+            }
+        );
     }
 }
