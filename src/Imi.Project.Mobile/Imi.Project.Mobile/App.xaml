@@ -9,6 +9,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <conv:ErrorToVisibleConverter x:Key="ErrorLabelVisibilty"/>
+            <conv:DateTimeToShortDateConverter x:Key="ShortDate"/>
 
             <Color x:Key="MainYellow">#fdd31d</Color>
 

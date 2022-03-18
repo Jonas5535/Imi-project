@@ -37,7 +37,8 @@
                 <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Eerste vlucht" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownType.ICAOCode}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
-                <Label Text="{Binding ShownType.FirstFlight}" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.FirstFlight, Converter={StaticResource ShortDate}}"
+                       Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Lengte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Spanwijdte" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownType.Length}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
