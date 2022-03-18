@@ -36,6 +36,13 @@ namespace Imi.Project.Mobile.ViewModels
             await ListInit();
         }
 
+        public ICommand OpenAircraftTypeDetailPageCommand => new Command<AircraftType>(
+            async (AircraftType aircraftType) =>
+            {
+                await CoreMethods.PushPageModel<AircraftTypeDetailViewModel>(aircraftType, false, true);
+            }
+        );
+
         public ICommand AddAircraftTypeCommand => new Command(
             async () =>
             {

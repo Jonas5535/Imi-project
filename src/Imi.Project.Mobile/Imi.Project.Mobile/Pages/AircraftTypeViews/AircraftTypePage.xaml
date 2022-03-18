@@ -12,7 +12,7 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding AircraftTypes}">
+            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding AircraftTypes}" ItemTapped="ListView_ItemTapped">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
