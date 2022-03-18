@@ -1,6 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Imi.Project.Mobile.ViewModels"
+             x:DataType="viewmodels:AircraftTypeDetailViewModel"
              x:Class="Imi.Project.Mobile.Pages.AircraftTypeDetailPage"
              BackgroundColor="White"
              Title="Details">
@@ -30,23 +32,23 @@
                 </Grid.ColumnDefinitions>
                 <Label Text="Merk" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
                 <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
-                <Label Text="Airbus" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
-                <Label Text="A320-200" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Brand}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.Type}" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Eerste vlucht" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
-                <Label Text="A320" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
-                <Label Text="22-02-1987" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.ICAOCode}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.FirstFlight}" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Lengte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Spanwijdte" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
-                <Label Text="37,57" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.Length}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
                 <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,40,0" Grid.Row="5" Grid.Column="0"></Label>
-                <Label Text="34,10" Style="{StaticResource ContentLabel}" Margin="0,0,15,0" Grid.Row="5" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.WingSpan}" Style="{StaticResource ContentLabel}" Margin="0,0,15,0" Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,50,0" Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="Hoogte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="6" Grid.Column="0"></Label>
                 <Label Text="Leeggewicht" Style="{StaticResource TitleLabel}" Grid.Row="6" Grid.Column="1"></Label>
-                <Label Text="11.76" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.Height}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
                 <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,40,0" Grid.Row="7" Grid.Column="0"></Label>
-                <Label Text="42.400" Style="{StaticResource ContentLabel}" Margin="0,0,30,0" Grid.Row="7" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.EmptyWeight}" Style="{StaticResource ContentLabel}" Margin="0,0,30,0" Grid.Row="7" Grid.Column="1"></Label>
                 <Label Text="kg" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,50,0" Grid.Row="7" Grid.Column="1"></Label>
             </Grid>
         </ScrollView>
