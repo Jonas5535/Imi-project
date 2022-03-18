@@ -23,14 +23,8 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 shownAirport = value;
-                RaisePropertyChanged(nameof(ShownAirport));
-                RaisePropertyChanged(nameof(UnitLabelVisible));
+                RaisePropertyChanged();
             }
-        }
-
-        public bool UnitLabelVisible
-        {
-            get { return ShownAirport.ElevationAMSL != null; }
         }
 
         public override void Init(object initData)
@@ -48,7 +42,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand EditAirportCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirportFormViewModel>(ShownAirport, false, true);
+                await CoreMethods.PushPageModel<AirportFormViewModel>(ShownAirport);
             }
         );
 
@@ -56,7 +50,7 @@ namespace Imi.Project.Mobile.ViewModels
             async () =>
             {
                 await _AirportService.DeleteAsync(ShownAirport.Id);
-                await CoreMethods.PopPageModel(false, true);
+                await CoreMethods.PopPageModel();
             }
         );
     }

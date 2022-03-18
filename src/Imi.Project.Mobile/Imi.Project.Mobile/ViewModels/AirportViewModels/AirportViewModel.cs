@@ -26,7 +26,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 airports = value;
-                RaisePropertyChanged(nameof(Airports));
+                RaisePropertyChanged();
             }
         }
 
@@ -39,21 +39,21 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand OpenAirportDetailPageCommand => new Command<Airport>(
             async (Airport airport) =>
             {
-                await CoreMethods.PushPageModel<AirportDetailViewModel>(airport, false, true);
+                await CoreMethods.PushPageModel<AirportDetailViewModel>(airport);
             }
         );
 
         public ICommand AddAirportCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirportFormViewModel>(true);
+                await CoreMethods.PushPageModel<AirportFormViewModel>();
             }
         );
 
         public ICommand EditAirportCommand => new Command<Airport>(
             async (Airport airport) =>
             {
-                await CoreMethods.PushPageModel<AirportFormViewModel>(airport, false, true);
+                await CoreMethods.PushPageModel<AirportFormViewModel>(airport);
             }
         );
 

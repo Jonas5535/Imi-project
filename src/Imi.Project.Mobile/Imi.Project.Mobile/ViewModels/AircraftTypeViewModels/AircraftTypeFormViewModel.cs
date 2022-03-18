@@ -32,7 +32,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 pageTitle = value;
-                RaisePropertyChanged(nameof(PageTitle));
+                RaisePropertyChanged();
             }
         }
 
@@ -44,7 +44,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 isBusy = value;
-                RaisePropertyChanged(nameof(IsBusy));
+                RaisePropertyChanged();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 brand = value;
-                RaisePropertyChanged(nameof(Brand));
+                RaisePropertyChanged();
             }
         }
 
@@ -68,7 +68,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 brandError = value;
-                RaisePropertyChanged(nameof(BrandError));
+                RaisePropertyChanged();
             }
         }
 
@@ -80,7 +80,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 type = value;
-                RaisePropertyChanged(nameof(Type));
+                RaisePropertyChanged();
             }
         }
 
@@ -92,7 +92,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 typeError = value;
-                RaisePropertyChanged(nameof(TypeError));
+                RaisePropertyChanged();
             }
         }
 
@@ -104,7 +104,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 icaoCode = value;
-                RaisePropertyChanged(nameof(ICAOCode));
+                RaisePropertyChanged();
             }
         }
 
@@ -116,7 +116,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 icaoCodeError = value;
-                RaisePropertyChanged(nameof(ICAOCodeError));
+                RaisePropertyChanged();
             }
         }
         #endregion
@@ -150,7 +150,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuigtype {_currentAircraftType.Type} is opgeslagen", "Ok");
 
-                    await CoreMethods.PopPageModel(_currentAircraftType, false, true);
+                    await CoreMethods.PopPageModel(_currentAircraftType);
                 }
             }
         );

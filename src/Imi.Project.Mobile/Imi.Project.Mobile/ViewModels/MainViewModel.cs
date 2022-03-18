@@ -9,21 +9,21 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand OpenAirlinePageCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirlineViewModel>(true);
+                await CoreMethods.PushPageModel<AirlineViewModel>();
             }
         );
 
         public ICommand OpenAirportPageCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirportViewModel>(true);
+                await CoreMethods.PushPageModel<AirportViewModel>();
             }
         );
 
         public ICommand OpenAircraftTypePageCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AircraftTypeViewModel>(true);
+                await CoreMethods.PushPageModel<AircraftTypeViewModel>();
             }
         );
     }

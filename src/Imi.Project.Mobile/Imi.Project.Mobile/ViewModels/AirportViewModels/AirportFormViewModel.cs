@@ -31,7 +31,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 pageTitle = value;
-                RaisePropertyChanged(nameof(PageTitle));
+                RaisePropertyChanged();
             }
         }
 
@@ -43,7 +43,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 isBusy = value;
-                RaisePropertyChanged(nameof(IsBusy));
+                RaisePropertyChanged();
             }
         }
 
@@ -55,7 +55,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 name = value;
-                RaisePropertyChanged(nameof(Name));
+                RaisePropertyChanged();
             }
         }
 
@@ -67,7 +67,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 nameError = value;
-                RaisePropertyChanged(nameof(NameError));
+                RaisePropertyChanged();
             }
         }
 
@@ -79,7 +79,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 iataCode = value;
-                RaisePropertyChanged(nameof(IATACode));
+                RaisePropertyChanged();
             }
         }
 
@@ -91,7 +91,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 iataCodeError = value;
-                RaisePropertyChanged(nameof(IATACodeError));
+                RaisePropertyChanged();
             }
         }
 
@@ -103,7 +103,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 icaoCode = value;
-                RaisePropertyChanged(nameof(ICAOCode));
+                RaisePropertyChanged();
             }
         }
 
@@ -115,7 +115,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 icaoCodeError = value;
-                RaisePropertyChanged(nameof(ICAOCodeError));
+                RaisePropertyChanged();
             }
         }
 
@@ -127,7 +127,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 elevationAMSL = value;
-                RaisePropertyChanged(nameof(ElevationAMSL));
+                RaisePropertyChanged();
             }
         }
 
@@ -139,7 +139,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 elevationAMSLError = value;
-                RaisePropertyChanged(nameof(ElevationAMSLError));
+                RaisePropertyChanged();
             }
         }
 
@@ -151,7 +151,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 runwayAmount = value;
-                RaisePropertyChanged(nameof(RunwayAmount));
+                RaisePropertyChanged();
             }
         }
 
@@ -163,7 +163,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 runwayAmountError = value;
-                RaisePropertyChanged(nameof(RunwayAmountError));
+                RaisePropertyChanged();
             }
         }
 
@@ -175,7 +175,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 terminalAmount = value;
-                RaisePropertyChanged(nameof(TerminalAmount));
+                RaisePropertyChanged();
             }
         }
 
@@ -187,7 +187,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 terminalAmountError = value;
-                RaisePropertyChanged(nameof(TerminalAmountError));
+                RaisePropertyChanged();
             }
         }
 
@@ -199,7 +199,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 country = value;
-                RaisePropertyChanged(nameof(Country));
+                RaisePropertyChanged();
             }
         }
 
@@ -211,7 +211,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 countryError = value;
-                RaisePropertyChanged(nameof(CountryError));
+                RaisePropertyChanged();
             }
         }
 
@@ -223,7 +223,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 city = value;
-                RaisePropertyChanged(nameof(City));
+                RaisePropertyChanged();
             }
         }
 
@@ -235,7 +235,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 cityError = value;
-                RaisePropertyChanged(nameof(CityError));
+                RaisePropertyChanged();
             }
         }
         #endregion
@@ -270,7 +270,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
 
-                    await CoreMethods.PopPageModel(_currentAirport, false, true);
+                    await CoreMethods.PopPageModel(_currentAirport);
                 }
             }
         );

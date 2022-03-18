@@ -23,7 +23,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 shownAirline = value;
-                RaisePropertyChanged(nameof(ShownAirline));
+                RaisePropertyChanged();
             }
         }
 
@@ -42,7 +42,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand EditAirlineCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AirlineFormViewModel>(ShownAirline, false, true);
+                await CoreMethods.PushPageModel<AirlineFormViewModel>(ShownAirline);
             }
         );
 
@@ -50,7 +50,7 @@ namespace Imi.Project.Mobile.ViewModels
             async () =>
             {
                 await _airlineService.DeleteAsync(ShownAirline.Id);
-                await CoreMethods.PopPageModel(false, true);
+                await CoreMethods.PopPageModel();
             }
         );
     }

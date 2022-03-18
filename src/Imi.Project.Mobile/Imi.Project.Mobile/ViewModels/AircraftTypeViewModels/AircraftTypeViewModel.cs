@@ -26,7 +26,7 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 aircraftTypes = value;
-                RaisePropertyChanged(nameof(AircraftTypes));
+                RaisePropertyChanged();
             }
         }
 
@@ -39,21 +39,21 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand OpenAircraftTypeDetailPageCommand => new Command<AircraftType>(
             async (AircraftType aircraftType) =>
             {
-                await CoreMethods.PushPageModel<AircraftTypeDetailViewModel>(aircraftType, false, true);
+                await CoreMethods.PushPageModel<AircraftTypeDetailViewModel>(aircraftType);
             }
         );
 
         public ICommand AddAircraftTypeCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>(true);
+                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>();
             }
         );
 
         public ICommand EditAircraftTypeCommand => new Command<AircraftType>(
             async (AircraftType aircraftType) =>
             {
-                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>(aircraftType, false, true);
+                await CoreMethods.PushPageModel<AircraftTypeFormViewModel>(aircraftType);
             }
         );
 
