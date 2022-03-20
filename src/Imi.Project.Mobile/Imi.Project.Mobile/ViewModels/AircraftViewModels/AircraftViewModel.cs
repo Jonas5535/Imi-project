@@ -4,6 +4,8 @@ using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -33,6 +35,27 @@ namespace Imi.Project.Mobile.ViewModels
             base.ViewIsAppearing(sender, e);
             await ListInit();
         }
+
+        public ICommand AddAircraftCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AircraftFormViewModel>();
+            }
+        );
+
+        public ICommand EditAircraftCommand => new Command<Aircraft>(
+            async (Aircraft aircraft) =>
+            {
+                await CoreMethods.PushPageModel<AircraftFormViewModel>(aircraft);
+            }
+        );
+
+        public ICommand DeleteAircraftCommand => new Command<Aircraft>(
+            async (Aircraft aircraft) =>
+            {
+                await _aircraftService.DeleteAsync(aircraft.Id);
+            }
+        );
 
         private async Task ListInit()
         {

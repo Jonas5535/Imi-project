@@ -3,11 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
              x:Class="Imi.Project.Mobile.Pages.AircraftPage"
+             x:Name="page"
              BackgroundColor="White"
              Title="Vliegtuigen">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="2" Order="Primary"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="2" Order="Primary" Command="{Binding AddAircraftCommand}"/>
         <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="1" Order="Primary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
@@ -17,8 +18,10 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png"
+                                          Command="{Binding BindingContext.EditAircraftCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png"
+                                          Command="{Binding BindingContext.DeleteAircraftCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">
