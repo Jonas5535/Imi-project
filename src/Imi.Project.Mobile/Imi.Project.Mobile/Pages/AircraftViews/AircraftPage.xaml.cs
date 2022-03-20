@@ -1,10 +1,4 @@
-﻿using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Services.Mocking;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Imi.Project.Mobile.Pages
@@ -12,61 +6,61 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftPage : ContentPage
     {
-        private readonly ICRUDService<Aircraft> aircraftService;
+        //private readonly ICRUDService<Aircraft> aircraftService;
 
         public AircraftPage()
         {
             InitializeComponent();
 
-            aircraftService = new MockAircraftService();
+            //aircraftService = new MockAircraftService();
         }
 
-        private async Task ListInit()
-        {
-            //busyIndicator.IsVisible = true;
+        //private async Task ListInit()
+        //{
+        //    //busyIndicator.IsVisible = true;
 
-            IEnumerable<Aircraft> aircrafts = await aircraftService.ListAllAsync();
+        //    IEnumerable<Aircraft> aircrafts = await aircraftService.ListAllAsync();
 
-            lvAircrafts.ItemsSource = aircrafts;
-            //busyIndicator.IsVisible = false;
-        }
+        //    lvAircrafts.ItemsSource = aircrafts;
+        //    //busyIndicator.IsVisible = false;
+        //}
 
-        protected override async void OnAppearing()
-        {
-            await ListInit();
-            base.OnAppearing();
-        }
+        //protected override async void OnAppearing()
+        //{
+        //    await ListInit();
+        //    base.OnAppearing();
+        //}
 
-        private async void BtnAdd_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AircraftFormPage(null));
-        }
+        //private async void BtnAdd_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new AircraftFormPage(null));
+        //}
 
-        private async void MnuEdit_Clicked(object sender, EventArgs e)
-        {
-            Aircraft selectedAircraft = ((MenuItem)sender).CommandParameter as Aircraft;
-            await Navigation.PushAsync(new AircraftFormPage(selectedAircraft));
-        }
+        //private async void MnuEdit_Clicked(object sender, EventArgs e)
+        //{
+        //    Aircraft selectedAircraft = ((MenuItem)sender).CommandParameter as Aircraft;
+        //    await Navigation.PushAsync(new AircraftFormPage(selectedAircraft));
+        //}
 
-        private async void MnuDelete_Clicked(object sender, EventArgs e)
-        {
-            //busyIndicator.IsVisible = true;
+        //private async void MnuDelete_Clicked(object sender, EventArgs e)
+        //{
+        //    //busyIndicator.IsVisible = true;
 
-            Aircraft selectedAircraft = ((MenuItem)sender).CommandParameter as Aircraft;
-            await aircraftService.DeleteAsync(selectedAircraft.Id);
+        //    Aircraft selectedAircraft = ((MenuItem)sender).CommandParameter as Aircraft;
+        //    await aircraftService.DeleteAsync(selectedAircraft.Id);
 
-            //busyIndicator.IsVisible = false;
-        }
+        //    //busyIndicator.IsVisible = false;
+        //}
 
-        private async void lvAircrafts_ItemTapped(object sender, ItemTappedEventArgs e)
-        {
-            Aircraft selectedAircraft = e.Item as Aircraft;
-            await Navigation.PushAsync(new AircraftDetailPage(selectedAircraft));
-        }
+        //private async void lvAircrafts_ItemTapped(object sender, ItemTappedEventArgs e)
+        //{
+        //    Aircraft selectedAircraft = e.Item as Aircraft;
+        //    await Navigation.PushAsync(new AircraftDetailPage(selectedAircraft));
+        //}
 
-        private async void BtnFilter_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new FilterPage());
-        }
+        //private async void BtnFilter_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new FilterPage());
+        //}
     }
 }

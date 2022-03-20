@@ -7,18 +7,18 @@
              Title="Vliegtuigen">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="2" Order="Primary" Clicked="BtnAdd_Clicked"/>
-        <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="1" Order="Primary" Clicked="BtnFilter_Clicked"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="2" Order="Primary"/>
+        <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="1" Order="Primary"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
-            <ListView x:Name="lvAircrafts" Style="{StaticResource ListViewLayout}" ItemTapped="lvAircrafts_ItemTapped">
+            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding Aircrafts}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}" Clicked="MnuEdit_Clicked"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}" Clicked="MnuDelete_Clicked"/>
+                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png" CommandParameter="{Binding .}"/>
+                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png" CommandParameter="{Binding .}"/>
                             </ViewCell.ContextActions>
                             <Frame Style="{StaticResource FrameForListView}">
                                 <StackLayout Orientation="Vertical">

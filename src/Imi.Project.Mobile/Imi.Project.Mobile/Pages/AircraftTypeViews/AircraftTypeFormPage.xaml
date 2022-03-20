@@ -76,7 +76,7 @@
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding EmptyWeightError}"
                            IsVisible="{Binding EmptyWeightError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
-                    <Button x:Name="BtnSave" Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAircraftTypeCommand}"></Button>
+                    <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAircraftTypeCommand}"></Button>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView IsVisible="{Binding IsBusy}"/>
