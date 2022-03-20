@@ -309,6 +309,11 @@ namespace Imi.Project.Mobile.ViewModels
             _currentAircraftType.Brand = Brand;
             _currentAircraftType.Type = Type?.ToUpper();
             _currentAircraftType.ICAOCode = ICAOCode?.ToUpper();
+            _currentAircraftType.FirstFlight = FirstFlight;
+            _currentAircraftType.Length = Length;
+            _currentAircraftType.WingSpan = WingSpan;
+            _currentAircraftType.Height = Height;
+            _currentAircraftType.EmptyWeight = EmptyWeight;
         }
 
         private bool Validate(AircraftType aircraftType)
@@ -316,6 +321,11 @@ namespace Imi.Project.Mobile.ViewModels
             BrandError = "";
             TypeError = "";
             ICAOCodeError = "";
+            FirstFlightError = "";
+            LengthError = "";
+            WingSpanError = "";
+            HeightError = "";
+            EmptyWeightError = "";
 
             ValidationContext<AircraftType> validationContext = new ValidationContext<AircraftType>(aircraftType);
             ValidationResult validationResult = _aircraftTypeValidator.Validate(validationContext);
@@ -333,6 +343,26 @@ namespace Imi.Project.Mobile.ViewModels
                 else if (error.PropertyName == nameof(aircraftType.ICAOCode))
                 {
                     ICAOCodeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.FirstFlight))
+                {
+                    FirstFlightError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.Length))
+                {
+                    LengthError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.WingSpan))
+                {
+                    WingSpanError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraftType.Height))
+                {
+                    HeightError = error.ErrorMessage;
+                }
+                else if (error.PropertyName ==  nameof(aircraftType.EmptyWeight))
+                {
+                    EmptyWeightError = error.ErrorMessage;
                 }
                 else
                 {
