@@ -43,6 +43,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand OpenFilterPageCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<FilterViewModel>();
+            }
+        );
+
         public ICommand AddAircraftCommand => new Command(
             async () =>
             {
