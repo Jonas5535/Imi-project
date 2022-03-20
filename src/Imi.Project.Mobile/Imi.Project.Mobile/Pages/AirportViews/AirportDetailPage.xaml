@@ -37,8 +37,8 @@
                 <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Hoogte AMSL" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAirport.ICAOCode}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
-                <Label Text="{Binding ShownAirport.ElevationAMSL}" Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
-                <Label Text="m" Style="{StaticResource ContentLabel}" Margin="0,0,-70,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAirport.ElevationAMSL, Converter={StaticResource AddUnit}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Landingsbanen" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Terminals" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAirport.RunwayAmount}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>

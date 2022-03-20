@@ -10,6 +10,7 @@
         <ResourceDictionary>
             <conv:ErrorToVisibleConverter x:Key="ErrorLabelVisibilty"/>
             <conv:DateTimeToShortDateConverter x:Key="ShortDate"/>
+            <conv:NumberToNumberWithUnitConverter x:Key="AddUnit"/>
 
             <Color x:Key="MainYellow">#fdd31d</Color>
 

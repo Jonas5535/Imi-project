@@ -41,16 +41,16 @@
                        Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Lengte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Spanwijdte" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
-                <Label Text="{Binding ShownType.Length}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
-                <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,40,0" Grid.Row="5" Grid.Column="0"></Label>
-                <Label Text="{Binding ShownType.WingSpan}" Style="{StaticResource ContentLabel}" Margin="0,0,15,0" Grid.Row="5" Grid.Column="1"></Label>
-                <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,50,0" Grid.Row="5" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Length, Converter={StaticResource AddUnit}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.WingSpan, Converter={StaticResource AddUnit}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Grid.Row="5" Grid.Column="1"></Label>
                 <Label Text="Hoogte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="6" Grid.Column="0"></Label>
                 <Label Text="Leeggewicht" Style="{StaticResource TitleLabel}" Grid.Row="6" Grid.Column="1"></Label>
-                <Label Text="{Binding ShownType.Height}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
-                <Label Text="m" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,40,0" Grid.Row="7" Grid.Column="0"></Label>
-                <Label Text="{Binding ShownType.EmptyWeight}" Style="{StaticResource ContentLabel}" Margin="0,0,30,0" Grid.Row="7" Grid.Column="1"></Label>
-                <Label Text="kg" Style="{StaticResource ContentLabel}" HorizontalOptions="End" Margin="0,0,50,0" Grid.Row="7" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Height, Converter={StaticResource AddUnit}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Margin="25,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.EmptyWeight, Converter={StaticResource AddUnit}, ConverterParameter=kg}" Style="{StaticResource ContentLabel}"
+                       Grid.Row="7" Grid.Column="1"></Label>
             </Grid>
         </ScrollView>
     </ContentPage.Content>
