@@ -50,7 +50,7 @@
                            Text="{Binding ICAOCodeError}"
                            IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Hoofdluchthaven" Style="{StaticResource FormLabel}"></Label>
-                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding MainAirport}" MaxLength="150" ReturnType="Next">
+                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding MainAirport}" MaxLength="200" ReturnType="Next">
                         <Entry.Keyboard>
                             <Keyboard x:FactoryMethod="Create">
                                 <x:Arguments>
