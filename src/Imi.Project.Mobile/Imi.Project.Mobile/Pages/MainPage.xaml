@@ -16,7 +16,7 @@
                 <StackLayout>
                     <Label Text="Avilection" TextColor="Black" FontSize="45" HorizontalTextAlignment="Center" Margin="15, 150, 15, 25"></Label>
                     <StackLayout Margin="0, 25, 0, 0">
-                        <Button x:Name="btnAircraft" ImageSource="AircraftIcon.png" Text="Vliegtuigen" Style="{StaticResource RoundedButton}" Clicked="btnAircraft_Clicked"></Button>
+                        <Button x:Name="btnAircraft" ImageSource="AircraftIcon.png" Text="Vliegtuigen" Style="{StaticResource RoundedButton}" Command="{Binding OpenAicraftPageCommand}"></Button>
                         <Button x:Name="btnAircraftType" ImageSource="AircraftTypeIcon.png" Text="VliegtuigTypes" Style="{StaticResource RoundedButton}" Command="{Binding OpenAircraftTypePageCommand}"></Button>
                         <Button x:Name="btnAirport" ImageSource="AirportIcon.png" Text="Luchthavens" Style="{StaticResource RoundedButton}" Command="{Binding OpenAirportPageCommand}"></Button>
                         <Button x:Name="btnAirline" ImageSource="AirlineIcon.png" Text="Maatschappijen" Style="{StaticResource RoundedButton}" Command="{Binding OpenAirlinePageCommand}"></Button>

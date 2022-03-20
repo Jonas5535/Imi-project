@@ -26,5 +26,12 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.PushPageModel<AircraftTypeViewModel>();
             }
         );
+
+        public ICommand OpenAicraftPageCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AircraftViewModel>();
+            }
+        );
     }
 }

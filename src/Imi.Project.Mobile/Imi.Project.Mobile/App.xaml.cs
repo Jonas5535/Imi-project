@@ -17,9 +17,11 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<ICRUDService<Airline>, MockAirlineService>();
             FreshIOC.Container.Register<ICRUDService<Airport>, MockAirportService>();
             FreshIOC.Container.Register<ICRUDService<AircraftType>, MockAircraftTypeService>();
+            FreshIOC.Container.Register<ICRUDService<Aircraft>, MockAircraftService>();
             FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
             FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();
             FreshIOC.Container.Register<IValidator<AircraftType>, AircraftTypeValidator>();
+            FreshIOC.Container.Register<IValidator<Aircraft>, AircraftValidator>();
 
             InitializeComponent();
 
