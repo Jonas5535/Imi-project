@@ -5,6 +5,8 @@ using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -17,6 +19,8 @@ namespace Imi.Project.Mobile.ViewModels
         private readonly IValidator<Aircraft> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
+
+        public event EventHandler AddPickerClicked;
 
         public IEnumerable<AircraftType> TypePickerContent { get; set; }
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
@@ -211,6 +215,13 @@ namespace Imi.Project.Mobile.ViewModels
             await RefreshAircraft();
             await PopulatePickers();
         }
+
+        public ICommand AddAirportPickerCommand => new Command(
+            () =>
+            {
+                AddPickerClicked(this, EventArgs.Empty);
+            }
+        );
 
         private async Task RefreshAircraft()
         {

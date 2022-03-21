@@ -58,8 +58,12 @@
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding AirportError}"
                            IsVisible="{Binding AirportError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
-                    <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"
-                            ItemsSource="{Binding AirportPickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                    <StackLayout x:Name="stAirportPickers">
+                        <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"
+                                ItemsSource="{Binding AirportPickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                    </StackLayout>
+                    <Button x:Name="btnAddPicker" BackgroundColor="{StaticResource MainYellow}" CornerRadius="60" HeightRequest="45" Margin="183,10,183,10"
+                            ImageSource="Add.png" Command="{Binding AddAirportPickerCommand}"></Button>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView x:Name="busyIndicator"/>

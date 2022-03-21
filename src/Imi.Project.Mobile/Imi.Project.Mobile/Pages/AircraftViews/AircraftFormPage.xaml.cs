@@ -4,6 +4,7 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using Imi.Project.Mobile.Core.Domain.Services.Mocking;
 using Imi.Project.Mobile.Core.Domain.Validators;
+using Imi.Project.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,90 +16,34 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftFormPage : ContentPage
     {
-        //private readonly ICRUDService<Aircraft> aircraftService;
-        //private readonly ICRUDService<AircraftType> aircraftTypeService;
-        //private readonly ICRUDService<Airline> airlineService;
-        //private readonly ICRUDService<Airport> airportService;
-        //private Aircraft currentAircraft;
-        //private bool isNew = true;
         //private List<Picker> pickers = new List<Picker>();
-        //private IValidator aircraftValidator;
 
-        public AircraftFormPage(Aircraft aircraft)
+        public AircraftFormPage()
         {
             InitializeComponent();
-
-            //aircraftService = new MockAircraftService();
-            //aircraftTypeService = new MockAircraftTypeService();
-            //airlineService = new MockAirlineService();
-            //airportService = new MockAirportService();
-            //aircraftValidator = new AircraftValidator();
-
-            //if (aircraft == null)
-            //{
-            //    currentAircraft = new Aircraft();
-            //    Title = "Nieuw vliegtuig";
-            //}
-            //else
-            //{
-            //    isNew = false;
-            //    currentAircraft = aircraft;
-            //    Title = $"{currentAircraft.Registration} bewerken";
-            //}
         }
 
-        //protected override void OnAppearing()
-        //{
-        //    PopulateTypePicker();
-        //    PopulateAirlinePicker();
-        //    PopulateAirportPicker(pckAirport);
-        //    pickers.Add(pckAirport);
+        protected override void OnAppearing()
+        {
+            //PopulateTypePicker();
+            //PopulateAirlinePicker();
+            //PopulateAirportPicker(pckAirport);
+            //pickers.Add(pckAirport);
 
-        //    if (!isNew)
-        //    {
-        //        LoadAircraftState();
-        //    }
-        //    base.OnAppearing();
-        //}
+            //if (!isNew)
+            //{
+            //    LoadAircraftState();
+            //}
+            base.OnAppearing();
 
-        //private async void PopulateTypePicker()
-        //{
-        //    IEnumerable<AircraftType> types = await aircraftTypeService.ListAllAsync();
-        //    List<string> pickerContent = new List<string>();
+            AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
+            viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
+        }
 
-        //    foreach (var type in types)
-        //    {
-        //        pickerContent.Add(type.ICAOCode);
-        //    }
-
-        //    pckType.ItemsSource = pickerContent;
-        //}
-
-        //private async void PopulateAirlinePicker()
-        //{
-        //    IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
-        //    List<string> pickerContent = new List<string>();
-
-        //    foreach (var airline in airlines)
-        //    {
-        //        pickerContent.Add(airline.Name);
-        //    }
-
-        //    pckAirline.ItemsSource = pickerContent;
-        //}
-
-        //private async void PopulateAirportPicker(Picker picker)
-        //{
-        //    IEnumerable<Airport> airports = await airportService.ListAllAsync();
-        //    List<string> pickerContent = new List<string>();
-
-        //    foreach (var airport in airports)
-        //    {
-        //        pickerContent.Add(airport.Name);
-        //    }
-
-        //    picker.ItemsSource = pickerContent;
-        //}
+        private void ViewModel_AddPickerClicked(object sender, EventArgs e)
+        {
+            _ = AddPicker();
+        }
 
         //private void LoadAircraftState()
         //{
@@ -153,25 +98,22 @@ namespace Imi.Project.Mobile.Pages
         //    }
         //}
 
-        //private Picker AddPicker()
-        //{
-        //    StackLayout stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
+        private Picker AddPicker()
+        {
+            StackLayout stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
 
-        //    AircraftForm.Children.Add(stackLayout);
+            stAirportPickers.Children.Add(stackLayout);
 
-        //    Picker picker = new Picker { Title = "Kies een luchthaven", Style = (Style)Application.Current.Resources["StandardPicker"], WidthRequest = 297, Margin = new Thickness(15, 0, 0, 0) };
-        //    picker.SelectedIndexChanged += new EventHandler(pckAirport_SelectedIndexChanged);
-        //    PopulateAirportPicker(picker);
+            Picker picker = new Picker { Title = "Kies een luchthaven", Style = (Style)Application.Current.Resources["StandardPicker"], WidthRequest = 297, Margin = new Thickness(15, 0, 0, 0) };
 
-        //    Button button = new Button { Text = "X", WidthRequest = 50 };
-        //    button.Clicked += new EventHandler(BtnRemove_Clicked);
+            Button button = new Button { Text = "X", WidthRequest = 50 };
 
-        //    stackLayout.Children.Add(picker);
-        //    stackLayout.Children.Add(button);
-        //    pickers.Add(picker);
+            stackLayout.Children.Add(picker);
+            stackLayout.Children.Add(button);
+            //pickers.Add(picker);
 
-        //    return picker;
-        //}
+            return picker;
+        }
 
         //private bool Validate(Aircraft aircraft)
         //{
