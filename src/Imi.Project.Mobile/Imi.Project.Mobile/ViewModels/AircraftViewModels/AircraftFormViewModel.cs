@@ -4,6 +4,7 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -17,6 +18,10 @@ namespace Imi.Project.Mobile.ViewModels
         private Aircraft _currentAircraft;
         private bool _isNew = true;
 
+        public IEnumerable<AircraftType> TypePickerContent { get; set; }
+        public IEnumerable<Airline> AirlinePickerContent { get; set; }
+        public IEnumerable<Airport> AirportPickerContent { get; set; }
+
         public AircraftFormViewModel(ICRUDService<Aircraft> aircraftService, ICRUDService<AircraftType> aircraftTypeService,
             ICRUDService<Airline> airlineService, ICRUDService<Airport> airportService)
         {
@@ -26,7 +31,7 @@ namespace Imi.Project.Mobile.ViewModels
             _airportService = airportService;
         }
 
-        #region Properties
+        #region FullProperties
         private string pageTitle;
 
         public string PageTitle
@@ -196,5 +201,38 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
         #endregion
+
+        public async override void Init(object initData)
+        {
+            base.Init(initData);
+
+            _currentAircraft = initData as Aircraft;
+
+            await RefreshAircraft();
+            await PopulatePickers();
+        }
+
+        private async Task RefreshAircraft()
+        {
+            if (_currentAircraft == null)
+            {
+                _currentAircraft = new Aircraft();
+                _currentAircraft.Id = Guid.NewGuid();
+                PageTitle = "Nieuw vliegtuig";
+            }
+            else
+            {
+                _isNew = false;
+                _currentAircraft = await _aircraftService.GetByIdAsync(_currentAircraft.Id);
+                PageTitle = $"{_currentAircraft.Registration} bewerken";
+            }
+        }
+
+        private async Task PopulatePickers()
+        {
+            TypePickerContent = await _aircraftTypeService.ListAllAsync();
+            AirlinePickerContent = await _airlineService.ListAllAsync();
+            AirportPickerContent = await _airportService.ListAllAsync();
+        }
     }
 }
