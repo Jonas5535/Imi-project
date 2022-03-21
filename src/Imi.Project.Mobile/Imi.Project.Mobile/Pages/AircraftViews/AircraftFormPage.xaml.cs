@@ -105,6 +105,8 @@ namespace Imi.Project.Mobile.Pages
             stAirportPickers.Children.Add(stackLayout);
 
             Picker picker = new Picker { Title = "Kies een luchthaven", Style = (Style)Application.Current.Resources["StandardPicker"], WidthRequest = 297, Margin = new Thickness(15, 0, 0, 0) };
+            picker.SetBinding(Picker.ItemsSourceProperty, "AirportPickerContent");
+            picker.ItemDisplayBinding = new Binding("Name");
 
             Button button = new Button { Text = "X", WidthRequest = 50 };
 
