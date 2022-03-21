@@ -2,6 +2,8 @@
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
 {
@@ -37,13 +39,30 @@ namespace Imi.Project.Mobile.ViewModels
         {
             ShownAircraft = null;
             ShownAircraft = returnedData as Aircraft;
-            ItemSourceSet(this, EventArgs.Empty);
         }
 
         protected override void ViewIsAppearing(object sender, EventArgs e)
         {
             base.ViewIsAppearing(sender, e);
+
+            // Placed this in ViewIsAppearing instead of in the Init and ReverseInit methods
+            // because I need the OnAppearing method of the view to be called first before calling this event.
             ItemSourceSet(this, EventArgs.Empty);
         }
+
+        public ICommand EditAircraftCommand => new Command(
+            async () =>
+            {
+                await CoreMethods.PushPageModel<AircraftFormViewModel>(ShownAircraft);
+            }
+        );
+
+        public ICommand DeleteAircraftCommand => new Command(
+            async () =>
+            {
+                await _aircraftService.DeleteAsync(ShownAircraft.Id);
+                await CoreMethods.PopPageModel();
+            }
+        );
     }
 }
