@@ -38,12 +38,62 @@ namespace Imi.Project.Mobile.Pages
 
             AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
             viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
+            //viewModel.RemovePickerClicked += ViewModel_RemovePickerClicked;
+        }
+
+        private Picker AddPicker()
+        {
+            StackLayout stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal }; // Add horizontal stacklayout to store picker and button
+
+            stAirportPickers.Children.Add(stackLayout);
+
+            Picker picker = new Picker { Title = "Kies een luchthaven", Style = (Style)Application.Current.Resources["StandardPicker"], WidthRequest = 297, Margin = new Thickness(15, 0, 0, 0) };
+            picker.SetBinding(Picker.ItemsSourceProperty, "AirportPickerContent");
+            picker.ItemDisplayBinding = new Binding("Name");
+
+            Button button = new Button { Text = "X", WidthRequest = 50 };
+            button.Clicked += RemoveButton_Clicked;
+            //button.SetBinding(Button.CommandProperty, "DeleteAirportPickerCommand");
+
+            stackLayout.Children.Add(picker);
+            stackLayout.Children.Add(button);
+            //pickers.Add(picker);
+
+            return picker;
         }
 
         private void ViewModel_AddPickerClicked(object sender, EventArgs e)
         {
             _ = AddPicker();
         }
+
+        private void RemoveButton_Clicked(object sender, EventArgs e)
+        {
+            Button currentButton = sender as Button;
+
+            StackLayout parent = currentButton.Parent as StackLayout;
+
+            //Picker picker = parent.Children.ElementAt(0) as Picker;
+            //pickers.Remove(picker);
+            //Picker lastPicker = pickers.LastOrDefault();
+
+            parent.Children.Clear();
+            stAirportPickers.Children.Remove(parent);
+        }
+
+        //private void ViewModel_RemovePickerClicked(object sender, EventArgs e)
+        //{
+        //    Button currentButton = sender as Button;
+
+        //    StackLayout parent = currentButton.Parent as StackLayout;
+
+        //    //Picker picker = parent.Children.ElementAt(0) as Picker;
+        //    //pickers.Remove(picker);
+        //    //Picker lastPicker = pickers.LastOrDefault();
+
+        //    parent.Children.Clear();
+        //    stAirportPickers.Children.Remove(parent);
+        //}
 
         //private void LoadAircraftState()
         //{
@@ -98,25 +148,6 @@ namespace Imi.Project.Mobile.Pages
         //    }
         //}
 
-        private Picker AddPicker()
-        {
-            StackLayout stackLayout = new StackLayout { Orientation = StackOrientation.Horizontal };
-
-            stAirportPickers.Children.Add(stackLayout);
-
-            Picker picker = new Picker { Title = "Kies een luchthaven", Style = (Style)Application.Current.Resources["StandardPicker"], WidthRequest = 297, Margin = new Thickness(15, 0, 0, 0) };
-            picker.SetBinding(Picker.ItemsSourceProperty, "AirportPickerContent");
-            picker.ItemDisplayBinding = new Binding("Name");
-
-            Button button = new Button { Text = "X", WidthRequest = 50 };
-
-            stackLayout.Children.Add(picker);
-            stackLayout.Children.Add(button);
-            //pickers.Add(picker);
-
-            return picker;
-        }
-
         //private bool Validate(Aircraft aircraft)
         //{
         //    ValidationContext<Aircraft> validationContext = new ValidationContext<Aircraft>(aircraft);
@@ -161,23 +192,6 @@ namespace Imi.Project.Mobile.Pages
         //        result = false;
         //    }
         //    return result;
-        //}
-
-        //private void BtnRemove_Clicked(object sender, EventArgs e)
-        //{
-        //    Button currentButton = sender as Button;
-
-        //    StackLayout parent = currentButton.Parent as StackLayout;
-
-        //    Picker picker = parent.Children.ElementAt(0) as Picker;
-        //    pickers.Remove(picker);
-        //    Picker lastPicker = pickers.LastOrDefault();
-
-        //    lastPicker.SelectedIndexChanged -= pckAirport_SelectedIndexChanged;
-        //    lastPicker.SelectedIndexChanged += new EventHandler(pckAirport_SelectedIndexChanged);
-
-        //    parent.Children.Clear();
-        //    AircraftForm.Children.Remove(parent);
         //}
 
         //private void pckAirport_SelectedIndexChanged(object sender, EventArgs e)

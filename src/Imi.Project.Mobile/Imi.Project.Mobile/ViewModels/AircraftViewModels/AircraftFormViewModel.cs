@@ -21,6 +21,7 @@ namespace Imi.Project.Mobile.ViewModels
         private bool _isNew = true;
 
         public event EventHandler AddPickerClicked;
+        //public event EventHandler RemovePickerClicked;
 
         public IEnumerable<AircraftType> TypePickerContent { get; set; }
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
@@ -222,6 +223,13 @@ namespace Imi.Project.Mobile.ViewModels
                 AddPickerClicked(this, EventArgs.Empty);
             }
         );
+
+        //public ICommand DeleteAirportPickerCommand => new Command<Button>(
+        //    (Button button) =>
+        //    {
+        //        RemovePickerClicked(button, EventArgs.Empty);
+        //    }
+        //);
 
         private async Task RefreshAircraft()
         {
