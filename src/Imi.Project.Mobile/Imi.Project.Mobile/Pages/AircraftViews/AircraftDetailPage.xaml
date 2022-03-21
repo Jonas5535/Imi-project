@@ -43,7 +43,7 @@
                 <Label Text="Luchthavens" BackgroundColor="{StaticResource MainYellow}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"
                         HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="6" Grid.ColumnSpan="2"/>
                 <StackLayout Grid.Row="7" Grid.ColumnSpan="2">
-                    <ListView HasUnevenRows="True" SelectionMode="None" ItemsSource="{Binding ShownAircraft.Airports}">
+                    <ListView x:Name="lvAirports" HasUnevenRows="True" SelectionMode="None" ItemsSource="{Binding ShownAircraft.Airports}">
                         <ListView.ItemTemplate>
                             <DataTemplate>
                                 <ViewCell>

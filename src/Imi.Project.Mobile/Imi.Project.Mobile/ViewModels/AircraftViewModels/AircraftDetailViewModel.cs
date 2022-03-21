@@ -1,12 +1,14 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
 
 namespace Imi.Project.Mobile.ViewModels
 {
     public class AircraftDetailViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Aircraft> _aircraftService;
+        public event EventHandler ItemSourceSet;
 
         public AircraftDetailViewModel(ICRUDService<Aircraft> aircraftService)
         {
@@ -35,6 +37,13 @@ namespace Imi.Project.Mobile.ViewModels
         {
             ShownAircraft = null;
             ShownAircraft = returnedData as Aircraft;
+            ItemSourceSet(this, EventArgs.Empty);
+        }
+
+        protected override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            base.ViewIsAppearing(sender, e);
+            ItemSourceSet(this, EventArgs.Empty);
         }
     }
 }
