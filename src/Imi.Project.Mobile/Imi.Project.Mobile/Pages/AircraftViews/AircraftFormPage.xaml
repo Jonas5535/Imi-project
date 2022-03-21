@@ -7,7 +7,7 @@
              BackgroundColor="White">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Opslaan" Clicked="BtnSave_Clicked"/>
+        <ToolbarItem Text="Opslaan"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -43,7 +43,7 @@
                     <Label x:Name="lblErrorLastSeen" Text="test" HorizontalOptions="EndAndExpand" Style="{StaticResource ErrorMessage}"></Label>
                     <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
                     <Label x:Name="lblErrorAirport" Style="{StaticResource ErrorMessage}"></Label>
-                    <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}" SelectedIndexChanged="pckAirport_SelectedIndexChanged"></Picker>
+                    <Picker AutomationId="Main" x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"></Picker>
                 </StackLayout>
             </ScrollView>
             <Pages:BusyView x:Name="busyIndicator"/>
