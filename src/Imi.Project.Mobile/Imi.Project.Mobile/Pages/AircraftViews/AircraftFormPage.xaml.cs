@@ -25,15 +25,7 @@ namespace Imi.Project.Mobile.Pages
 
         protected override void OnAppearing()
         {
-            //PopulateTypePicker();
-            //PopulateAirlinePicker();
-            //PopulateAirportPicker(pckAirport);
             //pickers.Add(pckAirport);
-
-            //if (!isNew)
-            //{
-            //    LoadAircraftState();
-            //}
             base.OnAppearing();
 
             AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
@@ -192,15 +184,6 @@ namespace Imi.Project.Mobile.Pages
         //        result = false;
         //    }
         //    return result;
-        //}
-
-        //private void pckAirport_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    AddPicker();
-        //    Picker currentPicker = sender as Picker;
-        //    currentPicker.SelectedIndexChanged -= pckAirport_SelectedIndexChanged;
-
-        //    StackLayout parent = currentPicker.Parent as StackLayout;
         //}
 
         //private async void BtnSave_Clicked(object sender, EventArgs e)

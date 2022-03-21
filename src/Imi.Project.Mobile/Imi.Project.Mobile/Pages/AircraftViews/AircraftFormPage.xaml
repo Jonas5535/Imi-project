@@ -29,13 +29,15 @@
                            IsVisible="{Binding RegistrationError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                     <Picker Title="Kies een type" Style="{StaticResource StandardPicker}"
-                            ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}"></Picker>
+                            ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}"
+                            SelectedItem="{Binding AircraftType}"></Picker>
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding AircraftTypeError}"
                            IsVisible="{Binding AircraftTypeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
                     <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                     <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}"
-                            ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                            ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding Airline}"></Picker>
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding AirlineError}"
                            IsVisible="{Binding AirlineError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>

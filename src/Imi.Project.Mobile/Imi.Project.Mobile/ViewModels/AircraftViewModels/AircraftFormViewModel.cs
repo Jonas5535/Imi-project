@@ -245,6 +245,17 @@ namespace Imi.Project.Mobile.ViewModels
                 _currentAircraft = await _aircraftService.GetByIdAsync(_currentAircraft.Id);
                 PageTitle = $"{_currentAircraft.Registration} bewerken";
             }
+            LoadAircraftState();
+        }
+
+        private void LoadAircraftState()
+        {
+            Registration = _currentAircraft.Registration;
+            Airline = _currentAircraft.Airline;
+            AircraftType = _currentAircraft.AircraftType;
+            HasSpecialLivery = _currentAircraft.HasSpecialLivery;
+            FirstSeen = _currentAircraft.FirstSeen;
+            LastSeen = _currentAircraft.LastSeen;
         }
 
         private async Task PopulatePickers()
