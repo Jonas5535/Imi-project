@@ -30,6 +30,7 @@
                 <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.Registration}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
                 <Label Text="{Binding ShownAircraft.AircraftType.Brand}" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAircraft.AircraftType.Type}" Style="{StaticResource ContentLabel}" Margin="0,28,0,0" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="Maatschappij" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Special livery" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.Airline.Name}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
