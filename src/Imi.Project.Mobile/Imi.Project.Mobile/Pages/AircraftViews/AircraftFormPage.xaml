@@ -4,7 +4,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AircraftFormPage"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             Title="{Binding PageTitle}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Opslaan"/>
@@ -12,7 +13,7 @@
     <ContentPage.Content>
         <AbsoluteLayout>
             <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
-                <StackLayout x:Name="AircraftForm">
+                <StackLayout>
                     <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                     <Entry x:Name="txtRegistration" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6">
                         <Entry.Keyboard>
