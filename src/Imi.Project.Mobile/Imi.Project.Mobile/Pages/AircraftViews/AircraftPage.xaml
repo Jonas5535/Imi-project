@@ -37,8 +37,8 @@
                                                     <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="Type"/>
                                                     <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="maatschappij"/>
                                                     <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Registration}"/>
-                                                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding AircraftType}"/>
-                                                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding Airline}"/>
+                                                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding AircraftType.ICAOCode}"/>
+                                                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding Airline.Name}"/>
                                                 </Grid>
                                             </StackLayout>
                                         </CardView:CardView.CardViewContent>

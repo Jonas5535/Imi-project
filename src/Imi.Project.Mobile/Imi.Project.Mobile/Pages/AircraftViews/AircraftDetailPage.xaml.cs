@@ -10,50 +10,50 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftDetailPage : ContentPage
     {
-        private readonly ICRUDService<Aircraft> aircraftService;
-        private Aircraft shownAircraft;
+        //private readonly ICRUDService<Aircraft> aircraftService;
+        //private Aircraft shownAircraft;
 
-        public AircraftDetailPage(Aircraft aircraft)
+        public AircraftDetailPage(/*Aircraft aircraft*/)
         {
             InitializeComponent();
 
-            aircraftService = new MockAircraftService();
+            //aircraftService = new MockAircraftService();
 
-            shownAircraft = aircraft;
+            //shownAircraft = aircraft;
         }
 
-        protected override void OnAppearing()
-        {
-            LoadAircraft();
-            base.OnAppearing();
-        }
+        //protected override void OnAppearing()
+        //{
+        //    LoadAircraft();
+        //    base.OnAppearing();
+        //}
 
-        private void LoadAircraft()
-        {
-            lblRegistration.Text = shownAircraft.Registration;
-            lblType.Text = shownAircraft.AircraftType;
-            lblAirline.Text = shownAircraft.Airline;
+        //private void LoadAircraft()
+        //{
+        //    lblRegistration.Text = shownAircraft.Registration;
+        //    lblType.Text = shownAircraft.AircraftType;
+        //    lblAirline.Text = shownAircraft.Airline;
 
-            if (shownAircraft.HasSpecialLivery) lblLivery.Text = "Ja";
-            else lblLivery.Text = "Nee";
+        //    if (shownAircraft.HasSpecialLivery) lblLivery.Text = "Ja";
+        //    else lblLivery.Text = "Nee";
 
-            lblFirstSeen.Text = shownAircraft.FirstSeen.ToShortDateString();
-            lblLastSeen.Text = shownAircraft.LastSeen.ToShortDateString();
+        //    lblFirstSeen.Text = shownAircraft.FirstSeen.ToShortDateString();
+        //    lblLastSeen.Text = shownAircraft.LastSeen.ToShortDateString();
 
-            lvAirports.HeightRequest = shownAircraft.Airports.Count * 41;
-            lvAirports.ItemsSource = shownAircraft.Airports;
-        }
+        //    lvAirports.HeightRequest = shownAircraft.Airports.Count * 41;
+        //    lvAirports.ItemsSource = shownAircraft.Airports;
+        //}
 
-        private async void BtnDelete_Clicked(object sender, EventArgs e)
-        {
-            await aircraftService.DeleteAsync(shownAircraft.Id);
+        //private async void BtnDelete_Clicked(object sender, EventArgs e)
+        //{
+        //    await aircraftService.DeleteAsync(shownAircraft.Id);
 
-            await Navigation.PopAsync();
-        }
+        //    await Navigation.PopAsync();
+        //}
 
-        private async void BtnEdit_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new AircraftFormPage(shownAircraft));
-        }
+        //private async void BtnEdit_Clicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new AircraftFormPage(shownAircraft));
+        //}
     }
 }
