@@ -88,18 +88,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private string hasSpecialLiveryError;
-
-        public string HasSpecialLiveryError
-        {
-            get { return hasSpecialLiveryError; }
-            set
-            {
-                hasSpecialLiveryError = value;
-                RaisePropertyChanged();
-            }
-        }
-
         private DateTime firstSeen;
 
         public DateTime FirstSeen
@@ -108,18 +96,6 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 firstSeen = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private string firstSeenError;
-
-        public string FirstSeenError
-        {
-            get { return firstSeenError; }
-            set
-            {
-                firstSeenError = value;
                 RaisePropertyChanged();
             }
         }
