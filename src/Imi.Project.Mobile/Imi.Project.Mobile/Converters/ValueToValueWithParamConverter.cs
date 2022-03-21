@@ -4,7 +4,7 @@ using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.Converters
 {
-    public class NumberToNumberWithUnitConverter : IValueConverter
+    public class ValueToValueWithParamConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
