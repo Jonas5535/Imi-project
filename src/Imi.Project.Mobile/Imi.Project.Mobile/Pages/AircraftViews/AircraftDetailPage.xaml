@@ -33,7 +33,7 @@
                 <Label Text="Maatschappij" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
                 <Label Text="Special livery" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.Airline.Name}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
-                <Label Text="{Binding ShownAircraft.HasSpecialLivery}" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownAircraft.HasSpecialLivery, Converter={StaticResource ConvertToYesNo}}" Style="{StaticResource ContentLabel}" Grid.Row="3" Grid.Column="1"></Label>
                 <Label Text="Eerst gezien" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
                 <Label Text="Laatst gezien" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.FirstSeen, Converter={StaticResource ShortDate}}" Style="{StaticResource ContentLabel}"

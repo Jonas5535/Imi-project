@@ -11,6 +11,7 @@
             <conv:ErrorToVisibleConverter x:Key="ErrorLabelVisibilty"/>
             <conv:DateTimeToShortDateConverter x:Key="ShortDate"/>
             <conv:NumberToNumberWithUnitConverter x:Key="AddUnit"/>
+            <conv:BoolToYesNoConverter x:Key="ConvertToYesNo"/>
 
             <Color x:Key="MainYellow">#fdd31d</Color>
 
