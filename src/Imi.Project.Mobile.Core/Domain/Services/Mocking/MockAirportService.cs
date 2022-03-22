@@ -1,7 +1,6 @@
 ﻿using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,14 +8,14 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
     public class MockAirportService : ICRUDService<Airport>
     {
-        private static ObservableCollection<Airport> _airportList = new ObservableCollection<Airport>
+        private static ICollection<Airport> _airportList = new List<Airport>
         {
-            new Airport{Id = Guid.NewGuid(), Name = "Brussels Airport", IATACode = "BRU", ICAOCode = "EBBR", ElevationAMSL = 56, RunwayAmount = 3,
-                TerminalAmount = 1, Country = "België", City = "Zaventem" },
-            new Airport{Id = Guid.NewGuid(), Name = "Nice Côte d'Azur", IATACode = "NCE", ICAOCode = "LFMN", ElevationAMSL = 4, RunwayAmount = 2,
-                TerminalAmount = 3, Country = "Frankrijk", City = "Nice" },
-            new Airport{Id = Guid.NewGuid(), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA", ElevationAMSL = 41, RunwayAmount = 2,
-                TerminalAmount = 3, Country = "japan", City = "Narita" }
+            new Airport{Id = Guid.Parse("41abe261-28a4-4d52-8da6-023ab750f21a"), Name = "Brussels Airport", IATACode = "BRU", ICAOCode = "EBBR",
+                ElevationAMSL = 56, RunwayAmount = 3, TerminalAmount = 1, Country = "België", City = "Zaventem" },
+            new Airport{Id = Guid.Parse("f6604525-b25b-4380-81f8-c65a80514ae1"), Name = "Nice Côte d'Azur", IATACode = "NCE", ICAOCode = "LFMN",
+                ElevationAMSL = 4, RunwayAmount = 2, TerminalAmount = 3, Country = "Frankrijk", City = "Nice" },
+            new Airport{Id = Guid.Parse("fd41f824-25f5-41b2-be69-12ea56655f77"), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA",
+                ElevationAMSL = 41, RunwayAmount = 2, TerminalAmount = 3, Country = "japan", City = "Narita" }
         };
 
         public async Task<Airport> AddAsync(Airport entity)
@@ -38,9 +37,9 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             return await Task.FromResult(airport);
         }
 
-        public async Task<ObservableCollection<Airport>> ListAllAsync()
+        public async Task<ICollection<Airport>> ListAllAsync()
         {
-            ObservableCollection<Airport> airports = _airportList;
+            ICollection<Airport> airports = _airportList;
             return await Task.FromResult(airports);
         }
 

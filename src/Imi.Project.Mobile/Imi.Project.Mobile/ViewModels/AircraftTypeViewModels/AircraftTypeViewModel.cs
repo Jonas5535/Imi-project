@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -66,7 +67,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
-            ObservableCollection<AircraftType> aircraftTypes = await _aircraftTypeService.ListAllAsync();
+            IEnumerable<AircraftType> source = await _aircraftTypeService.ListAllAsync();
+            ObservableCollection<AircraftType> aircraftTypes = new ObservableCollection<AircraftType>(source);
             AircraftTypes = null;
             AircraftTypes = aircraftTypes;
         }

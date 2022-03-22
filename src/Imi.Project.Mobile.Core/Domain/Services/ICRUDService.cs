@@ -7,7 +7,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 {
     public interface ICRUDService<T>
     {
-        Task<ObservableCollection<T>> ListAllAsync();
+        Task<ICollection<T>> ListAllAsync();
         Task<T> GetByIdAsync(Guid id);
         Task<T> AddAsync(T entity);
         Task<T> UpdateAsync(T entity);

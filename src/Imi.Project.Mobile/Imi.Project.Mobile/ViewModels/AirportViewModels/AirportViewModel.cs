@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -66,7 +67,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
-            ObservableCollection<Airport> airports = await _airportService.ListAllAsync();
+            IEnumerable<Airport> source = await _airportService.ListAllAsync();
+            ObservableCollection<Airport> airports = new ObservableCollection<Airport>(source);
             Airports = null;
             Airports = airports;
         }
