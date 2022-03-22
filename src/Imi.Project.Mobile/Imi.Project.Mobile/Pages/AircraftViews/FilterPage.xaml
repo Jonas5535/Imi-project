@@ -18,7 +18,7 @@
                 <Switch x:Name="swLivery" HorizontalOptions="StartAndExpand" Margin="15,5,0,0"></Switch>
                 <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
                 <Picker x:Name="pckAirport" Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"></Picker>
-                <Button x:Name="BtnSave" Text="Filteren" Style="{StaticResource SquareButton}" Clicked="BtnSave_Clicked"></Button>
+                <Button x:Name="BtnSave" Text="Filteren" Style="{StaticResource SquareButton}"></Button>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

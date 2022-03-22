@@ -11,71 +11,71 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class FilterPage : ContentPage
     {
-        private readonly ICRUDService<AircraftType> aircraftTypeService;
-        private readonly ICRUDService<Airline> airlineService;
-        private readonly ICRUDService<Airport> airportService;
+        //private readonly ICRUDService<AircraftType> aircraftTypeService;
+        //private readonly ICRUDService<Airline> airlineService;
+        //private readonly ICRUDService<Airport> airportService;
 
         public FilterPage()
         {
             InitializeComponent();
 
-            aircraftTypeService = new MockAircraftTypeService();
-            airlineService = new MockAirlineService();
-            airportService = new MockAirportService();
+            //aircraftTypeService = new MockAircraftTypeService();
+            //airlineService = new MockAirlineService();
+            //airportService = new MockAirportService();
         }
 
-        protected override void OnAppearing()
-        {
-            PopulateTypePicker();
-            PopulateAirlinePicker();
-            PopulateAirportPicker();
+        //protected override void OnAppearing()
+        //{
+        //    PopulateTypePicker();
+        //    PopulateAirlinePicker();
+        //    PopulateAirportPicker();
 
-            base.OnAppearing();
-        }
+        //    base.OnAppearing();
+        //}
 
-        private async void PopulateTypePicker()
-        {
-            IEnumerable<AircraftType> types = await aircraftTypeService.ListAllAsync();
-            List<string> pickerContent = new List<string>();
+        //private async void PopulateTypePicker()
+        //{
+        //    IEnumerable<AircraftType> types = await aircraftTypeService.ListAllAsync();
+        //    List<string> pickerContent = new List<string>();
 
-            foreach (var type in types)
-            {
-                pickerContent.Add(type.ICAOCode);
-            }
+        //    foreach (var type in types)
+        //    {
+        //        pickerContent.Add(type.ICAOCode);
+        //    }
 
-            pckType.ItemsSource = pickerContent;
-        }
+        //    pckType.ItemsSource = pickerContent;
+        //}
 
-        private async void PopulateAirlinePicker()
-        {
-            IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
-            List<string> pickerContent = new List<string>();
+        //private async void PopulateAirlinePicker()
+        //{
+        //    IEnumerable<Airline> airlines = await airlineService.ListAllAsync();
+        //    List<string> pickerContent = new List<string>();
 
-            foreach (var airline in airlines)
-            {
-                pickerContent.Add(airline.Name);
-            }
+        //    foreach (var airline in airlines)
+        //    {
+        //        pickerContent.Add(airline.Name);
+        //    }
 
-            pckAirline.ItemsSource = pickerContent;
-        }
+        //    pckAirline.ItemsSource = pickerContent;
+        //}
 
-        private async void PopulateAirportPicker()
-        {
-            IEnumerable<Airport> airports = await airportService.ListAllAsync();
-            List<string> pickerContent = new List<string>();
+        //private async void PopulateAirportPicker()
+        //{
+        //    IEnumerable<Airport> airports = await airportService.ListAllAsync();
+        //    List<string> pickerContent = new List<string>();
 
-            foreach (var airport in airports)
-            {
-                pickerContent.Add(airport.Name);
-            }
+        //    foreach (var airport in airports)
+        //    {
+        //        pickerContent.Add(airport.Name);
+        //    }
 
-            pckAirport.ItemsSource = pickerContent;
-        }
+        //    pckAirport.ItemsSource = pickerContent;
+        //}
 
-        private async void BtnSave_Clicked(object sender, EventArgs e)
-        {
-            await DisplayAlert("Niet geïmplementeerd", "De filter functie is nog niet geimplementeerd", "Ok");
-            await Navigation.PopAsync();
-        }
+        //private async void BtnSave_Clicked(object sender, EventArgs e)
+        //{
+        //    await DisplayAlert("Niet geïmplementeerd", "De filter functie is nog niet geimplementeerd", "Ok");
+        //    await Navigation.PopAsync();
+        //}
     }
 }
