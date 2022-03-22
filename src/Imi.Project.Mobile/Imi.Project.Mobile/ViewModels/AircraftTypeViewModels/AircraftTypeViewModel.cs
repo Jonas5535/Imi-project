@@ -62,6 +62,7 @@ namespace Imi.Project.Mobile.ViewModels
             async (AircraftType aircraftType) =>
             {
                 await _aircraftTypeService.DeleteAsync(aircraftType.Id);
+                await ListInit();
             }
         );
 

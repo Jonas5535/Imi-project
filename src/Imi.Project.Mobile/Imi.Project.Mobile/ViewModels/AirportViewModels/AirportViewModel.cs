@@ -62,6 +62,7 @@ namespace Imi.Project.Mobile.ViewModels
             async (Airport airport) =>
             {
                 await _airportService.DeleteAsync(airport.Id);
+                await ListInit();
             }
         );
 
