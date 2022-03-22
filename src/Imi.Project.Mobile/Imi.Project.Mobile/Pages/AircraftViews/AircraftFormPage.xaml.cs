@@ -119,52 +119,6 @@ namespace Imi.Project.Mobile.Pages
         //    }
         //}
 
-        //private bool Validate(Aircraft aircraft)
-        //{
-        //    ValidationContext<Aircraft> validationContext = new ValidationContext<Aircraft>(aircraft);
-        //    ValidationResult validationResult = aircraftValidator.Validate(validationContext);
-
-        //    foreach (var error in validationResult.Errors)
-        //    {
-        //        if (error.PropertyName == nameof(aircraft.Registration))
-        //        {
-        //            lblErrorRegistration.Text = error.ErrorMessage;
-        //            lblErrorRegistration.IsVisible = true;
-        //        }
-        //        if (error.PropertyName == nameof(aircraft.AircraftType))
-        //        {
-        //            lblErrorType.Text = error.ErrorMessage;
-        //            lblErrorType.IsVisible = true;
-        //        }
-        //        if (error.PropertyName == nameof(aircraft.Airline))
-        //        {
-        //            lblErrorAirline.Text = error.ErrorMessage;
-        //            lblErrorAirline.IsVisible = true;
-        //        }
-        //        if (error.PropertyName == nameof(aircraft.Airports))
-        //        {
-        //            lblErrorAirport.Text = error.ErrorMessage;
-        //            lblErrorAirport.IsVisible = true;
-        //        }
-        //    }
-        //    return validationResult.IsValid;
-        //}
-
-        //private bool ValidateLastSeen(Aircraft aircraft)
-        //{
-        //    bool result = true;
-
-        //    lblErrorLastSeen.IsVisible = false;
-
-        //    if (aircraft.LastSeen < aircraft.FirstSeen)
-        //    {
-        //        lblErrorLastSeen.Text = "De datum van laatst gezien moet later of gelijk zijn aan eerst gezien";
-        //        lblErrorLastSeen.IsVisible = true;
-        //        result = false;
-        //    }
-        //    return result;
-        //}
-
         //private async void BtnSave_Clicked(object sender, EventArgs e)
         //{
         //    busyIndicator.IsVisible = true;

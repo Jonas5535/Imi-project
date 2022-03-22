@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
@@ -28,12 +29,13 @@ namespace Imi.Project.Mobile.ViewModels
         public IEnumerable<Airport> AirportPickerContent { get; set; }
 
         public AircraftFormViewModel(ICRUDService<Aircraft> aircraftService, ICRUDService<AircraftType> aircraftTypeService,
-            ICRUDService<Airline> airlineService, ICRUDService<Airport> airportService)
+            ICRUDService<Airline> airlineService, ICRUDService<Airport> airportService, IValidator<Aircraft> aircraftValidator)
         {
             _aircraftService = aircraftService;
             _aircraftTypeService = aircraftTypeService;
             _airlineService = airlineService;
             _airportService = airportService;
+            _aircraftValidator = aircraftValidator;
         }
 
         #region FullProperties
@@ -213,7 +215,7 @@ namespace Imi.Project.Mobile.ViewModels
 
             _currentAircraft = initData as Aircraft;
 
-            await PopulatePickers();
+            await PopulatePickers(); // This needs to stay here in order to correctly load the pickers
         }
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
@@ -272,6 +274,56 @@ namespace Imi.Project.Mobile.ViewModels
             TypePickerContent = await _aircraftTypeService.ListAllAsync();
             AirlinePickerContent = await _airlineService.ListAllAsync();
             AirportPickerContent = await _airportService.ListAllAsync();
+        }
+
+        private bool Validate(Aircraft aircraft)
+        {
+            RegistrationError = "";
+            AircraftTypeError = "";
+            AirlineError = "";
+            AirportError = "";
+
+            ValidationContext<Aircraft> validationContext = new ValidationContext<Aircraft>(aircraft);
+            ValidationResult validationResult = _aircraftValidator.Validate(validationContext);
+
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(aircraft.Registration))
+                {
+                    RegistrationError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraft.AircraftType))
+                {
+                    AircraftTypeError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraft.Airline))
+                {
+                    AirlineError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraft.Airports))
+                {
+                    AirportError = error.ErrorMessage;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled in the viewmodel");
+                }
+            }
+            return validationResult.IsValid;
+        }
+
+        private bool ValidateLastSeen(Aircraft aircraft)
+        {
+            bool result = true;
+
+            LastSeenError = "";
+
+            if (aircraft.LastSeen < aircraft.FirstSeen)
+            {
+                LastSeenError = "De datum van laatst gezien moet later of gelijk zijn aan eerst gezien";
+                result = false;
+            }
+            return result;
         }
     }
 }
