@@ -230,6 +230,31 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand SaveAircraftCommand => new Command(
+            async () =>
+            {
+                SaveAircraftState();
+
+                if (Validate(_currentAircraft) && ValidateLastSeen(_currentAircraft))
+                {
+                    IsBusy = true;
+
+                    if (_isNew)
+                    {
+                        await _aircraftService.AddAsync(_currentAircraft);
+                    }
+                    else
+                    {
+                        await _aircraftService.UpdateAsync(_currentAircraft);
+                    }
+                    IsBusy = false;
+
+                    await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAircraft.Registration} is opgeslagen", "Ok");
+                    await CoreMethods.PopPageModel(_currentAircraft);
+                }
+            }
+        );
+
         private async Task RefreshAircraft()
         {
             if (_currentAircraft == null)
@@ -267,6 +292,11 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 LoadAircraftStateInitiated(this, EventArgs.Empty);
             }
+        }
+
+        private void SaveAircraftState()
+        {
+            throw new NotImplementedException();
         }
 
         private async Task PopulatePickers()

@@ -269,7 +269,6 @@ namespace Imi.Project.Mobile.ViewModels
                     IsBusy = false;
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuigtype {_currentAircraftType.Type} is opgeslagen", "Ok");
-
                     await CoreMethods.PopPageModel(_currentAircraftType);
                 }
             }

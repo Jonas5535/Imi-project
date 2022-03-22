@@ -269,7 +269,6 @@ namespace Imi.Project.Mobile.ViewModels
                     IsBusy = false;
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
-
                     await CoreMethods.PopPageModel(_currentAirport);
                 }
             }

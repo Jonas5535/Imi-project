@@ -222,7 +222,6 @@ namespace Imi.Project.Mobile.ViewModels
                     IsBusy = false;
 
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
-
                     await CoreMethods.PopPageModel(_currentAirline);
                 }
             }
