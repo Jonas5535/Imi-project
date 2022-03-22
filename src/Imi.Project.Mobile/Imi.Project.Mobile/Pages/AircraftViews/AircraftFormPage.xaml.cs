@@ -30,8 +30,9 @@ namespace Imi.Project.Mobile.Pages
 
             AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
             viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
-            //viewModel.RemovePickerClicked += ViewModel_RemovePickerClicked;
+            viewModel.LoadAircraftStateInitiated += ViewModel_LoadAircraftStateInitiated;
         }
+
 
         private Picker AddPicker()
         {
@@ -45,13 +46,28 @@ namespace Imi.Project.Mobile.Pages
 
             Button button = new Button { Text = "X", WidthRequest = 50 };
             button.Clicked += RemoveButton_Clicked;
-            //button.SetBinding(Button.CommandProperty, "DeleteAirportPickerCommand");
 
             stackLayout.Children.Add(picker);
             stackLayout.Children.Add(button);
             //pickers.Add(picker);
 
             return picker;
+        }
+
+        private void LoadAircraftState(AircraftFormViewModel viewModel)
+        {
+            pckAirport.SelectedItem = viewModel.Airports.FirstOrDefault();
+            for (int i = 1; i < viewModel.Airports.Count; i++)
+            {
+                Picker newPicker = AddPicker();
+                newPicker.SelectedItem = viewModel.Airports.ElementAt(i);
+            }
+        }
+
+        private void ViewModel_LoadAircraftStateInitiated(object sender, EventArgs e)
+        {
+            AircraftFormViewModel viewModel = sender as AircraftFormViewModel;
+            LoadAircraftState(viewModel);
         }
 
         private void ViewModel_AddPickerClicked(object sender, EventArgs e)
@@ -72,43 +88,6 @@ namespace Imi.Project.Mobile.Pages
             parent.Children.Clear();
             stAirportPickers.Children.Remove(parent);
         }
-
-        //private void ViewModel_RemovePickerClicked(object sender, EventArgs e)
-        //{
-        //    Button currentButton = sender as Button;
-
-        //    StackLayout parent = currentButton.Parent as StackLayout;
-
-        //    //Picker picker = parent.Children.ElementAt(0) as Picker;
-        //    //pickers.Remove(picker);
-        //    //Picker lastPicker = pickers.LastOrDefault();
-
-        //    parent.Children.Clear();
-        //    stAirportPickers.Children.Remove(parent);
-        //}
-
-        //private void LoadAircraftState()
-        //{
-        //    txtRegistration.Text = currentAircraft.Registration;
-        //    pckType.SelectedItem = currentAircraft.AircraftType;
-        //    pckAirline.SelectedItem = currentAircraft.Airline;
-        //    swLivery.IsToggled = currentAircraft.HasSpecialLivery;
-        //    dpFirstSeen.Date = currentAircraft.FirstSeen.Date;
-        //    dpLastSeen.Date = currentAircraft.LastSeen.Date;
-
-        //    if (!isNew)
-        //    {
-        //        pckAirport.SelectedIndexChanged -= pckAirport_SelectedIndexChanged;
-        //        pckAirport.SelectedItem = currentAircraft.Airports.FirstOrDefault();
-        //        for (int i = 1; i < currentAircraft.Airports.Count; i++)
-        //        {
-        //            Picker newPicker = AddPicker();
-        //            newPicker.SelectedIndexChanged -= pckAirport_SelectedIndexChanged;
-        //            newPicker.SelectedItem = currentAircraft.Airports.ElementAt(i);
-        //        }
-        //        AddPicker();
-        //    }
-        //}
 
         //private void SaveAircraftState()
         //{

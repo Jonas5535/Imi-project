@@ -21,7 +21,7 @@ namespace Imi.Project.Mobile.ViewModels
         private bool _isNew = true;
 
         public event EventHandler AddPickerClicked;
-        //public event EventHandler RemovePickerClicked;
+        public event EventHandler LoadAircraftStateInitiated;
 
         public IEnumerable<AircraftType> TypePickerContent { get; set; }
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
@@ -213,8 +213,12 @@ namespace Imi.Project.Mobile.ViewModels
 
             _currentAircraft = initData as Aircraft;
 
-            await RefreshAircraft();
             await PopulatePickers();
+        }
+
+        protected async override void ViewIsAppearing(object sender, EventArgs e)
+        {
+            await RefreshAircraft();
         }
 
         public ICommand AddAirportPickerCommand => new Command(
@@ -223,13 +227,6 @@ namespace Imi.Project.Mobile.ViewModels
                 AddPickerClicked(this, EventArgs.Empty);
             }
         );
-
-        //public ICommand DeleteAirportPickerCommand => new Command<Button>(
-        //    (Button button) =>
-        //    {
-        //        RemovePickerClicked(button, EventArgs.Empty);
-        //    }
-        //);
 
         private async Task RefreshAircraft()
         {
@@ -254,6 +251,7 @@ namespace Imi.Project.Mobile.ViewModels
             Airline = _currentAircraft.Airline;
             AircraftType = _currentAircraft.AircraftType;
             HasSpecialLivery = _currentAircraft.HasSpecialLivery;
+            Airports = _currentAircraft.Airports;
 
             if (_currentAircraft.FirstSeen != default)
                 FirstSeen = _currentAircraft.FirstSeen;
@@ -262,6 +260,11 @@ namespace Imi.Project.Mobile.ViewModels
             if (_currentAircraft.LastSeen != default)
                 LastSeen = _currentAircraft.LastSeen;
             else LastSeen = DateTime.Today;
+
+            if (!_isNew)
+            {
+                LoadAircraftStateInitiated(this, EventArgs.Empty);
+            }
         }
 
         private async Task PopulatePickers()
