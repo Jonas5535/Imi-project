@@ -23,6 +23,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         public event EventHandler AddPickerClicked;
         public event EventHandler LoadAircraftStateInitiated;
+        public event EventHandler SaveAircraftStateInitiated;
 
         public IEnumerable<AircraftType> TypePickerContent { get; set; }
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
@@ -296,7 +297,15 @@ namespace Imi.Project.Mobile.ViewModels
 
         private void SaveAircraftState()
         {
-            throw new NotImplementedException();
+            _currentAircraft.Registration = Registration;
+            _currentAircraft.Airline = Airline;
+            _currentAircraft.AircraftType = AircraftType;
+            _currentAircraft.HasSpecialLivery = HasSpecialLivery;
+            _currentAircraft.FirstSeen = FirstSeen;
+            _currentAircraft.LastSeen = LastSeen;
+
+            SaveAircraftStateInitiated(this, EventArgs.Empty);
+            _currentAircraft.Airports = Airports;
         }
 
         private async Task PopulatePickers()

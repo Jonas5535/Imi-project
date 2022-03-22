@@ -8,7 +8,7 @@
              Title="{Binding PageTitle}">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Opslaan"/>
+        <ToolbarItem Text="Opslaan" Command="{Binding SaveAircraftCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>

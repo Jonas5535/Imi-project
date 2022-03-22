@@ -1,9 +1,4 @@
-﻿using FluentValidation;
-using FluentValidation.Results;
-using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Services.Mocking;
-using Imi.Project.Mobile.Core.Domain.Validators;
+﻿using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -16,7 +11,7 @@ namespace Imi.Project.Mobile.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AircraftFormPage : ContentPage
     {
-        //private List<Picker> pickers = new List<Picker>();
+        private List<Picker> pickers = new List<Picker>();
 
         public AircraftFormPage()
         {
@@ -25,14 +20,14 @@ namespace Imi.Project.Mobile.Pages
 
         protected override void OnAppearing()
         {
-            //pickers.Add(pckAirport);
+            pickers.Add(pckAirport);
             base.OnAppearing();
 
             AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
             viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
             viewModel.LoadAircraftStateInitiated += ViewModel_LoadAircraftStateInitiated;
+            viewModel.SaveAircraftStateInitiated += ViewModel_SaveAircraftStateInitiated;
         }
-
 
         private Picker AddPicker()
         {
@@ -49,7 +44,7 @@ namespace Imi.Project.Mobile.Pages
 
             stackLayout.Children.Add(picker);
             stackLayout.Children.Add(button);
-            //pickers.Add(picker);
+            pickers.Add(picker);
 
             return picker;
         }
@@ -64,10 +59,36 @@ namespace Imi.Project.Mobile.Pages
             }
         }
 
+        private void SaveAircraftState(AircraftFormViewModel viewModel)
+        {
+            if (pckAirport.SelectedItem != null)
+            {
+                viewModel.Airports.Clear();
+                foreach (var picker in pickers)
+                {
+                    Picker lastPicker = pickers.LastOrDefault();
+
+                    if (picker == lastPicker && lastPicker.SelectedItem == null)
+                    {
+                        break;
+                    }
+
+                    if (picker.SelectedItem != null)
+                        viewModel.Airports.Add(picker.SelectedItem as Airport);
+                }
+            }
+        }
+
         private void ViewModel_LoadAircraftStateInitiated(object sender, EventArgs e)
         {
             AircraftFormViewModel viewModel = sender as AircraftFormViewModel;
             LoadAircraftState(viewModel);
+        }
+
+        private void ViewModel_SaveAircraftStateInitiated(object sender, EventArgs e)
+        {
+            AircraftFormViewModel viewModel = sender as AircraftFormViewModel;
+            SaveAircraftState(viewModel);
         }
 
         private void ViewModel_AddPickerClicked(object sender, EventArgs e)
@@ -81,66 +102,11 @@ namespace Imi.Project.Mobile.Pages
 
             StackLayout parent = currentButton.Parent as StackLayout;
 
-            //Picker picker = parent.Children.ElementAt(0) as Picker;
-            //pickers.Remove(picker);
-            //Picker lastPicker = pickers.LastOrDefault();
+            Picker picker = parent.Children.ElementAt(0) as Picker;
+            pickers.Remove(picker);
 
             parent.Children.Clear();
             stAirportPickers.Children.Remove(parent);
         }
-
-        //private void SaveAircraftState()
-        //{
-        //    currentAircraft.Registration = txtRegistration.Text;
-
-        //    //Extra validatie om crashes tegen te gaan
-        //    if (pckType.SelectedItem != null)
-        //        currentAircraft.AircraftType = pckType.SelectedItem.ToString();
-
-        //    if (pckAirline.SelectedItem != null)
-        //        currentAircraft.Airline = pckAirline.SelectedItem.ToString();
-
-        //    currentAircraft.HasSpecialLivery = swLivery.IsToggled;
-        //    currentAircraft.FirstSeen = dpFirstSeen.Date;
-        //    currentAircraft.LastSeen = dpLastSeen.Date;
-        //    if (pckAirport.SelectedItem != null)
-        //    {
-        //        currentAircraft.Airports.Clear();
-        //        foreach (var picker in pickers)
-        //        {
-        //            Picker lastPicker = pickers.LastOrDefault();
-
-        //            if (picker == lastPicker && lastPicker.SelectedItem == null)
-        //            {
-        //                break;
-        //            }
-        //            currentAircraft.Airports.Add(picker.SelectedItem.ToString());
-        //        }
-        //    }
-        //}
-
-        //private async void BtnSave_Clicked(object sender, EventArgs e)
-        //{
-        //    busyIndicator.IsVisible = true;
-
-        //    SaveAircraftState();
-
-        //    if (Validate(currentAircraft) && ValidateLastSeen(currentAircraft))
-        //    {
-        //        if (isNew)
-        //        {
-        //            currentAircraft.Id = Guid.NewGuid();
-        //            await aircraftService.AddAsync(currentAircraft);
-        //        }
-        //        else
-        //        {
-        //            await aircraftService.UpdateAsync(currentAircraft);
-        //        }
-
-        //        await DisplayAlert("Opgeslagen", $"het vliegtuig {currentAircraft.Registration} is opgeslagen", "Ok");
-        //        await Navigation.PopAsync();
-        //    }
-        //    busyIndicator.IsVisible = false;
-        //}
     }
 }
