@@ -31,6 +31,21 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             return await Task.FromResult(airport);
         }
 
+        public Task<AircraftType[]> GetAircraftTypes()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Airline[]> GetAirlines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Airport[]> GetAirports()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Airport> GetByIdAsync(Guid id)
         {
             Airport airport = _airportList.FirstOrDefault(a => a.Id == id);

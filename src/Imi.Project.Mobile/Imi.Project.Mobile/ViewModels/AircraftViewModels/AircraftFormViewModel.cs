@@ -14,9 +14,6 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftFormViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Aircraft> _aircraftService;
-        private readonly ICRUDService<AircraftType> _aircraftTypeService;
-        private readonly ICRUDService<Airline> _airlineService;
-        private readonly ICRUDService<Airport> _airportService;
         private readonly IValidator<Aircraft> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
@@ -29,13 +26,9 @@ namespace Imi.Project.Mobile.ViewModels
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
         public IEnumerable<Airport> AirportPickerContent { get; set; }
 
-        public AircraftFormViewModel(ICRUDService<Aircraft> aircraftService, ICRUDService<AircraftType> aircraftTypeService,
-            ICRUDService<Airline> airlineService, ICRUDService<Airport> airportService, IValidator<Aircraft> aircraftValidator)
+        public AircraftFormViewModel(ICRUDService<Aircraft> aircraftService, IValidator<Aircraft> aircraftValidator)
         {
             _aircraftService = aircraftService;
-            _aircraftTypeService = aircraftTypeService;
-            _airlineService = airlineService;
-            _airportService = airportService;
             _aircraftValidator = aircraftValidator;
         }
 
@@ -310,9 +303,9 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task PopulatePickers()
         {
-            TypePickerContent = await _aircraftTypeService.ListAllAsync();
-            AirlinePickerContent = await _airlineService.ListAllAsync();
-            AirportPickerContent = await _airportService.ListAllAsync();
+            TypePickerContent = await _aircraftService.GetAircraftTypes();
+            AirlinePickerContent = await _aircraftService.GetAirlines();
+            AirportPickerContent = await _aircraftService.GetAirports();
         }
 
         private bool Validate(Aircraft aircraft)
