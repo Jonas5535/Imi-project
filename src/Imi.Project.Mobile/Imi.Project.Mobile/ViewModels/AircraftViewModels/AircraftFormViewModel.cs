@@ -254,8 +254,14 @@ namespace Imi.Project.Mobile.ViewModels
             Airline = _currentAircraft.Airline;
             AircraftType = _currentAircraft.AircraftType;
             HasSpecialLivery = _currentAircraft.HasSpecialLivery;
-            FirstSeen = _currentAircraft.FirstSeen;
-            LastSeen = _currentAircraft.LastSeen;
+
+            if (_currentAircraft.FirstSeen != default)
+                FirstSeen = _currentAircraft.FirstSeen;
+            else FirstSeen = DateTime.Today;
+
+            if (_currentAircraft.LastSeen != default)
+                LastSeen = _currentAircraft.LastSeen;
+            else LastSeen = DateTime.Today;
         }
 
         private async Task PopulatePickers()
