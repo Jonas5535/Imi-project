@@ -8,6 +8,13 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
     public class MockAircraftTypeService : ICRUDService<AircraftType>
     {
+        private readonly ICRUDService<Aircraft> _aircraftService;
+
+        public MockAircraftTypeService(ICRUDService<Aircraft> aircraftService)
+        {
+            _aircraftService = aircraftService;
+        }
+
         private static ICollection<AircraftType> _aircraftTypeList = new List<AircraftType>
         {
             new AircraftType{ Id = Guid.Parse("4673e611-2495-4e0c-97e4-4abff97ae018"), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320",
@@ -27,6 +34,14 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
         public async Task<AircraftType> DeleteAsync(Guid id)
         {
             AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
+
+            ICollection<Aircraft> aircrafts = await _aircraftService.ListAllAsync();
+            Aircraft coupledAircraft = aircrafts.SingleOrDefault(a => a.AircraftType == aircraftType);
+
+            if (coupledAircraft != null)
+            {
+                return null;
+            }
             _aircraftTypeList.Remove(aircraftType);
             return await Task.FromResult(aircraftType);
         }

@@ -49,8 +49,12 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAircraftTypeCommand => new Command(
             async () =>
             {
-                await _aircraftTypeService.DeleteAsync(ShownType.Id);
-                await CoreMethods.PopPageModel();
+                AircraftType result = await _aircraftTypeService.DeleteAsync(ShownType.Id);
+
+                if (result != null)
+                    await CoreMethods.PopPageModel();
+                else
+                    await CoreMethods.DisplayAlert("Mistakes were made 🤦‍", "Dit vliegtuigtype is nog aan een vliegtuig gekoppeld \n Gelieve eerst alle gekoppelde vleigtuigen te verwijderen", "Ok");
             }
         );
     }
