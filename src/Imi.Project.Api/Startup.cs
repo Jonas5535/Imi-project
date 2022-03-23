@@ -1,4 +1,8 @@
+using Imi.Project.Api.Core.Infrastructure.Repositories;
+using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Core.Services;
 using Imi.Project.Api.Infrastructure.Data;
+using Imi.Project.Api.Infrastructure.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -28,7 +32,19 @@ namespace Imi.Project.Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            
+
+            //Repository classes and interfaces
+            services.AddScoped<IAircraftTypeRepository, AircraftTypeRepository>();
+            services.AddScoped<IAirlineRepository, AirlineRepository>();
+            services.AddScoped<IAirportRepository, AirportRepository>();
+            services.AddScoped<IAircraftRepository, AircraftRepository>();
+
+            //Service classes and interfaces
+            services.AddScoped<IAircraftService, AircraftService>();
+            services.AddScoped<IAircraftTypeService, AircraftTypeService>();
+            services.AddScoped<IAirlineService, AirlineService>();
+            services.AddScoped<IAirportService, AirportService>();
+
             services.AddControllers();
         }
 
