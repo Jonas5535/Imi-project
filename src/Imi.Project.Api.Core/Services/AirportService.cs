@@ -1,6 +1,8 @@
 ﻿using Imi.Project.Api.Core.Dtos.Airport;
+using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Core.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,14 +30,18 @@ namespace Imi.Project.Api.Core.Services
             throw new NotImplementedException();
         }
 
-        public Task<AirportDetailResponseDto> GetByIdAsync(Guid id)
+        public async Task<AirportDetailResponseDto> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            Airport result = await _airportRepository.GetByIdAsync(id);
+            AirportDetailResponseDto dto = result.MapToDetailDto();
+            return dto;
         }
 
-        public Task<IEnumerable<AirportListResponseDto>> ListAllAsync()
+        public async Task<IEnumerable<AirportListResponseDto>> ListAllAsync()
         {
-            throw new NotImplementedException();
+            IEnumerable<Airport> result = await _airportRepository.ListAllAsync();
+            IEnumerable<AirportListResponseDto> dto = result.MapToListDto();
+            return dto;
         }
 
         public Task<AirportDetailResponseDto> UpdateAsync(AirportRequestDto requestDto)
