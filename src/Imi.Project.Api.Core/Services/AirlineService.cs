@@ -45,8 +45,8 @@ namespace Imi.Project.Api.Core.Services
         public async Task<IEnumerable<AirlineListResponseDto>> ListAllAsync()
         {
             IEnumerable<Airline> result = await _airlineRepository.ListAllAsync();
-            IEnumerable<AirlineListResponseDto> dto = result.MapToListDto();
-            return dto;
+            IEnumerable<AirlineListResponseDto> dtos = result.MapToListDto();
+            return dtos;
         }
 
         public async Task<AirlineDetailResponseDto> UpdateAsync(AirlineRequestDto requestDto)
