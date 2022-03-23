@@ -34,5 +34,32 @@ namespace Imi.Project.Api.Controllers
 
             return Ok(aircraft);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AirlineRequestDto requestDto)
+        {
+            //TODO Add errorhandling
+
+            AirlineListResponseDto responseDto = await _airlineService.AddAsync(requestDto);
+            return CreatedAtAction(nameof(Get), new { id = responseDto.Id}, responseDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(AirlineRequestDto requestDto)
+        {
+            //TODO Add errorhandling
+
+            AirlineDetailResponseDto responseDto = await _airlineService.UpdateAsync(requestDto);
+            return Ok(responseDto);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            //TODO Add errorhandling
+
+            await _airlineService.DeleteAsync(id);
+            return Ok();
+        }
     }
 }
