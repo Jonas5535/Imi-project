@@ -1,6 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Aircraft;
 using Imi.Project.Api.Core.Infrastructure.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
