@@ -18,14 +18,21 @@ namespace Imi.Project.Api.Core.Services
             _aircraftRepository = aircraftRepository;
         }
 
-        public Task<AircraftListResponseDto> AddAsync(AircraftRequestDto requestDto)
+        public async Task<AircraftListResponseDto> AddAsync(AircraftRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Aircraft aircraftEntity = requestDto.MapToEntity();
+
+            //TODO Add errorhandling
+
+            await _aircraftRepository.AddAsync(aircraftEntity);
+            AircraftListResponseDto dto = aircraftEntity.MaptoListDtoSingle();
+            return dto;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            //TODO Check if id exists
+            await _aircraftRepository.DeleteAsync(id);
         }
 
         public async Task<IEnumerable<AircraftListResponseDto>> FilterAsync(bool? hasSpecialLivery, string registration, string type, string airlineName, string airportName)
@@ -50,9 +57,15 @@ namespace Imi.Project.Api.Core.Services
             return dtos;
         }
 
-        public Task<AircraftDetailResponseDto> UpdateAsync(AircraftRequestDto requestDto)
+        public async Task<AircraftDetailResponseDto> UpdateAsync(AircraftRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Aircraft aircraftEntity = requestDto.MapToEntity();
+
+            //TODO Add errorhandling
+
+            await _aircraftRepository.UpdateAsync(aircraftEntity);
+            AircraftDetailResponseDto dto = aircraftEntity.MapToDetailDto();
+            return dto;
         }
     }
 }
