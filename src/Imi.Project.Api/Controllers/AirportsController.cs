@@ -1,6 +1,5 @@
 ﻿using Imi.Project.Api.Core.Dtos.Airport;
 using Imi.Project.Api.Core.Infrastructure.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -34,6 +33,32 @@ namespace Imi.Project.Api.Controllers
             //TODO Add errorhandling
 
             return Ok(airport);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Post(AirportRequestDto airportRequestDto)
+        {
+            //TODO Add errorhandling
+            AirportListResponseDto responseDto = await _airportService.AddAsync(airportRequestDto);
+            return CreatedAtAction(nameof(Get), new { id = responseDto.Id }, responseDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Put(AirportRequestDto airportRequestDto)
+        {
+            //TODO Add errorhandling
+            AirportDetailResponseDto responseDto = await _airportService.UpdateAsync(airportRequestDto);
+
+            return Ok(responseDto);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            //TODO Add errorhandling
+
+            await _airportService.DeleteAsync(id);
+            return Ok();
         }
     }
 }
