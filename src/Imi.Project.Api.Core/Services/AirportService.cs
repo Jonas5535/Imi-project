@@ -13,6 +13,7 @@ namespace Imi.Project.Api.Core.Services
 {
     public class AirportService : IAirportService
     {
+        
         private readonly IAirportRepository _airportRepository;
 
         public AirportService(IAirportRepository airportRepository)
@@ -20,14 +21,20 @@ namespace Imi.Project.Api.Core.Services
             _airportRepository = airportRepository;
         }
 
-        public Task<AirportListResponseDto> AddAsync(AirportRequestDto requestDto)
+        public async Task<AirportListResponseDto> AddAsync(AirportRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Airport airportEntity = requestDto.MapToEntity();
+
+            //TODO Add ErrorHandling
+            await _airportRepository.AddAsync(airportEntity);
+            AirportListResponseDto dto = airportEntity.MapToListDtoSingle();
+            return dto;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            //TODO Add check for existing id
+            await _airportRepository.DeleteAsync(id);
         }
 
         public async Task<AirportDetailResponseDto> GetByIdAsync(Guid id)
@@ -44,9 +51,14 @@ namespace Imi.Project.Api.Core.Services
             return dto;
         }
 
-        public Task<AirportDetailResponseDto> UpdateAsync(AirportRequestDto requestDto)
+        public async Task<AirportDetailResponseDto> UpdateAsync(AirportRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Airport airportEntity = requestDto.MapToEntity();
+
+            //TODO Add errorhandling
+            await _airportRepository.UpdateAsync(airportEntity);
+            AirportDetailResponseDto dto = airportEntity.MapToDetailDto();
+            return dto;
         }
     }
 }
