@@ -18,14 +18,21 @@ namespace Imi.Project.Api.Core.Services
             _airlineRepository = airlineRepository;
         }
 
-        public Task<AirlineListResponseDto> AddAsync(AirlineRequestDto requestDto)
+        public async Task<AirlineListResponseDto> AddAsync(AirlineRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Airline airlineEntity = requestDto.MapToEntity();
+
+            //TODO Add errorhandling
+
+            await _airlineRepository.AddAsync(airlineEntity);
+            AirlineListResponseDto dto = airlineEntity.MapToListDtoSingle();
+            return dto;
         }
 
-        public Task DeleteAsync(Guid id)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            //TODO Add check for existing id
+            await _airlineRepository.DeleteAsync(id);
         }
 
         public async Task<AirlineDetailResponseDto> GetByIdAsync(Guid id)
@@ -42,9 +49,15 @@ namespace Imi.Project.Api.Core.Services
             return dto;
         }
 
-        public Task<AirlineDetailResponseDto> UpdateAsync(AirlineRequestDto requestDto)
+        public async Task<AirlineDetailResponseDto> UpdateAsync(AirlineRequestDto requestDto)
         {
-            throw new NotImplementedException();
+            Airline airlineEntity = requestDto.MapToEntity();
+
+            //TODO Add errorhandling
+
+            await _airlineRepository.UpdateAsync(airlineEntity);
+            AirlineDetailResponseDto dto = airlineEntity.MapToDetailDto();
+            return dto;
         }
     }
 }
