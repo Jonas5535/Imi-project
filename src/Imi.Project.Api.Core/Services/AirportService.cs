@@ -5,15 +5,13 @@ using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
 {
     public class AirportService : IAirportService
     {
-        
+
         private readonly IAirportRepository _airportRepository;
 
         public AirportService(IAirportRepository airportRepository)
