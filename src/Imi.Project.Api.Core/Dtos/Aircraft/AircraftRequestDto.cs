@@ -7,18 +7,22 @@ namespace Imi.Project.Api.Core.Dtos.Aircraft
     public class AircraftRequestDto : BaseDto
     {
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Text)]
         public string Registration { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         public bool HasSpecialLivery { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Date)]
         public DateTime FirstSeen { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Date)]
         public DateTime LastSeen { get; set; }
 
         // Image is not required as this is just an option
+        [DataType(DataType.ImageUrl)]
         public string Image { get; set; }
 
         // These two properties are also not required

@@ -6,15 +6,19 @@ namespace Imi.Project.Api.Core.Dtos.AircraftType
     public class AircraftTypeRequestDto : BaseDto
     {
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Text)]
         public string Brand { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Text)]
         public string Type { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Text)]
         public string ICAOCode { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
+        [DataType(DataType.Date)]
         public DateTime? FirstFlight { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
