@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Imi.Project.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Get(System.Nullable{System.Boolean},System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a list of all aircrafts in the database. You can also filter the list.
+            </summary>
+            <param name="hasSpecialLivery">Will filter on special livery when not null</param>
+            <param name="registration">Will filter on aircraft registration when not null</param>
+            <param name="type">Will filter on aircrafttype when not null</param>
+            <param name="airlineName">Will filter on airline when not null</param>
+            <param name="AirportName">Will filter on airport when not null. Currently broken</param>
+            <response code="200">Succesfully returns a list of aircrafts</response>
+            <response code="404">Cannot find any aircraft that match filter parameters</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific aircraft
+            </summary>
+            <param name="id">The id of the aircraft that you want details of</param>
+            <response code="200">Succesfully returns an aircraft</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Post(Imi.Project.Api.Core.Dtos.Aircraft.AircraftRequestDto)">
+            <summary>
+            Adds a new aircraft to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "registration": "OO-ABC",
+                 "hasSpecialLivery": true,
+                 "firstSeen": "2020-07-13",
+                 "lastSeen": "2022-02-11",
+                 "image": null,
+                 "longitude": null,
+                 "latitude": null,
+                 "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
+                 "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
+                 "airportIds": [
+                    "e2be3bd6-4c7b-41f4-a5c8-a1940310ea7d",
+                    "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
+                 ]
+                }
+            <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+            </remarks>
+            <response code="201">Created a new aircraft</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Put(Imi.Project.Api.Core.Dtos.Aircraft.AircraftRequestDto)">
+            <summary>
+            Updates an existing aircraft
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "id": "036f4398-a726-4839-4931-08da0e7ef24d",
+                 "addedOn": "2022-03-25T17:51:32.6092821",
+                 "registration": "OO-ABC",
+                 "hasSpecialLivery": true,
+                 "firstSeen": "2020-07-13",
+                 "lastSeen": "2022-02-11",
+                 "image": null,
+                 "longitude": null,
+                 "latitude": null,
+                 "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
+                 "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
+                 "airportIds": [
+                    "e2be3bd6-4c7b-41f4-a5c8-a1940310ea7d",
+                    "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
+                 ]
+                }
+            <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+            </remarks>
+            <response code="200">Succesfully updated the aircraft</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Delete(System.Guid)">
+            <summary>
+            Deletes an aircraft from the database
+            </summary>
+            <param name="id">The id of the aircraft you want to delete</param>
+            <response code="200">Succesfully deleted the aircraft</response>
+        </member>
+        <member name="M:Imi.Project.Api.Extensions.ControllerExtensions.HandleErrors(Microsoft.AspNetCore.Mvc.ControllerBase,System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Models.ErrorMessage})">
+            <summary>
+            Throws the topmost error as a HttpResponse
+            </summary>
+            <param name="controller"></param>
+            <param name="errors"></param>
+            <returns></returns>
+        </member>
+        <member name="M:Imi.Project.Api.Extensions.DtoValidations.IsSucces(System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Dtos.BaseDto})">
+            <summary>
+            Checks IsSucces property of every dto in a list of dtos
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

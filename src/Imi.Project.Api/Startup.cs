@@ -15,6 +15,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,6 +51,8 @@ namespace Imi.Project.Api
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI-Lampaert-Jonas", Version = "v1" });
+                var filePath = Path.Combine(AppContext.BaseDirectory, "ApiDocs.xml");
+                c.IncludeXmlComments(filePath);
             });
 
             services.AddControllers();
