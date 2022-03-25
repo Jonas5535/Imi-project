@@ -23,7 +23,7 @@ namespace Imi.Project.Api.Core.Mapping
 
             foreach (var airport in aircraftEntity.SpottedAtAirports)
             {
-                var a = airport.Airport.MapToListDtoSingle();
+                var a = airport.Airport?.MapToListDtoSingle();
                 airports.Add(a);
             }
 
@@ -91,6 +91,7 @@ namespace Imi.Project.Api.Core.Mapping
                 Aircraft aircraftToBeUpdated = new Aircraft
                 {
                     Id = requestDto.Id,
+                    AddedOn = requestDto.AddedOn,
                     Registration = requestDto.Registration?.ToUpper(),
                     HasSpecialLivery = requestDto.HasSpecialLivery,
                     FirstSeen = requestDto.FirstSeen.Date,

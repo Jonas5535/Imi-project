@@ -1,9 +1,12 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Api.Core.Dtos.Airport
 {
     public class AirportRequestDto : BaseDto
     {
+        public DateTime? AddedOn { get; set; }
+
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         public string Name { get; set; }

@@ -5,6 +5,7 @@ using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
@@ -28,6 +29,8 @@ namespace Imi.Project.Api.Core.Services
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.AddAsync(aircraftEntity);
 
+            // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
+            aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             AircraftListResponseDto dto = aircraftEntity.MaptoListDtoSingle();
             return dto;
         }
@@ -68,6 +71,8 @@ namespace Imi.Project.Api.Core.Services
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
+            // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
+            aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             AircraftDetailResponseDto dto = aircraftEntity.MapToDetailDto();
             return dto;
         }

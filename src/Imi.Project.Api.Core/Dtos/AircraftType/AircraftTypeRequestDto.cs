@@ -5,6 +5,8 @@ namespace Imi.Project.Api.Core.Dtos.AircraftType
 {
     public class AircraftTypeRequestDto : BaseDto
     {
+        public DateTime? AddedOn { get; set; }
+
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         public string Brand { get; set; }

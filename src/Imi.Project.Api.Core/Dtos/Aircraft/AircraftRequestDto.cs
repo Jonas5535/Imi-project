@@ -6,6 +6,8 @@ namespace Imi.Project.Api.Core.Dtos.Aircraft
 {
     public class AircraftRequestDto : BaseDto
     {
+        public DateTime? AddedOn { get; set; }
+        
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         public string Registration { get; set; }

@@ -49,6 +49,7 @@ namespace Imi.Project.Api.Core.Mapping
                 Airline airlineToBeUpdated = new Airline
                 {
                     Id = requestDto.Id,
+                    AddedOn = requestDto.AddedOn,
                     Name = requestDto.Name,
                     IATACode = requestDto.IATACode?.ToUpper(),
                     ICAOCode = requestDto.ICAOCode?.ToUpper(),
