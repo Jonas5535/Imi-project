@@ -63,7 +63,7 @@ namespace Imi.Project.Api.Infrastructure.Data
                 new AircraftAtAirport{ AircraftId = aircrafts[0].Id, AirportId = airports[1].Id},
                 new AircraftAtAirport{ AircraftId = aircrafts[0].Id, AirportId = airports[2].Id},
                 new AircraftAtAirport{ AircraftId = aircrafts[1].Id, AirportId = airports[0].Id},
-                new AircraftAtAirport{ AircraftId = aircrafts[0].Id, AirportId = airports[1].Id},
+                new AircraftAtAirport{ AircraftId = aircrafts[1].Id, AirportId = airports[1].Id},
                 new AircraftAtAirport{ AircraftId = aircrafts[2].Id, AirportId = airports[2].Id},
             };
             #endregion
@@ -73,6 +73,7 @@ namespace Imi.Project.Api.Infrastructure.Data
             modelBuilder.Entity<Airline>().HasData(airlines);
             modelBuilder.Entity<Airport>().HasData(airports);
             modelBuilder.Entity<Aircraft>().HasData(aircrafts);
+            modelBuilder.Entity<AircraftAtAirport>().HasData(aircraftsAtAirports);
             #endregion
         }
     }

@@ -131,9 +131,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "AddedOn", "Brand", "EmptyWeight", "FirstFlight", "Height", "ICAOCode", "Length", "ModifiedOn", "Type", "WingSpan" },
                 values: new object[,]
                 {
-                    { new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"), new DateTime(2022, 3, 25, 11, 16, 3, 622, DateTimeKind.Local).AddTicks(7483), "Airbus", 42400, new DateTime(1987, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 11.76, "A320", 37.57, new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(6654), "A320-200", 34.100000000000001 },
-                    { new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"), new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7571), "Boeing", 118000, new DateTime(2009, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 16.899999999999999, "B788", 56.700000000000003, new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7589), "787-8", 60.100000000000001 },
-                    { new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"), new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7612), "McDonnel Douglas", 112748, new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 17.600000000000001, "MD11", 61.399999999999999, new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7616), "MD-11", 51.700000000000003 }
+                    { new Guid("9ccfd83d-ff7b-4e76-8c12-7c0f0496b5c0"), new DateTime(2022, 3, 25, 13, 35, 27, 58, DateTimeKind.Local).AddTicks(4753), "Airbus", 42400, new DateTime(1987, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified), 11.76, "A320", 37.57, new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(4246), "A320-200", 34.100000000000001 },
+                    { new Guid("3a504b2e-11ec-4725-b1ed-5babee959c4b"), new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(5028), "Boeing", 118000, new DateTime(2009, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), 16.899999999999999, "B788", 56.700000000000003, new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(5046), "787-8", 60.100000000000001 },
+                    { new Guid("3d0fd8f6-e957-482a-9d3f-a0f93b2e78ec"), new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(5067), "McDonnel Douglas", 112748, new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), 17.600000000000001, "MD11", 61.399999999999999, new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(5073), "MD-11", 51.700000000000003 }
                 });
 
             migrationBuilder.InsertData(
@@ -141,9 +141,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "AddedOn", "FleetSize", "HeadQuarter", "IATACode", "ICAOCode", "MainAirport", "ModifiedOn", "Name" },
                 values: new object[,]
                 {
-                    { new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(637), 49, "Diegem, België", "SN", "BEL", "Brussels Airport", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(660), "Brussels Airlines" },
-                    { new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(676), 32, "Zaventem, België", "TB", "JAF", "Brussels Airport", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(681), "TUI Fly" },
-                    { new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(687), 18, "Frankfurt, Duitsland", "LH", "GEC", "Frankfurt am Main", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(690), "Lufthansa Cargo" }
+                    { new Guid("53f04903-180c-4cc4-9bc7-e5d9a1630ee0"), new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8094), 49, "Diegem, België", "SN", "BEL", "Brussels Airport", new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8114), "Brussels Airlines" },
+                    { new Guid("3a368982-9f8c-4440-8dd7-abf13772175f"), new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8131), 32, "Zaventem, België", "TB", "JAF", "Brussels Airport", new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8135), "TUI Fly" },
+                    { new Guid("c76bb1ce-8f7d-4bf2-8157-096c1514c2e0"), new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8142), 18, "Frankfurt, Duitsland", "LH", "GEC", "Frankfurt am Main", new DateTime(2022, 3, 25, 13, 35, 27, 63, DateTimeKind.Local).AddTicks(8145), "Lufthansa Cargo" }
                 });
 
             migrationBuilder.InsertData(
@@ -151,25 +151,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                 columns: new[] { "Id", "AddedOn", "City", "Country", "ElevationAMSL", "IATACode", "ICAOCode", "ModifiedOn", "Name", "RunwayAmount", "TerminalAmount" },
                 values: new object[,]
                 {
-                    { new Guid("a83fe1a7-5a0e-4671-b2c8-69ce4a99f88e"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4152), "Zaventem", "België", 56, "BRU", "EBBR", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4170), "Brussels Airport", 3, 1 },
-                    { new Guid("2b4b3bbe-0adc-4056-b13c-5ada9595cf18"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4187), "Nice", "Frankrijk", 4, "NCE", "LFMN", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4191), "Nice Côte d'Azur", 2, 3 },
-                    { new Guid("ea10f239-01a3-43e8-acf3-de0d808e855e"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4199), "Narita", "japan", 41, "NRT", "RJAA", new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4203), "Tokyo Narita Intl. Airport", 2, 3 }
+                    { new Guid("b55c30f0-2987-42b2-b667-0d3892c97692"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1767), "Zaventem", "België", 56, "BRU", "EBBR", new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1785), "Brussels Airport", 3, 1 },
+                    { new Guid("3df73cd2-3ed7-41eb-afcd-3a4103b3e992"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1802), "Nice", "Frankrijk", 4, "NCE", "LFMN", new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1807), "Nice Côte d'Azur", 2, 3 },
+                    { new Guid("b2f35991-dc73-4a72-bbfe-cc4856d007fe"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1830), "Narita", "japan", 41, "NRT", "RJAA", new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(1833), "Tokyo Narita Intl. Airport", 2, 3 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Aircrafts",
                 columns: new[] { "Id", "AddedOn", "AircraftTypeId", "AirlineId", "FirstSeen", "HasSpecialLivery", "Image", "LastSeen", "Latitude", "Longitude", "ModifiedOn", "Registration" },
-                values: new object[] { new Guid("d2645723-1915-47e9-b17a-10851f823fda"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7915), new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"), new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"), new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7934), "OO-SNJ" });
+                values: new object[] { new Guid("30bc296c-6b5e-4234-a31f-3a9918ed53a8"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5350), new Guid("9ccfd83d-ff7b-4e76-8c12-7c0f0496b5c0"), new Guid("53f04903-180c-4cc4-9bc7-e5d9a1630ee0"), new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5371), "OO-SNJ" });
 
             migrationBuilder.InsertData(
                 table: "Aircrafts",
                 columns: new[] { "Id", "AddedOn", "AircraftTypeId", "AirlineId", "FirstSeen", "HasSpecialLivery", "Image", "LastSeen", "Latitude", "Longitude", "ModifiedOn", "Registration" },
-                values: new object[] { new Guid("5b6c4731-a504-43b0-a4d1-9e43dedf2488"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7952), new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"), new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"), new DateTime(2020, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7957), "OO-LOE" });
+                values: new object[] { new Guid("99caa744-4cbd-4fba-bf5e-ceb600ebee26"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5389), new Guid("3a504b2e-11ec-4725-b1ed-5babee959c4b"), new Guid("3a368982-9f8c-4440-8dd7-abf13772175f"), new DateTime(2020, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5393), "OO-LOE" });
 
             migrationBuilder.InsertData(
                 table: "Aircrafts",
                 columns: new[] { "Id", "AddedOn", "AircraftTypeId", "AirlineId", "FirstSeen", "HasSpecialLivery", "Image", "LastSeen", "Latitude", "Longitude", "ModifiedOn", "Registration" },
-                values: new object[] { new Guid("eb6e6d14-b5bc-4467-aa92-2c896cd9d1ea"), new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7964), new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"), new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"), new DateTime(2020, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7968), "D-ALCC" });
+                values: new object[] { new Guid("f552e1cc-10a8-4000-8fb3-4ccda599e88e"), new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5401), new Guid("3d0fd8f6-e957-482a-9d3f-a0f93b2e78ec"), new Guid("c76bb1ce-8f7d-4bf2-8157-096c1514c2e0"), new DateTime(2020, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified), false, null, new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, new DateTime(2022, 3, 25, 13, 35, 27, 64, DateTimeKind.Local).AddTicks(5405), "D-ALCC" });
+
+            migrationBuilder.InsertData(
+                table: "AircraftAtAirports",
+                columns: new[] { "AircraftId", "AirportId" },
+                values: new object[,]
+                {
+                    { new Guid("30bc296c-6b5e-4234-a31f-3a9918ed53a8"), new Guid("b55c30f0-2987-42b2-b667-0d3892c97692") },
+                    { new Guid("30bc296c-6b5e-4234-a31f-3a9918ed53a8"), new Guid("3df73cd2-3ed7-41eb-afcd-3a4103b3e992") },
+                    { new Guid("30bc296c-6b5e-4234-a31f-3a9918ed53a8"), new Guid("b2f35991-dc73-4a72-bbfe-cc4856d007fe") },
+                    { new Guid("99caa744-4cbd-4fba-bf5e-ceb600ebee26"), new Guid("b55c30f0-2987-42b2-b667-0d3892c97692") },
+                    { new Guid("99caa744-4cbd-4fba-bf5e-ceb600ebee26"), new Guid("3df73cd2-3ed7-41eb-afcd-3a4103b3e992") },
+                    { new Guid("f552e1cc-10a8-4000-8fb3-4ccda599e88e"), new Guid("b2f35991-dc73-4a72-bbfe-cc4856d007fe") }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AircraftAtAirports_AirportId",
