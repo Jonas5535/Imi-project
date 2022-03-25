@@ -24,7 +24,7 @@ namespace Imi.Project.Api.Controllers
             [FromQuery] string airlineName, [FromQuery] string AirportName)
         {
             //TODO Check errorhandling
-            if (registration != null || !string.IsNullOrWhiteSpace(registration) || !string.IsNullOrWhiteSpace(type) || !string.IsNullOrWhiteSpace(airlineName) ||
+            if (hasSpecialLivery != null || !string.IsNullOrWhiteSpace(registration) || !string.IsNullOrWhiteSpace(type) || !string.IsNullOrWhiteSpace(airlineName) ||
                 !string.IsNullOrWhiteSpace(AirportName))
             {
                 IEnumerable<AircraftListResponseDto> aircrafts = await _aircraftService.FilterAsync(hasSpecialLivery, registration, type, airlineName, AirportName);
