@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Dtos.Aircraft;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -38,10 +39,10 @@ namespace Imi.Project.Api.Controllers
             if (hasSpecialLivery != null || !string.IsNullOrWhiteSpace(registration) || !string.IsNullOrWhiteSpace(type) || !string.IsNullOrWhiteSpace(airlineName) ||
                 !string.IsNullOrWhiteSpace(AirportName))
             {
-                IEnumerable<AircraftListResponseDto> aircrafts = await _aircraftService.FilterAsync(hasSpecialLivery, registration, type, airlineName, AirportName);
-                if (aircrafts.Any())
+                IEnumerable<AircraftListResponseDto> result = await _aircraftService.FilterAsync(hasSpecialLivery, registration, type, airlineName, AirportName);
+                if (result.Any())
                 {
-                    return Ok(aircrafts);
+                    return Ok(result);
                 }
                 return NotFound($"There were no aircrafts found that meet your search requirements");
             }
@@ -60,10 +61,14 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            AircraftDetailResponseDto aircraft = await _aircraftService.GetByIdAsync(id);
-            //TODO Add errorhandling
+            AircraftDetailResponseDto result = await _aircraftService.GetByIdAsync(id);
 
-            return Ok(aircraft);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -95,10 +100,14 @@ namespace Imi.Project.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AircraftRequestDto requestDto)
         {
-            //TODO Add errorhandling
+            AircraftListResponseDto result = await _aircraftService.AddAsync(requestDto);
 
-            AircraftListResponseDto responseDto = await _aircraftService.AddAsync(requestDto);
-            return CreatedAtAction(nameof(Get), new { id = responseDto.Id }, responseDto);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
         /// <summary>
@@ -132,10 +141,15 @@ namespace Imi.Project.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(AircraftRequestDto requestDto)
         {
-            //TODO Add errorhandling
             //TODO Fix bug with updating airport relations
-            AircraftDetailResponseDto responseDto = await _aircraftService.UpdateAsync(requestDto);
-            return Ok(responseDto);
+            AircraftDetailResponseDto result = await _aircraftService.UpdateAsync(requestDto);
+
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
         /// <summary>

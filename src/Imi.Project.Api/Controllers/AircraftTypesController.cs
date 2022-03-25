@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Dtos.AircraftType;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -39,10 +40,14 @@ namespace Imi.Project.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            AircraftTypeDetailResponseDto aircraftType = await _aircraftTypeService.GetByIdAsync(id);
-            //TODO Add errorhandling
+            AircraftTypeDetailResponseDto result = await _aircraftTypeService.GetByIdAsync(id);
 
-            return Ok(aircraftType);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
@@ -69,9 +74,14 @@ namespace Imi.Project.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AircraftTypeRequestDto requestDto)
         {
-            //TODO Add errorhandling
-            AircraftTypeListResponseDto responseDto = await _aircraftTypeService.AddAsync(requestDto);
-            return CreatedAtAction(nameof(Get), new { id = responseDto.Id }, responseDto);
+            AircraftTypeListResponseDto result = await _aircraftTypeService.AddAsync(requestDto);
+
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
         /// <summary>
@@ -94,13 +104,17 @@ namespace Imi.Project.Api.Controllers
         ///     }
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
         /// </remarks>
-    [HttpPut]
+        [HttpPut]
         public async Task<IActionResult> Put(AircraftTypeRequestDto requestDto)
         {
-            //TODO Add errorhandling
+            AircraftTypeDetailResponseDto result = await _aircraftTypeService.UpdateAsync(requestDto);
 
-            AircraftTypeDetailResponseDto responseDto = await _aircraftTypeService.UpdateAsync(requestDto);
-            return Ok(responseDto);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result?.GetErrors());
+            }
+
+            return Ok(result);
         }
 
         /// <summary>
