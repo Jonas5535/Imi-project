@@ -43,16 +43,10 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .IsRequired();
 
             modelBuilder.Entity<AircraftType>()
-                .Property(at => at.Length);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.WingSpan);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.Height);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.EmptyWeight);
+                .HasMany(at => at.Aircrafts)
+                .WithOne(a => a.AircraftType)
+                .HasForeignKey(a => a.AircraftTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region Airline
@@ -87,6 +81,12 @@ namespace Imi.Project.Api.Infrastructure.Data
             modelBuilder.Entity<Airline>()
                 .Property(al => al.HeadQuarter)
                 .HasMaxLength(200);
+
+            modelBuilder.Entity<Airline>()
+                .HasMany(ar => ar.Aircrafts)
+                .WithOne(a => a.Airline)
+                .HasForeignKey(a => a.AirlineId)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region Airport

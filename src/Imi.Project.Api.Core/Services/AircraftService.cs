@@ -71,6 +71,7 @@ namespace Imi.Project.Api.Core.Services
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
+            //TODO Fix bug where airports don't update
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             AircraftDetailResponseDto dto = aircraftEntity.MapToDetailDto();
