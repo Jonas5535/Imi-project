@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Imi.Project.Mobile.ViewModels"
+             x:DataType="viewmodels:MainViewModel"
+             x:Class="Imi.Project.Mobile.Pages.MainPage"
+             BackgroundColor="White"
+             Title="Home">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Account" IconImageSource="User.png" />
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <StackLayout>
+            <ScrollView VerticalOptions="FillAndExpand">
+                <StackLayout>
+                    <Label Text="Avilection" TextColor="Black" FontSize="45" HorizontalTextAlignment="Center" Margin="15, 150, 15, 25"></Label>
+                    <StackLayout Margin="0, 25, 0, 0">
+                        <Button x:Name="btnAircraft" ImageSource="AircraftIcon.png" Text="Vliegtuigen" Style="{StaticResource RoundedButton}" Command="{Binding OpenAicraftPageCommand}"></Button>
+                        <Button x:Name="btnAircraftType" ImageSource="AircraftTypeIcon.png" Text="VliegtuigTypes" Style="{StaticResource RoundedButton}" Command="{Binding OpenAircraftTypePageCommand}"></Button>
+                        <Button x:Name="btnAirport" ImageSource="AirportIcon.png" Text="Luchthavens" Style="{StaticResource RoundedButton}" Command="{Binding OpenAirportPageCommand}"></Button>
+                        <Button x:Name="btnAirline" ImageSource="AirlineIcon.png" Text="Maatschappijen" Style="{StaticResource RoundedButton}" Command="{Binding OpenAirlinePageCommand}"></Button>
+                    </StackLayout>
+                </StackLayout>
+            </ScrollView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

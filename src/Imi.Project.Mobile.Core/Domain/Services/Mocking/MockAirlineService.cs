@@ -1,49 +1,66 @@
 ﻿using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAirlineService : IAirlineService
+    public class MockAirlineService : ICRUDService<Airline>
     {
-        private static ObservableCollection<Airline> _airlineList = new ObservableCollection<Airline>
+        private static ICollection<Airline> _airlineList = new List<Airline>
         {
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL", MainAirport = "Brussels Airport", HeadQuarter = "Diegem, België", FleetSize = 49 },
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF", MainAirport = "Brussels Airport", HeadQuarter = "Zaventem, België", FleetSize = 32 },
-            new Airline{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC", MainAirport = "Frankfurt am Main", HeadQuarter = "Frankfurt, Duitsland", FleetSize = 18 }
+            new Airline{ Id = Guid.Parse("cd8cf99b-d0c0-4de8-b708-46573523afe5"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL",
+                MainAirport = "Brussels Airport", HeadQuarter = "Diegem, België", FleetSize = 49 },
+            new Airline{ Id = Guid.Parse("4e0b7e94-455c-485b-87d4-a357459a6ac1"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF",
+                MainAirport = "Brussels Airport", HeadQuarter = "Zaventem, België", FleetSize = 32 },
+            new Airline{ Id = Guid.Parse("0f1a0904-46f9-406a-afc2-460746623ad6"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC",
+                MainAirport = "Frankfurt am Main", HeadQuarter = "Frankfurt, Duitsland", FleetSize = 18 }
         };
 
-        public async Task<Airline> AddAirline(Airline airline)
+        public async Task<Airline> AddAsync(Airline entity)
         {
-            _airlineList.Add(airline);
-            return await Task.FromResult(airline);
+            _airlineList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<Airline> DeleteAirline(Guid airlineId)
+        public async Task<Airline> DeleteAsync(Guid id)
         {
-            Airline airline = _airlineList.FirstOrDefault(a => a.Id == airlineId);
+            Airline airline = _airlineList.FirstOrDefault(a => a.Id == id);
             _airlineList.Remove(airline);
             return await Task.FromResult(airline);
         }
 
-        public async Task<Airline> GetAirlineById(Guid airlineId)
+        public Task<AircraftType[]> GetAircraftTypes()
         {
-            Airline airline = _airlineList.FirstOrDefault(a => a.Id == airlineId);
+            throw new NotImplementedException();
+        }
+
+        public Task<Airline[]> GetAirlines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Airport[]> GetAirports()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<Airline> GetByIdAsync(Guid id)
+        {
+            Airline airline = _airlineList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(airline);
         }
 
-        public async Task<IEnumerable<Airline>> GetAirlines()
+        public async Task<ICollection<Airline>> ListAllAsync()
         {
-            IEnumerable<Airline> airlines = _airlineList;
+            ICollection<Airline> airlines = _airlineList;
             return await Task.FromResult(airlines);
         }
 
-        public async Task<Airline> UpdateAirline(Airline airline)
+        public async Task<Airline> UpdateAsync(Airline entity)
         {
-            Airline EditedAirline = _airlineList.FirstOrDefault(a => a.Id == airline.Id);
+            Airline EditedAirline = _airlineList.FirstOrDefault(a => a.Id == entity.Id);
             _airlineList.Remove(EditedAirline);
             _airlineList.Add(EditedAirline);
             return await Task.FromResult(EditedAirline);
