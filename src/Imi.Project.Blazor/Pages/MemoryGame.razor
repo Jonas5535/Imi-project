@@ -1,7 +1,64 @@
 ﻿@page "/memory"
+@inject IMemoryService _memoryService
 
-<h1>Memory</h1>
+@if (!HasStarted)
+{
+	<div class="card text-center mx-auto w-25 memory-welcome-card">
+		<div class="card-title">
+			<h3 class="mt-3">Memory</h3>
+		</div>
+		<div class="card-body">
+			<p>
+				Op deze pagina kan je memory spelen met foto's van vliegtuigen. <br /> Klik op spelen om het spel te starten. <br /> Veel plezier 😀
+			</p>
+			<button class="btn" @onclick="GameInit">Spelen</button>
+		</div>
+	</div>
+}
+else
+{
+	<div>
+		<h1>Memory</h1>
+		<span>Aantal levens: @stats.Lives</span>
+	</div>
+
+	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
+		@foreach (var card in MemoryCards)
+		{
+			<MemoryCard Model="card"
+				OnCardClick="HandleSelection">
+			</MemoryCard>
+		}
+	</div>
+}
 
 @code {
+	private bool HasStarted = false;
+	private IEnumerable<MemoryCardModel> MemoryCards;
+	private StatsModel stats;
 
+	private void GameInit()
+	{
+		MemoryCards = _memoryService.GetMemoryCards();
+		stats = _memoryService.GetStats();
+		HasStarted = true;
+	}
+
+	public void HandleSelection(object item)
+	{
+		MemoryCardModel card = item as MemoryCardModel;
+		_memoryService.HandleSelection(card);
+		stats = _memoryService.GetStats();
+
+		if (stats.Lives == 0)
+		{
+			_memoryService.EndGame(false);
+		}
+
+		if (stats.RemainingPairs == 0)
+		{
+			_memoryService.EndGame(true);
+		}
+	}
 }
+

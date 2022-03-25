@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Imi.Project.Mobile.Pages.FilterPage"
+             BackgroundColor="White"
+             Title="Filters">
+
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
+                <Entry Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Picker Title="Kies een type" Style="{StaticResource StandardPicker}"
+                        ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}"></Picker>
+                <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}"
+                        ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
+                <Switch HorizontalOptions="StartAndExpand" Margin="15,5,0,0"></Switch>
+                <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
+                <Picker Title="Kies een luchthaven" Style="{StaticResource StandardPicker}"
+                        ItemsSource="{Binding AirportPickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                <Button Text="Filteren" Style="{StaticResource SquareButton}" Command="{Binding FilterCommand}"></Button>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

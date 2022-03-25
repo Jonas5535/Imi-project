@@ -1,49 +1,66 @@
 ﻿using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAircraftTypeService : IAircraftTypeService
+    public class MockAircraftTypeService : ICRUDService<AircraftType>
     {
-        private static ObservableCollection<AircraftType> _aircraftTypeList = new ObservableCollection<AircraftType>
+        private static ICollection<AircraftType> _aircraftTypeList = new List<AircraftType>
         {
-            new AircraftType{ Id = Guid.Parse("00000000-0000-0000-0000-000000000001"), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320", FirstFlight = DateTime.Parse("1987/02/22"), Lentgh = 37.57D, WingSpan = 34.10D, Height = 11.76D, EmptyWeight = 42400 },
-            new AircraftType{ Id = Guid.Parse("00000000-0000-0000-0000-000000000002"), Brand = "Boeing", Type = "787-8", ICAOCode = "B788", FirstFlight = DateTime.Parse("2009/12/15"), Lentgh = 56.7D, WingSpan = 60.1D, Height = 16.9D, EmptyWeight = 118000 },
-            new AircraftType{ Id = Guid.Parse("00000000-0000-0000-0000-000000000003"), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11", FirstFlight = DateTime.Parse("1990/01/10"), Lentgh = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
+            new AircraftType{ Id = Guid.Parse("4673e611-2495-4e0c-97e4-4abff97ae018"), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320",
+                FirstFlight = DateTime.Parse("1987/02/22"), Length = 37.57D, WingSpan = 34.10D, Height = 11.76D, EmptyWeight = 42400 },
+            new AircraftType{ Id = Guid.Parse("a0979f14-e054-4928-a581-ddddd5aa2e89"), Brand = "Boeing", Type = "787-8", ICAOCode = "B788",
+                FirstFlight = DateTime.Parse("2009/12/15"), Length = 56.7D, WingSpan = 60.1D, Height = 16.9D, EmptyWeight = 118000 },
+            new AircraftType{ Id = Guid.Parse("e911ec3f-613e-443e-8756-50765d9ac40d"), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11",
+                FirstFlight = DateTime.Parse("1990/01/10"), Length = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
         };
 
-        public async Task<AircraftType> AddAircraftType(AircraftType aircraftType)
+        public async Task<AircraftType> AddAsync(AircraftType entity)
         {
-            _aircraftTypeList.Add(aircraftType);
-            return await Task.FromResult(aircraftType);
+            _aircraftTypeList.Add(entity);
+            return await Task.FromResult(entity);
         }
 
-        public async Task<AircraftType> DeleteAircraftType(Guid aircraftTypeId)
+        public async Task<AircraftType> DeleteAsync(Guid id)
         {
-            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftTypeId);
+            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
             _aircraftTypeList.Remove(aircraftType);
             return await Task.FromResult(aircraftType);
         }
 
-        public async Task<AircraftType> GetAircraftTypeById(Guid aircraftTypeId)
+        public Task<AircraftType[]> GetAircraftTypes()
         {
-            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftTypeId);
+            throw new NotImplementedException();
+        }
+
+        public Task<Airline[]> GetAirlines()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<Airport[]> GetAirports()
+        {
+            throw new NotImplementedException();
+        }
+
+        public async Task<AircraftType> GetByIdAsync(Guid id)
+        {
+            AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
             return await Task.FromResult(aircraftType);
         }
 
-        public async Task<IEnumerable<AircraftType>> GetAircraftTypes()
+        public async Task<ICollection<AircraftType>> ListAllAsync()
         {
-            IEnumerable<AircraftType> aircraftTypes = _aircraftTypeList;
+            ICollection<AircraftType> aircraftTypes = _aircraftTypeList;
             return await Task.FromResult(aircraftTypes);
         }
 
-        public async Task<AircraftType> UpdateAircraftType(AircraftType aircraftType)
+        public async Task<AircraftType> UpdateAsync(AircraftType entity)
         {
-            AircraftType EditedAircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == aircraftType.Id);
+            AircraftType EditedAircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == entity.Id);
             _aircraftTypeList.Remove(EditedAircraftType);
             _aircraftTypeList.Add(EditedAircraftType);
             return await Task.FromResult(EditedAircraftType);
