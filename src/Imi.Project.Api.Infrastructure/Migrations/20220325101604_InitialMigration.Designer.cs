@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Imi.Project.Api.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20220306173316_InitialMigration")]
+    [Migration("20220325101604_InitialMigration")]
     partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,7 +18,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Aircraft", b =>
@@ -27,7 +27,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddedOn")
+                    b.Property<DateTime?>("AddedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<Guid>("AircraftTypeId")
@@ -49,14 +49,12 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<double?>("Latitude")
-                        .HasPrecision(8, 5)
-                        .HasColumnType("float(8)");
+                        .HasColumnType("float");
 
                     b.Property<double?>("Longitude")
-                        .HasPrecision(8, 5)
-                        .HasColumnType("float(8)");
+                        .HasColumnType("float");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Registration")
@@ -75,38 +73,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("7ad87259-0659-4139-9e61-00a6d965b529"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AircraftTypeId = new Guid("5551f78b-51f6-4abe-844a-bf0757f064f7"),
-                            AirlineId = new Guid("2060867d-622e-48af-b7f7-454fa0b95a1d"),
+                            Id = new Guid("d2645723-1915-47e9-b17a-10851f823fda"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7915),
+                            AircraftTypeId = new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"),
+                            AirlineId = new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"),
                             FirstSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7934),
                             Registration = "OO-SNJ"
                         },
                         new
                         {
-                            Id = new Guid("ab1e6496-f389-4b31-817c-f0eff8643b8b"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AircraftTypeId = new Guid("e8de0249-2860-4dc3-bad1-12a23787a730"),
-                            AirlineId = new Guid("c48b695d-0fb0-4867-ab89-21ae9a7f76c0"),
+                            Id = new Guid("5b6c4731-a504-43b0-a4d1-9e43dedf2488"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7952),
+                            AircraftTypeId = new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"),
+                            AirlineId = new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"),
                             FirstSeen = new DateTime(2020, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7957),
                             Registration = "OO-LOE"
                         },
                         new
                         {
-                            Id = new Guid("b08f5c5a-0273-4ed7-bd8e-fada782fed7c"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            AircraftTypeId = new Guid("0074cf33-a3dc-4aee-9eff-faf4b2662b52"),
-                            AirlineId = new Guid("6c841066-3347-4da3-90bb-2c9f2fab562a"),
+                            Id = new Guid("eb6e6d14-b5bc-4467-aa92-2c896cd9d1ea"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7964),
+                            AircraftTypeId = new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"),
+                            AirlineId = new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"),
                             FirstSeen = new DateTime(2020, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7968),
                             Registration = "D-ALCC"
                         });
                 });
@@ -132,7 +130,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddedOn")
+                    b.Property<DateTime?>("AddedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Brand")
@@ -141,15 +139,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("EmptyWeight")
-                        .HasPrecision(6)
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("FirstFlight")
                         .HasColumnType("datetime2");
 
                     b.Property<double?>("Height")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
                     b.Property<string>("ICAOCode")
                         .IsRequired()
@@ -158,10 +154,9 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsFixedLength(true);
 
                     b.Property<double?>("Length")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Type")
@@ -170,8 +165,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<double?>("WingSpan")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -180,43 +174,43 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5551f78b-51f6-4abe-844a-bf0757f064f7"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 622, DateTimeKind.Local).AddTicks(7483),
                             Brand = "Airbus",
                             EmptyWeight = 42400,
                             FirstFlight = new DateTime(1987, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 11.76,
                             ICAOCode = "A320",
                             Length = 37.57,
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(6654),
                             Type = "A320-200",
                             WingSpan = 34.100000000000001
                         },
                         new
                         {
-                            Id = new Guid("e8de0249-2860-4dc3-bad1-12a23787a730"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7571),
                             Brand = "Boeing",
                             EmptyWeight = 118000,
                             FirstFlight = new DateTime(2009, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 16.899999999999999,
                             ICAOCode = "B788",
                             Length = 56.700000000000003,
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7589),
                             Type = "787-8",
                             WingSpan = 60.100000000000001
                         },
                         new
                         {
-                            Id = new Guid("0074cf33-a3dc-4aee-9eff-faf4b2662b52"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7612),
                             Brand = "McDonnel Douglas",
                             EmptyWeight = 112748,
                             FirstFlight = new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 17.600000000000001,
                             ICAOCode = "MD11",
                             Length = 61.399999999999999,
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7616),
                             Type = "MD-11",
                             WingSpan = 51.700000000000003
                         });
@@ -228,7 +222,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddedOn")
+                    b.Property<DateTime?>("AddedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<int?>("FleetSize")
@@ -254,7 +248,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -269,38 +263,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("2060867d-622e-48af-b7f7-454fa0b95a1d"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(637),
                             FleetSize = 49,
                             HeadQuarter = "Diegem, België",
                             IATACode = "SN",
                             ICAOCode = "BEL",
                             MainAirport = "Brussels Airport",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(660),
                             Name = "Brussels Airlines"
                         },
                         new
                         {
-                            Id = new Guid("c48b695d-0fb0-4867-ab89-21ae9a7f76c0"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(676),
                             FleetSize = 32,
                             HeadQuarter = "Zaventem, België",
                             IATACode = "TB",
                             ICAOCode = "JAF",
                             MainAirport = "Brussels Airport",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(681),
                             Name = "TUI Fly"
                         },
                         new
                         {
-                            Id = new Guid("6c841066-3347-4da3-90bb-2c9f2fab562a"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(687),
                             FleetSize = 18,
                             HeadQuarter = "Frankfurt, Duitsland",
                             IATACode = "LH",
                             ICAOCode = "GEC",
                             MainAirport = "Frankfurt am Main",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(690),
                             Name = "Lufthansa Cargo"
                         });
                 });
@@ -311,7 +305,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("AddedOn")
+                    b.Property<DateTime?>("AddedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("City")
@@ -338,7 +332,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nchar(4)")
                         .IsFixedLength(true);
 
-                    b.Property<DateTime>("ModifiedOn")
+                    b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
@@ -361,42 +355,42 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("c7e75a35-a2e4-45cb-920f-c2d3f58073a5"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("a83fe1a7-5a0e-4671-b2c8-69ce4a99f88e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4152),
                             City = "Zaventem",
                             Country = "België",
                             ElevationAMSL = 56,
                             IATACode = "BRU",
                             ICAOCode = "EBBR",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4170),
                             Name = "Brussels Airport",
                             RunwayAmount = 3,
                             TerminalAmount = 1
                         },
                         new
                         {
-                            Id = new Guid("ae23c91d-dc3f-4076-bdf6-05c8043bcb89"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("2b4b3bbe-0adc-4056-b13c-5ada9595cf18"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4187),
                             City = "Nice",
                             Country = "Frankrijk",
                             ElevationAMSL = 4,
                             IATACode = "NCE",
                             ICAOCode = "LFMN",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4191),
                             Name = "Nice Côte d'Azur",
                             RunwayAmount = 2,
                             TerminalAmount = 3
                         },
                         new
                         {
-                            Id = new Guid("cd552240-5afe-4bb4-a4d1-0e6ef0b39110"),
-                            AddedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Id = new Guid("ea10f239-01a3-43e8-acf3-de0d808e855e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4199),
                             City = "Narita",
                             Country = "japan",
                             ElevationAMSL = 41,
                             IATACode = "NRT",
                             ICAOCode = "RJAA",
-                            ModifiedOn = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4203),
                             Name = "Tokyo Narita Intl. Airport",
                             RunwayAmount = 2,
                             TerminalAmount = 3

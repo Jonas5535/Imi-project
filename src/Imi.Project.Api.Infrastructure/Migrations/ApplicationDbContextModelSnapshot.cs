@@ -16,7 +16,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.14")
+                .HasAnnotation("ProductVersion", "5.0.15")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Imi.Project.Api.Core.Entities.Aircraft", b =>
@@ -47,12 +47,10 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<double?>("Latitude")
-                        .HasPrecision(8, 5)
-                        .HasColumnType("float(8)");
+                        .HasColumnType("float");
 
                     b.Property<double?>("Longitude")
-                        .HasPrecision(8, 5)
-                        .HasColumnType("float(8)");
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -73,38 +71,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("059fd843-b72a-489f-90ff-e4c9d420f5b1"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1520),
-                            AircraftTypeId = new Guid("88e02962-1877-42e6-ae7c-59d2a8d90bdb"),
-                            AirlineId = new Guid("b56e1c5d-ae9f-4720-9962-096ac38f8e99"),
+                            Id = new Guid("d2645723-1915-47e9-b17a-10851f823fda"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7915),
+                            AircraftTypeId = new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"),
+                            AirlineId = new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"),
                             FirstSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1538),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7934),
                             Registration = "OO-SNJ"
                         },
                         new
                         {
-                            Id = new Guid("4e91be6b-1477-47ac-8fc6-9777fb2bec5a"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1557),
-                            AircraftTypeId = new Guid("b12f19d6-fa95-41a3-b44e-e2c327b12da1"),
-                            AirlineId = new Guid("04a65fd0-ead5-49f9-bbde-9c93026d42bd"),
+                            Id = new Guid("5b6c4731-a504-43b0-a4d1-9e43dedf2488"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7952),
+                            AircraftTypeId = new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"),
+                            AirlineId = new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"),
                             FirstSeen = new DateTime(2020, 7, 13, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 8, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1560),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7957),
                             Registration = "OO-LOE"
                         },
                         new
                         {
-                            Id = new Guid("e1c0ab7f-58ff-43ba-981e-cef16440bf9f"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1569),
-                            AircraftTypeId = new Guid("1221259b-c372-466a-9162-0af0bcf2d78b"),
-                            AirlineId = new Guid("1f482fc7-44e4-4d22-b3be-13f883011a71"),
+                            Id = new Guid("eb6e6d14-b5bc-4467-aa92-2c896cd9d1ea"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7964),
+                            AircraftTypeId = new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"),
+                            AirlineId = new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"),
                             FirstSeen = new DateTime(2020, 7, 29, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             HasSpecialLivery = false,
                             LastSeen = new DateTime(2021, 7, 25, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 271, DateTimeKind.Local).AddTicks(1572),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(7968),
                             Registration = "D-ALCC"
                         });
                 });
@@ -139,15 +137,13 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(50)");
 
                     b.Property<int?>("EmptyWeight")
-                        .HasPrecision(6)
                         .HasColumnType("int");
 
                     b.Property<DateTime?>("FirstFlight")
                         .HasColumnType("datetime2");
 
                     b.Property<double?>("Height")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
                     b.Property<string>("ICAOCode")
                         .IsRequired()
@@ -156,8 +152,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .IsFixedLength(true);
 
                     b.Property<double?>("Length")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
@@ -168,8 +163,7 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                         .HasColumnType("nvarchar(30)");
 
                     b.Property<double?>("WingSpan")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("float(5)");
+                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
@@ -178,43 +172,43 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("88e02962-1877-42e6-ae7c-59d2a8d90bdb"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 264, DateTimeKind.Local).AddTicks(4601),
+                            Id = new Guid("660f2b42-dc0b-44b8-a974-69b812a8445e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 622, DateTimeKind.Local).AddTicks(7483),
                             Brand = "Airbus",
                             EmptyWeight = 42400,
                             FirstFlight = new DateTime(1987, 2, 22, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 11.76,
                             ICAOCode = "A320",
                             Length = 37.57,
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(564),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(6654),
                             Type = "A320-200",
                             WingSpan = 34.100000000000001
                         },
                         new
                         {
-                            Id = new Guid("b12f19d6-fa95-41a3-b44e-e2c327b12da1"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(1420),
+                            Id = new Guid("dc2adf58-3856-46d8-86ce-eb1ddd69c539"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7571),
                             Brand = "Boeing",
                             EmptyWeight = 118000,
                             FirstFlight = new DateTime(2009, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 16.899999999999999,
                             ICAOCode = "B788",
                             Length = 56.700000000000003,
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(1437),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7589),
                             Type = "787-8",
                             WingSpan = 60.100000000000001
                         },
                         new
                         {
-                            Id = new Guid("1221259b-c372-466a-9162-0af0bcf2d78b"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(1459),
+                            Id = new Guid("b4cb2d4b-3409-4b5a-a05f-4e5263e76989"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7612),
                             Brand = "McDonnel Douglas",
                             EmptyWeight = 112748,
                             FirstFlight = new DateTime(1990, 1, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Height = 17.600000000000001,
                             ICAOCode = "MD11",
                             Length = 61.399999999999999,
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(1464),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 628, DateTimeKind.Local).AddTicks(7616),
                             Type = "MD-11",
                             WingSpan = 51.700000000000003
                         });
@@ -267,38 +261,38 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b56e1c5d-ae9f-4720-9962-096ac38f8e99"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4527),
+                            Id = new Guid("e167eccc-4a5e-497c-895d-c0bf59d9c798"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(637),
                             FleetSize = 49,
                             HeadQuarter = "Diegem, België",
                             IATACode = "SN",
                             ICAOCode = "BEL",
                             MainAirport = "Brussels Airport",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4545),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(660),
                             Name = "Brussels Airlines"
                         },
                         new
                         {
-                            Id = new Guid("04a65fd0-ead5-49f9-bbde-9c93026d42bd"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4561),
+                            Id = new Guid("da740992-5345-408d-b06c-3c1d648c5d6b"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(676),
                             FleetSize = 32,
                             HeadQuarter = "Zaventem, België",
                             IATACode = "TB",
                             ICAOCode = "JAF",
                             MainAirport = "Brussels Airport",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4565),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(681),
                             Name = "TUI Fly"
                         },
                         new
                         {
-                            Id = new Guid("1f482fc7-44e4-4d22-b3be-13f883011a71"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4583),
+                            Id = new Guid("25e897f3-0407-436a-b57d-9fa37d3515fb"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(687),
                             FleetSize = 18,
                             HeadQuarter = "Frankfurt, Duitsland",
                             IATACode = "LH",
                             ICAOCode = "GEC",
                             MainAirport = "Frankfurt am Main",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(4587),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(690),
                             Name = "Lufthansa Cargo"
                         });
                 });
@@ -359,42 +353,42 @@ namespace Imi.Project.Api.Infrastructure.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("b6b302d0-e135-4516-901a-077c20a7ed74"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8189),
+                            Id = new Guid("a83fe1a7-5a0e-4671-b2c8-69ce4a99f88e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4152),
                             City = "Zaventem",
                             Country = "België",
                             ElevationAMSL = 56,
                             IATACode = "BRU",
                             ICAOCode = "EBBR",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8208),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4170),
                             Name = "Brussels Airport",
                             RunwayAmount = 3,
                             TerminalAmount = 1
                         },
                         new
                         {
-                            Id = new Guid("eb6091cf-7f90-4380-9fab-54075748ab6f"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8224),
+                            Id = new Guid("2b4b3bbe-0adc-4056-b13c-5ada9595cf18"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4187),
                             City = "Nice",
                             Country = "Frankrijk",
                             ElevationAMSL = 4,
                             IATACode = "NCE",
                             ICAOCode = "LFMN",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8228),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4191),
                             Name = "Nice Côte d'Azur",
                             RunwayAmount = 2,
                             TerminalAmount = 3
                         },
                         new
                         {
-                            Id = new Guid("290a3080-1d18-429b-a205-2b9d042a2372"),
-                            AddedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8236),
+                            Id = new Guid("ea10f239-01a3-43e8-acf3-de0d808e855e"),
+                            AddedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4199),
                             City = "Narita",
                             Country = "japan",
                             ElevationAMSL = 41,
                             IATACode = "NRT",
                             ICAOCode = "RJAA",
-                            ModifiedOn = new DateTime(2022, 3, 17, 13, 21, 27, 270, DateTimeKind.Local).AddTicks(8240),
+                            ModifiedOn = new DateTime(2022, 3, 25, 11, 16, 3, 629, DateTimeKind.Local).AddTicks(4203),
                             Name = "Tokyo Narita Intl. Airport",
                             RunwayAmount = 2,
                             TerminalAmount = 3
