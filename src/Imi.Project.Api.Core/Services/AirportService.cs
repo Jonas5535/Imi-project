@@ -24,7 +24,11 @@ namespace Imi.Project.Api.Core.Services
             Airport airportEntity = requestDto.MapToEntity();
 
             //TODO Add ErrorHandling
+
+            airportEntity.AddedOn = DateTime.Now;
+            airportEntity.ModifiedOn = DateTime.Now;
             await _airportRepository.AddAsync(airportEntity);
+
             AirportListResponseDto dto = airportEntity.MapToListDtoSingle();
             return dto;
         }
@@ -54,7 +58,10 @@ namespace Imi.Project.Api.Core.Services
             Airport airportEntity = requestDto.MapToEntity();
 
             //TODO Add errorhandling
+
+            airportEntity.ModifiedOn= DateTime.Now;
             await _airportRepository.UpdateAsync(airportEntity);
+
             AirportDetailResponseDto dto = airportEntity.MapToDetailDto();
             return dto;
         }

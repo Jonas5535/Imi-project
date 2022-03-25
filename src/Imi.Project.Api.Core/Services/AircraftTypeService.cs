@@ -24,7 +24,10 @@ namespace Imi.Project.Api.Core.Services
 
             //TODO Add Errorhandling
 
+            aircraftTypeEntity.AddedOn = DateTime.Now;
+            aircraftTypeEntity.ModifiedOn = DateTime.Now;
             await _aircraftTypeRepository.AddAsync(aircraftTypeEntity);
+
             AircraftTypeListResponseDto dto = aircraftTypeEntity.MapToListDtoSingle();
             return dto;
         }
@@ -56,7 +59,9 @@ namespace Imi.Project.Api.Core.Services
 
             //TODO Add errorhandling
 
+            aircraftTypeEntity.ModifiedOn = DateTime.Now;
             await _aircraftTypeRepository.UpdateAsync(aircraftTypeEntity);
+
             AircraftTypeDetailResponseDto dto = aircraftTypeEntity.MapToDetailDto();
             return dto;
         }

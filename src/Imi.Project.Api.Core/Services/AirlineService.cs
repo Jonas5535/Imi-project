@@ -24,7 +24,10 @@ namespace Imi.Project.Api.Core.Services
 
             //TODO Add errorhandling
 
+            airlineEntity.AddedOn = DateTime.Now;
+            airlineEntity.ModifiedOn = DateTime.Now;
             await _airlineRepository.AddAsync(airlineEntity);
+
             AirlineListResponseDto dto = airlineEntity.MapToListDtoSingle();
             return dto;
         }
@@ -55,7 +58,9 @@ namespace Imi.Project.Api.Core.Services
 
             //TODO Add errorhandling
 
+            airlineEntity.ModifiedOn = DateTime.Now;
             await _airlineRepository.UpdateAsync(airlineEntity);
+
             AirlineDetailResponseDto dto = airlineEntity.MapToDetailDto();
             return dto;
         }
