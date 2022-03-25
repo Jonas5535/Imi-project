@@ -27,7 +27,7 @@ namespace Imi.Project.Api.Controllers
         /// <param name="registration">Will filter on aircraft registration when not null</param>
         /// <param name="type">Will filter on aircrafttype when not null</param>
         /// <param name="airlineName">Will filter on airline when not null</param>
-        /// <param name="AirportName">Will filter on airport when not null. Currently broken</param>
+        /// <param name="AirportName">Will filter on airport when not null. <i>(Currently broken)</i></param>
         /// <response code="200">Succesfully returns a list of aircrafts</response>
         /// <response code="404">Cannot find any aircraft that match filter parameters</response>
         [HttpGet]
@@ -88,7 +88,7 @@ namespace Imi.Project.Api.Controllers
         ///         "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
         ///      ]
         ///     }
-        /// <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
         /// </remarks>
         /// <response code="201">Created a new aircraft</response>
         [HttpPost]
@@ -125,14 +125,15 @@ namespace Imi.Project.Api.Controllers
         ///         "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
         ///      ]
         ///     }
-        /// <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values <br/> <br/>
+        /// <i>Updating the airports of an aircraft is currently not possible because of a bug somewhere in the code</i>
         /// </remarks>
         /// <response code="200">Succesfully updated the aircraft</response>
         [HttpPut]
         public async Task<IActionResult> Put(AircraftRequestDto requestDto)
         {
             //TODO Add errorhandling
-
+            //TODO Fix bug with updating airport relations
             AircraftDetailResponseDto responseDto = await _aircraftService.UpdateAsync(requestDto);
             return Ok(responseDto);
         }

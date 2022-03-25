@@ -12,7 +12,7 @@
             <param name="registration">Will filter on aircraft registration when not null</param>
             <param name="type">Will filter on aircrafttype when not null</param>
             <param name="airlineName">Will filter on airline when not null</param>
-            <param name="AirportName">Will filter on airport when not null. Currently broken</param>
+            <param name="AirportName">Will filter on airport when not null. <i>(Currently broken)</i></param>
             <response code="200">Succesfully returns a list of aircrafts</response>
             <response code="404">Cannot find any aircraft that match filter parameters</response>
         </member>
@@ -46,7 +46,7 @@
                     "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
                  ]
                 }
-            <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
             </remarks>
             <response code="201">Created a new aircraft</response>
         </member>
@@ -75,7 +75,8 @@
                     "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
                  ]
                 }
-            <strong>Caution: This is purely an example, it might not work depending on current id values</strong>
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values <br/> <br/>
+            <i>Updating the airports of an aircraft is currently not possible because of a bug somewhere in the code</i>
             </remarks>
             <response code="200">Succesfully updated the aircraft</response>
         </member>
@@ -85,6 +86,70 @@
             </summary>
             <param name="id">The id of the aircraft you want to delete</param>
             <response code="200">Succesfully deleted the aircraft</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get">
+            <summary>
+            Gets a list of all aircrafttypes in the database
+            </summary>
+            <response code="200">Succesfully returns a list of aircrafttypes</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific aircrafttype
+            </summary>
+            <param name="id">The id of the aircrafttype that you want details of</param>
+            <response code="200">Succesfully returns the requested aircrafttype</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Post(Imi.Project.Api.Core.Dtos.AircraftType.AircraftTypeRequestDto)">
+            <summary>
+            Adds an aircrafttype to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "brand": "Boeing",
+                 "type": "777-300ER",
+                 "icaoCode": "B77W",
+                 "firstFlight": "2003-02-24",
+                 "length": 73.86,
+                 "wingSpan": 64.80,
+                 "height": 18.5,
+                 "emptyWeight": 167829
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this aircrafttype already exists
+            </remarks>
+            <response code="201">Created a new aircrafttype</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Put(Imi.Project.Api.Core.Dtos.AircraftType.AircraftTypeRequestDto)">
+            <summary>
+            Updates an existing aircrafttype
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "brand": "Boeing",
+                 "type": "777-300ER",
+                 "icaoCode": "B77W",
+                 "firstFlight": "2003-02-24T00:00:00",
+                 "length": 73.86,
+                 "wingSpan": 64.8,
+                 "height": 18.5,
+                 "emptyWeight": 167829,
+                 "id": "78b2795a-7ae5-437b-12e4-08da0e4b85b3"
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
+            </remarks>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Delete(System.Guid)">
+            <summary>
+            Deletes an aircrafttype from the database
+            </summary>
+            <param name="id">The id of the aircrafttype you want to delete</param>
+            <response code="200">Succesfully deleted the aircrafttype</response>
         </member>
         <member name="M:Imi.Project.Api.Extensions.ControllerExtensions.HandleErrors(Microsoft.AspNetCore.Mvc.ControllerBase,System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Models.ErrorMessage})">
             <summary>
