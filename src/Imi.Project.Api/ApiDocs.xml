@@ -151,6 +151,68 @@
             <param name="id">The id of the aircrafttype you want to delete</param>
             <response code="200">Succesfully deleted the aircrafttype</response>
         </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Get">
+            <summary>
+            Gets a list of all airlines in the database
+            </summary>
+            <response code="200">Succesfully returns a list of airlines</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific airline
+            </summary>
+            <param name="id">The id of the airline you want details of</param>
+            <response code="200">Succesfully returns an airline</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Post(Imi.Project.Api.Core.Dtos.Airline.AirlineRequestDto)">
+            <summary>
+            Adds a new airline to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "name": "Eurowings",
+                 "iataCode": "EW",
+                 "icaoCode": "EWG",
+                 "mainAirport": "Düsseldorf",
+                 "headQuarter": "Düsseldorf, Duitsland",
+                 "fleetSize": 94
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airline already exists.
+            </remarks>
+            <response code="201">Created a new aircrafttype</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Put(Imi.Project.Api.Core.Dtos.Airline.AirlineRequestDto)">
+            <summary>
+            Updates an existing airline
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
+                 "addedOn": "2022-03-26T14:43:14.2533153",
+                 "name": "Eurowings",
+                 "iataCode": "EW",
+                 "icaoCode": "EWG",
+                 "mainAirport": "Düsseldorf",
+                 "headQuarter": "Düsseldorf, Duitsland",
+                 "fleetSize": 94
+                }  
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
+            </remarks>
+            <response code="200">Succesfully updated the airline</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Delete(System.Guid)">
+            <summary>
+            Deletes an airline form the database
+            </summary>
+            <param name="id">The id of the airline you want to delete</param>
+            <response code="200">Succesfully deleted the airline</response>
+        </member>
         <member name="M:Imi.Project.Api.Extensions.ControllerExtensions.HandleErrors(Microsoft.AspNetCore.Mvc.ControllerBase,System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Models.ErrorMessage})">
             <summary>
             Throws the topmost error as a HttpResponse

@@ -1,5 +1,7 @@
 ﻿using Imi.Project.Api.Core.Dtos.Airline;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,41 +20,105 @@ namespace Imi.Project.Api.Controllers
             _airlineService = airlineService;
         }
 
+        /// <summary>
+        /// Gets a list of all airlines in the database
+        /// </summary>
+        /// <response code="200">Succesfully returns a list of airlines</response>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<AirlineListResponseDto> airlines = await _airlineService.ListAllAsync();
+            IEnumerable<AirlineListResponseDto> result = await _airlineService.ListAllAsync();
 
-            return Ok(airlines);
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Gets all details of a specific airline
+        /// </summary>
+        /// <param name="id">The id of the airline you want details of</param>
+        /// <response code="200">Succesfully returns an airline</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            AirlineDetailResponseDto aircraft = await _airlineService.GetByIdAsync(id);
-            //TODO Add errorhandling
+            AirlineDetailResponseDto result = await _airlineService.GetByIdAsync(id);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
 
-            return Ok(aircraft);
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Adds a new airline to the database
+        /// </summary>
+        /// <param name="requestDto"></param>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     {
+        ///      "name": "Eurowings",
+        ///      "iataCode": "EW",
+        ///      "icaoCode": "EWG",
+        ///      "mainAirport": "Düsseldorf",
+        ///      "headQuarter": "Düsseldorf, Duitsland",
+        ///      "fleetSize": 94
+        ///     }
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on if this airline already exists.
+        /// </remarks>
+        /// <response code="201">Created a new aircrafttype</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AirlineRequestDto requestDto)
         {
-            //TODO Add errorhandling
+            AirlineListResponseDto result = await _airlineService.AddAsync(requestDto);
 
-            AirlineListResponseDto responseDto = await _airlineService.AddAsync(requestDto);
-            return CreatedAtAction(nameof(Get), new { id = responseDto.Id}, responseDto);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id}, result);
         }
 
+        /// <summary>
+        /// Updates an existing airline
+        /// </summary>
+        /// <param name="requestDto"></param>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     {
+        ///      "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
+        ///      "addedOn": "2022-03-26T14:43:14.2533153",
+        ///      "name": "Eurowings",
+        ///      "iataCode": "EW",
+        ///      "icaoCode": "EWG",
+        ///      "mainAirport": "Düsseldorf",
+        ///      "headQuarter": "Düsseldorf, Duitsland",
+        ///      "fleetSize": 94
+        ///     }  
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
+        /// </remarks>
+        /// <response code="200">Succesfully updated the airline</response>
         [HttpPut]
         public async Task<IActionResult> Put(AirlineRequestDto requestDto)
         {
-            //TODO Add errorhandling
+            AirlineDetailResponseDto result = await _airlineService.UpdateAsync(requestDto);
 
-            AirlineDetailResponseDto responseDto = await _airlineService.UpdateAsync(requestDto);
-            return Ok(responseDto);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Deletes an airline form the database
+        /// </summary>
+        /// <param name="id">The id of the airline you want to delete</param>
+        /// <response code="200">Succesfully deleted the airline</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
