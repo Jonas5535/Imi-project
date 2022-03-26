@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Airport;
+﻿using Imi.Project.Api.Core.Dtos;
+using Imi.Project.Api.Core.Dtos.Airport;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
@@ -46,10 +47,18 @@ namespace Imi.Project.Api.Core.Services
             return dto;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<BaseDto> DeleteAsync(Guid id)
         {
-            //TODO Add check for existing id
+            BaseDto dto = new BaseDto();
+
+            if (!_airportRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No airport with id {id} exists");
+                return dto;
+            }
+
             await _airportRepository.DeleteAsync(id);
+            return dto;
         }
 
         public async Task<AirportDetailResponseDto> GetByIdAsync(Guid id)

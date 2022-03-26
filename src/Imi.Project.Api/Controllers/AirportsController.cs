@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Airport;
+﻿using Imi.Project.Api.Core.Dtos;
+using Imi.Project.Api.Core.Dtos.Airport;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -128,12 +129,17 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the airport you want to delete</param>
         /// <response code="200">Succesfully deleted the airport</response>
+        /// <response code="404">There is no airport with the given id</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            //TODO Add errorhandling
+            BaseDto result = await _airportService.DeleteAsync(id);
 
-            await _airportService.DeleteAsync(id);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
             return Ok();
         }
     }

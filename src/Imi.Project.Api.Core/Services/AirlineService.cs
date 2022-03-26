@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Dtos.Airline;
+﻿using Imi.Project.Api.Core.Dtos;
+using Imi.Project.Api.Core.Dtos.Airline;
 using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
@@ -32,10 +33,11 @@ namespace Imi.Project.Api.Core.Services
             return dto;
         }
 
-        public async Task DeleteAsync(Guid id)
+        public async Task<BaseDto> DeleteAsync(Guid id)
         {
             //TODO Add check for existing id
             await _airlineRepository.DeleteAsync(id);
+            return null;
         }
 
         public async Task<AirlineDetailResponseDto> GetByIdAsync(Guid id)
