@@ -23,7 +23,7 @@ namespace Imi.Project.Api.Core.Services
         public async Task<AirportListResponseDto> AddAsync(AirportRequestDto requestDto)
         {
             AirportListResponseDto dto = new AirportListResponseDto();
-            var airports = _airportRepository.GetAll();
+            IQueryable<Airport> airports = _airportRepository.GetAll();
 
             if (requestDto.Id != new Guid() && airports.Any(a => a.Id.Equals(requestDto.Id)))
             {
@@ -36,7 +36,7 @@ namespace Imi.Project.Api.Core.Services
                 dto.AddBadRequest($"Airport with ICAO code {requestDto.ICAOCode} already exists");
                 return dto;
             }
-            //TODO Check if AddedOn and ModifiedOn validation is needed
+
             Airport airportEntity = requestDto.MapToEntity();
             airportEntity.AddedOn = DateTime.Now;
             airportEntity.ModifiedOn = DateTime.Now;
@@ -55,11 +55,10 @@ namespace Imi.Project.Api.Core.Services
         public async Task<AirportDetailResponseDto> GetByIdAsync(Guid id)
         {
             AirportDetailResponseDto dto = new AirportDetailResponseDto();
-            var airports = _airportRepository.GetAll().Where(a => a.Id == id).SingleOrDefault();
 
-            if (airports == null)
+            if (!_airportRepository.GetAll().Any(a => a.Id.Equals(id)))
             {
-                dto.AddNotFound($"No airports found with id {id}");
+                dto.AddNotFound($"No airports with id {id} exists");
                 return dto;
             }
 
@@ -77,14 +76,30 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AirportDetailResponseDto> UpdateAsync(AirportRequestDto requestDto)
         {
+            AirportDetailResponseDto dto = new AirportDetailResponseDto();
+            IQueryable<Airport> airports = _airportRepository.GetAll();
+
+            if (!airports.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddNotFound($"No Airport with id {requestDto.Id} exists");
+                return dto;
+            }
+
+            // Checking if the user isn't changing the icao code to something that already exist,
+            // while making sure it doesn't throw an error because the user didn't change the icao code
+            Airport currentAirport = airports.Where(a => a.Id.Equals(requestDto.Id)).FirstOrDefault();
+            if (airports.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)) && requestDto.ICAOCode != currentAirport.ICAOCode)
+            {
+                dto.AddConflict($"Record with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+
             Airport airportEntity = requestDto.MapToEntity();
-
-            //TODO Add errorhandling
-
+            airportEntity.AddedOn = currentAirport.AddedOn;
             airportEntity.ModifiedOn = DateTime.Now;
             await _airportRepository.UpdateAsync(airportEntity);
 
-            AirportDetailResponseDto dto = airportEntity.MapToDetailDto();
+            dto = airportEntity.MapToDetailDto();
             return dto;
         }
     }

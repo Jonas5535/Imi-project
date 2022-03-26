@@ -5,8 +5,6 @@ namespace Imi.Project.Api.Core.Dtos.Airport
 {
     public class AirportRequestDto : BaseDto
     {
-        public DateTime? AddedOn { get; set; }
-
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         [MaxLength(200, ErrorMessage = "{0} must be shorter than or equal to {1} characters")]

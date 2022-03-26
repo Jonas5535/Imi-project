@@ -108,6 +108,8 @@ namespace Imi.Project.Api.Controllers
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
         /// </remarks>
         /// <response code="200">Succesfully updated the airport</response>
+        /// <response code="404">There is no airport with the given id</response>
+        /// <response code="409">There is already an airport with the given icao code in the database</response>
         [HttpPut]
         public async Task<IActionResult> Put(AirportRequestDto airportRequestDto)
         {

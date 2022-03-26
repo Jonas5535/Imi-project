@@ -51,7 +51,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Airport airportToBeUpdated = new Airport
                 {
                     Id = requestDto.Id,
-                    AddedOn = requestDto.AddedOn,
                     Name = requestDto.Name,
                     IATACode = requestDto.IATACode?.ToUpper(),
                     ICAOCode = requestDto.ICAOCode?.ToUpper(),
