@@ -71,6 +71,7 @@ namespace Imi.Project.Api.Controllers
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
         /// </remarks>
         /// <response code="201">Added a new airport</response>
+        /// <response code="400">Airport or id already exists</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AirportRequestDto airportRequestDto)

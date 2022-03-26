@@ -243,6 +243,7 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
             </remarks>
             <response code="201">Added a new airport</response>
+            <response code="400">Airport or id already exists</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AirportsController.Put(Imi.Project.Api.Core.Dtos.Airport.AirportRequestDto)">
             <summary>

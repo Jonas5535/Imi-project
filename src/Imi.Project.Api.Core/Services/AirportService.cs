@@ -22,15 +22,27 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AirportListResponseDto> AddAsync(AirportRequestDto requestDto)
         {
+            AirportListResponseDto dto = new AirportListResponseDto();
+            var airports = _airportRepository.GetAll();
+
+            if (requestDto.Id != new Guid() && airports.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddBadRequest($"Airport with id {requestDto.Id} already exists");
+                return dto;
+            }
+
+            if (airports.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)))
+            {
+                dto.AddBadRequest($"Airport with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+            //TODO Check if AddedOn and ModifiedOn validation is needed
             Airport airportEntity = requestDto.MapToEntity();
-
-            //TODO Add ErrorHandling
-
             airportEntity.AddedOn = DateTime.Now;
             airportEntity.ModifiedOn = DateTime.Now;
             await _airportRepository.AddAsync(airportEntity);
 
-            AirportListResponseDto dto = airportEntity.MapToListDtoSingle();
+            dto = airportEntity.MapToListDtoSingle();
             return dto;
         }
 
