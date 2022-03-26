@@ -220,6 +220,7 @@
             </summary>
             <param name="id">The id of the airport you want details of</param>
             <response code="200">Succesfully returns an airport</response>
+            <response code="404">There was no airport found with the given id</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AirportsController.Post(Imi.Project.Api.Core.Dtos.Airport.AirportRequestDto)">
             <summary>

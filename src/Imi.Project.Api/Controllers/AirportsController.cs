@@ -37,6 +37,7 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the airport you want details of</param>
         /// <response code="200">Succesfully returns an airport</response>
+        /// <response code="404">There was no airport found with the given id</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
