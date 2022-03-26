@@ -83,9 +83,6 @@ namespace Imi.Project.Api.Controllers
         ///      "hasSpecialLivery": true,
         ///      "firstSeen": "2020-07-13",
         ///      "lastSeen": "2022-02-11",
-        ///      "image": null,
-        ///      "longitude": null,
-        ///      "latitude": null,
         ///      "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
         ///      "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
         ///      "airportIds": [
@@ -124,9 +121,6 @@ namespace Imi.Project.Api.Controllers
         ///      "hasSpecialLivery": true,
         ///      "firstSeen": "2020-07-13",
         ///      "lastSeen": "2022-02-11",
-        ///      "image": null,
-        ///      "longitude": null,
-        ///      "latitude": null,
         ///      "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
         ///      "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
         ///      "airportIds": [
