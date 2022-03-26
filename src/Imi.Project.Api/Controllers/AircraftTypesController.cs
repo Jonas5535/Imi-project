@@ -104,6 +104,7 @@ namespace Imi.Project.Api.Controllers
         ///     }
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
         /// </remarks>
+        /// <response code="200">Succesfully updated the aircrafttype</response>
         [HttpPut]
         public async Task<IActionResult> Put(AircraftTypeRequestDto requestDto)
         {

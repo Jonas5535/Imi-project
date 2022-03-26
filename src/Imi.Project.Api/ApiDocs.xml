@@ -143,6 +143,7 @@
                 }
             <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
             </remarks>
+            <response code="200">Succesfully updated the aircrafttype</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Delete(System.Guid)">
             <summary>
@@ -195,12 +196,12 @@
                 {
                  "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
                  "addedOn": "2022-03-26T14:43:14.2533153",
-                 "name": "Eurowings",
-                 "iataCode": "EW",
-                 "icaoCode": "EWG",
+                 "name": "Eurostrings",
+                 "iataCode": "ES",
+                 "icaoCode": "ESG",
                  "mainAirport": "Düsseldorf",
                  "headQuarter": "Düsseldorf, Duitsland",
-                 "fleetSize": 94
+                 "fleetSize": 69
                 }  
             <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
             </remarks>
@@ -212,6 +213,72 @@
             </summary>
             <param name="id">The id of the airline you want to delete</param>
             <response code="200">Succesfully deleted the airline</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Get">
+            <summary>
+            Gets a list of all airports in the database
+            </summary>
+            <response code="200">Succesfully returns a list of airports</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific airport
+            </summary>
+            <param name="id">The id of the airport you want details of</param>
+            <response code="200">Succesfully returns an airport</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Post(Imi.Project.Api.Core.Dtos.Airport.AirportRequestDto)">
+            <summary>
+            Adds a new airport to the database
+            </summary>
+            <param name="airportRequestDto"></param>
+            <remarks>
+            Sample request:
+                
+                {
+                 "name": "Vienna intl. Airport",
+                 "iataCode": "VIE",
+                 "icaoCode": "LOWW",
+                 "elevationAMSL": 183,
+                 "runwayAmount": 2,
+                 "terminalAmount": 3,
+                 "country": "Oostenrijk",
+                 "city": "Schwechat"
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
+            </remarks>
+            <response code="201">Added a new airport</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Put(Imi.Project.Api.Core.Dtos.Airport.AirportRequestDto)">
+            <summary>
+            Updates an existing airport
+            </summary>
+            <param name="airportRequestDto"></param>
+            <remarks>
+            Sample request:
+                
+                {
+                 "id": "3d19d53a-f6ef-43e9-4a2b-08da0f33c9b4",
+                 "addedOn": "2022-03-26T15:20:31.8787268+01:00",
+                 "name": "Vienna intl. Airport",
+                 "iataCode": "VUE",
+                 "icaoCode": "LOLL",
+                 "elevationAMSL": 183,
+                 "runwayAmount": 2,
+                 "terminalAmount": 3,
+                 "country": "Oostenrijk",
+                 "city": "Schwechat"
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
+            </remarks>
+            <response code="200">Succesfully updated the airport</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Delete(System.Guid)">
+            <summary>
+            Deletes an airport from the database
+            </summary>
+            <param name="id">The id of the airport you want to delete</param>
+            <response code="200">Succesfully deleted the airport</response>
         </member>
         <member name="M:Imi.Project.Api.Extensions.ControllerExtensions.HandleErrors(Microsoft.AspNetCore.Mvc.ControllerBase,System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Models.ErrorMessage})">
             <summary>

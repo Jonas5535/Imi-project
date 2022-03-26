@@ -1,5 +1,7 @@
 ﻿using Imi.Project.Api.Core.Dtos.Airport;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Extensions;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,10 @@ namespace Imi.Project.Api.Controllers
             _airportService = airportService;
         }
 
+        /// <summary>
+        /// Gets a list of all airports in the database
+        /// </summary>
+        /// <response code="200">Succesfully returns a list of airports</response>
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -26,32 +32,98 @@ namespace Imi.Project.Api.Controllers
             return Ok(airports);
         }
 
+        /// <summary>
+        /// Gets all details of a specific airport
+        /// </summary>
+        /// <param name="id">The id of the airport you want details of</param>
+        /// <response code="200">Succesfully returns an airport</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
-            AirportDetailResponseDto airport = await _airportService.GetByIdAsync(id);
-            //TODO Add errorhandling
+            AirportDetailResponseDto result = await _airportService.GetByIdAsync(id);
 
-            return Ok(airport);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Adds a new airport to the database
+        /// </summary>
+        /// <param name="airportRequestDto"></param>
+        /// <remarks>
+        /// Sample request:
+        ///     
+        ///     {
+        ///      "name": "Vienna intl. Airport",
+        ///      "iataCode": "VIE",
+        ///      "icaoCode": "LOWW",
+        ///      "elevationAMSL": 183,
+        ///      "runwayAmount": 2,
+        ///      "terminalAmount": 3,
+        ///      "country": "Oostenrijk",
+        ///      "city": "Schwechat"
+        ///     }
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
+        /// </remarks>
+        /// <response code="201">Added a new airport</response>
         [HttpPost]
+        [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AirportRequestDto airportRequestDto)
         {
-            //TODO Add errorhandling
-            AirportListResponseDto responseDto = await _airportService.AddAsync(airportRequestDto);
-            return CreatedAtAction(nameof(Get), new { id = responseDto.Id }, responseDto);
+            AirportListResponseDto result = await _airportService.AddAsync(airportRequestDto);
+
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
+        /// <summary>
+        /// Updates an existing airport
+        /// </summary>
+        /// <param name="airportRequestDto"></param>
+        /// <remarks>
+        /// Sample request:
+        ///     
+        ///     {
+        ///      "id": "3d19d53a-f6ef-43e9-4a2b-08da0f33c9b4",
+        ///      "addedOn": "2022-03-26T15:20:31.8787268+01:00",
+        ///      "name": "Vienna intl. Airport",
+        ///      "iataCode": "VUE",
+        ///      "icaoCode": "LOLL",
+        ///      "elevationAMSL": 183,
+        ///      "runwayAmount": 2,
+        ///      "terminalAmount": 3,
+        ///      "country": "Oostenrijk",
+        ///      "city": "Schwechat"
+        ///     }
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
+        /// </remarks>
+        /// <response code="200">Succesfully updated the airport</response>
         [HttpPut]
         public async Task<IActionResult> Put(AirportRequestDto airportRequestDto)
         {
-            //TODO Add errorhandling
-            AirportDetailResponseDto responseDto = await _airportService.UpdateAsync(airportRequestDto);
+            AirportDetailResponseDto result = await _airportService.UpdateAsync(airportRequestDto);
 
-            return Ok(responseDto);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            return Ok(result);
         }
 
+        /// <summary>
+        /// Deletes an airport from the database
+        /// </summary>
+        /// <param name="id">The id of the airport you want to delete</param>
+        /// <response code="200">Succesfully deleted the airport</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

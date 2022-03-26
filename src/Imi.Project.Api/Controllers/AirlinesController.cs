@@ -91,12 +91,12 @@ namespace Imi.Project.Api.Controllers
         ///     {
         ///      "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
         ///      "addedOn": "2022-03-26T14:43:14.2533153",
-        ///      "name": "Eurowings",
-        ///      "iataCode": "EW",
-        ///      "icaoCode": "EWG",
+        ///      "name": "Eurostrings",
+        ///      "iataCode": "ES",
+        ///      "icaoCode": "ESG",
         ///      "mainAirport": "Düsseldorf",
         ///      "headQuarter": "Düsseldorf, Duitsland",
-        ///      "fleetSize": 94
+        ///      "fleetSize": 69
         ///     }  
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
         /// </remarks>
