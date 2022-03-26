@@ -1,5 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Aircraft;
-using Imi.Project.Api.Core.Dtos.Airport;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -59,7 +58,7 @@ namespace Imi.Project.Api.Core.Mapping
             {
                 Id = aircraftEntity.Id,
                 Registration = aircraftEntity.Registration,
-                HasSpecialLivery= aircraftEntity.HasSpecialLivery,
+                HasSpecialLivery = aircraftEntity.HasSpecialLivery,
                 FirstSeen = aircraftEntity.FirstSeen,
                 LastSeen = aircraftEntity.LastSeen,
                 Image = aircraftEntity.Image,

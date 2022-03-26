@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Api.Core.Dtos.Airport
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AirportRequestDto : BaseDto
     {

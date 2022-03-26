@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Airline;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
@@ -78,7 +78,7 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return CreatedAtAction(nameof(Get), new { id = result.Id}, result);
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
         }
 
         /// <summary>

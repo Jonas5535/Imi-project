@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Api.Core.Dtos.AircraftType
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftTypeRequestDto : BaseDto
     {

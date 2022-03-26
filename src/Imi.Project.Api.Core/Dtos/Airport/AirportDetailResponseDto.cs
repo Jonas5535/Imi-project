@@ -1,4 +1,4 @@
-﻿namespace Imi.Project.Api.Core.Dtos.Airport
+﻿namespace Imi.Project.Api.Core.Dtos
 {
     public class AirportDetailResponseDto : BaseDto
     {

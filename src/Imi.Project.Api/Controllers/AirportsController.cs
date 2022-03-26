@@ -1,5 +1,4 @@
 ﻿using Imi.Project.Api.Core.Dtos;
-using Imi.Project.Api.Core.Dtos.Airport;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;

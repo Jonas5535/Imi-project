@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Imi.Project.Api.Core.Dtos.Airline
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AirlineListResponseDto : BaseDto
     {

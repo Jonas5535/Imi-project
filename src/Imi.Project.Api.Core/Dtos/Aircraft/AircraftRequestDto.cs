@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Api.Core.Dtos.Aircraft
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftRequestDto : BaseDto
     {
