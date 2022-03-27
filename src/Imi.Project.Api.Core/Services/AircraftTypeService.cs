@@ -55,9 +55,22 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<BaseDto> DeleteAsync(Guid id)
         {
-            //TODO Check if id exists
+            BaseDto dto = new BaseDto();
+
+            if (!_aircraftTypeRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No aircraftType with id {id} exists");
+                return dto;
+            }
+
+            if (_aircraftRepository.GetAll().Any(a => a.AircraftTypeId.Equals(id)))
+            {
+                dto.AddBadRequest("Cannot delete this aircrafttype because there are still aircraft coupled to it. Please uncouple all coupled aircrafts first.");
+                return dto;
+            }
+            
             await _aircraftTypeRepository.DeleteAsync(id);
-            return null;
+            return dto;
         }
 
         public async Task<AircraftTypeDetailResponseDto> GetByIdAsync(Guid id)
