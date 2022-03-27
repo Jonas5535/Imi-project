@@ -191,7 +191,6 @@
             
                 {
                  "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
-                 "addedOn": "2022-03-26T14:43:14.2533153",
                  "name": "Eurostrings",
                  "iataCode": "ES",
                  "icaoCode": "ESG",
@@ -202,6 +201,8 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
             </remarks>
             <response code="200">Succesfully updated the airline</response>
+            <response code="404">There is no airline with the given id</response>
+            <response code="409">There is already an airport with the given icao code in the database</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AirlinesController.Delete(System.Guid)">
             <summary>
@@ -257,7 +258,6 @@
                 
                 {
                  "id": "3d19d53a-f6ef-43e9-4a2b-08da0f33c9b4",
-                 "addedOn": "2022-03-26T15:20:31.8787268+01:00",
                  "name": "Vienna intl. Airport",
                  "iataCode": "VUE",
                  "icaoCode": "LOLL",

@@ -104,7 +104,7 @@ namespace Imi.Project.Api.Core.Services
 
             // Checking if the user isn't changing the icao code to something that already exist,
             // while making sure it doesn't throw an error because the user didn't change the icao code
-            Airport currentAirport = airports.Where(a => a.Id.Equals(requestDto.Id)).FirstOrDefault();
+            Airport currentAirport = airports.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
             if (airports.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)) && requestDto.ICAOCode != currentAirport.ICAOCode)
             {
                 dto.AddConflict($"Record with ICAO code {requestDto.ICAOCode} already exists");

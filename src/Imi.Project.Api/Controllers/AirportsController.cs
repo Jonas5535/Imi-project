@@ -95,7 +95,6 @@ namespace Imi.Project.Api.Controllers
         ///     
         ///     {
         ///      "id": "3d19d53a-f6ef-43e9-4a2b-08da0f33c9b4",
-        ///      "addedOn": "2022-03-26T15:20:31.8787268+01:00",
         ///      "name": "Vienna intl. Airport",
         ///      "iataCode": "VUE",
         ///      "icaoCode": "LOLL",

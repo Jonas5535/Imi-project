@@ -24,7 +24,7 @@ namespace Imi.Project.Api.Core.Services
             AirlineListResponseDto dto = new AirlineListResponseDto();
             IQueryable<Airline> airlines = _airlineRepository.GetAll();
 
-            if (requestDto.Id !=  new Guid() && airlines.Any(a => a.Id.Equals(requestDto.Id)))
+            if (requestDto.Id != new Guid() && airlines.Any(a => a.Id.Equals(requestDto.Id)))
             {
                 dto.AddBadRequest($"Airline with id {requestDto.Id} already exists");
                 return dto;
@@ -76,14 +76,30 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AirlineDetailResponseDto> UpdateAsync(AirlineRequestDto requestDto)
         {
+            AirlineDetailResponseDto dto = new AirlineDetailResponseDto();
+            IQueryable<Airline> airlines = _airlineRepository.GetAll();
+
+            if (!airlines.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddNotFound($"No airline with id {requestDto.Id} exists");
+                return dto;
+            }
+
+            // Checking if the user isn't changing the icao code to something that already exist,
+            // while making sure it doesn't throw an error because the user didn't change the icao code
+            Airline currentAirline = airlines.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
+            if (airlines.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)) && requestDto.ICAOCode != currentAirline.ICAOCode)
+            {
+                dto.AddConflict($"Record with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+
             Airline airlineEntity = requestDto.MapToEntity();
-
-            //TODO Add errorhandling
-
+            airlineEntity.AddedOn = currentAirline.AddedOn;
             airlineEntity.ModifiedOn = DateTime.Now;
             await _airlineRepository.UpdateAsync(airlineEntity);
 
-            AirlineDetailResponseDto dto = airlineEntity.MapToDetailDto();
+            dto = airlineEntity.MapToDetailDto();
             return dto;
         }
     }

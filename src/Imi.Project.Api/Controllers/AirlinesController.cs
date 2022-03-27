@@ -93,7 +93,6 @@ namespace Imi.Project.Api.Controllers
         /// 
         ///     {
         ///      "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
-        ///      "addedOn": "2022-03-26T14:43:14.2533153",
         ///      "name": "Eurostrings",
         ///      "iataCode": "ES",
         ///      "icaoCode": "ESG",
@@ -104,6 +103,8 @@ namespace Imi.Project.Api.Controllers
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
         /// </remarks>
         /// <response code="200">Succesfully updated the airline</response>
+        /// <response code="404">There is no airline with the given id</response>
+        /// <response code="409">There is already an airport with the given icao code in the database</response>
         [HttpPut]
         public async Task<IActionResult> Put(AirlineRequestDto requestDto)
         {
