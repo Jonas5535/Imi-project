@@ -5,6 +5,7 @@ using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Api.Core.Services
@@ -41,15 +42,23 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AirlineDetailResponseDto> GetByIdAsync(Guid id)
         {
+            AirlineDetailResponseDto dto = new AirlineDetailResponseDto();
+
+            if (!_airlineRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No airlines with id {id} exist");
+                return dto;
+            }
+
             Airline result = await _airlineRepository.GetByIdAsync(id);
-            AirlineDetailResponseDto dto = result.MapToDetailDto();
+            dto = result.MapToDetailDto();
             return dto;
         }
 
         public async Task<IEnumerable<AirlineListResponseDto>> ListAllAsync()
         {
             IEnumerable<Airline> result = await _airlineRepository.ListAllAsync();
-            IEnumerable<AirlineListResponseDto> dtos = result.MapToListDto();
+            IEnumerable<AirlineListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
             return dtos;
         }
 

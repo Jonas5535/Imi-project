@@ -74,7 +74,7 @@ namespace Imi.Project.Api.Core.Services
 
             if (!_airportRepository.GetAll().Any(a => a.Id.Equals(id)))
             {
-                dto.AddNotFound($"No airports with id {id} exists");
+                dto.AddNotFound($"No airports with id {id} exist");
                 return dto;
             }
 

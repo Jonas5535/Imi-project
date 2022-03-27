@@ -37,10 +37,12 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the airline you want details of</param>
         /// <response code="200">Succesfully returns an airline</response>
+        /// <response code="404">There was no airline found with the given id</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
             AirlineDetailResponseDto result = await _airlineService.GetByIdAsync(id);
+
             if (!result.IsSucces())
             {
                 return this.HandleErrors(result.GetErrors());

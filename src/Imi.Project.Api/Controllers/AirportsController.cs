@@ -27,9 +27,9 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<AirportListResponseDto> airports = await _airportService.ListAllAsync();
+            IEnumerable<AirportListResponseDto> result = await _airportService.ListAllAsync();
 
-            return Ok(airports);
+            return Ok(result);
         }
 
         /// <summary>

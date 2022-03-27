@@ -158,6 +158,7 @@
             </summary>
             <param name="id">The id of the airline you want details of</param>
             <response code="200">Succesfully returns an airline</response>
+            <response code="404">There was no airline found with the given id</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AirlinesController.Post(Imi.Project.Api.Core.Dtos.AirlineRequestDto)">
             <summary>
