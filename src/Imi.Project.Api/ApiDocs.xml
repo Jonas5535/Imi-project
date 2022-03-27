@@ -93,7 +93,7 @@
             </summary>
             <param name="id">The id of the aircrafttype that you want details of</param>
             <response code="200">Succesfully returns the requested aircrafttype</response>
-            <response code="404">There wa no aircrafttype found with the given id</response>
+            <response code="404">There was no aircrafttype found with the given id</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Post(Imi.Project.Api.Core.Dtos.AircraftTypeRequestDto)">
             <summary>
@@ -116,6 +116,7 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on if this aircrafttype already exists
             </remarks>
             <response code="201">Created a new aircrafttype</response>
+            <response code="400">Aircrafttype or id already exists</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Put(Imi.Project.Api.Core.Dtos.AircraftTypeRequestDto)">
             <summary>

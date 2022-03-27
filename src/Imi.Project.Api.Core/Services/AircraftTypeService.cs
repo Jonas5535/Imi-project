@@ -21,15 +21,33 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AircraftTypeListResponseDto> AddAsync(AircraftTypeRequestDto requestDto)
         {
+            AircraftTypeListResponseDto dto = new AircraftTypeListResponseDto();
+            IQueryable<AircraftType> types = _aircraftTypeRepository.GetAll();
+
+            if (requestDto.Id != new Guid() && types.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddBadRequest($"Aircrafttype with id {requestDto.Id} already exists");
+                return dto;
+            }
+
+            if (types.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)))
+            {
+                dto.AddBadRequest($"Aircrafttype with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+
+            if (requestDto.FirstFlight > DateTime.Today)
+            {
+                dto.AddBadRequest($"The date of the first flight cannot be later than {DateTime.Today.ToShortDateString()}");
+                return dto;
+            }
+
             AircraftType aircraftTypeEntity = requestDto.MapToEntity();
-
-            //TODO Add Errorhandling
-
             aircraftTypeEntity.AddedOn = DateTime.Now;
             aircraftTypeEntity.ModifiedOn = DateTime.Now;
             await _aircraftTypeRepository.AddAsync(aircraftTypeEntity);
 
-            AircraftTypeListResponseDto dto = aircraftTypeEntity.MapToListDtoSingle();
+            dto = aircraftTypeEntity.MapToListDtoSingle();
             return dto;
         }
 

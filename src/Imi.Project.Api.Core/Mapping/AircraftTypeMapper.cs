@@ -51,7 +51,6 @@ namespace Imi.Project.Api.Core.Mapping
                 AircraftType aircraftTypeToBeUpdated = new AircraftType
                 {
                     Id = requestDto.Id,
-                    AddedOn = requestDto.AddedOn,
                     Brand = requestDto.Brand,
                     Type = requestDto.Type?.ToUpper(),
                     ICAOCode = requestDto.ICAOCode?.ToUpper(),

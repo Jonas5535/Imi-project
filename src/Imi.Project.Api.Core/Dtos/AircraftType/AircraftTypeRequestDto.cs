@@ -23,7 +23,7 @@ namespace Imi.Project.Api.Core.Dtos
         [MaxLength(4, ErrorMessage = "{0} must be {1} characters long")]
         public string ICAOCode { get; set; }
 
-        [Required(ErrorMessage = "{0} is required")] //TODO Check if data annotation is needed
+        [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Date)]
         public DateTime? FirstFlight { get; set; }
 
