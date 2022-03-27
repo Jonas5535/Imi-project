@@ -13,10 +13,12 @@ namespace Imi.Project.Api.Core.Services
     public class AircraftTypeService : IAircraftTypeService
     {
         private readonly IAircraftTypeRepository _aircraftTypeRepository;
+        private readonly IAircraftRepository _aircraftRepository;
 
-        public AircraftTypeService(IAircraftTypeRepository aircraftTypeRepository)
+        public AircraftTypeService(IAircraftTypeRepository aircraftTypeRepository, IAircraftRepository aircraftRepository)
         {
             _aircraftTypeRepository = aircraftTypeRepository;
+            _aircraftRepository = aircraftRepository;
         }
 
         public async Task<AircraftTypeListResponseDto> AddAsync(AircraftTypeRequestDto requestDto)
@@ -83,14 +85,36 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AircraftTypeDetailResponseDto> UpdateAsync(AircraftTypeRequestDto requestDto)
         {
+            AircraftTypeDetailResponseDto dto = new AircraftTypeDetailResponseDto();
+            IQueryable<AircraftType> types = _aircraftTypeRepository.GetAll();
+
+            if (!types.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddNotFound($"No aircrafttype with id {requestDto.Id} exists");
+                return dto;
+            }
+
+            // Checking if the user isn't changing the icao code to something that already exist,
+            // while making sure it doesn't throw an error because the user didn't change the icao code
+            AircraftType currentType = types.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
+            if (types.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)) && requestDto.ICAOCode != currentType.ICAOCode)
+            {
+                dto.AddConflict($"Record with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+
+            if (requestDto.FirstFlight > DateTime.Today)
+            {
+                dto.AddBadRequest($"The date of the first flight cannot be later than {DateTime.Today.ToShortDateString()}");
+                return dto;
+            }
+
             AircraftType aircraftTypeEntity = requestDto.MapToEntity();
-
-            //TODO Add errorhandling
-
+            aircraftTypeEntity.AddedOn = currentType.AddedOn;
             aircraftTypeEntity.ModifiedOn = DateTime.Now;
             await _aircraftTypeRepository.UpdateAsync(aircraftTypeEntity);
 
-            AircraftTypeDetailResponseDto dto = aircraftTypeEntity.MapToDetailDto();
+            dto = aircraftTypeEntity.MapToDetailDto();
             return dto;
         }
     }

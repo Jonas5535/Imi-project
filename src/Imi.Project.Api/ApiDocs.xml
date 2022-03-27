@@ -116,7 +116,7 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on if this aircrafttype already exists
             </remarks>
             <response code="201">Created a new aircrafttype</response>
-            <response code="400">Aircrafttype or id already exists</response>
+            <response code="400">The user added invalid information in the request</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Put(Imi.Project.Api.Core.Dtos.AircraftTypeRequestDto)">
             <summary>
@@ -127,6 +127,7 @@
             Sample request:
             
                 {
+                 "id": "78b2795a-7ae5-437b-12e4-08da0e4b85b3"
                  "brand": "Boeing",
                  "type": "777-300ER",
                  "icaoCode": "B77W",
@@ -135,11 +136,13 @@
                  "wingSpan": 64.8,
                  "height": 18.5,
                  "emptyWeight": 167829,
-                 "id": "78b2795a-7ae5-437b-12e4-08da0e4b85b3"
                 }
             <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
             </remarks>
             <response code="200">Succesfully updated the aircrafttype</response>
+            <response code="400">The date of the first flight is later than today</response>
+            <response code="404">There is no aircrafttype with the given id</response>
+            <response code="409">There is already an aircrafttype with the given icao code in the database</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Delete(System.Guid)">
             <summary>
