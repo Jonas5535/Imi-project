@@ -16,7 +16,27 @@ namespace Imi.Project.Api.Infrastructure.Data
                 new AircraftType{ Id = Guid.NewGuid(), Brand = "Boeing", Type = "787-8", ICAOCode = "B788", FirstFlight = DateTime.Parse("2009/12/15"),
                     Length = 56.7D, WingSpan = 60.1D, Height = 16.9D, EmptyWeight = 118000, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
                 new AircraftType{ Id = Guid.NewGuid(), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11", FirstFlight = DateTime.Parse("1990/01/10"),
-                    Length = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now }
+                    Length = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A220-100", ICAOCode = "BCS1", FirstFlight = DateTime.Parse("2013/09/16"),
+                    Length = 35.00D, WingSpan = 35.10D, Height = 11.50D, EmptyWeight = 35220, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A220-300", ICAOCode = "BCS3", FirstFlight = DateTime.Parse("2015/02/27"),
+                    Length = 38.71D, WingSpan = 35.10D, Height = 11.50D, EmptyWeight = 37080, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A319-100", ICAOCode = "A319", FirstFlight = DateTime.Parse("1995/08/25"),
+                    Length = 33.84D, WingSpan = 35.8D, Height = 11.76D, EmptyWeight = 40800, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A340-300", ICAOCode = "A343", FirstFlight = DateTime.Parse("1991/10/25"),
+                    Length = 63.66D, WingSpan = 60.3D, Height = 16.99D, EmptyWeight = 131000, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A350-1000", ICAOCode = "A35K", FirstFlight = DateTime.Parse("2016/11/24"),
+                    Length = 73.79D, WingSpan = 64.75D, Height = 17.08D, EmptyWeight = 155000, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Airbus", Type = "A380-800", ICAOCode = "A388", FirstFlight = DateTime.Parse("2005/04/27"),
+                    Length = 72.72D, WingSpan = 79.75D, Height = 24.09D, EmptyWeight = 277145, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Boeing", Type = "747-8", ICAOCode = "B748", FirstFlight = DateTime.Parse("2010/02/08"),
+                    Length = 76.3D, WingSpan = 68.4D, Height = 19.4D, EmptyWeight = 197100, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Boeing", Type = "777-300ER", ICAOCode = "B77W", FirstFlight = DateTime.Parse("2003/02/24"),
+                    Length = 73.86D, WingSpan = 64.80D, Height = 18.5D, EmptyWeight = 167829, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Boeing", Type = "787-9", ICAOCode = "B789", FirstFlight = DateTime.Parse("2013/09/17"),
+                    Length = 62.81D , WingSpan = 60.12D, Height = 17.02D, EmptyWeight = 128850, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
+                new AircraftType{ Id = Guid.NewGuid(), Brand = "Embraer", Type = "E190", ICAOCode = "E190", FirstFlight = DateTime.Parse("2004/03/12"),
+                    Length = 36.25D, WingSpan = 28.73D, Height = 10.57D, EmptyWeight = 27837, AddedOn = DateTime.Now, ModifiedOn = DateTime.Now },
             };
             #endregion
 
