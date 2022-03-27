@@ -128,6 +128,7 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the airport you want to delete</param>
         /// <response code="200">Succesfully deleted the airport</response>
+        /// <response code="400">Cannot remove because there are still aircraft coupled to this airport</response>
         /// <response code="404">There is no airport with the given id</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)

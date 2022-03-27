@@ -14,10 +14,12 @@ namespace Imi.Project.Api.Core.Services
     {
 
         private readonly IAirportRepository _airportRepository;
+        private readonly IAircraftRepository _aircraftRepository;
 
-        public AirportService(IAirportRepository airportRepository)
+        public AirportService(IAirportRepository airportRepository, IAircraftRepository aircraftRepository)
         {
             _airportRepository = airportRepository;
+            _aircraftRepository = aircraftRepository;
         }
 
         public async Task<AirportListResponseDto> AddAsync(AirportRequestDto requestDto)
@@ -56,6 +58,12 @@ namespace Imi.Project.Api.Core.Services
                 return dto;
             }
 
+            if (_aircraftRepository.GetAll().Any(a => a.SpottedAtAirports.Any(aa => aa.AirportId.Equals(id))))
+            {
+                dto.AddBadRequest("Cannot delete this airport because there are still aircraft coupled to it. Please uncouple all coupled aircrafts first.");
+                return dto;
+            }
+
             await _airportRepository.DeleteAsync(id);
             return dto;
         }
@@ -78,7 +86,8 @@ namespace Imi.Project.Api.Core.Services
         public async Task<IEnumerable<AirportListResponseDto>> ListAllAsync()
         {
             IEnumerable<Airport> result = await _airportRepository.ListAllAsync();
-            IEnumerable<AirportListResponseDto> dtos = result.MapToListDto();
+
+            IEnumerable<AirportListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
             return dtos;
         }
 
