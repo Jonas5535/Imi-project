@@ -179,6 +179,7 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on if this airline already exists.
             </remarks>
             <response code="201">Created a new aircrafttype</response>
+            <response code="400">Airline or id already exists</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AirlinesController.Put(Imi.Project.Api.Core.Dtos.AirlineRequestDto)">
             <summary>

@@ -21,15 +21,27 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AirlineListResponseDto> AddAsync(AirlineRequestDto requestDto)
         {
+            AirlineListResponseDto dto = new AirlineListResponseDto();
+            IQueryable<Airline> airlines = _airlineRepository.GetAll();
+
+            if (requestDto.Id !=  new Guid() && airlines.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddBadRequest($"Airline with id {requestDto.Id} already exists");
+                return dto;
+            }
+
+            if (airlines.Any(a => a.ICAOCode.Equals(requestDto.ICAOCode)))
+            {
+                dto.AddBadRequest($"Airline with ICAO code {requestDto.ICAOCode} already exists");
+                return dto;
+            }
+
             Airline airlineEntity = requestDto.MapToEntity();
-
-            //TODO Add errorhandling
-
             airlineEntity.AddedOn = DateTime.Now;
             airlineEntity.ModifiedOn = DateTime.Now;
             await _airlineRepository.AddAsync(airlineEntity);
 
-            AirlineListResponseDto dto = airlineEntity.MapToListDtoSingle();
+            dto = airlineEntity.MapToListDtoSingle();
             return dto;
         }
 
