@@ -40,16 +40,16 @@ namespace Imi.Project.Api.Controllers
                 !string.IsNullOrWhiteSpace(AirportName))
             {
                 IEnumerable<AircraftListResponseDto> result = await _aircraftService.FilterAsync(hasSpecialLivery, registration, type, airlineName, AirportName);
-                if (result.Any())
+                if (!result.IsSucces())
                 {
-                    return Ok(result);
+                    return this.HandleErrors(result.First().GetErrors());
                 }
-                return NotFound($"There were no aircrafts found that meet your search requirements");
+                return Ok(result);
             }
             else
             {
-                IEnumerable<AircraftListResponseDto> aircrafts = await _aircraftService.ListAllAsync();
-                return Ok(aircrafts);
+                IEnumerable<AircraftListResponseDto> result = await _aircraftService.ListAllAsync();
+                return Ok(result);
             }
         }
 

@@ -45,22 +45,40 @@ namespace Imi.Project.Api.Core.Services
         public async Task<IEnumerable<AircraftListResponseDto>> FilterAsync(bool? hasSpecialLivery, string registration, string type, string airlineName, string airportName)
         {
             IEnumerable<Aircraft> aircrafts = await _aircraftRepository.FilterAsync(hasSpecialLivery, registration, type, airlineName, airportName);
+
+            if (!aircrafts.Any())
+            {
+                List<AircraftListResponseDto> dtoList = new List<AircraftListResponseDto>();
+                AircraftListResponseDto dto = new AircraftListResponseDto();
+                dto.AddNotFound("There were no aircrafts found that meet your search requirements");
+                dtoList.Add(dto);
+                return dtoList;
+            }
+
             IEnumerable<AircraftListResponseDto> dtos = aircrafts.MapToListDto();
             return dtos;
         }
 
         public async Task<AircraftDetailResponseDto> GetByIdAsync(Guid id)
         {
-            //TODO Check if id exists
+            AircraftDetailResponseDto dto = new AircraftDetailResponseDto();
+
+            if (!_aircraftRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No aircrafts with id {id} exist");
+                return dto;
+            }
+
             Aircraft result = await _aircraftRepository.GetByIdAsync(id);
-            AircraftDetailResponseDto dto = result.MapToDetailDto();
+            dto = result.MapToDetailDto();
             return dto;
         }
 
         public async Task<IEnumerable<AircraftListResponseDto>> ListAllAsync()
         {
             IEnumerable<Aircraft> result = await _aircraftRepository.ListAllAsync();
-            IEnumerable<AircraftListResponseDto> dtos = result.MapToListDto();
+
+            IEnumerable<AircraftListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
             return dtos;
         }
 
