@@ -5,11 +5,11 @@ using System.ComponentModel.DataAnnotations;
 namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftRequestDto : BaseDto
-    {
-        public DateTime? AddedOn { get; set; }
-        
+    {   
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
+        [MinLength(6, ErrorMessage = "{0} must be {1} characters long")]
+        [MaxLength(6, ErrorMessage = "{0} must be {1} characters long")]
         public string Registration { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
@@ -38,7 +38,7 @@ namespace Imi.Project.Api.Core.Dtos
         [Required(ErrorMessage = "{0} is required")]
         public Guid AircraftTypeId { get; set; }
 
-        [Required(ErrorMessage = "{0} is required")]
+        [Required(ErrorMessage = "{0} is required")] //This does not trigger if you leave the list empty, because it only checks if the list exists
         public List<Guid> AirportIds { get; set; }
     }
 }

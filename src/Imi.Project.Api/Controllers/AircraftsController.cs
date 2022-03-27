@@ -35,7 +35,6 @@ namespace Imi.Project.Api.Controllers
         public async Task<IActionResult> Get([FromQuery] bool? hasSpecialLivery, [FromQuery] string registration, [FromQuery] string type,
             [FromQuery] string airlineName, [FromQuery] string AirportName)
         {
-            //TODO Check errorhandling
             if (hasSpecialLivery != null || !string.IsNullOrWhiteSpace(registration) || !string.IsNullOrWhiteSpace(type) || !string.IsNullOrWhiteSpace(airlineName) ||
                 !string.IsNullOrWhiteSpace(AirportName))
             {
@@ -58,6 +57,7 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the aircraft that you want details of</param>
         /// <response code="200">Succesfully returns an aircraft</response>
+        /// <response code="404">There was no aircraft found with the given id</response>
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(Guid id)
         {
@@ -93,6 +93,8 @@ namespace Imi.Project.Api.Controllers
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
         /// </remarks>
         /// <response code="201">Created a new aircraft</response>
+        /// <response code="400">The user added invalid information in the request.</response>
+        /// <response code="404">The user tried to couple an object that does not exist</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
         public async Task<IActionResult> Post(AircraftRequestDto requestDto)

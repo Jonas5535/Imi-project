@@ -22,6 +22,7 @@
             </summary>
             <param name="id">The id of the aircraft that you want details of</param>
             <response code="200">Succesfully returns an aircraft</response>
+            <response code="404">There was no aircraft found with the given id</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftsController.Post(Imi.Project.Api.Core.Dtos.AircraftRequestDto)">
             <summary>
@@ -46,6 +47,8 @@
             <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
             </remarks>
             <response code="201">Created a new aircraft</response>
+            <response code="400">The user added invalid information in the request.</response>
+            <response code="404">The user tries to couple an object that does not exist</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftsController.Put(Imi.Project.Api.Core.Dtos.AircraftRequestDto)">
             <summary>
@@ -252,7 +255,7 @@
                  "country": "Oostenrijk",
                  "city": "Schwechat"
                 }
-            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airport already exists
             </remarks>
             <response code="201">Added a new airport</response>
             <response code="400">Airport or id already exists</response>

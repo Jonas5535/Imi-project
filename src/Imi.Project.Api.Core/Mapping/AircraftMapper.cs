@@ -90,7 +90,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Aircraft aircraftToBeUpdated = new Aircraft
                 {
                     Id = requestDto.Id,
-                    AddedOn = requestDto.AddedOn,
                     Registration = requestDto.Registration?.ToUpper(),
                     HasSpecialLivery = requestDto.HasSpecialLivery,
                     FirstSeen = requestDto.FirstSeen.Date,

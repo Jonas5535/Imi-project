@@ -68,7 +68,7 @@ namespace Imi.Project.Api.Controllers
         ///      "country": "Oostenrijk",
         ///      "city": "Schwechat"
         ///     }
-        /// <strong>Caution:</strong> This is purely an example, it might not work depending on if this airprot already exists
+        /// <strong>Caution:</strong> This is purely an example, it might not work depending on if this airport already exists
         /// </remarks>
         /// <response code="201">Added a new airport</response>
         /// <response code="400">Airport or id already exists</response>
