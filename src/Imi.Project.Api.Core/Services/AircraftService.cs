@@ -148,16 +148,78 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<AircraftDetailResponseDto> UpdateAsync(AircraftRequestDto requestDto)
         {
-            Aircraft aircraftEntity = requestDto.MapToEntity();
+            AircraftDetailResponseDto dto = new AircraftDetailResponseDto();
+            IQueryable<Aircraft> aircrafts = _aircraftRepository.GetAll();
 
-            //TODO Add errorhandling
+            if (!aircrafts.Any(a => a.Id.Equals(requestDto.Id)))
+            {
+                dto.AddNotFound($"No aircraft with id {requestDto.Id} exists");
+                return dto;
+            }
+
+            // Checking if the user isn't changing the registration to something that already exist,
+            // while making sure it doesn't throw an error because the user didn't change the registration
+            Aircraft currentAircraft = aircrafts.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
+            if (aircrafts.Any(a => a.Registration.Equals(requestDto.Registration)) && requestDto.Registration != currentAircraft.Registration)
+            {
+                dto.AddConflict($"Record with registration {requestDto.Registration} already exists");
+                return dto;
+            }
+
+            if (requestDto.FirstSeen > DateTime.Today)
+            {
+                dto.AddBadRequest($"The date of first seen cannot be later than {DateTime.Today.ToShortDateString()}");
+                return dto;
+            }
+
+            if (requestDto.LastSeen < requestDto.FirstSeen || requestDto.LastSeen > DateTime.Today)
+            {
+                dto.AddBadRequest($"The date of last seen cannot be earlier than the date of first seen and cannot be later than {DateTime.Today.ToShortDateString()}");
+                return dto;
+            }
+
+            if (!_aircraftTypeRepository.GetAll().Any(a => a.Id.Equals(requestDto.AircraftTypeId)))
+            {
+                dto.AddNotFound($"The aircraftType with id {requestDto.AircraftTypeId} does not exist. Please select an existing aircrafttype");
+                return dto;
+            }
+
+            if (!_airlineRepository.GetAll().Any(a => a.Id.Equals(requestDto.AirlineId)))
+            {
+                dto.AddNotFound($"The airline with id {requestDto.AirlineId} does not exist. Please select an existing airline.");
+                return dto;
+            }
+
+            if (requestDto.AirportIds.Count == 0)
+            {
+                dto.AddBadRequest("The list of coupled airports cannot be empty, please select at least one airport");
+                return dto;
+            }
+
+            if (requestDto.AirportIds.Count != requestDto.AirportIds.Distinct().Count())
+            {
+                dto.AddBadRequest($"An airport cannot be added twice, please remove any duplicate airport ids from the list");
+                return dto;
+            }
+
+            foreach (var airportId in requestDto.AirportIds)
+            {
+                if (!_airportRepository.GetAll().Any(a => a.Id.Equals(airportId)))
+                {
+                    dto.AddNotFound($"The airport with id {airportId} does not exist. Please select existing airports");
+                    return dto;
+                }
+            }
+
+            Aircraft aircraftEntity = requestDto.MapToEntity();
+            aircraftEntity.AddedOn = currentAircraft.AddedOn;
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
             //TODO Fix bug where airports don't update
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
-            AircraftDetailResponseDto dto = aircraftEntity.MapToDetailDto();
+            dto = aircraftEntity.MapToDetailDto();
             return dto;
         }
     }

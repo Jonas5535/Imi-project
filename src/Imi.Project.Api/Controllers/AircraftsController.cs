@@ -93,7 +93,7 @@ namespace Imi.Project.Api.Controllers
         /// <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
         /// </remarks>
         /// <response code="201">Created a new aircraft</response>
-        /// <response code="400">The user added invalid information in the request.</response>
+        /// <response code="400">The user added invalid information in the request</response>
         /// <response code="404">The user tried to couple an object that does not exist</response>
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status201Created)]
@@ -118,7 +118,6 @@ namespace Imi.Project.Api.Controllers
         /// 
         ///     {
         ///      "id": "036f4398-a726-4839-4931-08da0e7ef24d",
-        ///      "addedOn": "2022-03-25T17:51:32.6092821",
         ///      "registration": "OO-ABC",
         ///      "hasSpecialLivery": true,
         ///      "firstSeen": "2020-07-13",
@@ -134,6 +133,9 @@ namespace Imi.Project.Api.Controllers
         /// <i>Updating the airports of an aircraft is currently not possible because of a bug somewhere in the code</i>
         /// </remarks>
         /// <response code="200">Succesfully updated the aircraft</response>
+        /// <response code="400">The user added invalid information in the request</response>
+        /// <response code="404">There is no aircraft with the given id or the user tried to couple an object that does not exist</response>
+        /// <response code="409">There is already an aircraft with the given registration</response>
         [HttpPut]
         public async Task<IActionResult> Put(AircraftRequestDto requestDto)
         {
