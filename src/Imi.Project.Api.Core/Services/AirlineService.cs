@@ -13,10 +13,12 @@ namespace Imi.Project.Api.Core.Services
     public class AirlineService : IAirlineService
     {
         private readonly IAirlineRepository _airlineRepository;
+        private readonly IAircraftRepository _aircraftRepository;
 
-        public AirlineService(IAirlineRepository airlineRepository)
+        public AirlineService(IAirlineRepository airlineRepository, IAircraftRepository aircraftRepository)
         {
             _airlineRepository = airlineRepository;
+            _aircraftRepository = aircraftRepository;
         }
 
         public async Task<AirlineListResponseDto> AddAsync(AirlineRequestDto requestDto)
@@ -47,9 +49,22 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<BaseDto> DeleteAsync(Guid id)
         {
-            //TODO Add check for existing id
+            BaseDto dto = new BaseDto();
+
+            if (!_airlineRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No airline with id {id} exists");
+                return dto;
+            }
+
+            if (_aircraftRepository.GetAll().Any(a => a.AirlineId.Equals(id)))
+            {
+                dto.AddBadRequest("Cannot delete this airline because there are still aircraft coupled to it. Please uncouple all coupled aircrafts first.");
+                return dto;
+            }
+
             await _airlineRepository.DeleteAsync(id);
-            return null;
+            return dto;
         }
 
         public async Task<AirlineDetailResponseDto> GetByIdAsync(Guid id)
