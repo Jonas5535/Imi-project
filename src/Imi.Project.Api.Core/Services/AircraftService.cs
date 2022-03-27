@@ -101,9 +101,16 @@ namespace Imi.Project.Api.Core.Services
 
         public async Task<BaseDto> DeleteAsync(Guid id)
         {
-            //TODO Check if id exists
+            BaseDto dto = new BaseDto();
+
+            if (!_aircraftRepository.GetAll().Any(a => a.Id.Equals(id)))
+            {
+                dto.AddNotFound($"No aircraft with id {id} exists");
+                return dto;
+            }
+
             await _aircraftRepository.DeleteAsync(id);
-            return null;
+            return dto;
         }
 
         public async Task<IEnumerable<AircraftListResponseDto>> FilterAsync(bool? hasSpecialLivery, string registration, string type, string airlineName, string airportName)

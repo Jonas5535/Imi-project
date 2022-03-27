@@ -155,12 +155,17 @@ namespace Imi.Project.Api.Controllers
         /// </summary>
         /// <param name="id">The id of the aircraft you want to delete</param>
         /// <response code="200">Succesfully deleted the aircraft</response>
+        /// <response code="404">There is no aircraft with the given id</response>
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
-            //TODO Add errorhandling
+            BaseDto result = await _aircraftService.DeleteAsync(id);
 
-            await _aircraftService.DeleteAsync(id);
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
             return Ok();
         }
     }

@@ -85,6 +85,7 @@
             </summary>
             <param name="id">The id of the aircraft you want to delete</param>
             <response code="200">Succesfully deleted the aircraft</response>
+            <response code="404">There is no aircraft with the given id</response>
         </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get">
             <summary>
