@@ -7,7 +7,7 @@ namespace Imi.Project.Api.Core.Dtos
     {
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
-        [MinLength(3, ErrorMessage = "{0} must be longer than {1} characters")]
+        [MinLength(3, ErrorMessage = "{0} must be longer than or equal to {1} characters")]
         [MaxLength(150, ErrorMessage = "{0} must be shorter than or equal to {1} characters")]
         public string Name { get; set; }
 
