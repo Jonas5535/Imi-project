@@ -65,6 +65,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
                 {
                     HandleMistake();
                 }
+                currentSelection.Clear();
             }
         }
 
@@ -89,9 +90,16 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             throw new NotImplementedException();
         }
 
-        private bool IsPair(List<MemoryCardModel> currentSelection)
+        private static bool IsPair(List<MemoryCardModel> currentSelection)
         {
-            throw new NotImplementedException();
+            if (currentSelection.FirstOrDefault().ActualImage == currentSelection.LastOrDefault().ActualImage)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static List<string> GetShuffledImages()
