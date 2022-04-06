@@ -1,9 +1,9 @@
-﻿using Imi.Project.Blazor.Core.CRUD.Models;
+﻿using Imi.Project.Blazor.Core.MemoryGame.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Imi.Project.Blazor.Core.CRUD.Services
+namespace Imi.Project.Blazor.Core.MemoryGame.Services
 {
     public class MemoryService : IMemoryService
     {
@@ -74,7 +74,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         }
 
         //ik retourneer void omdat ik op dit moment nog niet weet of ik iets zal retourneren of niet.
-        public void EndGame(bool isVictory) 
+        public void EndGame(bool isVictory)
         {
             throw new NotImplementedException();
         }

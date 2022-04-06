@@ -1,7 +1,7 @@
-﻿using Imi.Project.Blazor.Core.CRUD.Models;
+﻿using Imi.Project.Blazor.Core.MemoryGame.Models;
 using System.Collections.Generic;
 
-namespace Imi.Project.Blazor.Core.CRUD.Services
+namespace Imi.Project.Blazor.Core.MemoryGame.Services
 {
     public interface IMemoryService
     {

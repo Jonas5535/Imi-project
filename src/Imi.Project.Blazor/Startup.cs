@@ -1,5 +1,6 @@
 using Imi.Project.Blazor.Core.CRUD.Models;
 using Imi.Project.Blazor.Core.CRUD.Services;
+using Imi.Project.Blazor.Core.MemoryGame.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;

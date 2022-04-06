@@ -1,4 +1,4 @@
-﻿namespace Imi.Project.Blazor.Core.CRUD.Models
+﻿namespace Imi.Project.Blazor.Core.MemoryGame.Models
 {
     public class StatsModel
     {
