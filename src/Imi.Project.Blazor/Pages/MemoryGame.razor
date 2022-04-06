@@ -18,6 +18,10 @@ else
 				OnCardClick="HandleSelection">
 			</MemoryCard>
 		}
+		@if (IsBusy)
+	    {
+			<div class="overlay"></div>
+	    }
 	</div>
 }
 
@@ -25,6 +29,7 @@ else
 	private bool HasStarted = false;
 	private IEnumerable<MemoryCardModel> MemoryCards;
 	private StatsModel stats;
+	private bool IsBusy = false;
 
 	private void GameInit()
 	{
@@ -35,6 +40,7 @@ else
 
 	public async Task HandleSelection(object item)
 	{
+		IsBusy = true;
 		MemoryCardModel card = item as MemoryCardModel;
 		await _memoryService.HandleSelection(card);
 		stats = _memoryService.GetStats();
@@ -48,6 +54,7 @@ else
 		{
 			_memoryService.EndGame(true);
 		}
+		IsBusy = false;
 	}
 }
 
