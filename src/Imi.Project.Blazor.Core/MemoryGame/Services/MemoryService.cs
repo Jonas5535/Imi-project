@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.MemoryGame.Services
 {
@@ -50,7 +51,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             return cards;
         }
 
-        public void HandleSelection(MemoryCardModel card)
+        public async Task HandleSelection(MemoryCardModel card)
         {
             card.CurrentImage = card.ActualImage;
             currentSelection.Add(card);
@@ -63,7 +64,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
                 }
                 else
                 {
-                    HandleMistake();
+                    await HandleMistake(currentSelection);
                 }
                 currentSelection.Clear();
             }
@@ -80,9 +81,15 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             throw new NotImplementedException();
         }
 
-        private void HandleMistake()
+        private async Task HandleMistake(List<MemoryCardModel> currentSelection)
         {
-            throw new NotImplementedException();
+            MemoryCardModel firstCard = currentSelection.FirstOrDefault();
+            MemoryCardModel secondCard = currentSelection.LastOrDefault();
+
+            await Task.Delay(500); //Small delay so the player can see the cards that he selected before they turn around again
+            firstCard.CurrentImage = firstCard.CoverImage;
+            secondCard.CurrentImage = secondCard.CoverImage;
+            stats.Lives--;
         }
 
         private void HandleCorrect()

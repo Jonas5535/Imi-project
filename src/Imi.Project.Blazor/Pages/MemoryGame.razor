@@ -33,10 +33,10 @@ else
 		HasStarted = true;
 	}
 
-	public void HandleSelection(object item)
+	public async Task HandleSelection(object item)
 	{
 		MemoryCardModel card = item as MemoryCardModel;
-		_memoryService.HandleSelection(card);
+		await _memoryService.HandleSelection(card);
 		stats = _memoryService.GetStats();
 
 		if (stats.Lives == 0)
