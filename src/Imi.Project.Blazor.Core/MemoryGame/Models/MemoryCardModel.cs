@@ -5,5 +5,6 @@
         public string CoverImage { get; } = "/images/Memory/CardCover.png";
         public string ActualImage { get; set; }
         public string CurrentImage { get; set; }
+        public bool MatchFound { get; set; } = false;
     }
 }

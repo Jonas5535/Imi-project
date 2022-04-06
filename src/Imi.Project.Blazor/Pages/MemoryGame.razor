@@ -40,9 +40,19 @@ else
 
 	public async Task HandleSelection(object item)
 	{
-		IsBusy = true;
 		MemoryCardModel card = item as MemoryCardModel;
-		await _memoryService.HandleSelection(card);
+		if (!card.MatchFound)
+		{
+			IsBusy = true;
+			await _memoryService.HandleSelection(card);
+
+			CheckGameStatus();
+			IsBusy = false;
+		}
+	}
+
+	private void CheckGameStatus()
+	{
 		stats = _memoryService.GetStats();
 
 		if (stats.Lives == 0)
@@ -54,7 +64,6 @@ else
 		{
 			_memoryService.EndGame(true);
 		}
-		IsBusy = false;
 	}
 }
 

@@ -64,7 +64,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
                 }
                 else
                 {
-                    await HandleMistake(currentSelection);
+                    await HandleMistake();
                 }
                 currentSelection.Clear();
             }
@@ -81,7 +81,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             throw new NotImplementedException();
         }
 
-        private async Task HandleMistake(List<MemoryCardModel> currentSelection)
+        private async Task HandleMistake()
         {
             MemoryCardModel firstCard = currentSelection.FirstOrDefault();
             MemoryCardModel secondCard = currentSelection.LastOrDefault();
@@ -94,7 +94,12 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
 
         private void HandleCorrect()
         {
-            throw new NotImplementedException();
+            MemoryCardModel firstCard = currentSelection.FirstOrDefault();
+            MemoryCardModel secondCard = currentSelection.LastOrDefault();
+
+            firstCard.MatchFound = true;
+            secondCard.MatchFound = true;
+            stats.RemainingPairs--;
         }
 
         private static bool IsPair(List<MemoryCardModel> currentSelection)
