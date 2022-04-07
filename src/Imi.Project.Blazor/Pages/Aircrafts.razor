@@ -5,7 +5,9 @@
 <div class="row">
 	@foreach (var aircraft in aircrafts)
 	{
-		<ItemList Model="aircraft"></ItemList>
+		<ListItem Model="aircraft"
+			OnDeleteClicked="DeleteAsync">
+	</ListItem>
 	}
 </div>
 
@@ -20,5 +22,12 @@
 	public async Task ShowList()
 	{
 		aircrafts = await _AircraftService.ListAllAsync();
+	}
+
+	public async Task DeleteAsync(object item)
+	{
+		AircraftListItem aircraft = item as AircraftListItem;
+		await _AircraftService.DeleteAsync(aircraft.Id);
+		await ShowList();
 	}
 }
