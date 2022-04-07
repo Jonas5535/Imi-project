@@ -10,15 +10,23 @@
         public string Button2Content { get; set; }
         public bool IsShown { get; set; } = false;
 
-        public MessageBoxModel(string title, string message, bool button1Active = false, bool button2Active = false, string button1Content = null,
+        public MessageBoxModel()
+        {
+        }
+
+        public static MessageBoxModel Show(string title, string message, bool button1Active = false, string button1Content = null, bool button2Active = false,
             string button2Content = null)
         {
-            Title = title;
-            Message = message;
-            Button1Active = button1Active;
-            Button2Active = button2Active;
-            Button1Content = button1Content;
-            Button2Content = button2Content;
+            MessageBoxModel model = new();
+            
+            model.Title = title;
+            model.Message = message;
+            model.Button1Active = button1Active;
+            model.Button1Content = button1Content;
+            model.Button2Active = button2Active;
+            model.Button2Content = button2Content;
+            model.IsShown = true;
+            return model;
         }
     }
 }
