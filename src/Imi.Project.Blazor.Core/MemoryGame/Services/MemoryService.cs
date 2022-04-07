@@ -10,7 +10,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
     {
         private List<MemoryCardModel> currentSelection = new List<MemoryCardModel>();
 
-        private StatsModel stats = new StatsModel();
+        private StatsModel stats;
 
         private readonly static ICollection<string> _images = new List<string>
         {
@@ -70,8 +70,14 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             }
         }
 
-        public StatsModel GetStats()
+        public StatsModel GetStats(bool isNewGame)
         {
+            if (isNewGame)
+            {
+                stats = new StatsModel();
+                return stats;
+            }
+
             return stats;
         }
 

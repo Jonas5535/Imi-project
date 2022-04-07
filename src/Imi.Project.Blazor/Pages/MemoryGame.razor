@@ -26,7 +26,7 @@ else
 		{
 			<MessageboxCpt Model="messagebox"
 				OnButton1Click="RestartGame"
-				OnButton2Click="Quitgame">
+				OnButton2Click="CloseGame">
 			</MessageboxCpt>
 		}
 	</div>
@@ -42,7 +42,7 @@ else
 	private void GameInit()
 	{
 		MemoryCards = _memoryService.GetMemoryCards();
-		stats = _memoryService.GetStats();
+		stats = _memoryService.GetStats(true);
 		HasStarted = true;
 	}
 
@@ -64,14 +64,15 @@ else
 
 	}
 
-	public void Quitgame()
+	public void CloseGame()
 	{
-		
+		messagebox = new();
+		HasStarted = false;
 	}
 
 	private void CheckGameStatus()
 	{
-		stats = _memoryService.GetStats();
+		stats = _memoryService.GetStats(false);
 
 		if (stats.Lives == 0)
 		{

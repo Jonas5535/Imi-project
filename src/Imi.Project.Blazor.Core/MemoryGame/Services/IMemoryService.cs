@@ -8,7 +8,7 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
     {
         List<MemoryCardModel> GetMemoryCards();
         Task HandleSelection(MemoryCardModel card);
-        StatsModel GetStats();
+        StatsModel GetStats(bool isNewGame);
         MessageBox EndGame(bool isVictory);
     }
 }
