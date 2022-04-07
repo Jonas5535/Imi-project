@@ -75,10 +75,16 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             return stats;
         }
 
-        //ik retourneer void omdat ik op dit moment nog niet weet of ik iets zal retourneren of niet.
-        public void EndGame(bool isVictory)
+        public MessageBoxModel EndGame(bool isVictory)
         {
-            throw new NotImplementedException();
+            if (isVictory)
+            {
+                return MessageBoxModel.Show("Victory 🎉🎉🎉", "Proficiat, je hebt gewonnen!!!", true, "Opnieuw spelen", true, "Stoppen");
+            }
+            else
+            {
+                return MessageBoxModel.Show("Game over", "Je hebt helaas verloren. Volgende keer beter 👍", true, "opnieuw spelen", true, "Stoppen");
+            }
         }
 
         private async Task HandleMistake()
