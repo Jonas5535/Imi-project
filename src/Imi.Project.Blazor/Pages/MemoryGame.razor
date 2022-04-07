@@ -9,7 +9,8 @@ else
 {
 	<div>
 		<h1>Memory</h1>
-		<span>Aantal levens: <b>@stats.Lives</b></span>
+		<!--Placed in center so it is easier for the player to notice-->
+		<span class="font-size-larger justify-content-center d-flex">Aantal levens: <b>@stats.Lives</b></span> 
 	</div>
 	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
 		@foreach (var card in MemoryCards)
@@ -19,14 +20,14 @@ else
 			</MemoryCard>
 		}
 		@if (isBusy)
-	    {
+		{
 			<div class="overlay"></div>
-	    }
+		}
 		@if (messagebox.IsShown)
 		{
 			<MessageboxCpt Model="messagebox"
-				OnButton1Click="RestartGame"
-				OnButton2Click="CloseGame">
+				   OnButton1Click="RestartGame"
+				   OnButton2Click="CloseGame">
 			</MessageboxCpt>
 		}
 	</div>

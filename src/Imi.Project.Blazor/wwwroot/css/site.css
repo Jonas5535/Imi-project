@@ -117,6 +117,10 @@ app {
     box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
 }
 
+.font-size-larger{
+    font-size: larger;
+}
+
 .memory-card:hover {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
