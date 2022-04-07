@@ -1,5 +1,6 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListItem, AircraftItem> _AircraftService
+@inject ICRUDService<AircraftListItem, AircraftItem> _aircraftService
+@inject IJSRuntime _jsRuntime
 
 <h1>Vliegtuigen</h1>
 <div class="row">
@@ -21,13 +22,18 @@
 
 	public async Task ShowList()
 	{
-		aircrafts = await _AircraftService.ListAllAsync();
+		aircrafts = await _aircraftService.ListAllAsync();
 	}
 
 	public async Task DeleteAsync(object item)
 	{
-		AircraftListItem aircraft = item as AircraftListItem;
-		await _AircraftService.DeleteAsync(aircraft.Id);
-		await ShowList();
+		bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", "Ben je zeker dat je dit vliegtuig wilt verwijderen?");
+
+		if (confirmed)
+		{
+			AircraftListItem aircraft = item as AircraftListItem;
+			await _aircraftService.DeleteAsync(aircraft.Id);
+			await ShowList();
+		}
 	}
 }
