@@ -1,6 +1,6 @@
 ﻿namespace Imi.Project.Blazor.Core
 {
-    public class MessageBox
+    public class MessageBoxModel
     {
         public string Title { get; set; }
         public string Message { get; set; }
@@ -8,8 +8,9 @@
         public bool Button2Active { get; set; }
         public string Button1Content { get; set; }
         public string Button2Content { get; set; }
+        public bool IsShown { get; set; } = false;
 
-        public MessageBox(string title, string message, bool button1Active = false, bool button2Active = false, string button1Content = null,
+        public MessageBoxModel(string title, string message, bool button1Active = false, bool button2Active = false, string button1Content = null,
             string button2Content = null)
         {
             Title = title;

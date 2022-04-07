@@ -1,16 +1,22 @@
 ﻿<div class="messageBox-background"></div>
 <div class="card text-center messageBox">
 	<div class="card-title mt-3">
-		<h3>Game over</h3>
+		<h3>@Model.Title</h3>
 	</div>
 	<div class="card-body">
-		<p>Je hebt helaas verloren. Volgende keer beter. 👍</p>
-		<button class="btn">Opnieuw spelen</button>
-		<button class="btn">Stoppen</button>
+		<p>@Model.Message</p>
+		@if (Model.Button1Active)
+		{
+			<button class="btn">@Model.Button1Content</button>
+		}
+		@if (@Model.Button2Active)
+		{
+			<button class="btn">@Model.Button2Content</button>
+		}
 	</div>
 </div>
 
 @code {
 	[Parameter]
-	public Messagebox Model { get; set; }
+	public MessageBoxModel Model { get; set; }
 }
