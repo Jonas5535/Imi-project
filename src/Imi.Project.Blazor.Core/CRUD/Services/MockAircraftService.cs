@@ -49,12 +49,16 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 
         public Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            AircraftItem aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
+            if (aircraft == null) throw new ArgumentException("aircraft not found");
+            _aircrafts.Remove(aircraft);
+            return Task.CompletedTask;
         }
 
         public async Task<AircraftItem> GetByIdAsync(Guid id)
         {
             AircraftItem aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
+            if (aircraft == null) throw new ArgumentException("aircraft not found");
             aircraft.AircraftTypes = _aircraftTypes;
             aircraft.Airlines = _airlines;
             aircraft.Airports = _airports;
