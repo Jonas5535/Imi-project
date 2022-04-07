@@ -75,15 +75,15 @@ namespace Imi.Project.Blazor.Core.MemoryGame.Services
             return stats;
         }
 
-        public MessageBoxModel EndGame(bool isVictory)
+        public MessageBox EndGame(bool isVictory)
         {
             if (isVictory)
             {
-                return MessageBoxModel.Show("Victory 🎉🎉🎉", "Proficiat, je hebt gewonnen!!!", true, "Opnieuw spelen", true, "Stoppen");
+                return MessageBox.Show("Victory 🎉🎉", "Proficiat, je hebt gewonnen!!!", "Opnieuw spelen", true, "Stoppen");
             }
             else
             {
-                return MessageBoxModel.Show("Game over", "Je hebt helaas verloren. Volgende keer beter 👍", true, "opnieuw spelen", true, "Stoppen");
+                return MessageBox.Show("Game over", "Je hebt helaas verloren. Volgende keer beter 👍", "Opnieuw spelen", true, "Stoppen");
             }
         }
 

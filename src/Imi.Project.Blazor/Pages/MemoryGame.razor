@@ -24,7 +24,10 @@ else
 	    }
 		@if (messagebox.IsShown)
 		{
-			<Messagebox Model="messagebox"></Messagebox>
+			<MessageboxCpt Model="messagebox"
+				OnButton1Click="RestartGame"
+				OnButton2Click="Quitgame">
+			</MessageboxCpt>
 		}
 	</div>
 }
@@ -34,7 +37,7 @@ else
 	private IEnumerable<MemoryCardModel> MemoryCards;
 	private StatsModel stats;
 	private bool isBusy = false;
-	private MessageBoxModel messagebox = new();
+	private MessageBox messagebox = new();
 
 	private void GameInit()
 	{
@@ -54,6 +57,16 @@ else
 			CheckGameStatus();
 			isBusy = false;
 		}
+	}
+
+	public void RestartGame()
+	{
+
+	}
+
+	public void Quitgame()
+	{
+		
 	}
 
 	private void CheckGameStatus()
