@@ -1,0 +1,99 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
+             x:Class="Imi.Project.Mobile.Pages.AirportFormPage"
+             BackgroundColor="White"
+             Title="{Binding PageTitle}">
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Label Text="Naam" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: Brussels Airport" Style="{StaticResource StandardEntry}" Text="{Binding Name}" MaxLength="200" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding NameError}"
+                           IsVisible="{Binding NameError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="IATA code" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: BRU" Style="{StaticResource StandardEntry}" Text="{Binding IATACode}" MaxLength="3" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding IATACodeError}"
+                           IsVisible="{Binding IATACodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: EBBR" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding ICAOCodeError}"
+                           IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Hoogte AMSL" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 56" Style="{StaticResource StandardEntry}" Text="{Binding ElevationAMSL}" MaxLength="4" Keyboard="Numeric" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding ElevationAMSLError}"
+                           IsVisible="{Binding ElevationAMSLError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Landingsbanen" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 3" Style="{StaticResource StandardEntry}" Text="{Binding RunwayAmount}" MaxLength="2" Keyboard="Numeric" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding RunwayAmountError}"
+                           IsVisible="{Binding RunwayAmountError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Terminals" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 1" Style="{StaticResource StandardEntry}" Text="{Binding TerminalAmount}" MaxLength="2" Keyboard="Numeric" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding TerminalAmountError}"
+                           IsVisible="{Binding TerminalAmountError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Land" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: België" Style="{StaticResource StandardEntry}" Text="{Binding Country}" MaxLength="200" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding CountryError}"
+                           IsVisible="{Binding CountryError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Stad" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: Zaventem" Style="{StaticResource StandardEntry}" Text="{Binding City}" MaxLength="200">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding CityError}"
+                           IsVisible="{Binding CityError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAirportCommand}"></Button>
+                </StackLayout>
+            </ScrollView>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,7 +1,90 @@
 ﻿@page "/memory"
+@inject IMemoryService _memoryService
 
-<h1>Memory</h1>
+@if (!HasStarted)
+{
+	<MemoryWelcomeCard OnPlayButtonClick="GameInit"></MemoryWelcomeCard>
+}
+else
+{
+	<div>
+		<h1>Memory</h1>
+		<!--Placed in center so it is easier for the player to notice-->
+		<span class="font-size-larger justify-content-center d-flex">Aantal levens: <b>@stats.Lives</b></span> 
+	</div>
+	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
+		@foreach (var card in MemoryCards)
+		{
+			<MemoryCard Model="card"
+				OnCardClick="HandleSelection">
+			</MemoryCard>
+		}
+		@if (isBusy)
+		{
+			<div class="overlay"></div>
+		}
+		@if (messagebox.IsShown)
+		{
+			<MessageboxCpt Model="messagebox"
+				   OnButton1Click="RestartGame"
+				   OnButton2Click="CloseGame">
+			</MessageboxCpt>
+		}
+	</div>
+}
 
 @code {
+	private bool HasStarted = false;
+	private IEnumerable<MemoryCardModel> MemoryCards;
+	private StatsModel stats;
+	private bool isBusy = false;
+	private MessageBox messagebox = new();
 
+	private void GameInit()
+	{
+		MemoryCards = _memoryService.GetMemoryCards();
+		stats = _memoryService.GetStats(true);
+		HasStarted = true;
+	}
+
+	public async Task HandleSelection(object item)
+	{
+		MemoryCardModel card = item as MemoryCardModel;
+		if (!card.MatchFound)
+		{
+			isBusy = true;
+			await _memoryService.HandleSelection(card);
+
+			CheckGameStatus();
+			isBusy = false;
+		}
+	}
+
+	public void RestartGame()
+	{
+		GameInit();
+		messagebox = new();
+	}
+
+	public void CloseGame()
+	{
+		messagebox = new();
+		HasStarted = false;
+	}
+
+	private void CheckGameStatus()
+	{
+		stats = _memoryService.GetStats(false);
+
+		if (stats.Lives == 0)
+		{
+			messagebox = _memoryService.EndGame(false);
+		}
+
+		if (stats.RemainingPairs == 0)
+		{
+			messagebox = _memoryService.EndGame(true);
+		}
+	}
 }
+

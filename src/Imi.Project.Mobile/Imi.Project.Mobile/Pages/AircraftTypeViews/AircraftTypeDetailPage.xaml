@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodels="clr-namespace:Imi.Project.Mobile.ViewModels"
+             x:DataType="viewmodels:AircraftTypeDetailViewModel"
+             x:Class="Imi.Project.Mobile.Pages.AircraftTypeDetailPage"
+             BackgroundColor="White"
+             Title="Details">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Command="{Binding DeleteAircraftTypeCommand}"/>
+        <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary" Command="{Binding EditAircraftTypeCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <ScrollView>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="65"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="50"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label Text="Merk" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="0" Grid.Column="0"></Label>
+                <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="0" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Brand}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.Type}" Style="{StaticResource ContentLabel}" Grid.Row="1" Grid.Column="1"></Label>
+                <Label Text="ICAO Code" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
+                <Label Text="Eerste vlucht" Style="{StaticResource TitleLabel}" Grid.Row="2" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.ICAOCode}" Style="{StaticResource ContentLabel}" Margin="25,0,0,0" Grid.Row="3" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.FirstFlight, Converter={StaticResource ShortDate}}"
+                       Style="{StaticResource ContentLabel}" Margin="0,0,10,0" Grid.Row="3" Grid.Column="1"></Label>
+                <Label Text="Lengte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="4" Grid.Column="0"></Label>
+                <Label Text="Spanwijdte" Style="{StaticResource TitleLabel}" Grid.Row="4" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Length, Converter={StaticResource AddParameter}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Margin="25,0,0,0" Grid.Row="5" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.WingSpan, Converter={StaticResource AddParameter}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Grid.Row="5" Grid.Column="1"></Label>
+                <Label Text="Hoogte" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="6" Grid.Column="0"></Label>
+                <Label Text="Leeggewicht" Style="{StaticResource TitleLabel}" Grid.Row="6" Grid.Column="1"></Label>
+                <Label Text="{Binding ShownType.Height, Converter={StaticResource AddParameter}, ConverterParameter=m}" Style="{StaticResource ContentLabel}"
+                       Margin="25,0,0,0" Grid.Row="7" Grid.Column="0"></Label>
+                <Label Text="{Binding ShownType.EmptyWeight, Converter={StaticResource AddParameter}, ConverterParameter=kg}" Style="{StaticResource ContentLabel}"
+                       Grid.Row="7" Grid.Column="1"></Label>
+            </Grid>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

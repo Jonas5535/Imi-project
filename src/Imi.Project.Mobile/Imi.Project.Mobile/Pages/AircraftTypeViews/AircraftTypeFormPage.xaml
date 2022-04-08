@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
+             x:Class="Imi.Project.Mobile.Pages.AircraftTypeFormPage"
+             BackgroundColor="White"
+             Title="{Binding PageTitle}">
+
+    <ContentPage.Content>
+        <AbsoluteLayout>
+            <ScrollView AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <StackLayout>
+                    <Label Text="Merk" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: Boeing" Style="{StaticResource StandardEntry}" Text="{Binding Brand}" MaxLength="50" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeSentence</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding BrandError}"
+                           IsVisible="{Binding BrandError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Type" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 787-8" Style="{StaticResource StandardEntry}" Text="{Binding Type}" MaxLength="30" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding TypeError}"
+                           IsVisible="{Binding TypeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="ICAO code" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: B788" Style="{StaticResource StandardEntry}" Text="{Binding ICAOCode}" MaxLength="4" ReturnType="Next">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
+                    </Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding ICAOCodeError}"
+                           IsVisible="{Binding ICAOCodeError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Eerste vlucht" Style="{StaticResource FormLabel}"></Label>
+                    <DatePicker Style="{StaticResource StandardDatePicker}" MinimumDate="01/01/1900" MaximumDate="{x:Static sys:DateTime.Today}"
+                                Date="{Binding FirstFlight}" Margin="10,0,100,0"></DatePicker>
+                    <Label Text="Lengte" Style="{StaticResource FormLabel}"></Label>
+                    <!--No numeric keyboard on this entry because it blocks the comma and dot keys, so you can't enter decimal numbers-->
+                    <Entry Placeholder="bv: 37,57" Style="{StaticResource StandardEntry}" Text="{Binding Length}" MaxLength="6" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding LengthError}"
+                           IsVisible="{Binding LengthError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Spanwijdte" Style="{StaticResource FormLabel}"></Label>
+                    <!--No numeric keyboard on this entry because it blocks the comma and dot keys, so you can't enter decimal numbers-->
+                    <Entry Placeholder="bv: 34,10" Style="{StaticResource StandardEntry}" Text="{Binding WingSpan}" MaxLength="6" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding WingSpanError}"
+                           IsVisible="{Binding WingSpanError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Hoogte" Style="{StaticResource FormLabel}"></Label>
+                    <!--No numeric keyboard on this entry because it blocks the comma and dot keys, so you can't enter decimal numbers-->
+                    <Entry Placeholder="bv: 11,76" Style="{StaticResource StandardEntry}" Text="{Binding Height}" MaxLength="6" ReturnType="Next"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding HeightError}"
+                           IsVisible="{Binding HeightError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Label Text="Leeggewicht" Style="{StaticResource FormLabel}"></Label>
+                    <Entry Placeholder="bv: 42400" Style="{StaticResource StandardEntry}" Text="{Binding EmptyWeight}" MaxLength="6" Keyboard="Numeric"></Entry>
+                    <Label Style="{StaticResource ErrorMessage}"
+                           Text="{Binding EmptyWeightError}"
+                           IsVisible="{Binding EmptyWeightError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
+                    <Button Text="Opslaan" Style="{StaticResource SquareButton}" Command="{Binding SaveAircraftTypeCommand}"></Button>
+                </StackLayout>
+            </ScrollView>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>

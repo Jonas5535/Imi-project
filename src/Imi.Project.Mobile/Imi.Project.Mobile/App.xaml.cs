@@ -1,4 +1,10 @@
-﻿using Imi.Project.Mobile.Views;
+﻿using FluentValidation;
+using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Models;
+using Imi.Project.Mobile.Core.Domain.Services;
+using Imi.Project.Mobile.Core.Domain.Services.Mocking;
+using Imi.Project.Mobile.Core.Domain.Validators;
+using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile
@@ -7,9 +13,19 @@ namespace Imi.Project.Mobile
     {
         public App()
         {
+            //register dependencies
+            FreshIOC.Container.Register<ICRUDService<Airline>, MockAirlineService>();
+            FreshIOC.Container.Register<ICRUDService<Airport>, MockAirportService>();
+            FreshIOC.Container.Register<ICRUDService<AircraftType>, MockAircraftTypeService>();
+            FreshIOC.Container.Register<ICRUDService<Aircraft>, MockAircraftService>();
+            FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
+            FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();
+            FreshIOC.Container.Register<IValidator<AircraftType>, AircraftTypeValidator>();
+            FreshIOC.Container.Register<IValidator<Aircraft>, AircraftValidator>();
+
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new FreshNavigationContainer(FreshPageModelResolver.ResolvePageModel<MainViewModel>());
 
             NavigationPage navigationPage = Current.MainPage as NavigationPage;
             navigationPage.BarBackgroundColor = Color.FromHex("#fdd31d");
