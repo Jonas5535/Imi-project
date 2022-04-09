@@ -2,18 +2,28 @@
 @inject ICRUDService<AircraftListItem, AircraftItem> _aircraftService
 @inject IJSRuntime _jsRuntime
 
-<h1>Vliegtuigen</h1>
-<div class="row">
-	@foreach (var aircraft in aircrafts)
-	{
-		<ListItem Model="aircraft"
-			OnDeleteClicked="DeleteAsync">
-	</ListItem>
-	}
-</div>
+@if (showDetails)
+{
+	<AircraftDetailView Model="aircraft"></AircraftDetailView>
+}
+else
+{
+	<h1>Vliegtuigen</h1>
+	<div class="row">
+		@foreach (var aircraft in aircrafts)
+		{
+			<ListItem Model="aircraft"
+				OnCardClicked="ShowDetails"
+				OnDeleteClicked="DeleteAsync">
+			</ListItem>
+		}
+	</div>
+}
 
 @code {
 	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
+	private AircraftItem aircraft;
+	private bool showDetails = false;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -23,6 +33,13 @@
 	public async Task ShowList()
 	{
 		aircrafts = await _aircraftService.ListAllAsync();
+	}
+
+	public async Task ShowDetails(object item)
+	{
+		AircraftListItem receivedModel = item as AircraftListItem;
+		aircraft = await _aircraftService.GetByIdAsync(receivedModel.Id);
+		showDetails = true;
 	}
 
 	public async Task DeleteAsync(object item)
