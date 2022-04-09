@@ -30,7 +30,7 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<ICRUDService<AircraftListItem, AircraftItem>, MockAircraftService>();
+            services.AddTransient<ICRUDService<AircraftListItem, Aircraft>, MockAircraftService>();
             services.AddTransient<IMemoryService, MemoryService>();
         }
 

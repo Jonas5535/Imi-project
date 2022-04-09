@@ -1,8 +1,8 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListItem, AircraftItem> _aircraftService
+@inject ICRUDService<AircraftListItem, Aircraft> _aircraftService
 @inject IJSRuntime _jsRuntime
 
-@if (!showDetails)
+@if (showDetails)
 {
 	<AircraftDetail Model="aircraft"></AircraftDetail>
 }
@@ -22,7 +22,7 @@ else
 
 @code {
 	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
-	private AircraftItem aircraft;
+	private Aircraft aircraft;
 	private bool showDetails = false;
 
 	protected override async Task OnInitializedAsync()

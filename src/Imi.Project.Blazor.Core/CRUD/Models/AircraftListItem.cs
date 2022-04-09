@@ -7,7 +7,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Models
         public Guid Id { get; set; }
         public string Image { get; set; }
         public string Registration { get; set; }
-        public string AircraftType { get; set; }
-        public string Airline { get; set; }
+        public AircraftType AircraftType { get; set; }
+        public Airline Airline { get; set; }
     }
 }
