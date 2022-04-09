@@ -1,8 +1,8 @@
 ﻿<div class="d-flex">
-	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left"></button>
+	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left" @onclick="e => OnBackClicked.InvokeAsync()"></button>
 	<h1 class="d-inline align-self-center mr-auto">Details</h1>
 	<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-pencil"></button>
-	<button class="btn btn-circle align-self-center mb-2 oi oi-trash"></button>
+	<button class="btn btn-circle align-self-center mb-2 oi oi-trash" @onclick="e => OnDeleteClicked.InvokeAsync()"></button>
 </div>
 
 <div class="row mt-4">
@@ -50,6 +50,10 @@
 @code {
 	[Parameter]
 	public Aircraft Model { get; set; }
+	[Parameter]
+	public EventCallback OnBackClicked { get; set; }
+	[Parameter]
+	public EventCallback OnDeleteClicked { get; set; }
 
 	private string ConvertBoolToYesNo()
 	{

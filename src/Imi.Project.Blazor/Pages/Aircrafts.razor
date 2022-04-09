@@ -4,7 +4,9 @@
 
 @if (showDetails)
 {
-	<AircraftDetail Model="aircraft"></AircraftDetail>
+	<AircraftDetail Model="aircraft"
+		OnBackClicked="GoBack">
+	</AircraftDetail>
 }
 else
 {
@@ -52,5 +54,10 @@ else
 			await _aircraftService.DeleteAsync(aircraft.Id);
 			await ShowList();
 		}
+	}
+
+	public void GoBack()
+	{
+		showDetails = false;
 	}
 }
