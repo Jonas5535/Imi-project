@@ -62,6 +62,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 
             aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId);
             aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId);
+            aircraft.Airports = new List<Airport>();
 
             foreach (var airportId in aircraft.AirportIds)
             {
