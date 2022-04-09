@@ -2,7 +2,7 @@
 @inject ICRUDService<AircraftListItem, AircraftItem> _aircraftService
 @inject IJSRuntime _jsRuntime
 
-@if (showDetails)
+@if (!showDetails)
 {
 	<AircraftDetailView Model="aircraft"></AircraftDetailView>
 }
