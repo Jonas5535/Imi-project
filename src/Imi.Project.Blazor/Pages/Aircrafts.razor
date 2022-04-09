@@ -5,7 +5,8 @@
 @if (showDetails)
 {
 	<AircraftDetail Model="aircraft"
-		OnBackClicked="GoBack">
+		OnBackClicked="GoBack"
+		OnDeleteClicked="DeleteAsync">
 	</AircraftDetail>
 }
 else
@@ -50,9 +51,15 @@ else
 
 		if (confirmed)
 		{
-			AircraftListItem aircraft = item as AircraftListItem;
-			await _aircraftService.DeleteAsync(aircraft.Id);
+			//AircraftListItem aircraft = item as AircraftListItem;
+			Guid id = (Guid)item;
+			await _aircraftService.DeleteAsync(id);
 			await ShowList();
+		}
+
+		if (showDetails)
+		{
+			GoBack();
 		}
 	}
 
