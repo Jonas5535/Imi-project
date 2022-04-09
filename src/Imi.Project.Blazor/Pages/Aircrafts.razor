@@ -51,7 +51,6 @@ else
 
 		if (confirmed)
 		{
-			//AircraftListItem aircraft = item as AircraftListItem;
 			Guid id = (Guid)item;
 			await _aircraftService.DeleteAsync(id);
 			await ShowList();
