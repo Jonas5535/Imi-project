@@ -60,6 +60,15 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
             if (aircraft == null) throw new ArgumentException("aircraft not found");
 
+            aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId);
+            aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId);
+
+            foreach (var airportId in aircraft.AirportIds)
+            {
+                Airport airport = _airports.FirstOrDefault(a => a.Id.Equals(airportId));
+                aircraft.Airports.Add(airport);
+            }
+
             return await Task.FromResult(aircraft);
         }
 
