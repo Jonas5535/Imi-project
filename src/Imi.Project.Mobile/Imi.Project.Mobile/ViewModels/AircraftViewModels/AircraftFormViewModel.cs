@@ -290,7 +290,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         private void SaveAircraftState()
         {
-            _currentAircraft.Registration = Registration;
+            _currentAircraft.Registration = Registration; //TODO Add .ToUpper()
             _currentAircraft.Airline = Airline;
             _currentAircraft.AircraftType = AircraftType;
             _currentAircraft.HasSpecialLivery = HasSpecialLivery;
