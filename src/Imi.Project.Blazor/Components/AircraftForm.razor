@@ -31,7 +31,7 @@
 	</div>
 	<div class="form-group">
 		<label for="specialLivery">Special livery:</label>
-		<InputCheckbox id="specialLivery" @bind-Value="Model.HasSpecialLivery" class="form-control w-35px"/>
+		<InputCheckbox id="specialLivery" @bind-Value="Model.HasSpecialLivery" class="form-control w-35px" />
 		<ValidationMessage For="@(() => Model.HasSpecialLivery)" />
 	</div>
 	<div class="form-group">
@@ -43,6 +43,16 @@
 		<label for="lastSeen">Laatst gezien:</label>
 		<InputDate id="lastSeen" @bind-Value="Model.LastSeen" class="form-control w-auto" />
 		<ValidationMessage For="@(() => Model.LastSeen)"></ValidationMessage>
+	</div>
+	<div class="form-group">
+		<label for="airport">Luchthavens:</label>
+		<Select id="airport" @onchange="SelectedAirportChanged" @On multiple class="form-control w-auto">
+			@foreach (var airport in Airports)
+			{
+				<option value="@airport.Value">@airport.Label</option>
+			}
+		</Select>
+		<ValidationMessage For="@(() => Model.AirlineId)" />
 	</div>
 </EditForm>
 
@@ -63,5 +73,11 @@
 	private void HandleValidSubmit()
 	{
 		OnSubmitClicked.InvokeAsync();
+	}
+
+	private void SelectedAirportChanged(ChangeEventArgs e)
+	{
+		Guid id = Guid.Parse((string)e.Value);
+		Model.AirportIds.Add(id);
 	}
 }
