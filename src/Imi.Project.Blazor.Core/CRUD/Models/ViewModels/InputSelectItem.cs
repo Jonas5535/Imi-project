@@ -1,8 +1,10 @@
-﻿namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
+﻿using System;
+
+namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 {
-    public class InputSelectItem // Check if needed
+    public class InputSelectItem
     {
-        public string Value { get; set; }
+        public Guid Value { get; set; }
         public string Label { get; set; }
     }
 }

@@ -7,6 +7,17 @@
 	<div class="form-group">
 		<label for="registration">Registratienummer:</label>
 		<InputText id="registration" @bind-Value="Model.Registration" class="form-control w-auto" />
+		<ValidationMessage For="@(() => Model.Registration)" />
+	</div>
+	<div class="form-group">
+		<label for="type">Type:</label>
+		<InputSelect id="type" @bind-Value="Model.AircraftTypeId" class="form-control w-auto">
+			@foreach (var type in Types)
+			{
+				<option value="@type.Value">@type.Label</option>
+			}
+		</InputSelect>
+		<ValidationMessage For="@(() => Model.AircraftTypeId)" />
 	</div>
 </EditForm>
 
@@ -15,6 +26,8 @@
 	public AircraftFormViewModel Model { get; set; }
 	[Parameter]
 	public string PageTitle { get; set; }
+	[Parameter]
+	public IEnumerable<InputSelectItem> Types { get; set; }
 	[Parameter]
 	public EventCallback OnSubmitClicked { get; set; }
 
