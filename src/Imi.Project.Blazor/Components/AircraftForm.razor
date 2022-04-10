@@ -1,0 +1,25 @@
+﻿<h1>@PageTitle</h1>
+
+<EditForm Model="@Model" OnInvalidSubmit="HandleValidSubmit">
+	<DataAnnotationsValidator />
+	<ValidationSummary />
+
+	<div class="form-group">
+		<label for="registration">Registratienummer:</label>
+		<InputText id="registration" @bind-Value="Model.Registration" class="form-control w-auto" />
+	</div>
+</EditForm>
+
+@code {
+	[Parameter]
+	public Aircraft Model { get; set; }
+	[Parameter]
+	public string PageTitle { get; set; }
+	[Parameter]
+	public EventCallback OnSubmitClicked { get; set; }
+
+	private void HandleValidSubmit()
+	{
+		OnSubmitClicked.InvokeAsync();
+	}
+}

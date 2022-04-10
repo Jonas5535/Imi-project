@@ -9,9 +9,18 @@
 		OnDeleteClicked="DeleteAsync">
 	</AircraftDetail>
 }
+else if (formModel != null)
+{
+	<AircraftForm Model="formModel"
+		PageTitle="@formPageTitle">
+	</AircraftForm>
+}
 else
 {
-	<h1>Vliegtuigen</h1>
+	<div class="d-flex">
+		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(null)"></button>
+	</div>
 	<div class="row">
 		@foreach (var aircraft in aircrafts)
 		{
@@ -27,6 +36,8 @@ else
 	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
 	private Aircraft aircraft;
 	private bool showDetails = false;
+	private string formPageTitle;
+	private Aircraft formModel;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -65,5 +76,16 @@ else
 	public void GoBack()
 	{
 		showDetails = false;
+		aircraft = null;
+	}
+
+	public void ShowForm(object item)
+	{
+		if (item == null)
+		{
+			formModel = new Aircraft();
+			formModel.Id = new Guid();
+			formPageTitle = "Nieuw vliegtuig";
+		}
 	}
 }
