@@ -1,3 +1,4 @@
+using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
 using Imi.Project.Blazor.Core.CRUD.Models.ViewModels;
 using Imi.Project.Blazor.Core.CRUD.Services;
 using Imi.Project.Blazor.Core.MemoryGame.Services;
@@ -24,7 +25,7 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<ICRUDService<AircraftListViewModel, AircraftDetailViewModel>, MockAircraftService>();
+            services.AddTransient<ICRUDService<AircraftListViewModel, AircraftDetailViewModel, Aircraft>, MockAircraftService>();
             services.AddTransient<IMemoryService, MemoryService>();
         }
 

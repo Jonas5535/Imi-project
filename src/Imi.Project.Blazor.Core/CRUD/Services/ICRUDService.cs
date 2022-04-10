@@ -4,12 +4,12 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public interface ICRUDService<T, K>
+    public interface ICRUDService<T, D, E>
     {
         Task<IEnumerable<T>> ListAllAsync();
-        Task<K> GetByIdAsync(Guid id);
-        Task AddAsync(K item);
-        Task UpdateAsync(K item);
+        Task<D> GetByIdAsync(Guid id);
+        Task AddAsync(E item);
+        Task UpdateAsync(E item);
         Task DeleteAsync(Guid id);
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel>
+    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel, Aircraft>
     {
         private static Airline[] _airlines = new Airline[]
         {
@@ -57,14 +57,26 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return Task.CompletedTask;
         }
 
-        public async Task<Aircraft> GetByIdAsync(Guid id)
+        public async Task<AircraftDetailViewModel> GetByIdAsync(Guid id)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
             if (aircraft == null) throw new ArgumentException("aircraft not found");
 
-            aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId);
-            aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId);
-            aircraft.Airports = new List<Airport>();
+            AircraftDetailViewModel result;
+
+            result = new AircraftDetailViewModel
+            {
+                Id = aircraft.Id,
+                Registration = aircraft.Registration,
+                HasSpecialLivery = aircraft.HasSpecialLivery,
+                FirstSeen = aircraft.FirstSeen,
+                LastSeen = aircraft.LastSeen,
+                Image = aircraft.Image,
+                AircraftType = aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId),
+                Airline = aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId),
+            };
+            
+            result.Airports = new List<Airport>();
 
             foreach (var airportId in aircraft.AirportIds)
             {
@@ -72,7 +84,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 aircraft.Airports.Add(airport);
             }
 
-            return await Task.FromResult(aircraft);
+            return await Task.FromResult(result);
         }
 
         public async Task<IEnumerable<AircraftListViewModel>> ListAllAsync()
