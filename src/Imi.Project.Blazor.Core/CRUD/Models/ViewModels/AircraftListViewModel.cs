@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using System;
 
-namespace Imi.Project.Blazor.Core.CRUD.Models
+namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 {
     public class AircraftListViewModel
     {

@@ -1,4 +1,5 @@
-﻿using Imi.Project.Blazor.Core.CRUD.Models;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using Imi.Project.Blazor.Core.CRUD.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListViewModel, Aircraft>
+    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel>
     {
         private static Airline[] _airlines = new Airline[]
         {

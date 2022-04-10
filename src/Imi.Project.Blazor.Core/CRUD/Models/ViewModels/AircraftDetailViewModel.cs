@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using System;
 using System.Collections.Generic;
 
 namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels

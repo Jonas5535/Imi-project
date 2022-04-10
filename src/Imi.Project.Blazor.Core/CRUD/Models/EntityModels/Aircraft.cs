@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Imi.Project.Blazor.Core.CRUD.Models
+namespace Imi.Project.Blazor.Core.CRUD.Models.EntityModels
 {
     public class Aircraft
     {

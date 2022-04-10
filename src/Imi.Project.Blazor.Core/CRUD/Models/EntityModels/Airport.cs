@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Imi.Project.Blazor.Core.CRUD.Models
+namespace Imi.Project.Blazor.Core.CRUD.Models.EntityModels
 {
     public class Airport
     {
