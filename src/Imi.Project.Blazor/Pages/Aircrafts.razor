@@ -1,5 +1,5 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListItem, Aircraft> _aircraftService
+@inject ICRUDService<AircraftListViewModel, Aircraft> _aircraftService
 @inject IJSRuntime _jsRuntime
 
 @if (showDetails)
@@ -33,7 +33,7 @@ else
 }
 
 @code {
-	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
+	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
 	private Aircraft aircraft;
 	private bool showDetails = false;
 	private string formPageTitle;
@@ -51,7 +51,7 @@ else
 
 	public async Task ShowDetails(object item)
 	{
-		AircraftListItem receivedModel = item as AircraftListItem;
+		AircraftListViewModel receivedModel = item as AircraftListViewModel;
 		aircraft = await _aircraftService.GetByIdAsync(receivedModel.Id);
 		showDetails = true;
 	}

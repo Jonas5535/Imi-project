@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListItem, Aircraft>
+    public class MockAircraftService : ICRUDService<AircraftListViewModel, Aircraft>
     {
         private static Airline[] _airlines = new Airline[]
         {
@@ -74,11 +74,11 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(aircraft);
         }
 
-        public async Task<IEnumerable<AircraftListItem>> ListAllAsync()
+        public async Task<IEnumerable<AircraftListViewModel>> ListAllAsync()
         {
-            List<AircraftListItem> aircrafts;
+            List<AircraftListViewModel> aircrafts;
 
-            aircrafts = _aircrafts.Select(a => new AircraftListItem()
+            aircrafts = _aircrafts.Select(a => new AircraftListViewModel()
             {
                 Id = a.Id,
                 Registration = a.Registration,

@@ -2,7 +2,7 @@
 
 namespace Imi.Project.Blazor.Core.CRUD.Models
 {
-    public class AircraftListItem
+    public class AircraftListViewModel
     {
         public Guid Id { get; set; }
         public string Image { get; set; }
