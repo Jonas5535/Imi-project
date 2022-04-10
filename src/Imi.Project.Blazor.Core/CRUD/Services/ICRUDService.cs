@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -11,5 +12,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         Task AddAsync(E item);
         Task UpdateAsync(E item);
         Task DeleteAsync(Guid id);
+        Task<Airline[]> GetAirlines();
+        Task<AircraftType[]> GetAircraftTypes();
+        Task<Airport[]> GetAirports();
     }
 }

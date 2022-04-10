@@ -57,6 +57,21 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return Task.CompletedTask;
         }
 
+        public async Task<AircraftType[]> GetAircraftTypes()
+        {
+            return await Task.FromResult(_aircraftTypes);
+        }
+
+        public async Task<Airline[]> GetAirlines()
+        {
+            return await Task.FromResult(_airlines);
+        }
+
+        public async Task<Airport[]> GetAirports()
+        {
+            return await Task.FromResult(_airports);
+        }
+
         public async Task<AircraftDetailViewModel> GetByIdAsync(Guid id)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
@@ -75,7 +90,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId),
                 Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId),
             };
-            
+
             result.Airports = new List<Airport>();
 
             foreach (var airportId in aircraft.AirportIds)
