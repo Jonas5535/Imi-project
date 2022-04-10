@@ -72,8 +72,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 FirstSeen = aircraft.FirstSeen,
                 LastSeen = aircraft.LastSeen,
                 Image = aircraft.Image,
-                AircraftType = aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId),
-                Airline = aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId),
+                AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId),
+                Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId),
             };
             
             result.Airports = new List<Airport>();
@@ -81,7 +81,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             foreach (var airportId in aircraft.AirportIds)
             {
                 Airport airport = _airports.FirstOrDefault(a => a.Id.Equals(airportId));
-                aircraft.Airports.Add(airport);
+                result.Airports.Add(airport);
             }
 
             return await Task.FromResult(result);

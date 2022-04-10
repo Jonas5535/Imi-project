@@ -1,18 +1,18 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListViewModel, Aircraft> _aircraftService
+@inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, Aircraft> _aircraftService
 @inject IJSRuntime _jsRuntime
 
 @if (showDetails)
 {
 	<AircraftDetail Model="aircraft"
-		OnBackClicked="GoBack"
-		OnDeleteClicked="DeleteAsync">
+				OnBackClicked="GoBack"
+				OnDeleteClicked="DeleteAsync">
 	</AircraftDetail>
 }
 else if (formModel != null)
 {
 	<AircraftForm Model="formModel"
-		PageTitle="@formPageTitle">
+			  PageTitle="@formPageTitle">
 	</AircraftForm>
 }
 else
@@ -25,8 +25,8 @@ else
 		@foreach (var aircraft in aircrafts)
 		{
 			<ListItem Model="aircraft"
-				OnCardClicked="ShowDetails"
-				OnDeleteClicked="DeleteAsync">
+			  OnCardClicked="ShowDetails"
+			  OnDeleteClicked="DeleteAsync">
 			</ListItem>
 		}
 	</div>
@@ -34,10 +34,10 @@ else
 
 @code {
 	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
-	private Aircraft aircraft;
+	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
 	private string formPageTitle;
-	private Aircraft formModel;
+	private AircraftFormViewModel formModel;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -83,7 +83,7 @@ else
 	{
 		if (item == null)
 		{
-			formModel = new Aircraft();
+			formModel = new AircraftFormViewModel();
 			formModel.Id = new Guid();
 			formPageTitle = "Nieuw vliegtuig";
 		}

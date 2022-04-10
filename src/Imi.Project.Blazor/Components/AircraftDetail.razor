@@ -7,7 +7,7 @@
 
 <div class="row mt-4">
 	<div class="col-lg-6 mb-4">
-		<img class="img-fluid" src="@Model.Image" alt="Foto van @Model.Registration"/>
+		<img class="img-fluid" src="@Model.Image" alt="Foto van @Model.Registration" />
 	</div>
 	<div class="col-lg-6 my-auto">
 		<div class="row">
@@ -42,14 +42,14 @@
 <div class="row mb-2">
 	@foreach (var airport in Model.Airports)
 	{
-		<div class="col-12 text-center bg-light-yellow py-1">@airport.Name</div>   
+		<div class="col-12 text-center bg-light-yellow py-1">@airport.Name</div>
 	}
 </div>
 
 
 @code {
 	[Parameter]
-	public Aircraft Model { get; set; }
+	public AircraftDetailViewModel Model { get; set; }
 	[Parameter]
 	public EventCallback OnBackClicked { get; set; }
 	[Parameter]
