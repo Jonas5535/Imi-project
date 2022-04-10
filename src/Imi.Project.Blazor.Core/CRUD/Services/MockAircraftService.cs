@@ -44,7 +44,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 
         public Task AddAsync(Aircraft item)
         {
-            throw new NotImplementedException();
+            _aircrafts.Add(item);
+            return Task.CompletedTask;
         }
 
         public Task DeleteAsync(Guid id)
