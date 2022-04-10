@@ -13,7 +13,8 @@ else if (formModel != null)
 {
 	<AircraftForm Model="formModel"
 			  PageTitle="@formPageTitle"
-			  Types="selectTypes">
+			  Types="selectTypes"
+			  Airlines="selectAirlines">
 	</AircraftForm>
 }
 else
@@ -40,8 +41,8 @@ else
 	private string formPageTitle;
 	private AircraftFormViewModel formModel;
 	private IEnumerable<InputSelectItem> selectTypes;
-	private InputSelectItem[] selectAirlines;
-	private InputSelectItem[] selectAirports;
+	private IEnumerable<InputSelectItem> selectAirlines;
+	private IEnumerable<InputSelectItem> selectAirports;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -93,6 +94,7 @@ else
 		}
 
 		selectTypes = await GetTypesForInputSelect();
+		selectAirlines = await GetAirlinesForInputSelect();
 	}
 
 	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()
@@ -104,6 +106,21 @@ else
 		foreach (var type in types)
 		{
 			InputSelectItem item = new InputSelectItem { Value = type.Id, Label = type.Type };
+			items.Add(item);
+			i++;
+		}
+		return items;
+	}
+
+	private async Task<IEnumerable<InputSelectItem>> GetAirlinesForInputSelect()
+	{
+		Airline[] airlines = await _aircraftService.GetAirlines();
+		List<InputSelectItem> items = new List<InputSelectItem>();
+		int i = 1;
+
+		foreach (var airline in airlines)
+		{
+			InputSelectItem item = new InputSelectItem { Value = airline.Id, Label = airline.Name };
 			items.Add(item);
 			i++;
 		}

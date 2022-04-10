@@ -30,7 +30,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
         [Required(ErrorMessage = "{0} is verplicht")]
         [DataType(DataType.Date)]
         [CurrentDate(ErrorMessage = "De datum van {0} mag niet later zijn dan vandaag")]
-        [LaterThan(nameof(FirstSeen), ErrorMessage = "De datum van {0} mag zijn vroeger zijn dan {1}")]
+        //[LaterThan(nameof(FirstSeen), ErrorMessage = "De datum van {0} mag zijn vroeger zijn dan {1}")] //Werkt niet.
+        //TODO Hulp vragen aan lector
         public DateTime LastSeen { get; set; }
 
         [Display(Name = "Vliegtuigtype")]

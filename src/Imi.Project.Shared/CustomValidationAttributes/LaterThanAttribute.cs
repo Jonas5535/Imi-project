@@ -2,7 +2,8 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Imi.Project.Shared.CustomValidationAttributes
-{
+{   //Werkt niet
+    //TODO Hulp vragen aan lector
     public class LaterThanAttribute : ValidationAttribute
     {
         readonly DateTime _dateToCompare;
