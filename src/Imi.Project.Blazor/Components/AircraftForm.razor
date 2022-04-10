@@ -75,7 +75,7 @@
 		OnSubmitClicked.InvokeAsync();
 	}
 
-	private void SelectedAirportChanged(ChangeEventArgs e)
+	private void SelectedAirportChanged(ChangeEventArgs e) //TODO Vragen aan lector hoe ik dit moet aanpakken
 	{
 		Guid id = Guid.Parse((string)e.Value);
 		Model.AirportIds.Add(id);
