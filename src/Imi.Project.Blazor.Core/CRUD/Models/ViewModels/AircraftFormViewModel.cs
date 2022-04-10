@@ -1,4 +1,4 @@
-﻿using Imi.Project.Shared;
+﻿using Imi.Project.Shared.CustomValidationAttributes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -30,6 +30,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
         [Required(ErrorMessage = "{0} is verplicht")]
         [DataType(DataType.Date)]
         [CurrentDate(ErrorMessage = "De datum van {0} mag niet later zijn dan vandaag")]
+        [LaterThan(nameof(FirstSeen), ErrorMessage = "De datum van {0} mag zijn vroeger zijn dan {1}")]
         public DateTime LastSeen { get; set; }
 
         [Display(Name = "Vliegtuigtype")]

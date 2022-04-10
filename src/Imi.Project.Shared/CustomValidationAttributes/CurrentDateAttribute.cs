@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Imi.Project.Shared
+namespace Imi.Project.Shared.CustomValidationAttributes
 {
     public class CurrentDateAttribute : ValidationAttribute
     {
