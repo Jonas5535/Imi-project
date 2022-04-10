@@ -29,6 +29,11 @@
 		</InputSelect>
 		<ValidationMessage For="@(() => Model.AirlineId)" />
 	</div>
+	<div class="form-group">
+		<label for="specialLivery">Special livery:</label>
+		<InputCheckbox id="specialLivery" @bind-Value="Model.HasSpecialLivery" class="form-control w-35px"/>
+		<ValidationMessage For="@(() => Model.HasSpecialLivery)" />
+	</div>
 </EditForm>
 
 @code {

@@ -129,6 +129,10 @@ app {
     background-color: var(--Lighter-yellow);
 }
 
+.w-35px{
+    width: 35px;
+}
+
 .memory-card:hover {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
