@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:local="clr-namespace:Imi.Project.Wpf"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
@@ -117,11 +118,12 @@
             <Label Grid.Row="6" Margin="0,5,0,0" FontWeight="Medium" Content="Laatst gezien:"></Label>
 
             <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <TextBox x:Name="txtType" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <TextBox x:Name="txtAirline" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <TextBox x:Name="txtSpecialLivery" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <TextBox x:Name="txtFirstSeen" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <TextBox x:Name="txtLastSeen" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <ComboBox x:Name="txtType" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"></ComboBox>
+            <ComboBox x:Name="txtAirline" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"></ComboBox>
+            <ToggleButton x:Name="tbSpecialLivery" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0" Content="Nee"
+                          Checked="tbSpecialLivery_Checked" Unchecked="tbSpecialLivery_Unchecked"></ToggleButton>
+            <DatePicker x:Name="dpFirstSeen" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <DatePicker x:Name="dpLastSeen" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
         </Grid>
     </Grid>
 </Window>

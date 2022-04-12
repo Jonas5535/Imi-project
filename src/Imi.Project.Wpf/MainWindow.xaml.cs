@@ -24,5 +24,15 @@ namespace Imi.Project.Wpf
         {
             InitializeComponent();
         }
+
+        private void tbSpecialLivery_Checked(object sender, RoutedEventArgs e)
+        {
+            tbSpecialLivery.Content = "ja";
+        }
+
+        private void tbSpecialLivery_Unchecked(object sender, RoutedEventArgs e)
+        {
+            tbSpecialLivery.Content = "Nee";
+        }
     }
 }
