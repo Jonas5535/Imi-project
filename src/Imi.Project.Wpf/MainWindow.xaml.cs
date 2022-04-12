@@ -20,24 +20,58 @@ namespace Imi.Project.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<ComboBox> comboBoxes = new List<ComboBox>();
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void tbSpecialLivery_Checked(object sender, RoutedEventArgs e)
+        private ComboBox AddComboBox()
+        {
+            // Add horizontal stackPanel to store combobox and button
+            StackPanel stackPanel = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 5) };
+
+            stAirportPickers.Children.Add(stackPanel);
+
+            ComboBox comboBox = new ComboBox { Height = 25.96, Width = 220, VerticalAlignment = VerticalAlignment.Top };
+
+            Button button = new Button { Content = "X", Width = 30, Margin = new Thickness(5, 0, 0, 0) };
+            button.Click += RemoveButton_Clicked;
+
+            stackPanel.Children.Add(comboBox);
+            stackPanel.Children.Add(button);
+            comboBoxes.Add(comboBox);
+
+            return comboBox;
+        }
+
+        private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button currentButton = sender as Button;
+
+            StackPanel parent = currentButton.Parent as StackPanel;
+
+            ComboBox comboBox = parent.Children.OfType<ComboBox>().FirstOrDefault();
+            comboBoxes.Remove(comboBox);
+
+            parent.Children.Clear();
+            stAirportPickers.Children.Remove(parent);
+        }
+
+        private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
         {
             tbSpecialLivery.Content = "ja";
         }
 
-        private void tbSpecialLivery_Unchecked(object sender, RoutedEventArgs e)
+        private void TbSpecialLivery_Unchecked(object sender, RoutedEventArgs e)
         {
             tbSpecialLivery.Content = "Nee";
         }
 
-        private void btnAddPicker_Click(object sender, RoutedEventArgs e)
+        private void BtnAddPicker_Click(object sender, RoutedEventArgs e)
         {
-
+            _ = AddComboBox();
         }
     }
 }
