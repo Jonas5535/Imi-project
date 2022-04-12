@@ -34,5 +34,10 @@ namespace Imi.Project.Wpf
         {
             tbSpecialLivery.Content = "Nee";
         }
+
+        private void btnAddPicker_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
