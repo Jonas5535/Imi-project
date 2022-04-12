@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imi.Project.Wpf" xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        xmlns:local="clr-namespace:Imi.Project.Wpf"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
         Title="MainWindow" MinHeight="450" MaxHeight="450" MinWidth="1000" MaxWidth="1000" Height="450" Width="1000">
     <Grid>
@@ -22,8 +23,13 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold" Content="Vliegtuigen"></Label>
-            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5"></ListBox>
+            <Label Grid.Row="0" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d" Margin="5,0,5,0" Content="Vliegtuigen"></Label>
+            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5">
+                <system:String>OO-ABC</system:String>
+                <system:String>OO-LOE</system:String>
+                <system:String>D-ALCC</system:String>
+                <system:String>G-VBIG</system:String>
+            </ListBox>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
@@ -41,14 +47,15 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" Content="Details"></Label>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d" Content="Details"></Label>
             <Label Grid.Row="1" FontWeight="Medium" Content="Registratienummer:"></Label>
             <Label Grid.Row="2" FontWeight="Medium" Content="Type:"></Label>
             <Label Grid.Row="3" FontWeight="Medium" Content="Maatschappij:"></Label>
             <Label Grid.Row="4" FontWeight="Medium" Content="Special livery:"></Label>
             <Label Grid.Row="5" FontWeight="Medium" Content="Eerst gezien:"></Label>
             <Label Grid.Row="6" FontWeight="Medium" Content="Laatst gezien:"></Label>
-            <Label Grid.Row="7" FontWeight="Medium" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Background="#fdd31d" Margin="0,5,0,0" Content="Luchthavens:"></Label>
+            <Label Grid.Row="7" FontWeight="Medium" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Background="#fdd31d"
+                   Margin="0,5,0,0" Content="Luchthavens:"></Label>
 
             <Label x:Name="lblRegistration" Grid.Row="1" Grid.Column="1">OO-ABC</Label>
             <Label x:Name="lblType" Grid.Row="2" Grid.Column="1">Airbus A320-200</Label>
