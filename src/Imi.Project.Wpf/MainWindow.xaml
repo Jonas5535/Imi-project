@@ -3,9 +3,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Imi.Project.Wpf"
+        xmlns:local="clr-namespace:Imi.Project.Wpf" xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1000">
+        Title="MainWindow" MinHeight="450" MaxHeight="450" MinWidth="1000" MaxWidth="1000" Height="450" Width="1000">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="200*"/>
@@ -22,10 +22,10 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Height="30px" HorizontalAlignment="Center" FontWeight="Bold" Content="Vliegtuigen"></Label>
-            <ListBox Grid.Row="1" Margin="5"></ListBox>
+            <Label Grid.Row="0" HorizontalAlignment="Center" FontWeight="Bold" Content="Vliegtuigen"></Label>
+            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5"></ListBox>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
@@ -39,21 +39,37 @@
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
                 <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" Content="Details:"></Label>
-            <Label Grid.Row="1" Content="Registratienummer:"></Label>
-            <Label Grid.Row="2" Content="Type:"></Label>
-            <Label Grid.Row="3" Content="Maatschappij:"></Label>
-            <Label Grid.Row="4" Content="Special livery:"></Label>
-            <Label Grid.Row="5" Content="Eerst gezien:"></Label>
-            <Label Grid.Row="6" Content="Laatst gezien:"></Label>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" FontWeight="Bold" Content="Details"></Label>
+            <Label Grid.Row="1" FontWeight="Medium" Content="Registratienummer:"></Label>
+            <Label Grid.Row="2" FontWeight="Medium" Content="Type:"></Label>
+            <Label Grid.Row="3" FontWeight="Medium" Content="Maatschappij:"></Label>
+            <Label Grid.Row="4" FontWeight="Medium" Content="Special livery:"></Label>
+            <Label Grid.Row="5" FontWeight="Medium" Content="Eerst gezien:"></Label>
+            <Label Grid.Row="6" FontWeight="Medium" Content="Laatst gezien:"></Label>
+            <Label Grid.Row="7" FontWeight="Medium" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Background="#fdd31d" Margin="0,5,0,0" Content="Luchthavens:"></Label>
 
-            <Label Grid.Row="1" Grid.Column="1"></Label>
-            <Label Grid.Row="2" Grid.Column="1"></Label>
-            <Label Grid.Row="3" Grid.Column="1"></Label>
-            <Label Grid.Row="4" Grid.Column="1"></Label>
-            <Label Grid.Row="5" Grid.Column="1"></Label>
-            <Label Grid.Row="6" Grid.Column="1"></Label>
+            <Label x:Name="lblRegistration" Grid.Row="1" Grid.Column="1">OO-ABC</Label>
+            <Label x:Name="lblType" Grid.Row="2" Grid.Column="1">Airbus A320-200</Label>
+            <Label x:Name="lblAirline" Grid.Row="3" Grid.Column="1">Brussels Airlines</Label>
+            <Label x:Name="lblSpecialLivery" Grid.Row="4" Grid.Column="1">Nee</Label>
+            <Label x:Name="lblFirstSeen" Grid.Row="5" Grid.Column="1">8/07/2021</Label>
+            <Label x:Name="lblLastSeen" Grid.Row="6" Grid.Column="1">8/07/2021</Label>
+            <ScrollViewer Grid.Row="8" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+                <ItemsControl>
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding}" HorizontalContentAlignment="Center" Background="#feea95" Margin="0,1,0,0"></Label>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <system:String>Brussels Airport</system:String>
+                    <system:String>Nice Côte d'Azur</system:String>
+                    <system:String>Tokyo Narita Intl. Airport</system:String>
+                    <system:String>Item #4</system:String>
+                    <system:String>Item #5</system:String>
+                </ItemsControl>
+            </ScrollViewer>
         </Grid>
     </Grid>
 </Window>
