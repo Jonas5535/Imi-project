@@ -92,5 +92,36 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
+        <Grid Grid.Row="1" Grid.Column="3" Margin="5,0,5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblFormTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d"
+                   Content="Toevoegen"></Label>
+            <Label Grid.Row="1" Margin="0,5,0,0" FontWeight="Medium" Content="Registratienummer:"></Label>
+            <Label Grid.Row="2" Margin="0,5,0,0" FontWeight="Medium" Content="Type:"></Label>
+            <Label Grid.Row="3" Margin="0,5,0,0" FontWeight="Medium" Content="Maatschappij:"></Label>
+            <Label Grid.Row="4" Margin="0,5,0,0" FontWeight="Medium" Content="Special livery:"></Label>
+            <Label Grid.Row="5" Margin="0,5,0,0" FontWeight="Medium" Content="Eerst gezien:"></Label>
+            <Label Grid.Row="6" Margin="0,5,0,0" FontWeight="Medium" Content="Laatst gezien:"></Label>
+
+            <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <TextBox x:Name="txtType" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <TextBox x:Name="txtAirline" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <TextBox x:Name="txtSpecialLivery" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <TextBox x:Name="txtFirstSeen" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+            <TextBox x:Name="txtLastSeen" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0"></TextBox>
+        </Grid>
     </Grid>
 </Window>
