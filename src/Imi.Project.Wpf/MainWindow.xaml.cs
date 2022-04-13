@@ -52,17 +52,16 @@ namespace Imi.Project.Wpf
             return comboBox;
         }
 
-        private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
+        private string ConvertBoolToYesNo(bool boolToConvert)
         {
-            Button currentButton = sender as Button;
-
-            StackPanel parent = currentButton.Parent as StackPanel;
-
-            ComboBox comboBox = parent.Children.OfType<ComboBox>().FirstOrDefault();
-            comboBoxes.Remove(comboBox);
-
-            parent.Children.Clear();
-            stAirportPickers.Children.Remove(parent);
+            if (boolToConvert)
+            {
+                return "Ja";
+            }
+            else
+            {
+                return "Nee";
+            }
         }
 
         private void ShowError(string title, string message)
@@ -73,14 +72,32 @@ namespace Imi.Project.Wpf
             lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"{title}: {message}" };
         }
 
+        private void ResetErrorLabel()
+        {
+            lblError.Background = Brushes.White;
+            lblError.Content = null;
+        }
+
         private void PopulateAircraftsInListBox(IEnumerable<ApiAircraftListResponse> aircrafts)
         {
             lstAircrafts.Items.Clear();
             lstAircrafts.ItemsSource = aircrafts; 
         }
 
+        private void ShowAircraftDetails(ApiAircraftDetailResponse aircraft)
+        {
+            lblRegistration.Content = aircraft.Registration;
+            lblType.Content = $"{aircraft.AircraftType.Brand} {aircraft.AircraftType.Type}";
+            lblAirline.Content = aircraft.Airline.Name;
+            lblSpecialLivery.Content = ConvertBoolToYesNo(aircraft.HasSpecialLivery);
+            lblFirstSeen.Content = aircraft.FirstSeen;
+            lblLastSeen.Content = aircraft.LastSeen;
+            icAirports.ItemsSource = aircraft.Airports;
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ResetErrorLabel();
             ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
 
             try
@@ -105,6 +122,7 @@ namespace Imi.Project.Wpf
                 ShowError(response.Reason.ToString(), response.ErrorMessage);
             }
         }
+
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
         {
             tbSpecialLivery.Content = "ja";
@@ -120,5 +138,46 @@ namespace Imi.Project.Wpf
             _ = AddComboBox();
         }
 
+        private void RemoveButton_Clicked(object sender, RoutedEventArgs e)
+        {
+            Button currentButton = sender as Button;
+
+            StackPanel parent = currentButton.Parent as StackPanel;
+
+            ComboBox comboBox = parent.Children.OfType<ComboBox>().FirstOrDefault();
+            comboBoxes.Remove(comboBox);
+
+            parent.Children.Clear();
+            stAirportPickers.Children.Remove(parent);
+        }
+
+        private async void LstAircrafts_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ResetErrorLabel();
+            ApiBaseResponse<ApiAircraftDetailResponse> response = new();
+            var aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
+
+            try
+            {
+                response = await _aircraftService.GetByIdAsync(aircraft.Id);
+            }
+            catch (HttpRequestException ex)
+            {
+                ShowError("Fout", ex.Message);
+            }
+            catch (Exception)
+            {
+                ShowError("Fout", "Er is iets misgelopen tijdens het ophalen van de data");
+            }
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+                ShowAircraftDetails(response.Data);
+            }
+            else
+            {
+                ShowError(response.Reason.ToString(), response.ErrorMessage);
+            }
+        }
     }
 }

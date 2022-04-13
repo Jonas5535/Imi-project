@@ -48,7 +48,7 @@ namespace Imi.Project.Wpf.Core
             return response;
         }
 
-        public async Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(Guid id)
+        public async Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(string id)
         {
             ApiBaseResponse<ApiAircraftDetailResponse> response = new();
 
