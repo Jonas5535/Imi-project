@@ -25,7 +25,7 @@ namespace Imi.Project.Wpf.Core
 
         public async Task<ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>> ListAllAsync()
         {
-            var response = new ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>();
+            ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
 
             HttpResponseMessage apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
 
@@ -34,6 +34,31 @@ namespace Imi.Project.Wpf.Core
             if (apiResponse.IsSuccessStatusCode)
             {
                 var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAircraftListResponse>>(responseStream);
+
+                response.Data = deserializedResponse;
+                response.Status = apiResponse.StatusCode;
+                return response;
+            }
+
+            var deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+
+            response.Status = apiResponse.StatusCode;
+            response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = deserializedErrorMessage;
+            return response;
+        }
+
+        public async Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(Guid id)
+        {
+            ApiBaseResponse<ApiAircraftDetailResponse> response = new();
+
+            HttpResponseMessage apiResponse = await _httpClient.GetAsync($"{_aircraftEndpoint}/{id}");
+
+            using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<ApiAircraftDetailResponse>(responseStream);
 
                 response.Data = deserializedResponse;
                 response.Status = apiResponse.StatusCode;
