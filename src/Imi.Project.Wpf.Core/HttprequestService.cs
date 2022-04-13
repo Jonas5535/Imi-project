@@ -16,7 +16,7 @@ namespace Imi.Project.Wpf.Core
         {
             _httpClientFactory = httpClientFactory;
             _httpClient = _httpClientFactory.CreateClient();
-            _httpClient.BaseAddress = new Uri("https://localhost:5001/Api/");
+            _httpClient.BaseAddress = new Uri(ApiBaseUri.ApiBaseAddress);
         }
     }
 }
