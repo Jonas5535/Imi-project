@@ -1,7 +1,9 @@
 ﻿using Imi.Project.Wpf.Core;
+using Imi.Project.Wpf.Core.ApiModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,27 +65,38 @@ namespace Imi.Project.Wpf
             stAirportPickers.Children.Remove(parent);
         }
 
-        private void ShowError(string message)
+        private void ShowError(string title, string message)
         {
             lblError.Background = Brushes.Red;
             lblError.Foreground = Brushes.Black;
             lblError.FontWeight = FontWeights.Bold;
-            lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"Fout: {message}" };
+            lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"{title}: {message}" };
         }
 
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
+
             try
             {
-                var test = await _aircraftService.ListAllAsync();
+                response = await _aircraftService.ListAllAsync();
             }
             catch (HttpRequestException ex)
             {
-                ShowError(ex.Message);
+                ShowError("Fout", ex.Message);
             }
             catch (Exception)
             {
-                ShowError("Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
+                ShowError("Fout", "Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
+            }
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+
+            }
+            else
+            {
+                ShowError(response.Reason.ToString(), response.ErrorMessage);
             }
         }
 

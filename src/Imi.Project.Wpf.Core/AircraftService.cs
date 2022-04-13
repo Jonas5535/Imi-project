@@ -27,11 +27,12 @@ namespace Imi.Project.Wpf.Core
         {
             var response = new ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>();
 
-            HttpResponseMessage apiResponse= apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
+            HttpResponseMessage apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
+
+            using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
             
             if (apiResponse.IsSuccessStatusCode)
             {
-                using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
                 var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAircraftListResponse>>(responseStream);
 
                 response.Data = deserializedResponse;
@@ -39,8 +40,11 @@ namespace Imi.Project.Wpf.Core
                 return response;
             }
 
+            var deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+
             response.Status = apiResponse.StatusCode;
-            response.ErrorMessage = apiResponse.ReasonPhrase;
+            response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = deserializedErrorMessage;
             return response;
         }
     }
