@@ -73,6 +73,12 @@ namespace Imi.Project.Wpf
             lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"{title}: {message}" };
         }
 
+        private void PopulateAircraftsInListBox(IEnumerable<ApiAircraftListResponse> aircrafts)
+        {
+            lstAircrafts.Items.Clear();
+            lstAircrafts.ItemsSource = aircrafts; 
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
@@ -92,14 +98,13 @@ namespace Imi.Project.Wpf
 
             if (response.Status == HttpStatusCode.OK)
             {
-
+                PopulateAircraftsInListBox(response.Data);
             }
             else
             {
                 ShowError(response.Reason.ToString(), response.ErrorMessage);
             }
         }
-
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
         {
             tbSpecialLivery.Content = "ja";

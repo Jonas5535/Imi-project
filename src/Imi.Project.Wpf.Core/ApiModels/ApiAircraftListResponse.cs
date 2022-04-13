@@ -32,5 +32,10 @@ namespace Imi.Project.Wpf.Core.ApiModels
 
         [JsonPropertyName("id")]
         public string Id { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Registration} - {AircraftType.IcaoCode} - {Airline.Name}";
+        }
     }
 }
