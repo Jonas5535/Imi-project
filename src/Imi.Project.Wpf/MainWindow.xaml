@@ -124,5 +124,6 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
+        <Label x:Name="lblError" Grid.Row="2"></Label>
     </Grid>
 </Window>
