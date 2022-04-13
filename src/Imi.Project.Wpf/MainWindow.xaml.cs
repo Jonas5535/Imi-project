@@ -63,7 +63,15 @@ namespace Imi.Project.Wpf
         }
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            var test = await _aircraftService.ListAllAsync();
+            try
+            {
+                var test = await _aircraftService.ListAllAsync();
+            }
+            catch (Exception ex)
+            {
+                lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = ex.Message };
+            }
+
         }
 
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)

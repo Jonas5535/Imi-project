@@ -25,17 +25,9 @@ namespace Imi.Project.Wpf.Core
 
         public async Task<ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>> ListAllAsync()
         {
-            HttpResponseMessage apiResponse;
             var response = new ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>();
 
-            try
-            {
-                apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+            HttpResponseMessage apiResponse= apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
             
             if (apiResponse.IsSuccessStatusCode)
             {
