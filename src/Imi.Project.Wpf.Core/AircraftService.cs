@@ -40,7 +40,7 @@ namespace Imi.Project.Wpf.Core
                 return response;
             }
 
-            var deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
 
             response.Status = apiResponse.StatusCode;
             response.Reason = apiResponse.ReasonPhrase;
@@ -65,10 +65,31 @@ namespace Imi.Project.Wpf.Core
                 return response;
             }
 
-            var deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
 
             response.Status = apiResponse.StatusCode;
             response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = deserializedErrorMessage;
+            return response;
+        }
+
+        private async Task<ApiBaseResponse<object>> DeleteAsync(string id)
+        {
+            ApiBaseResponse<object> response = new();
+
+            HttpResponseMessage deleteRequest = await _httpClient.DeleteAsync($"{_aircraftEndpoint}/{id}");
+
+            if (deleteRequest.IsSuccessStatusCode)
+            {
+                response.Status = deleteRequest.StatusCode;
+                return response;
+            }
+
+            using Stream responseStream = await deleteRequest.Content.ReadAsStreamAsync();
+            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+
+            response.Status = deleteRequest.StatusCode;
+            response.Reason = deleteRequest.ReasonPhrase;
             response.ErrorMessage = deserializedErrorMessage;
             return response;
         }
