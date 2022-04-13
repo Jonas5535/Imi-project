@@ -40,4 +40,3 @@ namespace Imi.Project.Wpf.Core.ApiModels
         public string Id { get; set; }
     }
 }
-}

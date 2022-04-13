@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Wpf.Core;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,11 +21,13 @@ namespace Imi.Project.Wpf
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly IAircraftService _aircraftService;
         private List<ComboBox> comboBoxes = new List<ComboBox>();
 
-        public MainWindow()
+        public MainWindow(IAircraftService aircraftService)
         {
             InitializeComponent();
+            _aircraftService = aircraftService;
         }
 
         private ComboBox AddComboBox()
@@ -58,6 +61,10 @@ namespace Imi.Project.Wpf
             parent.Children.Clear();
             stAirportPickers.Children.Remove(parent);
         }
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            var test = await _aircraftService.ListAllAsync();
+        }
 
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
         {
@@ -73,5 +80,6 @@ namespace Imi.Project.Wpf
         {
             _ = AddComboBox();
         }
+
     }
 }

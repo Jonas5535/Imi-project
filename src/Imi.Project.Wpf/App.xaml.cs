@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Imi.Project.Wpf.Core;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Windows;
@@ -30,6 +31,7 @@ namespace Imi.Project.Wpf
         {
             services.AddHttpClient();
             services.AddTransient(typeof(MainWindow));
+            services.AddScoped<IAircraftService, AircraftService>();
         }
     }
 }
