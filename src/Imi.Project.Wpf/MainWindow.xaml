@@ -38,12 +38,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Label Grid.Row="0" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d" Margin="5,0,5,0" Content="Vliegtuigen"></Label>
-            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5">
-                <system:String>OO-ABC - A320 - Brussels Airlines</system:String>
-                <system:String>OO-LOE - B788 - TUI Fly</system:String>
-                <system:String>D-ALCC - MD11 - Lufthansa Cargo</system:String>
-                <system:String>G-VBIG - B744 - Virgin Atlantic</system:String>
-            </ListBox>
+            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5"></ListBox>
         </Grid>
         <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
             <Grid.ColumnDefinitions>
@@ -71,24 +66,19 @@
             <Label Grid.Row="7" FontWeight="Medium" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Background="#fdd31d"
                    Margin="0,5,0,0" Content="Luchthavens:"></Label>
 
-            <Label x:Name="lblRegistration" Grid.Row="1" Grid.Column="1">OO-ABC</Label>
-            <Label x:Name="lblType" Grid.Row="2" Grid.Column="1">Airbus A320-200</Label>
-            <Label x:Name="lblAirline" Grid.Row="3" Grid.Column="1">Brussels Airlines</Label>
-            <Label x:Name="lblSpecialLivery" Grid.Row="4" Grid.Column="1">Nee</Label>
-            <Label x:Name="lblFirstSeen" Grid.Row="5" Grid.Column="1">8/07/2021</Label>
-            <Label x:Name="lblLastSeen" Grid.Row="6" Grid.Column="1">8/07/2021</Label>
+            <Label x:Name="lblRegistration" Grid.Row="1" Grid.Column="1"></Label>
+            <Label x:Name="lblType" Grid.Row="2" Grid.Column="1"></Label>
+            <Label x:Name="lblAirline" Grid.Row="3" Grid.Column="1"></Label>
+            <Label x:Name="lblSpecialLivery" Grid.Row="4" Grid.Column="1"></Label>
+            <Label x:Name="lblFirstSeen" Grid.Row="5" Grid.Column="1"></Label>
+            <Label x:Name="lblLastSeen" Grid.Row="6" Grid.Column="1"></Label>
             <ScrollViewer Grid.Row="8" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
                 <ItemsControl x:Name="icAirports">
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding}" HorizontalContentAlignment="Center" Background="#feea95" Margin="0,1,0,0"></Label>
+                            <Label HorizontalContentAlignment="Center" Background="#feea95" Margin="0,1,0,0"></Label>
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
-                    <system:String>Brussels Airport</system:String>
-                    <system:String>Nice Côte d'Azur</system:String>
-                    <system:String>Tokyo Narita Intl. Airport</system:String>
-                    <system:String>Item #4</system:String>
-                    <system:String>Item #5</system:String>
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
