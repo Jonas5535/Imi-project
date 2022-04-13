@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -61,17 +62,29 @@ namespace Imi.Project.Wpf
             parent.Children.Clear();
             stAirportPickers.Children.Remove(parent);
         }
+
+        private void ShowError(string message)
+        {
+            lblError.Background = Brushes.Red;
+            lblError.Foreground = Brushes.Black;
+            lblError.FontWeight = FontWeights.Bold;
+            lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"Fout: {message}" };
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             try
             {
                 var test = await _aircraftService.ListAllAsync();
             }
-            catch (Exception ex)
+            catch (HttpRequestException ex)
             {
-                lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = ex.Message };
+                ShowError(ex.Message);
             }
-
+            catch (Exception)
+            {
+                ShowError("Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
+            }
         }
 
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
