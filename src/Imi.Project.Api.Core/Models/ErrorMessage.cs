@@ -12,7 +12,7 @@ namespace Imi.Project.Api.Core.Models
             return new ErrorMessage
             {
                 ErrorType = HttpStatusCode.BadRequest,
-                Message = message,
+                Message = $"\"{message}\"", //Adding double quotes so client can read errormessage without getting json deserialization exception
             };
         }
 
@@ -21,7 +21,7 @@ namespace Imi.Project.Api.Core.Models
             return new ErrorMessage
             {
                 ErrorType = HttpStatusCode.NotFound,
-                Message = message,
+                Message = $"\"{message}\"",
             };
         }
 
@@ -30,7 +30,7 @@ namespace Imi.Project.Api.Core.Models
             return new ErrorMessage
             {
                 ErrorType = HttpStatusCode.Conflict,
-                Message = message,
+                Message = $"\"{message}\"",
             };
         }
 
@@ -39,7 +39,7 @@ namespace Imi.Project.Api.Core.Models
             return new ErrorMessage
             {
                 ErrorType = HttpStatusCode.InternalServerError,
-                Message = message,
+                Message = $"\"{message}\"",
             };
         }
 
@@ -48,7 +48,7 @@ namespace Imi.Project.Api.Core.Models
             return new ErrorMessage
             {
                 ErrorType = HttpStatusCode.Forbidden,
-                Message = message,
+                Message = $"\"{message}\"",
             };
         }
     }
