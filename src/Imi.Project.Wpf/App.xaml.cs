@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Windows;
 
 namespace Imi.Project.Wpf
@@ -13,5 +10,26 @@ namespace Imi.Project.Wpf
     /// </summary>
     public partial class App : Application
     {
+        public IServiceProvider ServiceProvider { get; private set; }
+        public IConfiguration Configuration { get; set; }
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            ConfigurationBuilder builder = new();
+
+            ServiceCollection serviceCollection = new();
+            ConfigureServices(serviceCollection);
+
+            ServiceProvider = serviceCollection.BuildServiceProvider();
+
+            MainWindow mainWindow = ServiceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+        }
+
+        private void ConfigureServices(IServiceCollection services)
+        {
+            services.AddHttpClient();
+            services.AddTransient(typeof(MainWindow));
+        }
     }
 }
