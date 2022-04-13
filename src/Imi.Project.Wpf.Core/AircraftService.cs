@@ -30,7 +30,7 @@ namespace Imi.Project.Wpf.Core
             HttpResponseMessage apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
 
             using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
-            
+
             if (apiResponse.IsSuccessStatusCode)
             {
                 var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAircraftListResponse>>(responseStream);
@@ -73,7 +73,7 @@ namespace Imi.Project.Wpf.Core
             return response;
         }
 
-        private async Task<ApiBaseResponse<object>> DeleteAsync(string id)
+        public async Task<ApiBaseResponse<object>> DeleteAsync(string id)
         {
             ApiBaseResponse<object> response = new();
 

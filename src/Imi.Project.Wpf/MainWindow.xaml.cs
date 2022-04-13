@@ -5,17 +5,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace Imi.Project.Wpf
 {
@@ -52,7 +45,7 @@ namespace Imi.Project.Wpf
             return comboBox;
         }
 
-        private string ConvertBoolToYesNo(bool boolToConvert)
+        private static string ConvertBoolToYesNo(bool boolToConvert)
         {
             if (boolToConvert)
             {
@@ -64,24 +57,26 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private void ShowError(string title, string message)
+        private void ShowFeedback(bool isError, string title, string message)
         {
-            lblError.Background = Brushes.Red;
-            lblError.Foreground = Brushes.Black;
-            lblError.FontWeight = FontWeights.Bold;
-            lblError.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"{title}: {message}" };
+            if (isError) lblFeedback.Background = Brushes.Red;
+            else lblFeedback.Background = Brushes.LightGreen;
+
+            lblFeedback.Foreground = Brushes.Black;
+            lblFeedback.FontWeight = FontWeights.Bold;
+            lblFeedback.Content = new AccessText { TextWrapping = TextWrapping.Wrap, Text = $"{title}: {message}" };
         }
 
-        private void ResetErrorLabel()
+        private void ResetFeedback()
         {
-            lblError.Background = Brushes.White;
-            lblError.Content = null;
+            lblFeedback.Background = Brushes.White;
+            lblFeedback.Content = null;
         }
 
         private void PopulateAircraftsInListBox(IEnumerable<ApiAircraftListResponse> aircrafts)
         {
-            lstAircrafts.Items.Clear();
-            lstAircrafts.ItemsSource = aircrafts; 
+            lstAircrafts.ItemsSource = default;
+            lstAircrafts.ItemsSource = aircrafts;
         }
 
         private void ShowAircraftDetails(ApiAircraftDetailResponse aircraft)
@@ -95,32 +90,48 @@ namespace Imi.Project.Wpf
             icAirports.ItemsSource = aircraft.Airports;
         }
 
-        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        private void ClearDetails()
         {
-            ResetErrorLabel();
-            ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
+            lblRegistration.Content = null;
+            lblType.Content = null;
+            lblAirline.Content = null;
+            lblSpecialLivery.Content = null;
+            lblFirstSeen.Content = null;
+            lblLastSeen.Content = null;
+            icAirports.ItemsSource = default;
+        }
+
+        private async Task LoadAircrafts()
+        {
+            ClearDetails();
 
             try
             {
-                response = await _aircraftService.ListAllAsync();
+                ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = await _aircraftService.ListAllAsync();
+
+                if (response.Status == HttpStatusCode.OK)
+                {
+                    PopulateAircraftsInListBox(response.Data);
+                }
+                else
+                {
+                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                }
             }
             catch (HttpRequestException ex)
             {
-                ShowError("Fout", ex.Message);
+                ShowFeedback(true, "Fout", ex.Message);
             }
             catch (Exception)
             {
-                ShowError("Fout", "Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
+                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
             }
+        }
 
-            if (response.Status == HttpStatusCode.OK)
-            {
-                PopulateAircraftsInListBox(response.Data);
-            }
-            else
-            {
-                ShowError(response.Reason.ToString(), response.ErrorMessage);
-            }
+        private async void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            ResetFeedback();
+            await LoadAircrafts();
         }
 
         private void TbSpecialLivery_Checked(object sender, RoutedEventArgs e)
@@ -153,30 +164,60 @@ namespace Imi.Project.Wpf
 
         private async void LstAircrafts_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            ResetErrorLabel();
-            ApiBaseResponse<ApiAircraftDetailResponse> response = new();
-            var aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
+            ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
+            if (aircraft == null) return;
+            ResetFeedback();
 
             try
             {
-                response = await _aircraftService.GetByIdAsync(aircraft.Id);
+                ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
+
+                if (response.Status == HttpStatusCode.OK)
+                {
+                    ShowAircraftDetails(response.Data);
+                    btnDelete.IsEnabled = true;
+                    btnEdit.IsEnabled = true;
+                }
+                else
+                {
+                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                }
             }
             catch (HttpRequestException ex)
             {
-                ShowError("Fout", ex.Message);
+                ShowFeedback(true, "Fout", ex.Message);
             }
             catch (Exception)
             {
-                ShowError("Fout", "Er is iets misgelopen tijdens het ophalen van de data");
+                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het ophalen van de data");
             }
+        }
 
-            if (response.Status == HttpStatusCode.OK)
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
+
+            try
             {
-                ShowAircraftDetails(response.Data);
+                ApiBaseResponse<object> response = response = await _aircraftService.DeleteAsync(aircraft.Id);
+
+                if (response.Status == HttpStatusCode.OK)
+                {
+                    ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
+                    await LoadAircrafts();
+                }
+                else
+                {
+                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                }
             }
-            else
+            catch (HttpRequestException ex)
             {
-                ShowError(response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, "Fout", ex.Message);
+            }
+            catch (Exception)
+            {
+                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het verwijderen van de data");
             }
         }
     }

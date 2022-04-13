@@ -1,5 +1,4 @@
 ﻿using Imi.Project.Wpf.Core.ApiModels;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -9,5 +8,6 @@ namespace Imi.Project.Wpf.Core
     {
         Task<ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>> ListAllAsync();
         Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(string id);
+        Task<ApiBaseResponse<object>> DeleteAsync(string id);
     }
 }
