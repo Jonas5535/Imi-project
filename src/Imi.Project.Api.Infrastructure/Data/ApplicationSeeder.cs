@@ -201,6 +201,7 @@ namespace Imi.Project.Api.Infrastructure.Data
                 new AircraftAtAirport{ AircraftId = aircrafts[1].Id, AirportId = airports[0].Id},
                 new AircraftAtAirport{ AircraftId = aircrafts[1].Id, AirportId = airports[1].Id},
                 new AircraftAtAirport{ AircraftId = aircrafts[2].Id, AirportId = airports[2].Id},
+                new AircraftAtAirport{ AircraftId = aircrafts[3].Id, AirportId = airports[12].Id},
             };
             #endregion
 
