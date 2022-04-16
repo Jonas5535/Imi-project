@@ -105,26 +105,15 @@ namespace Imi.Project.Wpf
         {
             ClearDetails();
 
-            try
-            {
-                ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = await _aircraftService.ListAllAsync();
+            ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = await _aircraftService.ListAllAsync();
 
-                if (response.Status == HttpStatusCode.OK)
-                {
-                    PopulateAircraftsInListBox(response.Data);
-                }
-                else
-                {
-                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
-                }
-            }
-            catch (HttpRequestException ex)
+            if (response.Status == HttpStatusCode.OK)
             {
-                ShowFeedback(true, "Fout", ex.Message);
+                PopulateAircraftsInListBox(response.Data);
             }
-            catch (Exception)
+            else
             {
-                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het ophalen van de data"); // Generic message so user doesn't see information he shouldn't see.
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
             }
         }
 
@@ -168,28 +157,17 @@ namespace Imi.Project.Wpf
             if (aircraft == null) return;
             ResetFeedback();
 
-            try
-            {
-                ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
+            ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
 
-                if (response.Status == HttpStatusCode.OK)
-                {
-                    ShowAircraftDetails(response.Data);
-                    btnDelete.IsEnabled = true;
-                    btnEdit.IsEnabled = true;
-                }
-                else
-                {
-                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
-                }
-            }
-            catch (HttpRequestException ex)
+            if (response.Status == HttpStatusCode.OK)
             {
-                ShowFeedback(true, "Fout", ex.Message);
+                ShowAircraftDetails(response.Data);
+                btnDelete.IsEnabled = true;
+                btnEdit.IsEnabled = true;
             }
-            catch (Exception)
+            else
             {
-                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het ophalen van de data");
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
             }
         }
 
@@ -197,27 +175,16 @@ namespace Imi.Project.Wpf
         {
             ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
 
-            try
-            {
-                ApiBaseResponse<object> response = response = await _aircraftService.DeleteAsync(aircraft.Id);
+            ApiBaseResponse<object> response = await _aircraftService.DeleteAsync(aircraft.Id);
 
-                if (response.Status == HttpStatusCode.OK)
-                {
-                    ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
-                    await LoadAircrafts();
-                }
-                else
-                {
-                    ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
-                }
-            }
-            catch (HttpRequestException ex)
+            if (response.Status == HttpStatusCode.OK)
             {
-                ShowFeedback(true, "Fout", ex.Message);
+                ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
+                await LoadAircrafts();
             }
-            catch (Exception)
+            else
             {
-                ShowFeedback(true, "Fout", "Er is iets misgelopen tijdens het verwijderen van de data");
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
             }
         }
     }

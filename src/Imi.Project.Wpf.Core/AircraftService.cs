@@ -2,9 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -26,8 +25,26 @@ namespace Imi.Project.Wpf.Core
         public async Task<ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>> ListAllAsync()
         {
             ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = new();
+            HttpResponseMessage apiResponse;
 
-            HttpResponseMessage apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
+            try
+            {
+                apiResponse = await _httpClient.GetAsync(_aircraftEndpoint);
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                return response;
+            }
 
             using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
 
@@ -51,8 +68,26 @@ namespace Imi.Project.Wpf.Core
         public async Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(string id)
         {
             ApiBaseResponse<ApiAircraftDetailResponse> response = new();
+            HttpResponseMessage apiResponse;
 
-            HttpResponseMessage apiResponse = await _httpClient.GetAsync($"{_aircraftEndpoint}/{id}");
+            try
+            {
+                apiResponse = await _httpClient.GetAsync($"{_aircraftEndpoint}/{id}");
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                return response;
+            }
 
             using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
 
@@ -76,8 +111,26 @@ namespace Imi.Project.Wpf.Core
         public async Task<ApiBaseResponse<object>> DeleteAsync(string id)
         {
             ApiBaseResponse<object> response = new();
+            HttpResponseMessage deleteRequest;
 
-            HttpResponseMessage deleteRequest = await _httpClient.DeleteAsync($"{_aircraftEndpoint}/{id}");
+            try
+            {
+                deleteRequest = await _httpClient.DeleteAsync($"{_aircraftEndpoint}/{id}");
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het verwijderen van de data";
+                return response;
+            }
 
             if (deleteRequest.IsSuccessStatusCode)
             {
