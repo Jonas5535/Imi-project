@@ -83,8 +83,8 @@ namespace Imi.Project.Wpf
             lblType.Content = $"{aircraft.AircraftType.Brand} {aircraft.AircraftType.Type}";
             lblAirline.Content = aircraft.Airline.Name;
             lblSpecialLivery.Content = ConvertBoolToYesNo(aircraft.HasSpecialLivery);
-            lblFirstSeen.Content = aircraft.FirstSeen;
-            lblLastSeen.Content = aircraft.LastSeen;
+            lblFirstSeen.Content = aircraft.FirstSeen.ToString("dd/MM/yyyy");
+            lblLastSeen.Content = aircraft.LastSeen.ToString("dd/MM/yyyy");
             icAirports.ItemsSource = aircraft.Airports;
         }
 
