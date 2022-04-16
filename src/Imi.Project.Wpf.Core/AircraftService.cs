@@ -57,11 +57,15 @@ namespace Imi.Project.Wpf.Core
                 return response;
             }
 
-            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
 
             response.Status = apiResponse.StatusCode;
             response.Reason = apiResponse.ReasonPhrase;
-            response.ErrorMessage = deserializedErrorMessage;
+            response.ErrorMessage = errorMessage;
             return response;
         }
 
@@ -100,11 +104,15 @@ namespace Imi.Project.Wpf.Core
                 return response;
             }
 
-            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
 
             response.Status = apiResponse.StatusCode;
             response.Reason = apiResponse.ReasonPhrase;
-            response.ErrorMessage = deserializedErrorMessage;
+            response.ErrorMessage = errorMessage;
             return response;
         }
 
@@ -139,11 +147,16 @@ namespace Imi.Project.Wpf.Core
             }
 
             using Stream responseStream = await deleteRequest.Content.ReadAsStreamAsync();
-            string deserializedErrorMessage = await JsonSerializer.DeserializeAsync<string>(responseStream);
+
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
 
             response.Status = deleteRequest.StatusCode;
             response.Reason = deleteRequest.ReasonPhrase;
-            response.ErrorMessage = deserializedErrorMessage;
+            response.ErrorMessage = errorMessage;
             return response;
         }
     }
