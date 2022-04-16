@@ -29,6 +29,7 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
+            <Button x:Name="btnRefresh" Height="30" Margin="5,0,0,0" Padding="2,0,2,0" Content="Herladen" Click="BtnRefresh_Click"></Button>
             <Button x:Name="btnAdd" Grid.Row="1" Height="30" Margin="5,0,0,5" Padding="2,0,2,0" Content="Toevoegen"></Button>
             <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="1" Height="30" Margin="5,0,5,5" Padding="2,0,2,0" Content="Bewerken" IsEnabled="False"></Button>
             <Button x:Name="btnDelete" Grid.Row="1" Grid.Column="2" Height="30" Margin="0,0,5,5" Padding="2,0,2,0" Content="Verwijderen" IsEnabled="False"
@@ -108,7 +109,7 @@
             <Label Grid.Row="5" Margin="0,5,0,0" FontWeight="Medium" Content="Eerst gezien:"></Label>
             <Label Grid.Row="6" Margin="0,5,0,0" FontWeight="Medium" Content="Laatst gezien:"></Label>
             <Label Grid.Row="7" Margin="0,5,0,0" FontWeight="Medium" Content="Luchthavens:"></Label>
-            <Button x:Name="btnSave" Grid.Row="7" HorizontalAlignment="Left" Height="30" Content="Opslaan" Margin="5,0,0,0"></Button>
+            <Button x:Name="btnSave" Grid.Row="7" HorizontalAlignment="Center" Height="30" Width="100" Content="Opslaan"></Button>
 
             <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"></TextBox>
             <ComboBox x:Name="cmbType" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"></ComboBox>

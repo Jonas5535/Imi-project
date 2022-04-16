@@ -185,5 +185,11 @@ namespace Imi.Project.Wpf
                 ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
             }
         }
+
+        private async void BtnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            ResetFeedback();
+            await LoadAircrafts();
+        }
     }
 }
