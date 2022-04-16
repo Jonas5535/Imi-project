@@ -43,15 +43,9 @@ namespace Imi.Project.Api.Core.Services
                 return dto;
             }
 
-            if (requestDto.FirstSeen > DateTime.Today)
+            if (requestDto.LastSeen < requestDto.FirstSeen)
             {
-                dto.AddBadRequest($"The date of first seen cannot be later than {DateTime.Today.ToShortDateString()}");
-                return dto;
-            }
-
-            if (requestDto.LastSeen < requestDto.FirstSeen || requestDto.LastSeen > DateTime.Today)
-            {
-                dto.AddBadRequest($"The date of last seen cannot be earlier than the date of first seen and cannot be later than {DateTime.Today.ToShortDateString()}");
+                dto.AddBadRequest($"The date of last seen cannot be earlier than the date of first seen");
                 return dto;
             }
 
@@ -173,15 +167,9 @@ namespace Imi.Project.Api.Core.Services
                 return dto;
             }
 
-            if (requestDto.FirstSeen > DateTime.Today)
+            if (requestDto.LastSeen < requestDto.FirstSeen)
             {
-                dto.AddBadRequest($"The date of first seen cannot be later than {DateTime.Today.ToShortDateString()}");
-                return dto;
-            }
-
-            if (requestDto.LastSeen < requestDto.FirstSeen || requestDto.LastSeen > DateTime.Today)
-            {
-                dto.AddBadRequest($"The date of last seen cannot be earlier than the date of first seen and cannot be later than {DateTime.Today.ToShortDateString()}");
+                dto.AddBadRequest($"The date of last seen cannot be earlier than the date of first seen");
                 return dto;
             }
 
