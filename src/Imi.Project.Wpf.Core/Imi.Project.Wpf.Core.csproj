@@ -13,8 +13,4 @@
     <ProjectReference Include="..\Imi.Project.Shared\Imi.Project.Shared.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Validators\" />
-  </ItemGroup>
-
 </Project>
