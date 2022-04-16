@@ -1,4 +1,5 @@
-﻿using Imi.Project.Wpf.Core.ApiModels;
+﻿using Imi.Project.Shared;
+using Imi.Project.Wpf.Core.ApiModels;
 using System;
 using System.Collections.Generic;
 using System.IO;
