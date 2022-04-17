@@ -1,4 +1,5 @@
-﻿using Imi.Project.Wpf.Core;
+﻿using FluentValidation;
+using Imi.Project.Wpf.Core;
 using Imi.Project.Wpf.Core.ApiModels;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ namespace Imi.Project.Wpf
     public partial class MainWindow : Window
     {
         private readonly IAircraftService _aircraftService;
+        private readonly IValidator<ApiAircraftRequest> _aircraftValidator;
         private List<ComboBox> _comboBoxes = new List<ComboBox>();
         private ApiAircraftRequest _currentAircraft;
         private bool _isnew = true;
@@ -24,10 +26,11 @@ namespace Imi.Project.Wpf
         private IEnumerable<ApiAircraftTypeResponse> _typeComboBoxContent;
         private IEnumerable<ApiAirlineResponse> _airlineComboBoxContent;
 
-        public MainWindow(IAircraftService aircraftService)
+        public MainWindow(IAircraftService aircraftService, IValidator<ApiAircraftRequest> aircraftValidator)
         {
             InitializeComponent();
             _aircraftService = aircraftService;
+            _aircraftValidator = aircraftValidator;
         }
 
         #region General methods
@@ -286,6 +289,64 @@ namespace Imi.Project.Wpf
                 return null;
             }
         }
+
+        private bool Validate(ApiAircraftRequest aircraft)
+        {
+            lblRegistrationError.Content = "";
+            lblRegistrationError.Visibility = Visibility.Collapsed;
+            lblTypeError.Content = "";
+            lblTypeError.Visibility = Visibility.Collapsed;
+            lblAirlineError.Content = "";
+            lblAirlineError.Visibility = Visibility.Collapsed;
+            lblFirstSeenError.Content = "";
+            lblFirstSeenError.Visibility = Visibility.Collapsed;
+            lblLastSeenError.Content = "";
+            lblLastSeenError.Visibility = Visibility.Collapsed;
+            actAirportError.Text = "";
+            lblAirportError.Visibility = Visibility.Collapsed;
+
+            ValidationContext<ApiAircraftRequest> validationContext = new ValidationContext<ApiAircraftRequest>(aircraft);
+            FluentValidation.Results.ValidationResult validationResult = _aircraftValidator.Validate(validationContext);
+
+            foreach (var error in validationResult.Errors)
+            {
+                if (error.PropertyName == nameof(aircraft.Registration))
+                {
+                    lblRegistrationError.Content = error.ErrorMessage;
+                    lblRegistrationError.Visibility = Visibility.Visible;
+                }
+                else if (error.PropertyName == nameof(aircraft.AircraftTypeId))
+                {
+                    lblTypeError.Content = error.ErrorMessage;
+                    lblTypeError.Visibility = Visibility.Visible;
+                }
+                else if (error.PropertyName == nameof(aircraft.AirlineId))
+                {
+                    lblAirlineError.Content = error.ErrorMessage;
+                    lblAirlineError.Visibility = Visibility.Visible;
+                }
+                else if (error.PropertyName == nameof(aircraft.FirstSeen))
+                {
+                    lblFirstSeenError.Content = error.ErrorMessage;
+                    lblFirstSeenError.Visibility = Visibility.Visible;
+                }
+                else if (error.PropertyName == nameof(aircraft.LastSeen))
+                {
+                    lblLastSeenError.Content = error.ErrorMessage;
+                    lblLastSeenError.Visibility = Visibility.Visible;
+                }
+                else if (error.PropertyName == nameof(aircraft.AirportIds))
+                {
+                    actAirportError.Text = error.ErrorMessage;
+                    lblAirportError.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    throw new NotImplementedException($"The property {error.PropertyName} is not handled");
+                }
+            }
+            return validationResult.IsValid;
+        }
         #endregion
 
         #region EventHandlers
@@ -405,6 +466,11 @@ namespace Imi.Project.Wpf
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             SaveAircraftState();
+
+            if (Validate(_currentAircraft))
+            {
+
+            }
         }
         #endregion
     }
