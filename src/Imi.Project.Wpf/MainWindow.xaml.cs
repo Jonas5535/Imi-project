@@ -20,7 +20,9 @@ namespace Imi.Project.Wpf
         private List<ComboBox> comboBoxes = new List<ComboBox>();
         private ApiAircraftRequest _currentAircraft;
         private bool _isnew = true;
-        private IEnumerable<ApiAirportResponse> airportComboboxContent;
+        private IEnumerable<ApiAirportResponse> _airportComboBoxContent; // These are needed to be able to set the selecteditem of the comboboxes in the form
+        private IEnumerable<ApiAircraftTypeResponse> _typeComboBoxContent;
+        private IEnumerable<ApiAirlineResponse> _airlineComboBoxContent;
 
         public MainWindow(IAircraftService aircraftService)
         {
@@ -37,7 +39,7 @@ namespace Imi.Project.Wpf
             stAirportPickers.Children.Add(stackPanel);
 
             ComboBox comboBox = new ComboBox { Height = 25.96, Width = 220, VerticalAlignment = VerticalAlignment.Top };
-            comboBox.ItemsSource = airportComboboxContent;
+            comboBox.ItemsSource = _airportComboBoxContent;
 
             Button button = new Button { Content = "X", Width = 30, Margin = new Thickness(5, 0, 0, 0) };
             button.Click += RemoveButton_Clicked;
@@ -123,30 +125,30 @@ namespace Imi.Project.Wpf
         #endregion
 
         #region FormMethods
-        private async Task<bool> PopulateComboboxes()
+        private async Task<bool> PopulateComboBoxes()
         {
             bool isSucces;
 
-            isSucces = await PopulateAirlineCombobox();
+            isSucces = await PopulateAirlineComboBox();
             if (!isSucces) return isSucces;
 
-            isSucces = await PopulateTypeComboboxes();
+            isSucces = await PopulateTypeComboBox();
             if (!isSucces) return isSucces;
 
-            isSucces = await PopulateAirportComboboxes();
+            isSucces = await PopulateAirportComboBox();
             if (!isSucces) return isSucces;
 
             return isSucces;
         }
 
-        private async Task<bool> PopulateAirportComboboxes()
+        private async Task<bool> PopulateAirportComboBox()
         {
             ApiBaseResponse<IEnumerable<ApiAirportResponse>> response = await _aircraftService.GetAirports();
 
             if (response.Status == HttpStatusCode.OK)
             {
                 cmbAirport.ItemsSource = response.Data;
-                airportComboboxContent = response.Data;
+                _airportComboBoxContent = response.Data;
                 return true;
             }
             else
@@ -156,13 +158,14 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private async Task<bool> PopulateTypeComboboxes()
+        private async Task<bool> PopulateTypeComboBox()
         {
             ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>> response = await _aircraftService.GetAircraftTypes();
 
             if (response.Status == HttpStatusCode.OK)
             {
                 cmbType.ItemsSource = response.Data;
+                _typeComboBoxContent = response.Data;
                 return true;
             }
             else
@@ -172,13 +175,14 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private async Task<bool> PopulateAirlineCombobox()
+        private async Task<bool> PopulateAirlineComboBox()
         {
             ApiBaseResponse<IEnumerable<ApiAirlineResponse>> response = await _aircraftService.GetAirlines();
 
             if (response.Status == HttpStatusCode.OK)
             {
                 cmbAirline.ItemsSource = response.Data;
+                _airlineComboBoxContent = response.Data;
                 return true;
             }
             else
@@ -190,7 +194,7 @@ namespace Imi.Project.Wpf
 
         private async Task<bool> InitializeForm(ApiAircraftListResponse? aircraft)
         {
-            bool isSucces = await PopulateComboboxes();
+            bool isSucces = await PopulateComboBoxes();
             if (!isSucces) return isSucces;
 
             ApiAircraftDetailResponse requestedAircraft;
@@ -206,39 +210,33 @@ namespace Imi.Project.Wpf
             }
             else
             {
-                requestedAircraft = new ApiAircraftDetailResponse();
-                LoadAircraftState(requestedAircraft);
                 return true;
             }
         }
 
         private void LoadAircraftState(ApiAircraftDetailResponse requestedAircraft)
         {
-            lblRegistration.Content = requestedAircraft.Registration;
-            cmbType.SelectedItem = requestedAircraft.AircraftType;
-            cmbAirline.SelectedItem = requestedAircraft.Airline;
+            txtRegistration.Text = requestedAircraft.Registration;
+
+            ApiAircraftTypeResponse? selectedType = _typeComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.AircraftType.Id));
+            cmbType.SelectedItem = selectedType;
+
+            ApiAirlineResponse? selectedAirline = _airlineComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airline.Id));
+            cmbAirline.SelectedItem = selectedAirline;
+
             tbSpecialLivery.IsChecked = requestedAircraft.HasSpecialLivery;
 
-            if (requestedAircraft.FirstSeen != default)
-            {
-                dpFirstSeen.SelectedDate = requestedAircraft.FirstSeen;
-            }
-            else dpFirstSeen.SelectedDate = DateTime.Today;
+            dpFirstSeen.SelectedDate = requestedAircraft.FirstSeen;
 
-            if (requestedAircraft.LastSeen != default)
-            {
-                dpLastSeen.SelectedDate = requestedAircraft.LastSeen;
-            }
-            else dpLastSeen.SelectedDate = DateTime.Today;
+            dpLastSeen.SelectedDate = requestedAircraft.LastSeen;
 
-            if (!_isnew)
+            ApiAirportResponse? selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports.FirstOrDefault().Id));
+            cmbAirport.SelectedItem = selectedAirport;
+            for (int i = 1; i < requestedAircraft.Airports.Count; i++)
             {
-                cmbAirport.SelectedItem = requestedAircraft.Airports.FirstOrDefault();
-                for (int i = 1; i < requestedAircraft.Airports.Count; i++)
-                {
-                    ComboBox newComboBox = AddComboBox();
-                    newComboBox.SelectedItem = requestedAircraft.Airports[i];
-                }
+                ComboBox newComboBox = AddComboBox();
+                selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports[i].Id));
+                newComboBox.SelectedItem = selectedAirport;
             }
         }
 
@@ -353,6 +351,29 @@ namespace Imi.Project.Wpf
                 btnRefresh.IsEnabled = false;
             }
         }
+
+        private async void BtnEdit_Click(object sender, RoutedEventArgs e)
+        {
+            bool isSucces = await InitializeForm(lstAircrafts.SelectedItem as ApiAircraftListResponse);
+
+            if (!isSucces)
+            {
+                ShowFeedback(true, "Fout", "Het formulier kon niet geladen worden");
+            }
+            else
+            {
+                grdForm.IsEnabled = true;
+                btnAdd.IsEnabled = false;
+                btnEdit.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+                btnRefresh.IsEnabled = false;
+            }
+        }
         #endregion
+
+        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(cmbType.SelectedItem.ToString());
+        }
     }
 }
