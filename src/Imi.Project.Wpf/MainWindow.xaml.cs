@@ -469,7 +469,14 @@ namespace Imi.Project.Wpf
 
             if (Validate(_currentAircraft))
             {
+                if (_isnew)
+                {
 
+                }
+                else
+                {
+
+                }
             }
         }
         #endregion

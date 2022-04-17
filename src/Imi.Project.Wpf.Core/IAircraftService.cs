@@ -12,5 +12,6 @@ namespace Imi.Project.Wpf.Core
         Task<ApiBaseResponse<IEnumerable<ApiAirlineResponse>>> GetAirlines();
         Task<ApiBaseResponse<IEnumerable<ApiAirportResponse>>> GetAirports();
         Task<ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>>> GetAircraftTypes();
+        Task<ApiBaseResponse<object>> AddAsync(ApiAircraftRequest aircraft);
     }
 }

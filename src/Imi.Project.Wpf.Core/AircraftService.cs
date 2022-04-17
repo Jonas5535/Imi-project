@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -298,6 +299,53 @@ namespace Imi.Project.Wpf.Core
 
             response.Status = apiResponse.StatusCode;
             response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = errorMessage;
+            return response;
+        }
+
+        public async Task<ApiBaseResponse<object>> AddAsync(ApiAircraftRequest aircraft)
+        {
+            ApiBaseResponse<object> response = new();
+            HttpResponseMessage addRequest;
+
+            string serializedContent = JsonSerializer.Serialize(aircraft);
+            StringContent content = new StringContent(serializedContent);
+
+            try
+            {
+                addRequest = await _httpClient.PostAsync(_aircraftEndpoint, content);
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het opslaan van de data";
+                return response;
+            }
+
+            if (addRequest.IsSuccessStatusCode)
+            {
+                response.Status = addRequest.StatusCode;
+                return response;
+            }
+
+            using Stream responseStream = await addRequest.Content.ReadAsStreamAsync();
+
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
+
+            response.Status = addRequest.StatusCode;
+            response.Reason = addRequest.ReasonPhrase;
             response.ErrorMessage = errorMessage;
             return response;
         }
