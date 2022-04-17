@@ -118,13 +118,75 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private async Task PopulateComboboxes()
+        private async Task<bool> PopulateComboboxes()
         {
-            
+            bool isSucces;
+
+            isSucces = await PopulateAirlineCombobox();
+            if (!isSucces) return isSucces;
+
+            isSucces = await PopulateTypeComboboxes();
+            if (!isSucces) return isSucces;
+
+            isSucces = await PopulateAirportComboboxes();
+            if(!isSucces) return isSucces;
+
+            return isSucces;
+        }
+
+        private async Task<bool> PopulateAirportComboboxes()
+        {
+            ApiBaseResponse<IEnumerable<ApiAirportResponse>> response = await _aircraftService.GetAirports();
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+                cmbAirport.ItemsSource = response.Data;
+                return true;
+            }
+            else
+            {
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                return false;
+            }
+        }
+
+        private async Task<bool> PopulateTypeComboboxes()
+        {
+            ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>> response = await _aircraftService.GetAircraftTypes();
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+                cmbType.ItemsSource = response.Data;
+                return true;
+            }
+            else
+            {
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                return false;
+            }
+        }
+
+        private async Task<bool> PopulateAirlineCombobox()
+        {
+            ApiBaseResponse<IEnumerable<ApiAirlineResponse>> response = await _aircraftService.GetAirlines();
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+                cmbAirline.ItemsSource = response.Data;
+                return true;
+            }
+            else
+            {
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                return false;
+            }
         }
 
         private async Task<bool> InitializeForm(ApiAircraftListResponse? aircraft)
         {
+            bool isSucces = await PopulateComboboxes();
+            if (!isSucces) return isSucces;
+            
             ApiAircraftDetailResponse requestedAircraft;
 
             if (aircraft != null)
@@ -243,8 +305,6 @@ namespace Imi.Project.Wpf
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            await PopulateComboboxes();
-
             bool isSucces = await InitializeForm(null);
 
             if (!isSucces)
