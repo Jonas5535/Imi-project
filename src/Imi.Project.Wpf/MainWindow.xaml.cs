@@ -17,7 +17,7 @@ namespace Imi.Project.Wpf
     public partial class MainWindow : Window
     {
         private readonly IAircraftService _aircraftService;
-        private List<ComboBox> comboBoxes = new List<ComboBox>();
+        private List<ComboBox> _comboBoxes = new List<ComboBox>();
         private ApiAircraftRequest _currentAircraft;
         private bool _isnew = true;
         private IEnumerable<ApiAirportResponse> _airportComboBoxContent; // These are needed to be able to set the selecteditem of the comboboxes in the form
@@ -46,7 +46,7 @@ namespace Imi.Project.Wpf
 
             stackPanel.Children.Add(comboBox);
             stackPanel.Children.Add(button);
-            comboBoxes.Add(comboBox);
+            _comboBoxes.Add(comboBox);
 
             return comboBox;
         }
@@ -225,9 +225,7 @@ namespace Imi.Project.Wpf
             cmbAirline.SelectedItem = selectedAirline;
 
             tbSpecialLivery.IsChecked = requestedAircraft.HasSpecialLivery;
-
             dpFirstSeen.SelectedDate = requestedAircraft.FirstSeen;
-
             dpLastSeen.SelectedDate = requestedAircraft.LastSeen;
 
             ApiAirportResponse? selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports.FirstOrDefault().Id));
@@ -237,6 +235,40 @@ namespace Imi.Project.Wpf
                 ComboBox newComboBox = AddComboBox();
                 selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports[i].Id));
                 newComboBox.SelectedItem = selectedAirport;
+            }
+        }
+
+        private void SaveAircraftState()
+        {
+            ApiAircraftTypeResponse? type = cmbType.SelectedItem as ApiAircraftTypeResponse;
+            ApiAirlineResponse? airline = cmbAirline.SelectedItem as ApiAirlineResponse;
+
+            _currentAircraft = new ApiAircraftRequest
+            {
+                Registration = txtRegistration.Text,
+                AircraftTypeId = Guid.Parse(type.Id),
+                AirlineId = Guid.Parse(airline.Id),
+                HasSpecialLivery = tbSpecialLivery.IsChecked,
+                FirstSeen = dpFirstSeen.SelectedDate,
+                LastSeen = dpLastSeen.SelectedDate,
+                AirportIds = new List<Guid>()
+            };
+
+            if (cmbAirport.SelectedItem != null)
+            {
+                foreach (var comboBox in _comboBoxes)
+                {
+                    ComboBox lastComboBox = _comboBoxes.LastOrDefault();
+
+                    if (comboBox == lastComboBox && lastComboBox.SelectedItem == null)
+                        break;
+
+                    if (comboBox.SelectedItem != null)
+                    {
+                        ApiAirportResponse? airport = cmbAirport.SelectedItem as ApiAirportResponse;
+                        _currentAircraft.AirportIds.Add(Guid.Parse(airport.Id));
+                    }
+                }
             }
         }
 
@@ -285,7 +317,7 @@ namespace Imi.Project.Wpf
             StackPanel parent = currentButton.Parent as StackPanel;
 
             ComboBox comboBox = parent.Children.OfType<ComboBox>().FirstOrDefault();
-            comboBoxes.Remove(comboBox);
+            _comboBoxes.Remove(comboBox);
 
             parent.Children.Clear();
             stAirportPickers.Children.Remove(parent);
@@ -369,11 +401,11 @@ namespace Imi.Project.Wpf
                 btnRefresh.IsEnabled = false;
             }
         }
-        #endregion
 
         private void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(cmbType.SelectedItem.ToString());
+            SaveAircraftState();
         }
+        #endregion
     }
 }
