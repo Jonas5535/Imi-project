@@ -333,6 +333,7 @@ namespace Imi.Project.Wpf.Core
             if (addRequest.IsSuccessStatusCode)
             {
                 response.Status = addRequest.StatusCode;
+                response.Reason = addRequest.ReasonPhrase;
                 return response;
             }
 

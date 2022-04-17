@@ -1,4 +1,6 @@
-﻿using Imi.Project.Wpf.Core;
+﻿using FluentValidation;
+using Imi.Project.Mobile.Core.Domain.Validators;
+using Imi.Project.Wpf.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -32,6 +34,7 @@ namespace Imi.Project.Wpf
             services.AddHttpClient();
             services.AddTransient(typeof(MainWindow));
             services.AddScoped<IAircraftService, AircraftService>();
+            //services.AddScoped<IValidator, AircraftValidator>();
         }
     }
 }

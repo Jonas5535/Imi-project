@@ -18,7 +18,7 @@ namespace Imi.Project.Wpf
     public partial class MainWindow : Window
     {
         private readonly IAircraftService _aircraftService;
-        private readonly IValidator<ApiAircraftRequest> _aircraftValidator;
+        //private readonly IValidator<ApiAircraftRequest> _aircraftValidator;
         private List<ComboBox> _comboBoxes = new List<ComboBox>();
         private ApiAircraftRequest _currentAircraft;
         private bool _isnew = true;
@@ -26,11 +26,11 @@ namespace Imi.Project.Wpf
         private IEnumerable<ApiAircraftTypeResponse> _typeComboBoxContent;
         private IEnumerable<ApiAirlineResponse> _airlineComboBoxContent;
 
-        public MainWindow(IAircraftService aircraftService, IValidator<ApiAircraftRequest> aircraftValidator)
+        public MainWindow(IAircraftService aircraftService/*, IValidator<ApiAircraftRequest> aircraftValidator*/)
         {
             InitializeComponent();
             _aircraftService = aircraftService;
-            _aircraftValidator = aircraftValidator;
+            //_aircraftValidator = aircraftValidator;
         }
 
         #region General methods
@@ -290,62 +290,69 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private bool Validate(ApiAircraftRequest aircraft)
+        //private bool Validate(ApiAircraftRequest aircraft)
+        //{
+        //    lblRegistrationError.Content = "";
+        //    lblRegistrationError.Visibility = Visibility.Collapsed;
+        //    lblTypeError.Content = "";
+        //    lblTypeError.Visibility = Visibility.Collapsed;
+        //    lblAirlineError.Content = "";
+        //    lblAirlineError.Visibility = Visibility.Collapsed;
+        //    lblFirstSeenError.Content = "";
+        //    lblFirstSeenError.Visibility = Visibility.Collapsed;
+        //    lblLastSeenError.Content = "";
+        //    lblLastSeenError.Visibility = Visibility.Collapsed;
+        //    actAirportError.Text = "";
+        //    lblAirportError.Visibility = Visibility.Collapsed;
+
+        //    ValidationContext<ApiAircraftRequest> validationContext = new ValidationContext<ApiAircraftRequest>(aircraft);
+        //    FluentValidation.Results.ValidationResult validationResult = _aircraftValidator.Validate(validationContext);
+
+        //    foreach (var error in validationResult.Errors)
+        //    {
+        //        if (error.PropertyName == nameof(aircraft.Registration))
+        //        {
+        //            lblRegistrationError.Content = error.ErrorMessage;
+        //            lblRegistrationError.Visibility = Visibility.Visible;
+        //        }
+        //        else if (error.PropertyName == nameof(aircraft.AircraftTypeId))
+        //        {
+        //            lblTypeError.Content = error.ErrorMessage;
+        //            lblTypeError.Visibility = Visibility.Visible;
+        //        }
+        //        else if (error.PropertyName == nameof(aircraft.AirlineId))
+        //        {
+        //            lblAirlineError.Content = error.ErrorMessage;
+        //            lblAirlineError.Visibility = Visibility.Visible;
+        //        }
+        //        else if (error.PropertyName == nameof(aircraft.FirstSeen))
+        //        {
+        //            lblFirstSeenError.Content = error.ErrorMessage;
+        //            lblFirstSeenError.Visibility = Visibility.Visible;
+        //        }
+        //        else if (error.PropertyName == nameof(aircraft.LastSeen))
+        //        {
+        //            lblLastSeenError.Content = error.ErrorMessage;
+        //            lblLastSeenError.Visibility = Visibility.Visible;
+        //        }
+        //        else if (error.PropertyName == nameof(aircraft.AirportIds))
+        //        {
+        //            actAirportError.Text = error.ErrorMessage;
+        //            lblAirportError.Visibility = Visibility.Visible;
+        //        }
+        //        else
+        //        {
+        //            throw new NotImplementedException($"The property {error.PropertyName} is not handled");
+        //        }
+        //    }
+        //    return validationResult.IsValid;
+        //}
+
+        private void ResetForm()
         {
-            lblRegistrationError.Content = "";
-            lblRegistrationError.Visibility = Visibility.Collapsed;
-            lblTypeError.Content = "";
-            lblTypeError.Visibility = Visibility.Collapsed;
-            lblAirlineError.Content = "";
-            lblAirlineError.Visibility = Visibility.Collapsed;
-            lblFirstSeenError.Content = "";
-            lblFirstSeenError.Visibility = Visibility.Collapsed;
-            lblLastSeenError.Content = "";
-            lblLastSeenError.Visibility = Visibility.Collapsed;
-            actAirportError.Text = "";
-            lblAirportError.Visibility = Visibility.Collapsed;
-
-            ValidationContext<ApiAircraftRequest> validationContext = new ValidationContext<ApiAircraftRequest>(aircraft);
-            FluentValidation.Results.ValidationResult validationResult = _aircraftValidator.Validate(validationContext);
-
-            foreach (var error in validationResult.Errors)
-            {
-                if (error.PropertyName == nameof(aircraft.Registration))
-                {
-                    lblRegistrationError.Content = error.ErrorMessage;
-                    lblRegistrationError.Visibility = Visibility.Visible;
-                }
-                else if (error.PropertyName == nameof(aircraft.AircraftTypeId))
-                {
-                    lblTypeError.Content = error.ErrorMessage;
-                    lblTypeError.Visibility = Visibility.Visible;
-                }
-                else if (error.PropertyName == nameof(aircraft.AirlineId))
-                {
-                    lblAirlineError.Content = error.ErrorMessage;
-                    lblAirlineError.Visibility = Visibility.Visible;
-                }
-                else if (error.PropertyName == nameof(aircraft.FirstSeen))
-                {
-                    lblFirstSeenError.Content = error.ErrorMessage;
-                    lblFirstSeenError.Visibility = Visibility.Visible;
-                }
-                else if (error.PropertyName == nameof(aircraft.LastSeen))
-                {
-                    lblLastSeenError.Content = error.ErrorMessage;
-                    lblLastSeenError.Visibility = Visibility.Visible;
-                }
-                else if (error.PropertyName == nameof(aircraft.AirportIds))
-                {
-                    actAirportError.Text = error.ErrorMessage;
-                    lblAirportError.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    throw new NotImplementedException($"The property {error.PropertyName} is not handled");
-                }
-            }
-            return validationResult.IsValid;
+            txtRegistration.Text = "";
+            dpFirstSeen.SelectedDate = DateTime.Now;
+            dpLastSeen.SelectedDate = DateTime.Now;
         }
         #endregion
 
@@ -463,21 +470,31 @@ namespace Imi.Project.Wpf
             }
         }
 
-        private void BtnSave_Click(object sender, RoutedEventArgs e)
+        private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
             SaveAircraftState();
 
-            if (Validate(_currentAircraft))
-            {
-                if (_isnew)
-                {
-
-                }
-                else
-                {
-
-                }
-            }
+            //if (Validate(_currentAircraft)) error met di van validator
+            //{
+            //    if (_isnew)
+            //    {
+            //        var response = await _aircraftService.AddAsync(_currentAircraft);
+            //        if (response.Status == HttpStatusCode.OK)
+            //        {
+            //            ShowFeedback(false, response.Reason.ToString(), "Vliegtuig succesvol toegevoegd");
+            //            await LoadAircrafts();
+            //            ResetForm();
+            //        }
+            //        else
+            //        {
+            //            ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        //geen tijd
+            //    }
+            //}
         }
         #endregion
     }
