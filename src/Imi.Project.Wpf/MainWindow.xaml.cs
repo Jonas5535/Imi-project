@@ -118,6 +118,11 @@ namespace Imi.Project.Wpf
             }
         }
 
+        private async Task PopulateComboboxes()
+        {
+            
+        }
+
         private async Task<bool> InitializeForm(ApiAircraftListResponse? aircraft)
         {
             ApiAircraftDetailResponse requestedAircraft;
@@ -141,7 +146,7 @@ namespace Imi.Project.Wpf
 
         private void LoadAircraftState(ApiAircraftDetailResponse requestedAircraft)
         {
-            throw new NotImplementedException();
+            lblRegistration.Content = requestedAircraft.Registration;
         }
 
         private async Task<ApiAircraftDetailResponse?> GetAircraftForForm(ApiAircraftListResponse aircraft)
@@ -238,6 +243,8 @@ namespace Imi.Project.Wpf
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+            await PopulateComboboxes();
+
             bool isSucces = await InitializeForm(null);
 
             if (!isSucces)
@@ -253,5 +260,6 @@ namespace Imi.Project.Wpf
                 btnRefresh.IsEnabled = false;
             }
         }
+
     }
 }

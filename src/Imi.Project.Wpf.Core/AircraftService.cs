@@ -160,5 +160,146 @@ namespace Imi.Project.Wpf.Core
             response.ErrorMessage = errorMessage;
             return response;
         }
+
+        public async Task<ApiBaseResponse<IEnumerable<ApiAirlineResponse>>> GetAirlines()
+        {
+            ApiBaseResponse<IEnumerable<ApiAirlineResponse>> response = new();
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await _httpClient.GetAsync("Airlines");
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                return response;
+            }
+
+            using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAirlineResponse>>(responseStream);
+
+                response.Data = deserializedResponse;
+                response.Status = apiResponse.StatusCode;
+                return response;
+            }
+
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
+
+            response.Status = apiResponse.StatusCode;
+            response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = errorMessage;
+            return response;
+        }
+
+        public async Task<ApiBaseResponse<IEnumerable<ApiAirportResponse>>> GetAirports()
+        {
+            ApiBaseResponse<IEnumerable<ApiAirportResponse>> response = new();
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await _httpClient.GetAsync("Airports");
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                return response;
+            }
+
+            using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAirportResponse>>(responseStream);
+
+                response.Data = deserializedResponse;
+                response.Status = apiResponse.StatusCode;
+                return response;
+            }
+
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
+
+            response.Status = apiResponse.StatusCode;
+            response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = errorMessage;
+            return response;
+        }
+
+        public async Task<ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>>> GetAircraftTypes()
+        {
+            ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>> response = new();
+            HttpResponseMessage apiResponse;
+
+            try
+            {
+                apiResponse = await _httpClient.GetAsync("AircraftTypes");
+            }
+            catch (HttpRequestException ex)
+            {
+                response.Status = HttpStatusCode.ServiceUnavailable;
+                response.Reason = "Server niet beschikbaar";
+                response.ErrorMessage = ex.Message;
+                return response;
+            }
+            catch (Exception)
+            {
+                response.Status = HttpStatusCode.InternalServerError;
+                response.Reason = "Fout!";
+                response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                return response;
+            }
+
+            using Stream responseStream = await apiResponse.Content.ReadAsStreamAsync();
+
+            if (apiResponse.IsSuccessStatusCode)
+            {
+                var deserializedResponse = await JsonSerializer.DeserializeAsync<IEnumerable<ApiAircraftTypeResponse>>(responseStream);
+
+                response.Data = deserializedResponse;
+                response.Status = apiResponse.StatusCode;
+                return response;
+            }
+
+            string errorMessage;
+            using (StreamReader reader = new(responseStream))
+            {
+                errorMessage = await reader.ReadToEndAsync();
+            }
+
+            response.Status = apiResponse.StatusCode;
+            response.Reason = apiResponse.ReasonPhrase;
+            response.ErrorMessage = errorMessage;
+            return response;
+        }
     }
 }
