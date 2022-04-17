@@ -20,6 +20,7 @@ namespace Imi.Project.Wpf
         private List<ComboBox> comboBoxes = new List<ComboBox>();
         private ApiAircraftRequest _currentAircraft;
         private bool _isnew = true;
+        private IEnumerable<ApiAirportResponse> airportComboboxContent;
 
         public MainWindow(IAircraftService aircraftService)
         {
@@ -27,6 +28,7 @@ namespace Imi.Project.Wpf
             _aircraftService = aircraftService;
         }
 
+        #region General methods
         private ComboBox AddComboBox()
         {
             // Add horizontal stackPanel to store combobox and button
@@ -35,6 +37,7 @@ namespace Imi.Project.Wpf
             stAirportPickers.Children.Add(stackPanel);
 
             ComboBox comboBox = new ComboBox { Height = 25.96, Width = 220, VerticalAlignment = VerticalAlignment.Top };
+            comboBox.ItemsSource = airportComboboxContent;
 
             Button button = new Button { Content = "X", Width = 30, Margin = new Thickness(5, 0, 0, 0) };
             button.Click += RemoveButton_Clicked;
@@ -117,7 +120,9 @@ namespace Imi.Project.Wpf
                 ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
             }
         }
+        #endregion
 
+        #region FormMethods
         private async Task<bool> PopulateComboboxes()
         {
             bool isSucces;
@@ -129,7 +134,7 @@ namespace Imi.Project.Wpf
             if (!isSucces) return isSucces;
 
             isSucces = await PopulateAirportComboboxes();
-            if(!isSucces) return isSucces;
+            if (!isSucces) return isSucces;
 
             return isSucces;
         }
@@ -141,6 +146,7 @@ namespace Imi.Project.Wpf
             if (response.Status == HttpStatusCode.OK)
             {
                 cmbAirport.ItemsSource = response.Data;
+                airportComboboxContent = response.Data;
                 return true;
             }
             else
@@ -186,7 +192,7 @@ namespace Imi.Project.Wpf
         {
             bool isSucces = await PopulateComboboxes();
             if (!isSucces) return isSucces;
-            
+
             ApiAircraftDetailResponse requestedAircraft;
 
             if (aircraft != null)
@@ -209,6 +215,31 @@ namespace Imi.Project.Wpf
         private void LoadAircraftState(ApiAircraftDetailResponse requestedAircraft)
         {
             lblRegistration.Content = requestedAircraft.Registration;
+            cmbType.SelectedItem = requestedAircraft.AircraftType;
+            cmbAirline.SelectedItem = requestedAircraft.Airline;
+            tbSpecialLivery.IsChecked = requestedAircraft.HasSpecialLivery;
+
+            if (requestedAircraft.FirstSeen != default)
+            {
+                dpFirstSeen.SelectedDate = requestedAircraft.FirstSeen;
+            }
+            else dpFirstSeen.SelectedDate = DateTime.Today;
+
+            if (requestedAircraft.LastSeen != default)
+            {
+                dpLastSeen.SelectedDate = requestedAircraft.LastSeen;
+            }
+            else dpLastSeen.SelectedDate = DateTime.Today;
+
+            if (!_isnew)
+            {
+                cmbAirport.SelectedItem = requestedAircraft.Airports.FirstOrDefault();
+                for (int i = 1; i < requestedAircraft.Airports.Count; i++)
+                {
+                    ComboBox newComboBox = AddComboBox();
+                    newComboBox.SelectedItem = requestedAircraft.Airports[i];
+                }
+            }
         }
 
         private async Task<ApiAircraftDetailResponse?> GetAircraftForForm(ApiAircraftListResponse aircraft)
@@ -225,7 +256,9 @@ namespace Imi.Project.Wpf
                 return null;
             }
         }
+        #endregion
 
+        #region EventHandlers
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ResetFeedback();
@@ -320,6 +353,6 @@ namespace Imi.Project.Wpf
                 btnRefresh.IsEnabled = false;
             }
         }
-
+        #endregion
     }
 }
