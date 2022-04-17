@@ -6,7 +6,7 @@
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         xmlns:system="clr-namespace:System;assembly=System.Runtime"
         mc:Ignorable="d"
-        Title="Avilection" MinHeight="450" MaxHeight="450" MinWidth="1000" MaxWidth="1000" Height="450" Width="1000"
+        Title="Avilection" MinHeight="550" MaxHeight="550" MinWidth="1000" MaxWidth="1000" Height="550" Width="1000"
         Loaded="Window_Loaded">
     <Grid>
         <Grid.ColumnDefinitions>
@@ -85,7 +85,7 @@
                 </ItemsControl>
             </ScrollViewer>
         </Grid>
-        <Grid Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Margin="5,0,5,0" IsEnabled="False">
+        <Grid x:Name="grdForm" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Margin="5,0,5,0" IsEnabled="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
@@ -109,15 +109,24 @@
             <Label Grid.Row="5" Margin="0,5,0,0" FontWeight="Medium" Content="Eerst gezien:"></Label>
             <Label Grid.Row="6" Margin="0,5,0,0" FontWeight="Medium" Content="Laatst gezien:"></Label>
             <Label Grid.Row="7" Margin="0,5,0,0" FontWeight="Medium" Content="Luchthavens:"></Label>
-            <Button x:Name="btnSave" Grid.Row="7" HorizontalAlignment="Center" Height="30" Width="100" Content="Opslaan"></Button>
+            <Button x:Name="btnSave" Grid.Row="7" VerticalAlignment="Bottom" Height="30" Width="100" Margin="0,0,0,15" Content="Opslaan"></Button>
 
-            <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Margin="0,5,0,0"></TextBox>
-            <ComboBox x:Name="cmbType" Grid.Row="2" Grid.Column="1" Margin="0,5,0,0"></ComboBox>
-            <ComboBox x:Name="cmbAirline" Grid.Row="3" Grid.Column="1" Margin="0,5,0,0"></ComboBox>
+            <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormControl}"></TextBox>
+            <Label x:Name="lblRegistrationError" Grid.Row="1" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <ComboBox x:Name="cmbType" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormControl}"></ComboBox>
+            <Label x:Name="lblTypeError" Grid.Row="2" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <ComboBox x:Name="cmbAirline" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormControl}"></ComboBox>
+            <Label x:Name="lblAirlineError" Grid.Row="3" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
             <ToggleButton x:Name="tbSpecialLivery" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0" Content="Nee"
                           Checked="TbSpecialLivery_Checked" Unchecked="TbSpecialLivery_Unchecked"></ToggleButton>
-            <DatePicker x:Name="dpFirstSeen" Grid.Row="5" Grid.Column="1" Margin="0,5,0,0" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
-            <DatePicker x:Name="dpLastSeen" Grid.Row="6" Grid.Column="1" Margin="0,5,0,0" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <DatePicker x:Name="dpFirstSeen" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormControl}" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <Label x:Name="lblFirstSeenError" Grid.Row="5" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <DatePicker x:Name="dpLastSeen" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormControl}" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <Label x:Name="lblLastSeenError" Grid.Row="6" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <Label x:Name="lblAirportError" Grid.Row="7" Grid.Column="0" Height="55" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="10" Foreground="Orange"
+                   Visibility="Collapsed">
+                <AccessText x:Name="actAirportError" TextWrapping="Wrap" Height="45" Width="107"/>
+            </Label>
             <ScrollViewer Grid.Row="7" Grid.Column="1" Margin="0,5,0,0" VerticalScrollBarVisibility="Auto">
                 <StackPanel>
                     <StackPanel x:Name="stAirportPickers">
@@ -127,6 +136,6 @@
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <Label x:Name="lblFeedback" Grid.Row="2"></Label>
+        <Label x:Name="lblFeedback" Grid.Row="2" Margin="0,0,5,0"></Label>
     </Grid>
 </Window>
