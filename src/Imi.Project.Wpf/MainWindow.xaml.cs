@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Wpf.Core;
 using Imi.Project.Wpf.Core.ApiModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -17,6 +18,8 @@ namespace Imi.Project.Wpf
     {
         private readonly IAircraftService _aircraftService;
         private List<ComboBox> comboBoxes = new List<ComboBox>();
+        private ApiAircraftRequest _currentAircraft;
+        private bool _isnew = true;
 
         public MainWindow(IAircraftService aircraftService)
         {
@@ -115,6 +118,47 @@ namespace Imi.Project.Wpf
             }
         }
 
+        private async Task<bool> InitializeForm(ApiAircraftListResponse? aircraft)
+        {
+            ApiAircraftDetailResponse requestedAircraft;
+
+            if (aircraft != null)
+            {
+                _isnew = false;
+                requestedAircraft = await GetAircraftForForm(aircraft);
+                if (requestedAircraft == null) return false;
+                else lblFormTitle.Content = $"{requestedAircraft.Registration} bewerken";
+                LoadAircraftState(requestedAircraft);
+                return true;
+            }
+            else
+            {
+                requestedAircraft = new ApiAircraftDetailResponse();
+                LoadAircraftState(requestedAircraft);
+                return true;
+            }
+        }
+
+        private void LoadAircraftState(ApiAircraftDetailResponse requestedAircraft)
+        {
+            throw new NotImplementedException();
+        }
+
+        private async Task<ApiAircraftDetailResponse?> GetAircraftForForm(ApiAircraftListResponse aircraft)
+        {
+            ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
+
+            if (response.Status == HttpStatusCode.OK)
+            {
+                return response.Data;
+            }
+            else
+            {
+                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                return null;
+            }
+        }
+
         private async void Window_Loaded(object sender, RoutedEventArgs e)
         {
             ResetFeedback();
@@ -190,6 +234,24 @@ namespace Imi.Project.Wpf
         {
             ResetFeedback();
             await LoadAircrafts();
+        }
+
+        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            bool isSucces = await InitializeForm(null);
+
+            if (!isSucces)
+            {
+                ShowFeedback(true, "Fout", "Het formulier kon niet geladen worden");
+            }
+            else
+            {
+                grdForm.IsEnabled = true;
+                btnAdd.IsEnabled = false;
+                btnEdit.IsEnabled = false;
+                btnDelete.IsEnabled = false;
+                btnRefresh.IsEnabled = false;
+            }
         }
     }
 }
