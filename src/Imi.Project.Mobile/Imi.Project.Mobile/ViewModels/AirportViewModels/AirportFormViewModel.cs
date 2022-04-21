@@ -260,11 +260,11 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _airportService.AddAsync(_currentAirport);
+                        await _airportService.AddAsync(_currentAirport); //TODO handle BaseResponse
                     }
                     else
                     {
-                        await _airportService.UpdateAsync(_currentAirport);
+                        await _airportService.UpdateAsync(_currentAirport); //TODO handle BaseResponse
                     }
                     IsBusy = false;
 
@@ -285,10 +285,23 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 _isNew = false;
-                _currentAirport = await _airportService.GetByIdAsync(_currentAirport.Id);
+                _currentAirport = await GetCurrentAirport(_currentAirport.Id);
                 PageTitle = $"{_currentAirport.Name} bewerken";
             }
             LoadAirportState();
+        }
+
+        private async Task<Airport> GetCurrentAirport(Guid id)
+        {
+            BaseResponse<Airport> response = await _airportService.GetByIdAsync(id);
+
+            if (!response.IsSucces)
+            {
+                throw new NotImplementedException(); //TODO Handle unsuccesful response
+            }
+
+            Airport airport = response.Data;
+            return await Task.FromResult(airport);
         }
 
         private void LoadAirportState()

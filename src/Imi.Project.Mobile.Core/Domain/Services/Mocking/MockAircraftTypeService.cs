@@ -18,17 +18,20 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
                 FirstFlight = DateTime.Parse("1990/01/10"), Length = 61.4D, WingSpan = 51.70D, Height = 17.6D, EmptyWeight = 112748 }
         };
 
-        public async Task<AircraftType> AddAsync(AircraftType entity)
+        public async Task<BaseResponse<AircraftType>> AddAsync(AircraftType entity)
         {
             _aircraftTypeList.Add(entity);
-            return await Task.FromResult(entity);
+            BaseResponse<AircraftType> response = new BaseResponse<AircraftType>();
+            return await Task.FromResult(response);
         }
 
-        public async Task<AircraftType> DeleteAsync(Guid id)
+        public async Task<BaseResponse<AircraftType>> DeleteAsync(Guid id)
         {
             AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
             _aircraftTypeList.Remove(aircraftType);
-            return await Task.FromResult(aircraftType);
+
+            BaseResponse<AircraftType> response = new BaseResponse<AircraftType>();
+            return await Task.FromResult(response);
         }
 
         public Task<AircraftType[]> GetAircraftTypes()
@@ -46,24 +49,30 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             throw new NotImplementedException();
         }
 
-        public async Task<AircraftType> GetByIdAsync(Guid id)
+        public async Task<BaseResponse<AircraftType>> GetByIdAsync(Guid id)
         {
             AircraftType aircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == id);
-            return await Task.FromResult(aircraftType);
+
+            BaseResponse<AircraftType> response = new BaseResponse<AircraftType> { Data = aircraftType };
+            return await Task.FromResult(response);
         }
 
-        public async Task<ICollection<AircraftType>> ListAllAsync()
+        public async Task<BaseResponse<ICollection<AircraftType>>> ListAllAsync()
         {
             ICollection<AircraftType> aircraftTypes = _aircraftTypeList;
-            return await Task.FromResult(aircraftTypes);
+
+            BaseResponse<ICollection<AircraftType>> response = new BaseResponse<ICollection<AircraftType>> { Data = aircraftTypes };
+            return await Task.FromResult(response);
         }
 
-        public async Task<AircraftType> UpdateAsync(AircraftType entity)
+        public async Task<BaseResponse<AircraftType>> UpdateAsync(AircraftType entity)
         {
             AircraftType EditedAircraftType = _aircraftTypeList.FirstOrDefault(a => a.Id == entity.Id);
             _aircraftTypeList.Remove(EditedAircraftType);
             _aircraftTypeList.Add(EditedAircraftType);
-            return await Task.FromResult(EditedAircraftType);
+
+            BaseResponse<AircraftType> response = new BaseResponse<AircraftType>();
+            return await Task.FromResult(response);
         }
     }
 }

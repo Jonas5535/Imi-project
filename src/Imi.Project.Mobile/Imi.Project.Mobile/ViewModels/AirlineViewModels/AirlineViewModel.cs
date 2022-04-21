@@ -61,15 +61,21 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirlineCommand => new Command<Airline>(
             async (Airline airline) =>
             {
-                await _airlineService.DeleteAsync(airline.Id);
+                await _airlineService.DeleteAsync(airline.Id); //TODO handle BaseResponse
                 await ListInit();
             }
         );
 
         private async Task ListInit()
         {
-            IEnumerable<Airline> source = await _airlineService.ListAllAsync();
-            ObservableCollection<Airline> airlines = new ObservableCollection<Airline>(source);
+            BaseResponse<ICollection<Airline>> response = await _airlineService.ListAllAsync();
+
+            if (!response.IsSucces)
+            {
+                throw new NotImplementedException(); //TODO Handle unsuccesful response
+            }
+
+            ObservableCollection<Airline> airlines = new ObservableCollection<Airline>(response.Data);
             Airlines = null;
             Airlines = airlines;
         }

@@ -213,11 +213,11 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _airlineService.AddAsync(_currentAirline);
+                        await _airlineService.AddAsync(_currentAirline); //TODO handle BaseResponse
                     }
                     else
                     {
-                        await _airlineService.UpdateAsync(_currentAirline);
+                        await _airlineService.UpdateAsync(_currentAirline); //TODO handle BaseResponse
                     }
                     IsBusy = false;
 
@@ -238,10 +238,23 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 _isNew = false;
-                _currentAirline = await _airlineService.GetByIdAsync(_currentAirline.Id);
+                _currentAirline = await GetCurrentAirline(_currentAirline.Id);
                 PageTitle = $"{_currentAirline.Name} bewerken";
             }
             LoadAirlineState();
+        }
+
+        private async Task<Airline> GetCurrentAirline(Guid id)
+        {
+            BaseResponse<Airline> response = await _airlineService.GetByIdAsync(id);
+
+            if (!response.IsSucces)
+            {
+                throw new NotImplementedException(); //TODO Handle unsuccesful response
+            }
+
+            Airline airline = response.Data;
+            return await Task.FromResult(airline);
         }
 
         private void LoadAirlineState()

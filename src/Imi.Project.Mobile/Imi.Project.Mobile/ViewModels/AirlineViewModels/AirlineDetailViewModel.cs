@@ -49,7 +49,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirlineCommand => new Command(
             async () =>
             {
-                await _airlineService.DeleteAsync(ShownAirline.Id);
+                await _airlineService.DeleteAsync(ShownAirline.Id); //TODO handle BaseResponse
                 await CoreMethods.PopPageModel();
             }
         );

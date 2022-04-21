@@ -260,11 +260,11 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _aircraftTypeService.AddAsync(_currentAircraftType);
+                        await _aircraftTypeService.AddAsync(_currentAircraftType); //TODO handle BaseResponse
                     }
                     else
                     {
-                        await _aircraftTypeService.UpdateAsync(_currentAircraftType);
+                        await _aircraftTypeService.UpdateAsync(_currentAircraftType); //TODO handle BaseResponse
                     }
                     IsBusy = false;
 
@@ -285,10 +285,23 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 _isNew = false;
-                _currentAircraftType = await _aircraftTypeService.GetByIdAsync(_currentAircraftType.Id);
+                _currentAircraftType = await GetCurrentAircraftType(_currentAircraftType.Id);
                 PageTitle = $"{_currentAircraftType.Type} bewerken";
             }
             LoadAircraftTypeState();
+        }
+
+        private async Task<AircraftType> GetCurrentAircraftType(Guid id)
+        {
+            BaseResponse<AircraftType> response = await _aircraftTypeService.GetByIdAsync(id);
+
+            if (!response.IsSucces)
+            {
+                throw new NotImplementedException(); //TODO Handle unsuccesful response
+            }
+
+            AircraftType aircraftType = response.Data;
+            return await Task.FromResult(aircraftType);
         }
 
         private void LoadAircraftTypeState()

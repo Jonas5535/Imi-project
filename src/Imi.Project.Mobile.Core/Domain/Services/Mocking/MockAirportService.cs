@@ -18,17 +18,20 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
                 ElevationAMSL = 41, RunwayAmount = 2, TerminalAmount = 3, Country = "japan", City = "Narita" }
         };
 
-        public async Task<Airport> AddAsync(Airport entity)
+        public async Task<BaseResponse<Airport>> AddAsync(Airport entity)
         {
             _airportList.Add(entity);
-            return await Task.FromResult(entity);
+            BaseResponse<Airport> response = new BaseResponse<Airport>();
+            return await Task.FromResult(response);
         }
 
-        public async Task<Airport> DeleteAsync(Guid id)
+        public async Task<BaseResponse<Airport>> DeleteAsync(Guid id)
         {
             Airport airport = _airportList.FirstOrDefault(a => a.Id == id);
             _airportList.Remove(airport);
-            return await Task.FromResult(airport);
+
+            BaseResponse<Airport> response = new BaseResponse<Airport>();
+            return await Task.FromResult(response);
         }
 
         public Task<AircraftType[]> GetAircraftTypes()
@@ -46,24 +49,30 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             throw new NotImplementedException();
         }
 
-        public async Task<Airport> GetByIdAsync(Guid id)
+        public async Task<BaseResponse<Airport>> GetByIdAsync(Guid id)
         {
             Airport airport = _airportList.FirstOrDefault(a => a.Id == id);
-            return await Task.FromResult(airport);
+
+            BaseResponse<Airport> response = new BaseResponse<Airport> { Data = airport };
+            return await Task.FromResult(response);
         }
 
-        public async Task<ICollection<Airport>> ListAllAsync()
+        public async Task<BaseResponse<ICollection<Airport>>> ListAllAsync()
         {
             ICollection<Airport> airports = _airportList;
-            return await Task.FromResult(airports);
+
+            BaseResponse<ICollection<Airport>> response = new BaseResponse<ICollection<Airport>> { Data = airports };
+            return await Task.FromResult(response);
         }
 
-        public async Task<Airport> UpdateAsync(Airport entity)
+        public async Task<BaseResponse<Airport>> UpdateAsync(Airport entity)
         {
             Airport EditedAirport = _airportList.FirstOrDefault(a => a.Id == entity.Id);
             _airportList.Remove(EditedAirport);
             _airportList.Add(EditedAirport);
-            return await Task.FromResult(EditedAirport);
+
+            BaseResponse<Airport> response = new BaseResponse<Airport>();
+            return await Task.FromResult(response);
         }
     }
 }
