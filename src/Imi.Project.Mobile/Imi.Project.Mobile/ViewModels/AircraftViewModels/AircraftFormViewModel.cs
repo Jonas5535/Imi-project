@@ -229,7 +229,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 SaveAircraftState();
 
-                if (Validate(_currentAircraft)/* && ValidateLastSeen(_currentAircraft)*/)
+                if (Validate(_currentAircraft))
                 {
                     IsBusy = true;
 
