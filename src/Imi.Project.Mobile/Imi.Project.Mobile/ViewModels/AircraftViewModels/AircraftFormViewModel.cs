@@ -229,7 +229,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 SaveAircraftState();
 
-                if (Validate(_currentAircraft) && ValidateLastSeen(_currentAircraft))
+                if (Validate(_currentAircraft)/* && ValidateLastSeen(_currentAircraft)*/)
                 {
                     IsBusy = true;
 
@@ -303,7 +303,7 @@ namespace Imi.Project.Mobile.ViewModels
 
         private void SaveAircraftState()
         {
-            _currentAircraft.Registration = Registration; //TODO Add .ToUpper()
+            _currentAircraft.Registration = Registration?.ToUpper();
             _currentAircraft.Airline = Airline;
             _currentAircraft.AircraftType = AircraftType;
             _currentAircraft.HasSpecialLivery = HasSpecialLivery;
@@ -324,6 +324,7 @@ namespace Imi.Project.Mobile.ViewModels
         private bool Validate(Aircraft aircraft)
         {
             RegistrationError = "";
+            LastSeenError = "";
             AircraftTypeError = "";
             AirlineError = "";
             AirportError = "";
@@ -336,6 +337,10 @@ namespace Imi.Project.Mobile.ViewModels
                 if (error.PropertyName == nameof(aircraft.Registration))
                 {
                     RegistrationError = error.ErrorMessage;
+                }
+                else if (error.PropertyName == nameof(aircraft.LastSeen))
+                {
+                    LastSeenError = error.ErrorMessage;
                 }
                 else if (error.PropertyName == nameof(aircraft.AircraftType))
                 {
@@ -355,20 +360,6 @@ namespace Imi.Project.Mobile.ViewModels
                 }
             }
             return validationResult.IsValid;
-        }
-
-        private bool ValidateLastSeen(Aircraft aircraft)
-        {
-            bool result = true;
-
-            LastSeenError = "";
-
-            if (aircraft.LastSeen < aircraft.FirstSeen)
-            {
-                LastSeenError = "De datum van laatst gezien moet later of gelijk zijn aan eerst gezien";
-                result = false;
-            }
-            return result;
         }
     }
 }

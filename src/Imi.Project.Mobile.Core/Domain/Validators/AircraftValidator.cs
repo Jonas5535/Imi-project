@@ -5,13 +5,17 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
 {
     public class AircraftValidator : AbstractValidator<Aircraft>
     {
-        public AircraftValidator() //TODO Add validation on all datetime props. See AircraftValidator in wpf core for reference
+        public AircraftValidator()
         {
             RuleFor(aircraft => aircraft.Registration)
                 .NotEmpty()
                 .WithMessage("Het registratienummer mag niet leeg zijn")
                 .Length(6)
                 .WithMessage("Het registratienummer moet 6 karakters lang zijn");
+
+            RuleFor(aircraft => aircraft.LastSeen)
+                .GreaterThanOrEqualTo(a => a.FirstSeen)
+                .WithMessage("De datum van laatst gezien kan niet vroeger zijn dan de datum van \"Eerst gezien\"");
 
             RuleFor(aircraft => aircraft.AircraftType)
                 .NotEmpty()
