@@ -1,4 +1,4 @@
-﻿using Imi.Project.Shared.CustomValidationAttributes;
+﻿using Imi.Project.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
