@@ -42,7 +42,7 @@ else
 	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
 	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
-	private bool isNew = false;
+	private bool isNew = true;
 	private string formPageTitle;
 	private AircraftFormViewModel formModel;
 	private IEnumerable<InputSelectItem> selectTypes;
@@ -94,7 +94,7 @@ else
 	{
 		if (item == null)
 		{
-			isNew = false;
+			isNew = true;
 			formModel = new AircraftFormViewModel();
 			formModel.FirstSeen = DateTime.Today;
 			formModel.LastSeen = DateTime.Today;
@@ -105,7 +105,7 @@ else
 		{
 			AircraftDetailViewModel aircraft = await _aircraftService.GetByIdAsync((Guid)item);
 			LoadAircraftFormModel(aircraft);
-			isNew = true;
+			isNew = false;
 			formPageTitle = $"{formModel.Registration} bewerken";
 		}
 
@@ -116,7 +116,14 @@ else
 
 	public async Task SaveAsync()
 	{
-		await _aircraftService.AddAsync(formModel);
+		if (isNew)
+		{
+			await _aircraftService.AddAsync(formModel);
+		}
+		else
+		{
+			await _aircraftService.UpdateAsync(formModel);
+		}
 		await ShowList();
 		GoBack();
 	}
