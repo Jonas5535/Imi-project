@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Airport;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;

@@ -1,0 +1,141 @@
+﻿<Window x:Class="Imi.Project.Wpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:system="clr-namespace:System;assembly=System.Runtime"
+        mc:Ignorable="d"
+        Title="Avilection" MinHeight="550" MaxHeight="550" MinWidth="1000" MaxWidth="1000" Height="550" Width="1000"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220*"/>
+            <ColumnDefinition Width="370*"/>
+            <ColumnDefinition Width="410*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="75"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="0" Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button x:Name="btnRefresh" Height="30" Margin="5,0,0,0" Padding="2,0,2,0" Content="Herladen" Click="BtnRefresh_Click"></Button>
+            <Button x:Name="btnAdd" Grid.Row="1" Height="30" Margin="5,0,0,5" Padding="2,0,2,0" Content="Toevoegen" Click="BtnAdd_Click"></Button>
+            <Button x:Name="btnEdit" Grid.Row="1" Grid.Column="1" Height="30" Margin="5,0,5,5" Padding="2,0,2,0" Content="Bewerken" IsEnabled="False" Click="BtnEdit_Click"></Button>
+            <Button x:Name="btnDelete" Grid.Row="1" Grid.Column="2" Height="30" Margin="0,0,5,5" Padding="2,0,2,0" Content="Verwijderen" IsEnabled="False"
+                    Click="BtnDelete_Click"></Button>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d" Margin="5,0,5,0" Content="Vliegtuigen"></Label>
+            <ListBox x:Name="lstAircrafts" Grid.Row="1" Margin="5" SelectionChanged="LstAircrafts_SelectionChanged"></ListBox>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d" Content="Details"></Label>
+            <Label Grid.Row="1" FontWeight="Medium" Content="Registratienummer:"></Label>
+            <Label Grid.Row="2" FontWeight="Medium" Content="Type:"></Label>
+            <Label Grid.Row="3" FontWeight="Medium" Content="Maatschappij:"></Label>
+            <Label Grid.Row="4" FontWeight="Medium" Content="Special livery:"></Label>
+            <Label Grid.Row="5" FontWeight="Medium" Content="Eerst gezien:"></Label>
+            <Label Grid.Row="6" FontWeight="Medium" Content="Laatst gezien:"></Label>
+            <Label Grid.Row="7" FontWeight="Medium" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" Background="#fdd31d"
+                   Margin="0,5,0,0" Content="Luchthavens:"></Label>
+
+            <Label x:Name="lblRegistration" Grid.Row="1" Grid.Column="1"></Label>
+            <Label x:Name="lblType" Grid.Row="2" Grid.Column="1"></Label>
+            <Label x:Name="lblAirline" Grid.Row="3" Grid.Column="1"></Label>
+            <Label x:Name="lblSpecialLivery" Grid.Row="4" Grid.Column="1"></Label>
+            <Label x:Name="lblFirstSeen" Grid.Row="5" Grid.Column="1"></Label>
+            <Label x:Name="lblLastSeen" Grid.Row="6" Grid.Column="1"></Label>
+            <ScrollViewer Grid.Row="8" Grid.ColumnSpan="2" VerticalScrollBarVisibility="Auto">
+                <ItemsControl x:Name="icAirports">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}" HorizontalContentAlignment="Center" Background="#feea95" Margin="0,1,0,0"></Label>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        <Grid x:Name="grdForm" Grid.Row="1" Grid.Column="3" Grid.RowSpan="2" Margin="5,0,5,0" IsEnabled="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Label x:Name="lblFormTitle" Grid.Row="0" Grid.ColumnSpan="2" HorizontalContentAlignment="Center" FontWeight="Bold" Background="#fdd31d"
+                   Content="Nieuw Vliegtuig"></Label>
+            <Label Grid.Row="1" Margin="0,5,0,0" FontWeight="Medium" Content="Registratienummer:"></Label>
+            <Label Grid.Row="2" Margin="0,5,0,0" FontWeight="Medium" Content="Type:"></Label>
+            <Label Grid.Row="3" Margin="0,5,0,0" FontWeight="Medium" Content="Maatschappij:"></Label>
+            <Label Grid.Row="4" Margin="0,5,0,0" FontWeight="Medium" Content="Special livery:"></Label>
+            <Label Grid.Row="5" Margin="0,5,0,0" FontWeight="Medium" Content="Eerst gezien:"></Label>
+            <Label Grid.Row="6" Margin="0,5,0,0" FontWeight="Medium" Content="Laatst gezien:"></Label>
+            <Label Grid.Row="7" Margin="0,5,0,0" FontWeight="Medium" Content="Luchthavens:"></Label>
+            <Button x:Name="btnSave" Grid.Row="7" VerticalAlignment="Bottom" Height="30" Width="100" Margin="0,0,0,15" Content="Opslaan" Click="BtnSave_Click"></Button>
+
+            <TextBox x:Name="txtRegistration" Grid.Row="1" Grid.Column="1" Style="{StaticResource FormControl}"></TextBox>
+            <Label x:Name="lblRegistrationError" Grid.Row="1" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <ComboBox x:Name="cmbType" Grid.Row="2" Grid.Column="1" Style="{StaticResource FormControl}"></ComboBox>
+            <Label x:Name="lblTypeError" Grid.Row="2" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <ComboBox x:Name="cmbAirline" Grid.Row="3" Grid.Column="1" Style="{StaticResource FormControl}"></ComboBox>
+            <Label x:Name="lblAirlineError" Grid.Row="3" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <ToggleButton x:Name="tbSpecialLivery" Grid.Row="4" Grid.Column="1" Margin="0,5,0,0" Content="Nee"
+                          Checked="TbSpecialLivery_Checked" Unchecked="TbSpecialLivery_Unchecked"></ToggleButton>
+            <DatePicker x:Name="dpFirstSeen" Grid.Row="5" Grid.Column="1" Style="{StaticResource FormControl}" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <Label x:Name="lblFirstSeenError" Grid.Row="5" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <DatePicker x:Name="dpLastSeen" Grid.Row="6" Grid.Column="1" Style="{StaticResource FormControl}" SelectedDate="{x:Static sys:DateTime.Today}"></DatePicker>
+            <Label x:Name="lblLastSeenError" Grid.Row="6" Grid.Column="1" Style="{StaticResource ErrorLabel}" Foreground="Orange" Visibility="Collapsed"></Label>
+            <Label x:Name="lblAirportError" Grid.Row="7" Grid.Column="0" Height="55" VerticalAlignment="Top" Margin="0,30,0,0" FontSize="10" Foreground="Orange"
+                   Visibility="Collapsed">
+                <AccessText x:Name="actAirportError" TextWrapping="Wrap" Height="45" Width="107"/>
+            </Label>
+            <ScrollViewer Grid.Row="7" Grid.Column="1" Margin="0,5,0,0" VerticalScrollBarVisibility="Auto">
+                <StackPanel>
+                    <StackPanel x:Name="stAirportPickers">
+                        <ComboBox x:Name="cmbAirport" Height="25.96" Width="220" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,0,0,5"></ComboBox>
+                    </StackPanel>
+                    <Button x:Name="btnAddPicker" Width="30" FontSize="20" Content="+" Click="BtnAddPicker_Click"></Button>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+        <Label x:Name="lblFeedback" Grid.Row="2" Margin="0,0,5,0"></Label>
+    </Grid>
+</Window>

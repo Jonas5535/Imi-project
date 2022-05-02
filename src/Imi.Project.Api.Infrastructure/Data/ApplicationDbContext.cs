@@ -43,20 +43,10 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .IsRequired();
 
             modelBuilder.Entity<AircraftType>()
-                .Property(at => at.Length)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.WingSpan)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.Height)
-                .HasPrecision(5, 2);
-
-            modelBuilder.Entity<AircraftType>()
-                .Property(at => at.EmptyWeight)
-                .HasPrecision(6);
+                .HasMany(at => at.Aircrafts)
+                .WithOne(a => a.AircraftType)
+                .HasForeignKey(a => a.AircraftTypeId)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region Airline
@@ -91,6 +81,12 @@ namespace Imi.Project.Api.Infrastructure.Data
             modelBuilder.Entity<Airline>()
                 .Property(al => al.HeadQuarter)
                 .HasMaxLength(200);
+
+            modelBuilder.Entity<Airline>()
+                .HasMany(ar => ar.Aircrafts)
+                .WithOne(a => a.Airline)
+                .HasForeignKey(a => a.AirlineId)
+                .OnDelete(DeleteBehavior.Restrict);
             #endregion
 
             #region Airport
@@ -165,12 +161,10 @@ namespace Imi.Project.Api.Infrastructure.Data
                 .IsRequired();
 
             modelBuilder.Entity<Aircraft>()
-                .Property(a => a.Longitude)
-                .HasPrecision(8, 5);
+                .Property(a => a.Longitude);
 
             modelBuilder.Entity<Aircraft>()
-                .Property(a => a.Latitude)
-                .HasPrecision(8, 5);
+                .Property(a => a.Latitude);
             #endregion
 
             #region AircraftAtAirport

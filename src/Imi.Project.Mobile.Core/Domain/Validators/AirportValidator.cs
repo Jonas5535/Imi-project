@@ -9,7 +9,7 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
         {
             RuleFor(airport => airport.Name)
                 .NotEmpty()
-                .WithMessage($"De naam mag niet leeg zijn");
+                .WithMessage($"De naam mag niet leeg zijn"); //TODO Add minimum length
 
             RuleFor(airport => airport.IATACode)
                 .NotEmpty()

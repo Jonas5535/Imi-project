@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Aircraft;
+﻿using Imi.Project.Api.Core.Dtos;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

@@ -1,0 +1,78 @@
+﻿<div class="d-flex">
+	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left" @onclick="e => OnBackClicked.InvokeAsync()"></button>
+	<h1 class="d-inline align-self-center mr-auto">Details</h1>
+	<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-pencil"></button>
+	<button class="btn btn-circle align-self-center mb-2 oi oi-trash" @onclick="e => OnDeleteClicked.InvokeAsync(Model.Id)"></button>
+</div>
+
+<div class="row mt-4">
+	<div class="col-lg-6 mb-4">
+		<img class="img-fluid" src="@GetImage()" alt="Foto van @Model.Registration" />
+	</div>
+	<div class="col-lg-6 my-auto">
+		<div class="row">
+			<div class="col-6 font-weight-bold text-center">Registratie</div>
+			<div class="col-6 font-weight-bold text-center">Type</div>
+		</div>
+		<div class="row mt-2 mb-lg-5 mb-0">
+			<div class="col-6 text-center">@Model.Registration</div>
+			<div class="col-6 text-center">@Model.AircraftType.Brand @Model.AircraftType.Type</div>
+		</div>
+		<div class="row mt-lg-5 mt-4">
+			<div class="col-6 font-weight-bold text-center">Maatschappij</div>
+			<div class="col-6 font-weight-bold text-center">Special livery</div>
+		</div>
+		<div class="row mt-2 mb-lg-5 mb-0">
+			<div class="col-6 text-center">@Model.Airline.Name</div>
+			<div class="col-6 text-center">@ConvertBoolToYesNo()</div>
+		</div>
+		<div class="row mt-lg-5 mt-4">
+			<div class="col-6 font-weight-bold text-center">Eerst gezien</div>
+			<div class="col-6 font-weight-bold text-center">Laatst gezien</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-6 text-center">@Model.FirstSeen.ToShortDateString()</div>
+			<div class="col-6 text-center">@Model.LastSeen.ToShortDateString()</div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12 font-weight-bold text-center bg-yellow mt-4">Luchthavens</div>
+</div>
+<div class="row mb-2">
+	@foreach (var airport in Model.Airports)
+	{
+		<div class="col-12 text-center bg-light-yellow py-1">@airport.Name</div>
+	}
+</div>
+
+
+@code {
+	[Parameter]
+	public AircraftDetailViewModel Model { get; set; }
+	[Parameter]
+	public EventCallback OnBackClicked { get; set; }
+	[Parameter]
+	public EventCallback<object> OnDeleteClicked { get; set; }
+
+	private string ConvertBoolToYesNo()
+	{
+		if (Model.HasSpecialLivery)
+		{
+			return "Ja";
+		}
+		else
+		{
+			return "Nee";
+		}
+	}
+
+	private string GetImage()
+	{
+		if (string.IsNullOrWhiteSpace(Model.Image))
+		{
+			return "/Images/CRUD/Placeholder.png";
+		}
+		return Model.Image;
+	}
+}

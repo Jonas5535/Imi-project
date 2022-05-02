@@ -11,6 +11,6 @@ namespace Imi.Project.Api.Core.Infrastructure.Services
         Task<D> GetByIdAsync(Guid id);
         Task<T> AddAsync(R requestDto);
         Task<D> UpdateAsync(R requestDto);
-        Task DeleteAsync(Guid id);
+        Task<BaseDto> DeleteAsync(Guid id);
     }
 }

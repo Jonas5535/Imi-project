@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Imi.Project.Api.Core.Dtos.AircraftType
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftTypeListResponseDto : BaseDto
     {

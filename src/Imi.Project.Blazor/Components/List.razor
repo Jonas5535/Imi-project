@@ -1,0 +1,42 @@
+﻿<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem">
+	<div class="card-body" @onclick="e => OnCardClicked.InvokeAsync(Model)">
+		<img class="card-img-top" src="@GetImage()" alt="Foto van @Model.Registration" />
+		<div class="row align-items-center mt-3">
+			<div class="col text-center">Registratie</div>
+			<div class="col text-center">Type</div>
+			<div class="col text-center">Maatschappij</div>
+			<div class="w-100"></div>
+			<div class="col text-center font-weight-bold pt-2">@Model.Registration</div>
+			<div class="col text-center font-weight-bold pt-2">@Model.AircraftType.ICAOCode</div>
+			<div class="col text-center font-weight-bold pt-2">@Model.Airline.Name</div>
+		</div>
+	</div>
+	<div>
+		<div class="row text-center">
+			<div class="col">
+				<button class="btn oi oi-pencil"></button>
+			</div>
+			<div class="col">
+				<button class="btn oi oi-trash" @onclick="e => OnDeleteClicked.InvokeAsync(Model.Id)"></button>
+			</div>
+		</div>
+	</div>
+</div>
+
+@code {
+	[Parameter]
+	public AircraftListViewModel Model { get; set; }
+	[Parameter]
+	public EventCallback<object> OnDeleteClicked { get; set; }
+	[Parameter]
+	public EventCallback<object> OnCardClicked { get; set; }
+
+	private string GetImage()
+	{
+		if (string.IsNullOrWhiteSpace(Model.Image))
+		{
+			return "/Images/CRUD/Placeholder.png";
+		}
+		return Model.Image;
+	}
+}

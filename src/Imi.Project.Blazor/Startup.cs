@@ -1,16 +1,12 @@
-using Imi.Project.Blazor.Core.CRUD.Models;
+using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using Imi.Project.Blazor.Core.CRUD.Models.ViewModels;
 using Imi.Project.Blazor.Core.CRUD.Services;
+using Imi.Project.Blazor.Core.MemoryGame.Services;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor
 {
@@ -29,7 +25,7 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<ICRUDService<AircraftListItem, AircraftItem>, MockAircraftService>();
+            services.AddTransient<ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel>, MockAircraftService>();
             services.AddTransient<IMemoryService, MemoryService>();
         }
 

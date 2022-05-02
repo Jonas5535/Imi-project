@@ -12,7 +12,7 @@ namespace Imi.Project.Api.Extensions
         /// </summary>
         /// <param name="controller"></param>
         /// <param name="errors"></param>
-        /// <returns></returns>
+        /// <returns>An IActionResult that contains the topmost error</returns>
         public static IActionResult HandleErrors(this ControllerBase controller, IEnumerable<ErrorMessage> errors)
         {
             if (errors.Count() > 0)

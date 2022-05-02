@@ -1,15 +1,16 @@
-﻿using Imi.Project.Blazor.Core.CRUD.Models;
+﻿using Imi.Project.Blazor.Core.MemoryGame.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
-namespace Imi.Project.Blazor.Core.CRUD.Services
+namespace Imi.Project.Blazor.Core.MemoryGame.Services
 {
     public class MemoryService : IMemoryService
     {
         private List<MemoryCardModel> currentSelection = new List<MemoryCardModel>();
 
-        private StatsModel stats = new StatsModel();
+        private StatsModel stats;
 
         private readonly static ICollection<string> _images = new List<string>
         {
@@ -50,7 +51,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return cards;
         }
 
-        public void HandleSelection(MemoryCardModel card)
+        public async Task HandleSelection(MemoryCardModel card)
         {
             card.CurrentImage = card.ActualImage;
             currentSelection.Add(card);
@@ -63,35 +64,66 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 }
                 else
                 {
-                    HandleMistake();
+                    await HandleMistake();
                 }
+                currentSelection.Clear();
             }
         }
 
-        public StatsModel GetStats()
+        public StatsModel GetStats(bool isNewGame)
         {
+            if (isNewGame)
+            {
+                stats = new StatsModel();
+                return stats;
+            }
+
             return stats;
         }
 
-        //ik retourneer void omdat ik op dit moment nog niet weet of ik iets zal retourneren of niet.
-        public void EndGame(bool isVictory) 
+        public MessageBox EndGame(bool isVictory)
         {
-            throw new NotImplementedException();
+            if (isVictory)
+            {
+                return MessageBox.Show("Victory 🎉🎉", "Proficiat, je hebt gewonnen!!!", "Opnieuw spelen", true, "Stoppen");
+            }
+            else
+            {
+                return MessageBox.Show("Game over", "Je hebt helaas verloren. Volgende keer beter 👍", "Opnieuw spelen", true, "Stoppen");
+            }
         }
 
-        private void HandleMistake()
+        private async Task HandleMistake()
         {
-            throw new NotImplementedException();
+            MemoryCardModel firstCard = currentSelection.FirstOrDefault();
+            MemoryCardModel secondCard = currentSelection.LastOrDefault();
+
+            await Task.Delay(500); //Small delay so the player can see the cards that he selected before they turn around again
+            firstCard.CurrentImage = firstCard.CoverImage;
+            secondCard.CurrentImage = secondCard.CoverImage;
+            stats.Lives--;
         }
 
         private void HandleCorrect()
         {
-            throw new NotImplementedException();
+            MemoryCardModel firstCard = currentSelection.FirstOrDefault();
+            MemoryCardModel secondCard = currentSelection.LastOrDefault();
+
+            firstCard.MatchFound = true;
+            secondCard.MatchFound = true;
+            stats.RemainingPairs--;
         }
 
-        private bool IsPair(List<MemoryCardModel> currentSelection)
+        private static bool IsPair(List<MemoryCardModel> currentSelection)
         {
-            throw new NotImplementedException();
+            if (currentSelection.FirstOrDefault().ActualImage == currentSelection.LastOrDefault().ActualImage)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private static List<string> GetShuffledImages()

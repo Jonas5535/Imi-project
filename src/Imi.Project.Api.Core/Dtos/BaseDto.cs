@@ -15,7 +15,7 @@ namespace Imi.Project.Api.Core.Dtos
             return ErrorMessages;
         }
 
-        public void AddError(ErrorMessage error)
+        private void AddError(ErrorMessage error)
         {
             if (ErrorMessages is null)
             {
