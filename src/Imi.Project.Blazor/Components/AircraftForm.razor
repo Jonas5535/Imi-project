@@ -43,15 +43,16 @@
 		<label for="lastSeen">Laatst gezien:</label>
 		<InputDate id="lastSeen" @bind-Value="Model.LastSeen" class="form-control w-auto" />
 		<ValidationMessage For="@(() => Model.LastSeen)"></ValidationMessage>
+		<label for="LastSeen" class="text-danger @displayState">@lastSeenError</label>
 	</div>
 	<div class="form-group">
 		<label for="airport">Luchthavens:</label>
-		<Select id="airport" @onchange="SelectedAirportChanged" multiple class="form-control w-auto">
+		<InputSelect id="airport" @bind-Value="selectedAirport" class="form-control w-auto">
 			@foreach (var airport in Airports)
 			{
-				<option value="@airport.Value">@airport.Label</option>
+			   <option value="@airport.Value">@airport.Label</option>
 			}
-		</Select>
+		</InputSelect>
 		<ValidationMessage For="@(() => Model.AirlineId)" />
 	</div>
 </EditForm>
@@ -69,15 +70,36 @@
 	public IEnumerable<InputSelectItem> Airports { get; set; }
 	[Parameter]
 	public EventCallback OnSubmitClicked { get; set; }
+	private Guid selectedAirport;
+	private const string displayStateNone = "none";
+	private const string displayStateBlock = "inline-block";
+	private string displayState = displayStateNone;
+	private string lastSeenError;
+
+	protected override async Task OnInitializedAsync()
+	{
+		selectedAirport = Model.AirportIds.FirstOrDefault();
+	}
 
 	private void HandleValidSubmit()
 	{
+		Model.AirportIds.Clear();
+		Model.AirportIds.Add(selectedAirport);
+
 		OnSubmitClicked.InvokeAsync();
 	}
 
-	private void SelectedAirportChanged(ChangeEventArgs e) //TODO Vragen aan lector hoe ik dit moet aanpakken
+	private bool ValidateLastSeen(DateTime lastSeen)
 	{
-		Guid id = Guid.Parse((string)e.Value);
-		Model.AirportIds.Add(id);
+		if (lastSeen < Model.FirstSeen)
+		{
+			displayState = displayStateBlock;
+			lastSeenError = "De datum van laatst gezien kan niet vroeger zijn dan de datum van eerst gezien";
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }
