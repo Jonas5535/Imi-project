@@ -15,7 +15,8 @@ else if (formModel != null)
 			  PageTitle="@formPageTitle"
 			  Types="selectTypes"
 			  Airlines="selectAirlines"
-			  Airports="selectAirports">
+			  Airports="selectAirports"
+			  OnSubmitClicked="SaveAsync">
 	</AircraftForm>
 }
 else
@@ -100,6 +101,11 @@ else
 		selectTypes = await GetTypesForInputSelect();
 		selectAirlines = await GetAirlinesForInputSelect();
 		selectAirports = await GetAirportsForInputSelect();
+	}
+
+	public async Task SaveAsync()
+	{
+		
 	}
 
 	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()
