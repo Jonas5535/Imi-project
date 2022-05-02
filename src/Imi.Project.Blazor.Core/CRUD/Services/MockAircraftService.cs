@@ -48,7 +48,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             Aircraft aircraft = new Aircraft
             {
                 Id = Guid.NewGuid(),
-                Registration = item.Registration,
+                Registration = item.Registration?.ToUpper(),
                 AircraftTypeId = item.AircraftTypeId,
                 AirlineId = item.AirlineId,
                 HasSpecialLivery = item.HasSpecialLivery,
