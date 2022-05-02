@@ -27,10 +27,10 @@ else
 	<div class="row">
 		@foreach (var aircraft in aircrafts)
 		{
-			<ListItem Model="aircraft"
+			<List Model="aircraft"
 			  OnCardClicked="ShowDetails"
 			  OnDeleteClicked="DeleteAsync">
-			</ListItem>
+			</List>
 		}
 	</div>
 }
