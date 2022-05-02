@@ -1,5 +1,5 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, Aircraft> _aircraftService
+@inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel> _aircraftService
 @inject IJSRuntime _jsRuntime
 
 @if (showDetails)
@@ -91,7 +91,6 @@ else
 		if (item == null)
 		{
 			formModel = new AircraftFormViewModel();
-			formModel.Id = new Guid();
 			formModel.FirstSeen = DateTime.Today;
 			formModel.LastSeen = DateTime.Today;
 			formModel.AirportIds = new List<Guid>();
@@ -105,7 +104,7 @@ else
 
 	public async Task SaveAsync()
 	{
-		
+		await _aircraftService.AddAsync(formModel);
 	}
 
 	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()

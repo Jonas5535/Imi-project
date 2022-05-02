@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel, Aircraft>
+    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel>
     {
         private static Airline[] _airlines = new Airline[]
         {
@@ -43,9 +43,21 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 AirportIds = new List<Guid>{ _airports[1].Id }, Image = "/Images/CRUD/IMG_1891.JPG"},
         };
 
-        public Task AddAsync(Aircraft item)
+        public Task AddAsync(AircraftFormViewModel item)
         {
-            _aircrafts.Add(item);
+            Aircraft aircraft = new Aircraft
+            {
+                Id = Guid.NewGuid(),
+                Registration = item.Registration,
+                AircraftTypeId = item.AircraftTypeId,
+                AirlineId = item.AirlineId,
+                HasSpecialLivery = item.HasSpecialLivery,
+                FirstSeen = item.FirstSeen,
+                LastSeen = item.LastSeen,
+                AirportIds = item.AirportIds,
+            };
+
+            _aircrafts.Add(aircraft);
             return Task.CompletedTask;
         }
 
@@ -118,7 +130,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(aircrafts);
         }
 
-        public Task UpdateAsync(Aircraft item)
+        public Task UpdateAsync(AircraftFormViewModel item)
         {
             throw new NotImplementedException();
         }

@@ -45,7 +45,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 
         [Display(Name = "Luchthaven")]
         [Required(ErrorMessage = "{0} is verplicht")]
-		[NotEmptyCollection(ErrorMessage = "{0} is verplicht")]
+		//[NotEmptyCollection(ErrorMessage = "{0} is verplicht")]
 		public ICollection<Guid> AirportIds { get; set; }
     }
 }
