@@ -31,7 +31,8 @@ else
 		{
 			<List Model="aircraft"
 			  OnCardClicked="ShowDetails"
-			  OnDeleteClicked="DeleteAsync">
+			  OnDeleteClicked="DeleteAsync"
+			  OnEditClicked="ShowForm">
 			</List>
 		}
 	</div>
@@ -41,6 +42,7 @@ else
 	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
 	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
+	private bool isNew = false;
 	private string formPageTitle;
 	private AircraftFormViewModel formModel;
 	private IEnumerable<InputSelectItem> selectTypes;
@@ -92,11 +94,19 @@ else
 	{
 		if (item == null)
 		{
+			isNew = false;
 			formModel = new AircraftFormViewModel();
 			formModel.FirstSeen = DateTime.Today;
 			formModel.LastSeen = DateTime.Today;
 			formModel.AirportIds = new List<Guid>();
 			formPageTitle = "Nieuw vliegtuig";
+		}
+		else
+		{
+			AircraftDetailViewModel aircraft = await _aircraftService.GetByIdAsync((Guid)item);
+			LoadAircraftFormModel(aircraft);
+			isNew = true;
+			formPageTitle = $"{formModel.Registration} bewerken";
 		}
 
 		selectTypes = await GetTypesForInputSelect();
@@ -154,5 +164,27 @@ else
 			i++;
 		}
 		return items;
+	}
+
+	private void LoadAircraftFormModel(AircraftDetailViewModel aircraft)
+	{
+		formModel = new AircraftFormViewModel
+		{
+			Id = aircraft.Id,
+			Registration = aircraft.Registration,
+			AircraftTypeId = aircraft.AircraftType.Id,
+			AirlineId = aircraft.Airline.Id,
+			HasSpecialLivery = aircraft.HasSpecialLivery,
+			FirstSeen = aircraft.FirstSeen,
+			LastSeen = aircraft.LastSeen,
+		};
+
+		List<Guid> ids = new List<Guid>();
+
+		foreach (var airport in aircraft.Airports)
+		{
+			ids.Add(airport.Id);
+		}
+		formModel.AirportIds = ids;
 	}
 }
