@@ -2,14 +2,7 @@
 @inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel> _aircraftService
 @inject IJSRuntime _jsRuntime
 
-@if (showDetails)
-{
-	<AircraftDetail Model="aircraft"
-				OnBackClicked="GoBack"
-				OnDeleteClicked="DeleteAsync">
-	</AircraftDetail>
-}
-else if (formModel != null)
+@if (formModel != null)
 {
 	<AircraftForm Model="formModel"
 			  PageTitle="@formPageTitle"
@@ -19,6 +12,14 @@ else if (formModel != null)
 			  OnSubmitClicked="SaveAsync"
 			  OnBackClicked="GoBack">
 	</AircraftForm>
+}
+else if (showDetails)
+{
+	<AircraftDetail Model="aircraft"
+				OnBackClicked="GoBack"
+				OnDeleteClicked="DeleteAsync"
+				OnEditClicked="ShowForm">
+	</AircraftDetail>
 }
 else
 {
