@@ -1,4 +1,5 @@
-﻿using Imi.Project.Shared;
+﻿using Imi.Project.Blazor.Core.CRUD.CustomValidationAttributes;
+using Imi.Project.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -34,14 +35,17 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 
         [Display(Name = "Vliegtuigtype")]
         [Required(ErrorMessage = "{0} is verplicht")]
+        [NotEmptyGuid(ErrorMessage = "{0} is verplicht")] //Needed to trigger validation failure when user doesn't select value
         public Guid AircraftTypeId { get; set; }
 
         [Display(Name = "Maatschappij")]
         [Required(ErrorMessage = "{0} is verplicht")]
+        [NotEmptyGuid(ErrorMessage = "{0} is verplicht")]
         public Guid AirlineId { get; set; }
 
         [Display(Name = "Luchthaven")]
         [Required(ErrorMessage = "{0} is verplicht")]
-        public ICollection<Guid> AirportIds { get; set; }
+		[NotEmptyCollection(ErrorMessage = "{0} is verplicht")]
+		public ICollection<Guid> AirportIds { get; set; }
     }
 }
