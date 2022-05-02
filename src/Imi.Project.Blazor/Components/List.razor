@@ -14,7 +14,7 @@
 	<div>
 		<div class="row text-center">
 			<div class="col">
-				<button class="btn oi oi-pencil"></button>
+				<button class="btn oi oi-pencil" @onclick="e => OnEditClicked.InvokeAsync(Model.Id)"></button>
 			</div>
 			<div class="col">
 				<button class="btn oi oi-trash" @onclick="e => OnDeleteClicked.InvokeAsync(Model.Id)"></button>
@@ -30,6 +30,8 @@
 	public EventCallback<object> OnDeleteClicked { get; set; }
 	[Parameter]
 	public EventCallback<object> OnCardClicked { get; set; }
+	[Parameter]
+	public EventCallback<object> OnEditClicked { get; set; }
 
 	private string GetImage()
 	{
