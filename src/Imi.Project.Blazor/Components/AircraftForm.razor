@@ -43,18 +43,19 @@
 		<label for="lastSeen">Laatst gezien:</label>
 		<InputDate id="lastSeen" @bind-Value="Model.LastSeen" class="form-control w-auto" />
 		<ValidationMessage For="@(() => Model.LastSeen)"></ValidationMessage>
-		<label for="LastSeen" class="text-danger @displayState">@lastSeenError</label>
+		<label for="LastSeen" class="validation-message mb-0 @displayState">@lastSeenError</label>
 	</div>
 	<div class="form-group">
 		<label for="airport">Luchthavens:</label>
 		<InputSelect id="airport" @bind-Value="selectedAirport" class="form-control w-auto">
 			@foreach (var airport in Airports)
 			{
-			   <option value="@airport.Value">@airport.Label</option>
+				<option value="@airport.Value">@airport.Label</option>
 			}
 		</InputSelect>
 		<ValidationMessage For="@(() => Model.AirlineId)" />
 	</div>
+	<button type="submit" class="btn mb-3">Opslaan</button>
 </EditForm>
 
 @code {
@@ -71,12 +72,12 @@
 	[Parameter]
 	public EventCallback OnSubmitClicked { get; set; }
 	private Guid selectedAirport;
-	private const string displayStateNone = "none";
-	private const string displayStateBlock = "inline-block";
-	private string displayState = displayStateNone;
+	private const string displayStateInvisible = "invisible";
+	private const string displayStateVisible = "visible";
+	private string displayState = displayStateInvisible;
 	private string lastSeenError;
 
-	protected override async Task OnInitializedAsync()
+	protected override void OnInitialized()
 	{
 		selectedAirport = Model.AirportIds.FirstOrDefault();
 	}
@@ -85,6 +86,7 @@
 	{
 		Model.AirportIds.Clear();
 		Model.AirportIds.Add(selectedAirport);
+		if (!ValidateLastSeen(Model.LastSeen)) return;
 
 		OnSubmitClicked.InvokeAsync();
 	}
@@ -93,12 +95,14 @@
 	{
 		if (lastSeen < Model.FirstSeen)
 		{
-			displayState = displayStateBlock;
+			displayState = displayStateVisible;
 			lastSeenError = "De datum van laatst gezien kan niet vroeger zijn dan de datum van eerst gezien";
 			return false;
 		}
 		else
 		{
+			displayState = displayStateInvisible;
+			lastSeenError = null;
 			return true;
 		}
 	}
