@@ -132,7 +132,16 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 
         public Task UpdateAsync(AircraftFormViewModel item)
         {
-            throw new NotImplementedException();
+            Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == item.Id);
+            if (aircraft == null) throw new ArgumentException("Aircraft not found");
+            aircraft.Registration = item.Registration?.ToUpper();
+            aircraft.AircraftTypeId = item.AircraftTypeId;
+            aircraft.AirlineId = item.AirlineId;
+            aircraft.HasSpecialLivery = item.HasSpecialLivery;
+            aircraft.FirstSeen = item.FirstSeen;
+            aircraft.LastSeen = item.LastSeen;
+            aircraft.AirportIds = item.AirportIds;
+            return Task.CompletedTask;
         }
     }
 }
