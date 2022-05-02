@@ -1,4 +1,8 @@
-﻿<h1>@PageTitle</h1>
+﻿<div class="d-flex">
+	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left" @onclick="e => OnBackClicked.InvokeAsync()"></button>
+	<h1 class="d-inline align-self-center mr-auto">@PageTitle</h1>
+</div>
+
 
 <EditForm Model="@Model" OnValidSubmit="HandleValidSubmit">
 	<DataAnnotationsValidator />
@@ -71,6 +75,8 @@
 	public IEnumerable<InputSelectItem> Airports { get; set; }
 	[Parameter]
 	public EventCallback OnSubmitClicked { get; set; }
+	[Parameter]
+	public EventCallback OnBackClicked { get; set; }
 	private const string displayStateInvisible = "invisible";
 	private const string displayStateVisible = "visible";
 	private string displayState = displayStateInvisible;
