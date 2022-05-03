@@ -1,32 +1,54 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListItem, Aircraft> _aircraftService
+@inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel> _aircraftService
 @inject IJSRuntime _jsRuntime
 
-@if (showDetails)
+@if (formModel != null)
+{
+	<AircraftForm Model="formModel"
+			  PageTitle="@formPageTitle"
+			  Types="selectTypes"
+			  Airlines="selectAirlines"
+			  Airports="selectAirports"
+			  OnSubmitClicked="SaveAsync"
+			  OnBackClicked="GoBack">
+	</AircraftForm>
+}
+else if (showDetails)
 {
 	<AircraftDetail Model="aircraft"
-		OnBackClicked="GoBack"
-		OnDeleteClicked="DeleteAsync">
+				OnBackClicked="GoBack"
+				OnDeleteClicked="DeleteAsync"
+				OnEditClicked="ShowForm">
 	</AircraftDetail>
 }
 else
 {
-	<h1>Vliegtuigen</h1>
+	<div class="d-flex">
+		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(null)"></button>
+	</div>
 	<div class="row">
 		@foreach (var aircraft in aircrafts)
 		{
-			<ListItem Model="aircraft"
-				OnCardClicked="ShowDetails"
-				OnDeleteClicked="DeleteAsync">
-			</ListItem>
+			<List Model="aircraft"
+			  OnCardClicked="ShowDetails"
+			  OnDeleteClicked="DeleteAsync"
+			  OnEditClicked="ShowForm">
+			</List>
 		}
 	</div>
 }
 
 @code {
-	private IEnumerable<AircraftListItem> aircrafts = new List<AircraftListItem>();
-	private Aircraft aircraft;
+	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
+	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
+	private bool isNew = true;
+	private string formPageTitle;
+	private AircraftFormViewModel formModel;
+	private IEnumerable<InputSelectItem> selectTypes;
+	private IEnumerable<InputSelectItem> selectAirlines;
+	private IEnumerable<InputSelectItem> selectAirports;
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -40,7 +62,7 @@ else
 
 	public async Task ShowDetails(object item)
 	{
-		AircraftListItem receivedModel = item as AircraftListItem;
+		AircraftListViewModel receivedModel = item as AircraftListViewModel;
 		aircraft = await _aircraftService.GetByIdAsync(receivedModel.Id);
 		showDetails = true;
 	}
@@ -65,5 +87,112 @@ else
 	public void GoBack()
 	{
 		showDetails = false;
+		aircraft = null;
+		formModel = null;
+	}
+
+	public async Task ShowForm(object item)
+	{
+		if (item == null)
+		{
+			isNew = true;
+			formModel = new AircraftFormViewModel();
+			formModel.FirstSeen = DateTime.Today;
+			formModel.LastSeen = DateTime.Today;
+			formModel.AirportIds = new List<Guid>();
+			formPageTitle = "Nieuw vliegtuig";
+		}
+		else
+		{
+			AircraftDetailViewModel aircraft = await _aircraftService.GetByIdAsync((Guid)item);
+			LoadAircraftFormModel(aircraft);
+			isNew = false;
+			formPageTitle = $"{formModel.Registration} bewerken";
+		}
+
+		selectTypes = await GetTypesForInputSelect();
+		selectAirlines = await GetAirlinesForInputSelect();
+		selectAirports = await GetAirportsForInputSelect();
+	}
+
+	public async Task SaveAsync()
+	{
+		if (isNew)
+		{
+			await _aircraftService.AddAsync(formModel);
+		}
+		else
+		{
+			await _aircraftService.UpdateAsync(formModel);
+		}
+		await ShowList();
+		GoBack();
+	}
+
+	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()
+	{
+		AircraftType[] types = await _aircraftService.GetAircraftTypes();
+		List<InputSelectItem> items = new List<InputSelectItem>();
+		int i = 1;
+
+		foreach (var type in types)
+		{
+			InputSelectItem item = new InputSelectItem { Value = type.Id, Label = type.Type };
+			items.Add(item);
+			i++;
+		}
+		return items;
+	}
+
+	private async Task<IEnumerable<InputSelectItem>> GetAirlinesForInputSelect()
+	{
+		Airline[] airlines = await _aircraftService.GetAirlines();
+		List<InputSelectItem> items = new List<InputSelectItem>();
+		int i = 1;
+
+		foreach (var airline in airlines)
+		{
+			InputSelectItem item = new InputSelectItem { Value = airline.Id, Label = airline.Name };
+			items.Add(item);
+			i++;
+		}
+		return items;
+	}
+
+	private async Task<IEnumerable<InputSelectItem>> GetAirportsForInputSelect()
+	{
+		Airport[] airports = await _aircraftService.GetAirports();
+		List<InputSelectItem> items = new List<InputSelectItem>();
+		int i = 1;
+
+		foreach (var airport in airports)
+		{
+			InputSelectItem item = new InputSelectItem { Value = airport.Id, Label = airport.Name };
+			items.Add(item);
+			i++;
+		}
+		return items;
+	}
+
+	private void LoadAircraftFormModel(AircraftDetailViewModel aircraft)
+	{
+		formModel = new AircraftFormViewModel
+		{
+			Id = aircraft.Id,
+			Registration = aircraft.Registration,
+			AircraftTypeId = aircraft.AircraftType.Id,
+			AirlineId = aircraft.Airline.Id,
+			HasSpecialLivery = aircraft.HasSpecialLivery,
+			FirstSeen = aircraft.FirstSeen,
+			LastSeen = aircraft.LastSeen,
+		};
+
+		List<Guid> ids = new List<Guid>();
+
+		foreach (var airport in aircraft.Airports)
+		{
+			ids.Add(airport.Id);
+		}
+		formModel.AirportIds = ids;
 	}
 }

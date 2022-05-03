@@ -1,5 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos;
+﻿using Imi.Project.Api.Core.Constants;
+using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Core.Models;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +29,10 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<AircraftTypeListResponseDto> aircraftTypes = await _aircraftTypeService.ListAllAsync();
+            IEnumerable<AircraftTypeListResponseDto> result = await _aircraftTypeService.ListAllAsync();
 
-            return Ok(aircraftTypes);
+            BaseResponseModel<IEnumerable<AircraftTypeListResponseDto>> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return Ok(result);
+            BaseResponseModel<AircraftTypeDetailResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
 
         /// <summary>
@@ -83,7 +87,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+            BaseResponseModel<AircraftTypeListResponseDto> response = new() { Status = StatusConstants.Created, Data = result };
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, response);
         }
 
         /// <summary>
@@ -120,7 +125,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result?.GetErrors());
             }
 
-            return Ok(result);
+            BaseResponseModel<AircraftTypeDetailResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
 
         /// <summary>
@@ -140,7 +146,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return Ok();
+            BaseResponseModel<BaseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
     }
 }

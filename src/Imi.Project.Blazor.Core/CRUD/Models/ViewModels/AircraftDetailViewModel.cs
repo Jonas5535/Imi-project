@@ -1,9 +1,10 @@
-﻿using System;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using System;
 using System.Collections.Generic;
 
-namespace Imi.Project.Blazor.Core.CRUD.Models
+namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 {
-    public class Aircraft
+    public class AircraftDetailViewModel
     {
         public Guid Id { get; set; }
         public string Registration { get; set; }
@@ -11,11 +12,9 @@ namespace Imi.Project.Blazor.Core.CRUD.Models
         public DateTime FirstSeen { get; set; }
         public DateTime LastSeen { get; set; }
         public string Image { get; set; }
-        public Guid AircraftTypeId { get; set; }
         public AircraftType AircraftType { get; set; }
-        public Guid AirlineId { get; set; }
         public Airline Airline { get; set; }
-        public ICollection<Guid> AirportIds { get; set; }
         public ICollection<Airport> Airports { get; set; }
+
     }
 }

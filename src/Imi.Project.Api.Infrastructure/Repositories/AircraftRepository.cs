@@ -47,22 +47,22 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(registration))
             {
-                query = query.Where(a => a.Registration.ToUpper().Contains(registration.ToUpper()));
+                query = query.Where(a => a.Registration.Contains(registration));
             }
 
             if (!string.IsNullOrEmpty(type))
             {
-                query = query.Where(a => a.AircraftType.Type.ToUpper().Contains(type.ToUpper()));
+                query = query.Where(a => a.AircraftType.Type.Contains(type));
             }
 
             if (!string.IsNullOrEmpty(airlineName))
             {
-                query = query.Where(a => a.Airline.Name.ToUpper().Contains(airlineName.ToUpper()));
+                query = query.Where(a => a.Airline.Name.Contains(airlineName));
             }
 
             if (!string.IsNullOrEmpty(airportName))
             {
-                query = query.Where(a => a.SpottedAtAirports.SingleOrDefault().Airport.Name.ToUpper().Contains(airportName.ToUpper())); //Ik geef op
+                query = query.Where(a => a.SpottedAtAirports.SingleOrDefault().Airport.Name.Contains(airportName)); //Onmogelijke query
             }
 
             return await query.ToListAsync();

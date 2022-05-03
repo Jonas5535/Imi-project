@@ -21,8 +21,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Brand = aircraftTypeEntity.Brand,
                 Type = aircraftTypeEntity.Type,
                 ICAOCode = aircraftTypeEntity.ICAOCode,
-                AddedOn = aircraftTypeEntity.AddedOn,
-                ModifiedOn = aircraftTypeEntity.ModifiedOn
             };
             return dto;
         }

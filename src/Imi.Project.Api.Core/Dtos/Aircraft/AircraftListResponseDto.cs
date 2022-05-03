@@ -11,7 +11,5 @@ namespace Imi.Project.Api.Core.Dtos
         public AircraftTypeListResponseDto AircraftType { get; set; }
         public AirlineListResponseDto Airline { get; set; }
         public ICollection<AirportListResponseDto> Airports { get; set; }
-        public DateTime? AddedOn { get; set; }
-        public DateTime? ModifiedOn { get; set; }
     }
 }

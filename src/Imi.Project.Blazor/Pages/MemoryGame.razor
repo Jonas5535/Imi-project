@@ -1,7 +1,7 @@
 ﻿@page "/memory"
 @inject IMemoryService _memoryService
 
-@if (!HasStarted)
+@if (!hasStarted)
 {
 	<MemoryWelcomeCard OnPlayButtonClick="GameInit"></MemoryWelcomeCard>
 }
@@ -12,8 +12,8 @@ else
 		<!--Placed in center so it is easier for the player to notice-->
 		<span class="font-size-larger justify-content-center d-flex">Aantal levens: <b>@stats.Lives</b></span> 
 	</div>
-	<div class="row align-self-center mt-4 mx-auto" style="width: 80rem">
-		@foreach (var card in MemoryCards)
+	<div class="row align-self-center mt-4 mx-auto mb-2" style="width: 80rem">
+		@foreach (var card in memoryCards)
 		{
 			<MemoryCard Model="card"
 				OnCardClick="HandleSelection">
@@ -34,17 +34,17 @@ else
 }
 
 @code {
-	private bool HasStarted = false;
-	private IEnumerable<MemoryCardModel> MemoryCards;
+	private bool hasStarted = false;
+	private IEnumerable<MemoryCardModel> memoryCards;
 	private StatsModel stats;
 	private bool isBusy = false;
 	private MessageBox messagebox = new();
 
 	private void GameInit()
 	{
-		MemoryCards = _memoryService.GetMemoryCards();
+		memoryCards = _memoryService.GetMemoryCards();
 		stats = _memoryService.GetStats(true);
-		HasStarted = true;
+		hasStarted = true;
 	}
 
 	public async Task HandleSelection(object item)
@@ -69,7 +69,7 @@ else
 	public void CloseGame()
 	{
 		messagebox = new();
-		HasStarted = false;
+		hasStarted = false;
 	}
 
 	private void CheckGameStatus()

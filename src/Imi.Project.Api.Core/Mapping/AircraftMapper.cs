@@ -35,8 +35,6 @@ namespace Imi.Project.Api.Core.Mapping
                 AircraftType = aircraftEntity.AircraftType?.MapToListDtoSingle(),
                 Airline = aircraftEntity.Airline?.MapToListDtoSingle(),
                 Airports = airports,
-                AddedOn = aircraftEntity.AddedOn,
-                ModifiedOn = aircraftEntity.ModifiedOn,
             };
             return dto;
         }

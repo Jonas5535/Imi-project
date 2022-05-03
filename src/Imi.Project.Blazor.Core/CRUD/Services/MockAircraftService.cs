@@ -1,4 +1,5 @@
-﻿using Imi.Project.Blazor.Core.CRUD.Models;
+﻿using Imi.Project.Blazor.Core.CRUD.Models.EntityModels;
+using Imi.Project.Blazor.Core.CRUD.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListItem, Aircraft>
+    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel>
     {
         private static Airline[] _airlines = new Airline[]
         {
@@ -42,9 +43,22 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 AirportIds = new List<Guid>{ _airports[1].Id }, Image = "/Images/CRUD/IMG_1891.JPG"},
         };
 
-        public Task AddAsync(Aircraft item)
+        public Task AddAsync(AircraftFormViewModel item)
         {
-            throw new NotImplementedException();
+            Aircraft aircraft = new Aircraft
+            {
+                Id = Guid.NewGuid(),
+                Registration = item.Registration?.ToUpper(),
+                AircraftTypeId = item.AircraftTypeId,
+                AirlineId = item.AirlineId,
+                HasSpecialLivery = item.HasSpecialLivery,
+                FirstSeen = item.FirstSeen,
+                LastSeen = item.LastSeen,
+                AirportIds = item.AirportIds,
+            };
+
+            _aircrafts.Add(aircraft);
+            return Task.CompletedTask;
         }
 
         public Task DeleteAsync(Guid id)
@@ -55,29 +69,56 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return Task.CompletedTask;
         }
 
-        public async Task<Aircraft> GetByIdAsync(Guid id)
+        public async Task<AircraftType[]> GetAircraftTypes()
+        {
+            return await Task.FromResult(_aircraftTypes);
+        }
+
+        public async Task<Airline[]> GetAirlines()
+        {
+            return await Task.FromResult(_airlines);
+        }
+
+        public async Task<Airport[]> GetAirports()
+        {
+            return await Task.FromResult(_airports);
+        }
+
+        public async Task<AircraftDetailViewModel> GetByIdAsync(Guid id)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
             if (aircraft == null) throw new ArgumentException("aircraft not found");
 
-            aircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId);
-            aircraft.Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId);
-            aircraft.Airports = new List<Airport>();
+            AircraftDetailViewModel result;
+
+            result = new AircraftDetailViewModel
+            {
+                Id = aircraft.Id,
+                Registration = aircraft.Registration,
+                HasSpecialLivery = aircraft.HasSpecialLivery,
+                FirstSeen = aircraft.FirstSeen,
+                LastSeen = aircraft.LastSeen,
+                Image = aircraft.Image,
+                AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id == aircraft.AircraftTypeId),
+                Airline = _airlines.FirstOrDefault(a => a.Id == aircraft.AirlineId),
+            };
+
+            result.Airports = new List<Airport>();
 
             foreach (var airportId in aircraft.AirportIds)
             {
                 Airport airport = _airports.FirstOrDefault(a => a.Id.Equals(airportId));
-                aircraft.Airports.Add(airport);
+                result.Airports.Add(airport);
             }
 
-            return await Task.FromResult(aircraft);
+            return await Task.FromResult(result);
         }
 
-        public async Task<IEnumerable<AircraftListItem>> ListAllAsync()
+        public async Task<IEnumerable<AircraftListViewModel>> ListAllAsync()
         {
-            List<AircraftListItem> aircrafts;
+            List<AircraftListViewModel> aircrafts;
 
-            aircrafts = _aircrafts.Select(a => new AircraftListItem()
+            aircrafts = _aircrafts.Select(a => new AircraftListViewModel()
             {
                 Id = a.Id,
                 Registration = a.Registration,
@@ -89,9 +130,18 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(aircrafts);
         }
 
-        public Task UpdateAsync(Aircraft item)
+        public Task UpdateAsync(AircraftFormViewModel item)
         {
-            throw new NotImplementedException();
+            Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == item.Id);
+            if (aircraft == null) throw new ArgumentException("Aircraft not found");
+            aircraft.Registration = item.Registration?.ToUpper();
+            aircraft.AircraftTypeId = item.AircraftTypeId;
+            aircraft.AirlineId = item.AirlineId;
+            aircraft.HasSpecialLivery = item.HasSpecialLivery;
+            aircraft.FirstSeen = item.FirstSeen;
+            aircraft.LastSeen = item.LastSeen;
+            aircraft.AirportIds = item.AirportIds;
+            return Task.CompletedTask;
         }
     }
 }
