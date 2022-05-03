@@ -62,7 +62,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
             if (!string.IsNullOrEmpty(airportName))
             {
-                query = query.Where(a => a.SpottedAtAirports.SingleOrDefault().Airport.Name.Contains(airportName)); //Ik geef op
+                query = query.Where(a => a.SpottedAtAirports.SingleOrDefault().Airport.Name.Contains(airportName)); //Onmogelijke query
             }
 
             return await query.ToListAsync();
