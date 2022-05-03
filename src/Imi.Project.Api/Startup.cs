@@ -50,7 +50,7 @@ namespace Imi.Project.Api
             //Register the Swagger generator, defining 1 or more Swagger documents.
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "IMI-Lampaert-Jonas", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aircraft API", Version = "v1" });
                 var filePath = Path.Combine(AppContext.BaseDirectory, "ApiDocs.xml");
                 c.IncludeXmlComments(filePath);
             });
