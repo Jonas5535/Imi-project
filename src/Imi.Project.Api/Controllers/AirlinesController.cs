@@ -1,5 +1,6 @@
 ﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Core.Models;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -27,9 +28,10 @@ namespace Imi.Project.Api.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            IEnumerable<AirlineListResponseDto> result = await _airlineService.ListAllAsync();
+            IEnumerable<AirlineListResponseDto> airlines = await _airlineService.ListAllAsync();
+            BaseResponseModel<IEnumerable<AirlineListResponseDto>> responseModel = new() { Status = "OK", Data = airlines };
 
-            return Ok(result);
+            return Ok(responseModel);
         }
 
         /// <summary>
@@ -132,7 +134,7 @@ namespace Imi.Project.Api.Controllers
 
             if (!result.IsSucces())
             {
-                return this .HandleErrors(result.GetErrors());
+                return this.HandleErrors(result.GetErrors());
             }
 
             return Ok();
