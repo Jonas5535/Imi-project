@@ -1,6 +1,6 @@
 ﻿namespace Imi.Project.Api.Core.Constants
 {
-	public class StatusConstants
+	public static class StatusConstants
 	{
 		public const string BadRequest = "Bad Request";
 		public const string NotFound = "Not Found";

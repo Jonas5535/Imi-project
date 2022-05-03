@@ -1,4 +1,5 @@
-﻿using Imi.Project.Api.Core.Models;
+﻿using Imi.Project.Api.Core.Constants;
+using Imi.Project.Api.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +39,7 @@ namespace Imi.Project.Api.Extensions
 			}
 			else
 			{
-				model.Status = "Internal Server Error";
+				model.Status = StatusConstants.InternalServerError;
 				model.ErrorMessage = "The server detected no errors in this request but mistakenly handled it as one.";
 				return controller.StatusCode(500, model);
 			}
