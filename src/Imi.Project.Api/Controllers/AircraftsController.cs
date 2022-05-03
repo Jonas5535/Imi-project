@@ -1,5 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos;
+﻿using Imi.Project.Api.Core.Constants;
+using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Infrastructure.Services;
+using Imi.Project.Api.Core.Models;
 using Imi.Project.Api.Extensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -43,12 +45,15 @@ namespace Imi.Project.Api.Controllers
                 {
                     return this.HandleErrors(result.First().GetErrors());
                 }
-                return Ok(result);
+
+                BaseResponseModel<IEnumerable<AircraftListResponseDto>> response = new() { Status = StatusConstants.OK, Data = result };
+                return Ok(response);
             }
             else
             {
                 IEnumerable<AircraftListResponseDto> result = await _aircraftService.ListAllAsync();
-                return Ok(result);
+                BaseResponseModel<IEnumerable<AircraftListResponseDto>> response = new() { Status = StatusConstants.OK, Data = result };
+                return Ok(response);
             }
         }
 
@@ -68,7 +73,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return Ok(result);
+            BaseResponseModel<AircraftDetailResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
 
         /// <summary>
@@ -106,7 +112,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+            BaseResponseModel<AircraftListResponseDto> response = new() { Status = StatusConstants.Created, Data = result };
+            return CreatedAtAction(nameof(Get), new { id = result.Id }, response);
         }
 
         /// <summary>
@@ -147,7 +154,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return Ok(result);
+            BaseResponseModel<AircraftDetailResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
 
         /// <summary>
@@ -166,7 +174,8 @@ namespace Imi.Project.Api.Controllers
                 return this.HandleErrors(result.GetErrors());
             }
 
-            return Ok();
+            BaseResponseModel<BaseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(response);
         }
     }
 }
