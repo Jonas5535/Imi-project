@@ -68,7 +68,7 @@ namespace Imi.Project.Api
 			// specifying the Swagger JSON endpoint.
 			app.UseSwaggerUI(c =>
 			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "IMI-Lampaert-Jonas");
+				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aircraft API");
 				c.RoutePrefix = string.Empty;
 			});
 
