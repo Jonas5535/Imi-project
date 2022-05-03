@@ -303,7 +303,7 @@
             </summary>
             <param name="controller"></param>
             <param name="errors"></param>
-            <returns>An IActionResult that contains the topmost error</returns>
+            <returns>An IActionResult that contains the topmost error wrapped inside a BaseResponseModel</returns>
         </member>
         <member name="M:Imi.Project.Api.Extensions.DtoValidations.IsSucces(System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Dtos.BaseDto})">
             <summary>
