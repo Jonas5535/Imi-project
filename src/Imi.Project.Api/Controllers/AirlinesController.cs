@@ -29,8 +29,8 @@ namespace Imi.Project.Api.Controllers
 		[HttpGet]
 		public async Task<IActionResult> Get()
 		{
-			IEnumerable<AirlineListResponseDto> airlines = await _airlineService.ListAllAsync();
-			BaseResponseModel<IEnumerable<AirlineListResponseDto>> responseModel = new() { Status = StatusConstants.OK, Data = airlines };
+			IEnumerable<AirlineListResponseDto> result = await _airlineService.ListAllAsync();
+			BaseResponseModel<IEnumerable<AirlineListResponseDto>> responseModel = new() { Status = StatusConstants.OK, Data = result };
 
 			return Ok(responseModel);
 		}
@@ -51,7 +51,8 @@ namespace Imi.Project.Api.Controllers
 				return this.HandleErrors(result.GetErrors());
 			}
 
-			return Ok(result);
+			BaseResponseModel<AirlineDetailResponseDto> responseModel = new() { Status = StatusConstants.OK, Data = result };
+			return Ok(responseModel);
 		}
 
 		/// <summary>
@@ -84,7 +85,8 @@ namespace Imi.Project.Api.Controllers
 				return this.HandleErrors(result.GetErrors());
 			}
 
-			return CreatedAtAction(nameof(Get), new { id = result.Id }, result);
+			BaseResponseModel<AirlineListResponseDto> responseModel = new() { Status = StatusConstants.Created, Data = result };
+			return CreatedAtAction(nameof(Get), new { id = result.Id }, responseModel);
 		}
 
 		/// <summary>
@@ -118,7 +120,8 @@ namespace Imi.Project.Api.Controllers
 				return this.HandleErrors(result.GetErrors());
 			}
 
-			return Ok(result);
+			BaseResponseModel<AirlineDetailResponseDto> resultModel = new() { Status = StatusConstants.OK, Data = result };
+			return Ok(resultModel);
 		}
 
 		/// <summary>
@@ -138,7 +141,8 @@ namespace Imi.Project.Api.Controllers
 				return this.HandleErrors(result.GetErrors());
 			}
 
-			return Ok();
+			BaseResponseModel<BaseDto> resultModel = new() { Status = StatusConstants.OK, Data = result };
+			return Ok(resultModel);
 		}
 	}
 }
