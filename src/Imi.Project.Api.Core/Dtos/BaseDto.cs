@@ -41,13 +41,13 @@ namespace Imi.Project.Api.Core.Dtos
 
         public void AddInternalServerError(string message)
         {
-            AddError(ErrorMessage.ConflictError(message));
+            AddError(ErrorMessage.InternalServerError(message));
         }
 
-        public void AddForbidden(string message)
-        {
-            AddError(ErrorMessage.Forbidden(message));
-        }
+        //public void AddForbidden(string message)
+        //{
+        //    AddError(ErrorMessage.Forbidden(message));
+        //}
 
         public bool IsSucces()
         {
