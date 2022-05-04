@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Imi.Project.Shared;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -17,10 +18,12 @@ namespace Imi.Project.Api.Core.Dtos
 
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Date)]
+        [CurrentDate(ErrorMessage = "{0} cannot be later than today")]
         public DateTime FirstSeen { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Date)]
+        [CurrentDate(ErrorMessage = "{0} cannot be later than today")]
         public DateTime LastSeen { get; set; }
 
         // Image is not required as this is just an option

@@ -121,6 +121,26 @@ app {
     font-size: larger;
 }
 
+.bg-yellow{
+    background-color: var(--Yellow);
+}
+
+.bg-light-yellow{
+    background-color: var(--Lighter-yellow);
+}
+
+.w-35px{
+    width: 35px;
+}
+
+.visible{
+    display:inline-block;
+}
+
+.invisible{
+    display:none;
+}
+
 .memory-card:hover {
     box-shadow: 2px 12px 15px #999;
     transform: translateY(-2px);
@@ -153,6 +173,12 @@ app {
     .btn:hover {
         box-shadow: 2px 2px 5px #999;
     }
+
+.btn-circle{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
 
 .overlay {
     position: absolute;

@@ -21,8 +21,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Name = airportEntity.Name,
                 IATACode = airportEntity.IATACode,
                 ICAOCode = airportEntity.ICAOCode,
-                AddedOn = airportEntity.AddedOn,
-                ModifiedOn = airportEntity.ModifiedOn,
             };
             return dto;
         }

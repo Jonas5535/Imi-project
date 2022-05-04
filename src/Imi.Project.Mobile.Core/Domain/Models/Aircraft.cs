@@ -13,6 +13,6 @@ namespace Imi.Project.Mobile.Core.Domain.Models
         public DateTime LastSeen { get; set; }
         public AircraftType AircraftType { get; set; }
         public Airline Airline { get; set; }
-        public ICollection<Airport> Airports { get; set; } = new ObservableCollection<Airport>();
+        public ICollection<Airport> Airports { get; set; } = new ObservableCollection<Airport>(); //TODO Check if needed
     }
 }
