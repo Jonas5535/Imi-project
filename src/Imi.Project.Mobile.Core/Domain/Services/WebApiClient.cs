@@ -8,6 +8,8 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 {
     public class WebApiClient
     {
+        private const string _baseUri = "https://192.168.50.100:5001/api";
+
         private static HttpClientHandler ClientHandler()
         {
             var httpClientHandler = new HttpClientHandler();
@@ -19,7 +21,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             return httpClientHandler;
         }
 
-        public async static Task<BaseResponse<T>> GetApiResult<T>(string uri)
+        public async static Task<BaseResponse<T>> GetApiResult<T>(string endpoint)
         {
             BaseResponse<T> response = new BaseResponse<T>();
 
@@ -27,7 +29,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             {
                 try
                 {
-                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>(uri);
+                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{_baseUri}/{endpoint}");
                     return response;
                 }
                 catch (HttpRequestException ex)

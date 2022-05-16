@@ -12,7 +12,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
 
         public ApiAirlineService()
         {
-            _baseEndpoint = $"https://192.168.50.100:5001/api/airlines";
+            _baseEndpoint = "airlines";
         }
 
         public Task<BaseResponse<Airline>> AddAsync(Airline entity)
