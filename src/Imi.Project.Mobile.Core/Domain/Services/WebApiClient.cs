@@ -1,9 +1,7 @@
 ﻿using Imi.Project.Mobile.Core.Domain.Models;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services
@@ -21,7 +19,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             return httpClientHandler;
         }
 
-        public async Task<BaseResponse<T>> GetApiResult<T>(string uri)
+        public async static Task<BaseResponse<T>> GetApiResult<T>(string uri)
         {
             BaseResponse<T> response = new BaseResponse<T>();
 
