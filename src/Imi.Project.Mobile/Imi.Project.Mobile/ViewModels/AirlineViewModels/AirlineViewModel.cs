@@ -61,8 +61,16 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirlineCommand => new Command<Airline>(
             async (Airline airline) =>
             {
-                await _airlineService.DeleteAsync(airline.Id); //TODO handle BaseResponse
-                await ListInit();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze maatschappij wilt verwijderen", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    BaseResponse<Airline> response = await _airlineService.DeleteAsync(airline.Id);
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await ListInit();
+                }   
             }
         );
 
@@ -79,8 +87,7 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Stoppen");
-
-                if (answer) await ListInit();
+                if (answer is true) await ListInit();
             }
         }
     }
