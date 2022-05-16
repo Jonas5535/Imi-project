@@ -1,6 +1,8 @@
 ﻿using Imi.Project.Mobile.Core.Domain.Models;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
+using System.Net.Http.Formatting;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
 
@@ -19,6 +21,14 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 (message, cert, chain, errors) => { return true; };
 #endif
             return httpClientHandler;
+        }
+
+        private static JsonMediaTypeFormatter GetJsonFormatter()
+        {
+            var formatter = new JsonMediaTypeFormatter();
+            //prevent self-referencing loops when saving Json (Bucket -> BucketItem -> Bucket -> ...)
+            formatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            return formatter;
         }
 
         public async static Task<BaseResponse<T>> GetApiResult<T>(string endpoint)
@@ -47,6 +57,30 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                     return response;
                 }
             }
+        }
+
+        private static async Task<TOut> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)
+        {
+            TOut result = default;
+
+            using (HttpClient httpClient = new HttpClient(ClientHandler()))
+            {
+                HttpResponseMessage response;
+                if (httpMethod == HttpMethod.Post)
+                {
+                    response = await httpClient.PostAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                }
+                else if (httpMethod == HttpMethod.Put)
+                {
+                    response = await httpClient.PutAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                }
+                else
+                {
+                    response = await httpClient.DeleteAsync($"{_baseUri}/{endpoint}");
+                }
+                result = await response.Content.ReadAsAsync<TOut>();
+            }
+            return result;
         }
     }
 }
