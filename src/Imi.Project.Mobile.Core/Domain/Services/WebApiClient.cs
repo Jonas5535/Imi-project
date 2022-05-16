@@ -59,6 +59,21 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             }
         }
 
+        public static async Task<TOut> PutCallApi<TOut, TIn>(string uri, TIn entity)
+        {
+            return await CallApi<TOut, TIn>(uri, entity, HttpMethod.Put);
+        }
+
+        public static async Task<TOut> PostCallApi<TOut, TIn>(string uri, TIn entity)
+        {
+            return await CallApi<TOut, TIn>(uri, entity, HttpMethod.Post);
+        }
+
+        public static async Task<TOut> DeleteCallApi<TOut>(string uri)
+        {
+            return await CallApi<TOut, object>(uri, null, HttpMethod.Delete);
+        }
+
         private static async Task<TOut> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)
         {
             TOut result = default;
