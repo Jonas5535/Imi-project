@@ -24,31 +24,28 @@ namespace Imi.Project.Mobile.Core.Domain.Services
         public async Task<BaseResponse<T>> GetApiResult<T>(string uri)
         {
             BaseResponse<T> response = new BaseResponse<T>();
-            HttpResponseMessage apiResponse;
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
                 try
                 {
-                    var test = await httpClient.GetFromJsonAsync<T>(uri);
-                    return null;
+                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>(uri);
+                    return response;
                 }
                 catch (HttpRequestException ex)
                 {
                     response.IsSucces = false;
-                    response.Reason = "Server niet beschikbaar";
+                    response.Status = "Server niet beschikbaar";
                     response.ErrorMessage = ex.Message;
                     return response;
                 }
                 catch (Exception)
                 {
                     response.IsSucces = false;
-                    response.Reason = "Fout!";
+                    response.Status = "Fout!";
                     response.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
                     return response;
                 }
-
-
             }
         }
     }
