@@ -14,14 +14,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
             _baseEndpoint = "airlines";
         }
 
-        public Task<BaseResponse<Airline>> AddAsync(Airline entity)
+        public async Task<BaseResponse<Airline>> AddAsync(Airline entity)
         {
-            throw new NotImplementedException();
+            BaseResponse<Airline> response = await WebApiClient.PostCallApi<BaseResponse<Airline>, Airline>(_baseEndpoint, entity);
+            return response;
         }
 
-        public Task<BaseResponse<Airline>> DeleteAsync(Guid id)
+        public async Task<BaseResponse<Airline>> DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            return await WebApiClient.DeleteCallApi<BaseResponse<Airline>>($"{_baseEndpoint}/{id}");
         }
 
         public Task<AircraftType[]> GetAircraftTypes()
@@ -49,9 +50,9 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
             return await WebApiClient.GetApiResult<ICollection<Airline>>(_baseEndpoint);
         }
 
-        public Task<BaseResponse<Airline>> UpdateAsync(Airline entity)
+        public async Task<BaseResponse<Airline>> UpdateAsync(Airline entity)
         {
-            throw new NotImplementedException();
+            return await WebApiClient.PutCallApi<BaseResponse<Airline>, Airline>(_baseEndpoint, entity);
         }
     }
 }
