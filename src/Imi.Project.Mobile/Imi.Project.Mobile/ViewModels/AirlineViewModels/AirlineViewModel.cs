@@ -86,7 +86,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
             else
             {
-                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Stoppen");
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
                 if (answer is true) await ListInit();
             }
         }

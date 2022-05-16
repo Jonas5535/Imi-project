@@ -239,6 +239,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 _isNew = false;
                 _currentAirline = await GetCurrentAirline(_currentAirline.Id);
+                if (_currentAirline == null) return; // needed to cut off the method
                 PageTitle = $"{_currentAirline.Name} bewerken";
             }
             LoadAirlineState();
@@ -250,9 +251,19 @@ namespace Imi.Project.Mobile.ViewModels
 
             if (!response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
-            }
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opniew proberen", "Terug");
 
+                if (answer is true)
+                {
+                    return await GetCurrentAirline(id);
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null; //Needed to cut off the method
+                }
+            }
+           
             Airline airline = response.Data;
             return await Task.FromResult(airline);
         }
