@@ -70,14 +70,18 @@ namespace Imi.Project.Mobile.ViewModels
         {
             BaseResponse<ICollection<Airline>> response = await _airlineService.ListAllAsync();
 
-            if (!response.IsSucces)
+            if (response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                ObservableCollection<Airline> airlines = new ObservableCollection<Airline>(response.Data);
+                Airlines = null;
+                Airlines = airlines;
             }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Stoppen");
 
-            ObservableCollection<Airline> airlines = new ObservableCollection<Airline>(response.Data);
-            Airlines = null;
-            Airlines = airlines;
+                if (answer) await ListInit();
+            }
         }
     }
 }
