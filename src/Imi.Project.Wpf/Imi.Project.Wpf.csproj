@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Imi.Project.Mobile.Core\Imi.Project.Mobile.Core.csproj" />
     <ProjectReference Include="..\Imi.Project.Wpf.Core\Imi.Project.Wpf.Core.csproj" />
   </ItemGroup>
 

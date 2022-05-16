@@ -1,6 +1,4 @@
-﻿using FluentValidation;
-using Imi.Project.Mobile.Core.Domain.Validators;
-using Imi.Project.Wpf.Core;
+﻿using Imi.Project.Wpf.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
