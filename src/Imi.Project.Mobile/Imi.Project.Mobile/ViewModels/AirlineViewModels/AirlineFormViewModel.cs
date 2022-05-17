@@ -213,19 +213,28 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _airlineService.AddAsync(_currentAirline); //TODO handle BaseResponse
+                        var response = await _airlineService.AddAsync(_currentAirline);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
-                        await _airlineService.UpdateAsync(_currentAirline); //TODO handle BaseResponse
+                        var response = await _airlineService.UpdateAsync(_currentAirline);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
-
-                    await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
-                    await CoreMethods.PopPageModel(_currentAirline);
                 }
             }
         );
+
+        private async Task ShowSucces()
+        {
+            await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAirline.Name} is opgeslagen", "Ok");
+            await CoreMethods.PopPageModel(_currentAirline);
+        }
 
         private async Task RefreshAirline()
         {
@@ -263,7 +272,7 @@ namespace Imi.Project.Mobile.ViewModels
                     return null; //Needed to cut off the method
                 }
             }
-           
+
             Airline airline = response.Data;
             return await Task.FromResult(airline);
         }
@@ -318,7 +327,7 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     MainAirportError = error.ErrorMessage;
                 }
-                else if (error.PropertyName ==  nameof(airline.HeadQuarter))
+                else if (error.PropertyName == nameof(airline.HeadQuarter))
                 {
                     HeadQuarterError = error.ErrorMessage;
                 }
