@@ -5,14 +5,9 @@ using System.Diagnostics;
 
 namespace Imi.Project.Vue.Controllers
 {
-    public class HomeController : Controller
+    public class AircraftController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
-        {
-            _logger = logger;
-        }
 
         public IActionResult Index()
         {
