@@ -1,5 +1,4 @@
-﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
+﻿
 
 :root {
     --Yellow: #fdd31d;
@@ -10,6 +9,29 @@ for details on configuring this project to bundle and minify static web assets. 
 .bg-yellow {
     background-color: var(--Yellow);
 }
+
+.crud-card {
+    box-shadow: 0 0 5px 0 rgba(22, 22, 26, .25);
+    border-radius: 5%;
+    height: 425px;
+}
+
+    .crud-card:hover {
+        background-color: var(--Lighter-yellow);
+        box-shadow: 2px 12px 15px #999;
+        transform: translateY(-2px);
+    }
+
+.btn {
+    background-color: var(--Yellow);
+    width: 150px;
+    height: 40px;
+    border-radius: 0.75rem;
+}
+
+    .btn:hover {
+        box-shadow: 2px 2px 5px #999;
+    }
 
 a.navbar-brand {
   white-space: normal;
