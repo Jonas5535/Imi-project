@@ -26,7 +26,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
         private static JsonMediaTypeFormatter GetJsonFormatter()
         {
             var formatter = new JsonMediaTypeFormatter();
-            //prevent self-referencing loops when saving Json (Bucket -> BucketItem -> Bucket -> ...)
+            //prevent self-referencing loops when saving Json
             formatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
             return formatter;
         }
