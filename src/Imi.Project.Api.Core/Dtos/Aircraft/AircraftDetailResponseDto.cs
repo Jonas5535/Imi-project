@@ -1,10 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos.AircraftType;
-using Imi.Project.Api.Core.Dtos.Airline;
-using Imi.Project.Api.Core.Dtos.Airport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Imi.Project.Api.Core.Dtos.Aircraft
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftDetailResponseDto : BaseDto
     {

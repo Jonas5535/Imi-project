@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.AircraftType;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Brand = aircraftTypeEntity.Brand,
                 Type = aircraftTypeEntity.Type,
                 ICAOCode = aircraftTypeEntity.ICAOCode,
-                AddedOn = aircraftTypeEntity.AddedOn,
-                ModifiedOn = aircraftTypeEntity.ModifiedOn
             };
             return dto;
         }

@@ -8,7 +8,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
     public class MockAircraftService : ICRUDService<Aircraft>
     {
-        private static Airline[] airlines = new Airline[]
+        private static Airline[] airlines = new Airline[] //TODO Put _ before array names
         {
             new Airline{ Id = Guid.Parse("fda5ebe2-57e1-4124-b63f-f5757768465d"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL"},
             new Airline{ Id = Guid.Parse("33770603-1f1e-4663-ad2e-1235fe24c47d"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF"},

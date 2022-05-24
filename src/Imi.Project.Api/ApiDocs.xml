@@ -1,0 +1,316 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Imi.Project.Api</name>
+    </assembly>
+    <members>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Get(System.Nullable{System.Boolean},System.String,System.String,System.String,System.String)">
+            <summary>
+            Gets a list of all aircrafts in the database. You can also filter the list.
+            </summary>
+            <param name="hasSpecialLivery">Will filter on special livery when not null</param>
+            <param name="registration">Will filter on aircraft registration when not null</param>
+            <param name="type">Will filter on aircrafttype when not null</param>
+            <param name="airlineName">Will filter on airline when not null</param>
+            <param name="AirportName">Will filter on airport when not null. <i>(Currently broken)</i></param>
+            <response code="200">Succesfully returns a list of aircrafts</response>
+            <response code="404">Cannot find any aircraft that match filter parameters</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific aircraft
+            </summary>
+            <param name="id">The id of the aircraft that you want details of</param>
+            <response code="200">Succesfully returns an aircraft</response>
+            <response code="404">There was no aircraft found with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Post(Imi.Project.Api.Core.Dtos.AircraftRequestDto)">
+            <summary>
+            Adds a new aircraft to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "registration": "OO-ABC",
+                 "hasSpecialLivery": true,
+                 "firstSeen": "2020-07-13",
+                 "lastSeen": "2022-02-11",
+                 "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
+                 "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
+                 "airportIds": [
+                    "e2be3bd6-4c7b-41f4-a5c8-a1940310ea7d",
+                    "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
+                 ]
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values
+            </remarks>
+            <response code="201">Created a new aircraft</response>
+            <response code="400">The user added invalid information in the request</response>
+            <response code="404">The user tried to couple an object that does not exist</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Put(Imi.Project.Api.Core.Dtos.AircraftRequestDto)">
+            <summary>
+            Updates an existing aircraft
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "id": "036f4398-a726-4839-4931-08da0e7ef24d",
+                 "registration": "OO-ABC",
+                 "hasSpecialLivery": true,
+                 "firstSeen": "2020-07-13",
+                 "lastSeen": "2022-02-11",
+                 "airlineId": "92c70a1d-e55a-4e36-a504-1c477c3c4b1c",
+                 "aircraftTypeId": "f10b801f-ef2d-481b-9cfe-4bfe6182a832",
+                 "airportIds": [
+                    "e2be3bd6-4c7b-41f4-a5c8-a1940310ea7d",
+                    "d8806f32-bf51-4b76-8c4f-37e0f532a6a7"
+                 ]
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values <br/> <br/>
+            <i>Updating the airports of an aircraft is currently not possible because of a bug somewhere in the code</i>
+            </remarks>
+            <response code="200">Succesfully updated the aircraft</response>
+            <response code="400">The user added invalid information in the request</response>
+            <response code="404">There is no aircraft with the given id or the user tried to couple an object that does not exist</response>
+            <response code="409">There is already an aircraft with the given registration</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.Delete(System.Guid)">
+            <summary>
+            Deletes an aircraft from the database
+            </summary>
+            <param name="id">The id of the aircraft you want to delete</param>
+            <response code="200">Succesfully deleted the aircraft</response>
+            <response code="404">There is no aircraft with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get">
+            <summary>
+            Gets a list of all aircrafttypes in the database
+            </summary>
+            <response code="200">Succesfully returns a list of aircrafttypes</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific aircrafttype
+            </summary>
+            <param name="id">The id of the aircrafttype that you want details of</param>
+            <response code="200">Succesfully returns the requested aircrafttype</response>
+            <response code="404">There was no aircrafttype found with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Post(Imi.Project.Api.Core.Dtos.AircraftTypeRequestDto)">
+            <summary>
+            Adds an aircrafttype to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "brand": "Boeing",
+                 "type": "777-300ER",
+                 "icaoCode": "B77W",
+                 "firstFlight": "2003-02-24",
+                 "length": 73.86,
+                 "wingSpan": 64.80,
+                 "height": 18.5,
+                 "emptyWeight": 167829
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this aircrafttype already exists
+            </remarks>
+            <response code="201">Created a new aircrafttype</response>
+            <response code="400">The user added invalid information in the request</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Put(Imi.Project.Api.Core.Dtos.AircraftTypeRequestDto)">
+            <summary>
+            Updates an existing aircrafttype
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "id": "78b2795a-7ae5-437b-12e4-08da0e4b85b3"
+                 "brand": "Boeing",
+                 "type": "777-300ER",
+                 "icaoCode": "B77W",
+                 "firstFlight": "2003-02-24T00:00:00",
+                 "length": 73.86,
+                 "wingSpan": 64.8,
+                 "height": 18.5,
+                 "emptyWeight": 167829,
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
+            </remarks>
+            <response code="200">Succesfully updated the aircrafttype</response>
+            <response code="400">The date of the first flight is later than today</response>
+            <response code="404">There is no aircrafttype with the given id</response>
+            <response code="409">There is already an aircrafttype with the given icao code in the database</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Delete(System.Guid)">
+            <summary>
+            Deletes an aircrafttype from the database
+            </summary>
+            <param name="id">The id of the aircrafttype you want to delete</param>
+            <response code="200">Succesfully deleted the aircrafttype</response>
+            <response code="400">Cannot remove because there are still aircraft coupled to this aircrafttype</response>
+            <response code="404">There is no airport with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Get">
+            <summary>
+            Gets a list of all airlines in the database
+            </summary>
+            <response code="200">Succesfully returns a list of airlines</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific airline
+            </summary>
+            <param name="id">The id of the airline you want details of</param>
+            <response code="200">Succesfully returns an airline</response>
+            <response code="404">There was no airline found with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Post(Imi.Project.Api.Core.Dtos.AirlineRequestDto)">
+            <summary>
+            Adds a new airline to the database
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "name": "Eurowings",
+                 "iataCode": "EW",
+                 "icaoCode": "EWG",
+                 "mainAirport": "Düsseldorf",
+                 "headQuarter": "Düsseldorf, Duitsland",
+                 "fleetSize": 94
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airline already exists.
+            </remarks>
+            <response code="201">Created a new aircrafttype</response>
+            <response code="400">Airline or id already exists</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Put(Imi.Project.Api.Core.Dtos.AirlineRequestDto)">
+            <summary>
+            Updates an existing airline
+            </summary>
+            <param name="requestDto"></param>
+            <remarks>
+            Sample request:
+            
+                {
+                 "id": "147923d0-9426-4481-3f5f-08da0f2e9375",
+                 "name": "Eurostrings",
+                 "iataCode": "ES",
+                 "icaoCode": "ESG",
+                 "mainAirport": "Düsseldorf",
+                 "headQuarter": "Düsseldorf, Duitsland",
+                 "fleetSize": 69
+                }  
+            <strong>Caution:</strong> This is purely an example, it might not work depending on current id values.
+            </remarks>
+            <response code="200">Succesfully updated the airline</response>
+            <response code="404">There is no airline with the given id</response>
+            <response code="409">There is already an airport with the given icao code in the database</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirlinesController.Delete(System.Guid)">
+            <summary>
+            Deletes an airline form the database
+            </summary>
+            <param name="id">The id of the airline you want to delete</param>
+            <response code="200">Succesfully deleted the airline</response>
+            <response code="400">Cannot remove because there are still aircraft coupled to this airline</response>
+            <response code="404">There is no airline with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Get">
+            <summary>
+            Gets a list of all airports in the database
+            </summary>
+            <response code="200">Succesfully returns a list of airports</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Get(System.Guid)">
+            <summary>
+            Gets all details of a specific airport
+            </summary>
+            <param name="id">The id of the airport you want details of</param>
+            <response code="200">Succesfully returns an airport</response>
+            <response code="404">There was no airport found with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Post(Imi.Project.Api.Core.Dtos.AirportRequestDto)">
+            <summary>
+            Adds a new airport to the database
+            </summary>
+            <param name="airportRequestDto"></param>
+            <remarks>
+            Sample request:
+                
+                {
+                 "name": "Vienna intl. Airport",
+                 "iataCode": "VIE",
+                 "icaoCode": "LOWW",
+                 "elevationAMSL": 183,
+                 "runwayAmount": 2,
+                 "terminalAmount": 3,
+                 "country": "Oostenrijk",
+                 "city": "Schwechat"
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on if this airport already exists
+            </remarks>
+            <response code="201">Added a new airport</response>
+            <response code="400">Airport or id already exists</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Put(Imi.Project.Api.Core.Dtos.AirportRequestDto)">
+            <summary>
+            Updates an existing airport
+            </summary>
+            <param name="airportRequestDto"></param>
+            <remarks>
+            Sample request:
+                
+                {
+                 "id": "3d19d53a-f6ef-43e9-4a2b-08da0f33c9b4",
+                 "name": "Vienna intl. Airport",
+                 "iataCode": "VUE",
+                 "icaoCode": "LOLL",
+                 "elevationAMSL": 183,
+                 "runwayAmount": 2,
+                 "terminalAmount": 3,
+                 "country": "Oostenrijk",
+                 "city": "Schwechat"
+                }
+            <strong>Caution:</strong> This is purely an example, it might not work depending on the current id values
+            </remarks>
+            <response code="200">Succesfully updated the airport</response>
+            <response code="404">There is no airport with the given id</response>
+            <response code="409">There is already an airport with the given icao code in the database</response>
+        </member>
+        <member name="M:Imi.Project.Api.Controllers.AirportsController.Delete(System.Guid)">
+            <summary>
+            Deletes an airport from the database
+            </summary>
+            <param name="id">The id of the airport you want to delete</param>
+            <response code="200">Succesfully deleted the airport</response>
+            <response code="400">Cannot remove because there are still aircraft coupled to this airport</response>
+            <response code="404">There is no airport with the given id</response>
+        </member>
+        <member name="M:Imi.Project.Api.Extensions.ControllerExtensions.HandleErrors(Microsoft.AspNetCore.Mvc.ControllerBase,System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Models.ErrorMessage})">
+            <summary>
+            Throws the topmost error as a HttpResponse
+            </summary>
+            <param name="controller"></param>
+            <param name="errors"></param>
+            <returns>An IActionResult that contains the topmost error wrapped inside a BaseResponseModel</returns>
+        </member>
+        <member name="M:Imi.Project.Api.Extensions.DtoValidations.IsSucces(System.Collections.Generic.IEnumerable{Imi.Project.Api.Core.Dtos.BaseDto})">
+            <summary>
+            Checks IsSucces property of every dto in a list of dtos
+            </summary>
+            <param name="result"></param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

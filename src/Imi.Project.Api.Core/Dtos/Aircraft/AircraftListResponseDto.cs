@@ -1,10 +1,7 @@
-﻿using Imi.Project.Api.Core.Dtos.AircraftType;
-using Imi.Project.Api.Core.Dtos.Airline;
-using Imi.Project.Api.Core.Dtos.Airport;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
-namespace Imi.Project.Api.Core.Dtos.Aircraft
+namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftListResponseDto : BaseDto
     {
@@ -14,7 +11,5 @@ namespace Imi.Project.Api.Core.Dtos.Aircraft
         public AircraftTypeListResponseDto AircraftType { get; set; }
         public AirlineListResponseDto Airline { get; set; }
         public ICollection<AirportListResponseDto> Airports { get; set; }
-        public DateTime? AddedOn { get; set; }
-        public DateTime? ModifiedOn { get; set; }
     }
 }

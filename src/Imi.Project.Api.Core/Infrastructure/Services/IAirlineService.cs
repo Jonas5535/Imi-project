@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Airline;
+﻿using Imi.Project.Api.Core.Dtos;
 
 namespace Imi.Project.Api.Core.Infrastructure.Services
 {

@@ -1,4 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Airline;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -21,8 +21,6 @@ namespace Imi.Project.Api.Core.Mapping
                 Name = airlineEntity.Name,
                 IATACode = airlineEntity.IATACode,
                 ICAOCode = airlineEntity.ICAOCode,
-                AddedOn = airlineEntity.AddedOn,
-                ModifiedOn = airlineEntity.ModifiedOn,
             };
             return dto;
         }

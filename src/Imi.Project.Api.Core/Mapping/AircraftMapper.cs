@@ -1,5 +1,4 @@
-﻿using Imi.Project.Api.Core.Dtos.Aircraft;
-using Imi.Project.Api.Core.Dtos.Airport;
+﻿using Imi.Project.Api.Core.Dtos;
 using Imi.Project.Api.Core.Entities;
 using System;
 using System.Collections.Generic;
@@ -23,7 +22,7 @@ namespace Imi.Project.Api.Core.Mapping
 
             foreach (var airport in aircraftEntity.SpottedAtAirports)
             {
-                var a = airport.Airport.MapToListDtoSingle();
+                var a = airport.Airport?.MapToListDtoSingle();
                 airports.Add(a);
             }
 
@@ -36,8 +35,6 @@ namespace Imi.Project.Api.Core.Mapping
                 AircraftType = aircraftEntity.AircraftType?.MapToListDtoSingle(),
                 Airline = aircraftEntity.Airline?.MapToListDtoSingle(),
                 Airports = airports,
-                AddedOn = aircraftEntity.AddedOn,
-                ModifiedOn = aircraftEntity.ModifiedOn,
             };
             return dto;
         }
@@ -59,7 +56,7 @@ namespace Imi.Project.Api.Core.Mapping
             {
                 Id = aircraftEntity.Id,
                 Registration = aircraftEntity.Registration,
-                HasSpecialLivery= aircraftEntity.HasSpecialLivery,
+                HasSpecialLivery = aircraftEntity.HasSpecialLivery,
                 FirstSeen = aircraftEntity.FirstSeen,
                 LastSeen = aircraftEntity.LastSeen,
                 Image = aircraftEntity.Image,
@@ -95,9 +92,9 @@ namespace Imi.Project.Api.Core.Mapping
                     HasSpecialLivery = requestDto.HasSpecialLivery,
                     FirstSeen = requestDto.FirstSeen.Date,
                     LastSeen = requestDto.LastSeen.Date,
-                    Image = requestDto.Image,
-                    Latitude = requestDto.Latitude,
-                    Longitude = requestDto.Longitude,
+                    //Image = requestDto.Image,         //Not yet in use
+                    //Latitude = requestDto.Latitude,   //Not yet in use
+                    //Longitude = requestDto.Longitude, //Not yet in use
                     AirlineId = requestDto.AirlineId,
                     AircraftTypeId = requestDto.AircraftTypeId,
                     SpottedAtAirports = airports
@@ -111,9 +108,9 @@ namespace Imi.Project.Api.Core.Mapping
                 HasSpecialLivery = requestDto.HasSpecialLivery,
                 FirstSeen = requestDto.FirstSeen.Date,
                 LastSeen = requestDto.LastSeen.Date,
-                Image = requestDto.Image,
-                Latitude = requestDto.Latitude,
-                Longitude = requestDto.Longitude,
+                //Image = requestDto.Image,         //Not yet in use
+                //Latitude = requestDto.Latitude,   //Not yet in use
+                //Longitude = requestDto.Longitude, //Not yet in use
                 AirlineId = requestDto.AirlineId,
                 AircraftTypeId = requestDto.AircraftTypeId,
                 SpottedAtAirports = airports

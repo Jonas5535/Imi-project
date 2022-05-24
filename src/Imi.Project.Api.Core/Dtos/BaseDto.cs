@@ -15,7 +15,7 @@ namespace Imi.Project.Api.Core.Dtos
             return ErrorMessages;
         }
 
-        public void AddError(ErrorMessage error)
+        private void AddError(ErrorMessage error)
         {
             if (ErrorMessages is null)
             {
@@ -41,13 +41,13 @@ namespace Imi.Project.Api.Core.Dtos
 
         public void AddInternalServerError(string message)
         {
-            AddError(ErrorMessage.ConflictError(message));
+            AddError(ErrorMessage.InternalServerError(message));
         }
 
-        public void AddForbidden(string message)
-        {
-            AddError(ErrorMessage.Forbidden(message));
-        }
+        //public void AddForbidden(string message)
+        //{
+        //    AddError(ErrorMessage.Forbidden(message));
+        //}
 
         public bool IsSucces()
         {

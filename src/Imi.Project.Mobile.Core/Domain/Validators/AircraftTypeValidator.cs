@@ -5,7 +5,7 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
 {
     public class AircraftTypeValidator : AbstractValidator<AircraftType>
     {
-        public AircraftTypeValidator()
+        public AircraftTypeValidator() //TODO Add validation on all datetime props. See AircraftValidator in wpf core for reference
         {
             RuleFor(aircraftType => aircraftType.Brand)
                 .NotEmpty()
