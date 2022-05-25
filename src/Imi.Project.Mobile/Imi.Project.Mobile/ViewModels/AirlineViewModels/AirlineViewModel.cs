@@ -52,7 +52,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            if (_hasChanged) await ListInit();
+            if (_hasChanged)
+                await ListInit();
         }
 
         public ICommand OpenAirlineDetailPageCommand => new Command<Airline>(
