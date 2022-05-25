@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace Imi.Project.Vue.Controllers
 {
-    public class HomeController : Controller
+    public class AircraftController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AircraftController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public AircraftController(ILogger<AircraftController> logger)
         {
             _logger = logger;
         }

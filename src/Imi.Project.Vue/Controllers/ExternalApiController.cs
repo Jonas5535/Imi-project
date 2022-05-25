@@ -5,11 +5,11 @@ using System.Diagnostics;
 
 namespace Imi.Project.Vue.Controllers
 {
-    public class HomeController : Controller
+    public class ExternalApiController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ExternalApiController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        public ExternalApiController(ILogger<ExternalApiController> logger)
         {
             _logger = logger;
         }
