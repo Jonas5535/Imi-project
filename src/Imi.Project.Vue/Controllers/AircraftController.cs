@@ -7,7 +7,12 @@ namespace Imi.Project.Vue.Controllers
 {
     public class AircraftController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<AircraftController> _logger;
+
+        public AircraftController(ILogger<AircraftController> logger)
+        {
+            _logger = logger;
+        }
 
         public IActionResult Index()
         {

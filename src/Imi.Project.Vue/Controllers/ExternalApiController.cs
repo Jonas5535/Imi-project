@@ -7,7 +7,12 @@ namespace Imi.Project.Vue.Controllers
 {
     public class ExternalApiController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ILogger<ExternalApiController> _logger;
+
+        public ExternalApiController(ILogger<ExternalApiController> logger)
+        {
+            _logger = logger;
+        }
 
         public IActionResult Index()
         {
