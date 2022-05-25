@@ -13,11 +13,25 @@ namespace Imi.Project.Mobile.ViewModels
     public class AirlineViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airline> _airlineService;
+        bool _hasChanged = true;
 
         public AirlineViewModel(ICRUDService<Airline> airlineService)
         {
             _airlineService = airlineService;
         }
+
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         private ObservableCollection<Airline> airlines;
 
@@ -31,10 +45,14 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        public override void ReverseInit(object returnedData)
+        {
+            _hasChanged = true;
+        }
+
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            await ListInit();
+            if (_hasChanged) await ListInit();
         }
 
         public ICommand OpenAirlineDetailPageCommand => new Command<Airline>(
@@ -76,6 +94,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
+            IsBusy = true;
+
             BaseResponse<ICollection<Airline>> response = await _airlineService.ListAllAsync();
 
             if (response.IsSucces)
@@ -83,12 +103,14 @@ namespace Imi.Project.Mobile.ViewModels
                 ObservableCollection<Airline> airlines = new ObservableCollection<Airline>(response.Data);
                 Airlines = null;
                 Airlines = airlines;
+                _hasChanged = false;
             }
             else
             {
                 bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
                 if (answer is true) await ListInit();
             }
+            IsBusy = false;
         }
     }
 }
