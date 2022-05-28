@@ -53,11 +53,11 @@ app {
 }
 
 .sidebar {
-    background-image: linear-gradient(180deg, var(--Yellow) 0%, var(--Darker-yellow) 70%);
+    background-image: linear-gradient(180deg, var(--Darker-yellow) 0%, var(--Yellow) 70%);
 }
 
     .sidebar .top-row {
-        background-color: var(--Yellow);
+        background-color: var(--Darker-yellow);
     }
 
     .sidebar .navbar-brand {
