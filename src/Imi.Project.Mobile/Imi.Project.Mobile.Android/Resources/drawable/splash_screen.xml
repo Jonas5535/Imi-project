@@ -4,6 +4,6 @@
 		<color android:color="@color/launcher_background"/>
 	</item>
 	<item>
-		<bitmap android:src="@drawable/AppLogo" android:tileMode="disabled" android:gravity="center"/>
+		<bitmap android:src="@drawable/SplashLogo" android:tileMode="disabled" android:gravity="center"/>
 	</item>
 </layer-list>
