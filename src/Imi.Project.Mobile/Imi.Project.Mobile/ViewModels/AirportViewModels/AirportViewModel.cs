@@ -32,10 +32,15 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        public override void ReverseInit(object returnedData)
+        {
+            _hasChanged = true;
+        }
+
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            await ListInit();
+            if (_hasChanged)
+                await ListInit();
         }
 
         public ICommand OpenAirportDetailPageCommand => new Command<Airport>(
