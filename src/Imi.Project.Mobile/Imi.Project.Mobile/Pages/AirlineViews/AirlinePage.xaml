@@ -13,7 +13,7 @@
         <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAirlineCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <AbsoluteLayout >
+        <AbsoluteLayout>
             <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
                 <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding Airlines}" ItemTapped="ListView_ItemTapped">
                     <ListView.ItemTemplate>
@@ -57,7 +57,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Pages:BusyView IsVisible="{Binding IsBusy}"></Pages:BusyView>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

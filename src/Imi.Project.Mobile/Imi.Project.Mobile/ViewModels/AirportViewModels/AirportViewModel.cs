@@ -20,6 +20,18 @@ namespace Imi.Project.Mobile.ViewModels
             _airportService = airportService;
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private ObservableCollection<Airport> airports;
 
         public ObservableCollection<Airport> Airports
@@ -82,6 +94,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
+            IsBusy = true;
+
             BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
 
             if (response.IsSucces)
@@ -96,7 +110,7 @@ namespace Imi.Project.Mobile.ViewModels
                 bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
                 if (answer is true) await ListInit();
             }
-
+            IsBusy = false;
         }
     }
 }
