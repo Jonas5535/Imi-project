@@ -10,8 +10,6 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 {
     public class WebApiClient
     {
-        private const string _baseUri = "https://192.168.50.100:5001/api";
-
         private static HttpClientHandler ClientHandler()
         {
             var httpClientHandler = new HttpClientHandler();
@@ -37,10 +35,10 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
-                httpClient.Timeout = TimeSpan.FromSeconds(10);
+                //httpClient.Timeout = TimeSpan.FromSeconds(10);
                 try
                 {
-                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{_baseUri}/{endpoint}");
+                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{ApiBaseUri.baseUri}/{endpoint}");
                     return response;
                 }
                 catch (HttpRequestException ex)
@@ -95,15 +93,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 {
                     if (httpMethod == HttpMethod.Post)
                     {
-                        response = await httpClient.PostAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                        response = await httpClient.PostAsync($"{ApiBaseUri.baseUri}/{endpoint}", entity, GetJsonFormatter());
                     }
                     else if (httpMethod == HttpMethod.Put)
                     {
-                        response = await httpClient.PutAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                        response = await httpClient.PutAsync($"{ApiBaseUri.baseUri}/{endpoint}", entity, GetJsonFormatter());
                     }
                     else
                     {
-                        response = await httpClient.DeleteAsync($"{_baseUri}/{endpoint}");
+                        response = await httpClient.DeleteAsync($"{ApiBaseUri.baseUri}/{endpoint}");
                     }
                     result = await response.Content.ReadAsAsync<BaseResponse<TOut>>();
                 }
