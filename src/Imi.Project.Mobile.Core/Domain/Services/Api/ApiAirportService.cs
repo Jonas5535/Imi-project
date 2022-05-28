@@ -16,13 +16,13 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
 
         public async Task<BaseResponse<Airport>> AddAsync(Airport entity)
         {
-            BaseResponse<Airport> response = await WebApiClient.PostCallApi<BaseResponse<Airport>, Airport>(_baseEndpoint, entity);
+            BaseResponse<Airport> response = await WebApiClient.PostCallApi<Airport, Airport>(_baseEndpoint, entity);
             return response;
         }
 
         public async Task<BaseResponse<Airport>> DeleteAsync(Guid id)
         {
-            return await WebApiClient.DeleteCallApi<BaseResponse<Airport>>($"{_baseEndpoint}/{id}");
+            return await WebApiClient.DeleteCallApi<Airport>($"{_baseEndpoint}/{id}");
         }
 
         public Task<AircraftType[]> GetAircraftTypes()
@@ -52,7 +52,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
 
         public async Task<BaseResponse<Airport>> UpdateAsync(Airport entity)
         {
-            return await WebApiClient.PutCallApi<BaseResponse<Airport>, Airport>(_baseEndpoint, entity);
+            return await WebApiClient.PutCallApi<Airport, Airport>(_baseEndpoint, entity);
         }
     }
 }

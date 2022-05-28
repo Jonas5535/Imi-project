@@ -10,7 +10,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 {
     public class WebApiClient
     {
-        private const string _baseUri = "https://192.168.3.168:5001/api";
+        private const string _baseUri = "https://192.168.50.100:5001/api";
 
         private static HttpClientHandler ClientHandler()
         {
