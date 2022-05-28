@@ -260,19 +260,28 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _airportService.AddAsync(_currentAirport); //TODO handle BaseResponse
+                        var response = await _airportService.AddAsync(_currentAirport);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
-                        await _airportService.UpdateAsync(_currentAirport); //TODO handle BaseResponse
+                        var response = await _airportService.UpdateAsync(_currentAirport);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
-
-                    await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
-                    await CoreMethods.PopPageModel(_currentAirport);
                 }
             }
         );
+
+        private async Task ShowSucces()
+        {
+            await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
+            await CoreMethods.PopPageModel(_currentAirport);
+        }
 
         private async Task RefreshAirport()
         {
