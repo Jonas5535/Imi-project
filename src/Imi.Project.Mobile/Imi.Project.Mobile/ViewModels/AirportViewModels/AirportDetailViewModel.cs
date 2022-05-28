@@ -49,8 +49,16 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirportCommand => new Command(
             async () =>
             {
-                await _AirportService.DeleteAsync(ShownAirport.Id); //TODO handle BaseResponse
-                await CoreMethods.PopPageModel();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze luchthaven wilt verwijderen?", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    BaseResponse<Airport> response = await _AirportService.DeleteAsync(ShownAirport.Id);
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await CoreMethods.PopPageModel();
+                }
             }
         );
     }
