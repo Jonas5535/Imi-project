@@ -295,6 +295,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 _isNew = false;
                 _currentAirport = await GetCurrentAirport(_currentAirport.Id);
+                if (_currentAirport == null) return; //Needed to cut of the method
                 PageTitle = $"{_currentAirport.Name} bewerken";
             }
             LoadAirportState();
@@ -306,7 +307,17 @@ namespace Imi.Project.Mobile.ViewModels
 
             if (!response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Terug");
+
+                if (answer is true)
+                {
+                    return await GetCurrentAirport(id);
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null; //Needed to cut off the method
+                }
             }
 
             Airport airport = response.Data;
