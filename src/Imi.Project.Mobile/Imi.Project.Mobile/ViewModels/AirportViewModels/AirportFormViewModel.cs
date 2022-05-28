@@ -261,7 +261,7 @@ namespace Imi.Project.Mobile.ViewModels
                     if (_isNew)
                     {
                         var response = await _airportService.AddAsync(_currentAirport);
-
+                        
                         if (response.IsSucces) await ShowSucces();
                         else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
