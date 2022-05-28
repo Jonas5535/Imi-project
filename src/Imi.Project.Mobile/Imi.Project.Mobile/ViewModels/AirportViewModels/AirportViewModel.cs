@@ -55,6 +55,13 @@ namespace Imi.Project.Mobile.ViewModels
                 await ListInit();
         }
 
+        public ICommand RefreshListCommand => new Command(
+            async () =>
+            {
+                await ListInit();
+            }
+        );
+
         public ICommand OpenAirportDetailPageCommand => new Command<Airport>(
             async (Airport airport) =>
             {

@@ -9,7 +9,7 @@
              Title="Maatschappijen">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Command="{Binding RefreshListCommand}"></ToolbarItem>
+        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Command="{Binding RefreshListCommand}"/>
         <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAirlineCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
