@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class AirportViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airport> _airportService;
+        bool _hasChanged = true;
 
         public AirportViewModel(ICRUDService<Airport> airportService)
         {
@@ -78,15 +79,19 @@ namespace Imi.Project.Mobile.ViewModels
         {
             BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
 
-            if (!response.IsSucces)
+            if (response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
-
+                ObservableCollection<Airport> airports = new ObservableCollection<Airport>(response.Data);
+                Airports = null;
+                Airports = airports;
+                _hasChanged = false;
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
+                if (answer is true) await ListInit();
             }
 
-            ObservableCollection<Airport> airports = new ObservableCollection<Airport>(response.Data);
-            Airports = null;
-            Airports = airports;
         }
     }
 }
