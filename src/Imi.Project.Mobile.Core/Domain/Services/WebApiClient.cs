@@ -37,6 +37,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
+                httpClient.Timeout = TimeSpan.FromSeconds(10);
                 try
                 {
                     response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{_baseUri}/{endpoint}");
@@ -45,8 +46,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 catch (HttpRequestException ex)
                 {
                     response.IsSucces = false;
-                    response.Status = "Server niet beschikbaar";
+                    response.Status = "Server niet bereikbaar";
                     response.ErrorMessage = ex.Message;
+                    return response;
+                }
+                catch (TaskCanceledException)
+                {
+                    response.IsSucces = false;
+                    response.Status = "Time out";
+                    response.ErrorMessage = "Het ophalen van de data is gestopt.";
                     return response;
                 }
                 catch (Exception)
@@ -80,6 +88,8 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
+                httpClient.Timeout = TimeSpan.FromSeconds(10);
+
                 HttpResponseMessage response;
                 try
                 {
@@ -100,8 +110,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 catch (HttpRequestException ex)
                 {
                     result.IsSucces = false;
-                    result.Status = "Server niet beschikbaar";
+                    result.Status = "Server niet bereikbaar";
                     result.ErrorMessage = ex.Message;
+                    return result;
+                }
+                catch (TaskCanceledException)
+                {
+                    result.IsSucces = false;
+                    result.Status = "Time out";
+                    result.ErrorMessage = "Het ophalen van de data is gestopt.";
                     return result;
                 }
                 catch (Exception)
