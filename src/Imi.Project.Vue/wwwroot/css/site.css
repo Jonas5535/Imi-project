@@ -6,8 +6,8 @@
     --Lighter-yellow: #fff7b3;
 }
 
-.bg-yellow {
-    background-color: var(--Yellow);
+.bg-yellow{
+    background-color: var(--Darker-yellow);
 }
 
 .crud-card {
