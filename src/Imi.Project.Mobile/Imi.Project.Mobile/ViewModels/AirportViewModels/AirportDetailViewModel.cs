@@ -1,6 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -37,6 +39,28 @@ namespace Imi.Project.Mobile.ViewModels
         {
             ShownAirport = null;
             ShownAirport = returnedData as Airport;
+        }
+
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
+        {
+            await GetDetails();
+        }
+
+        private async Task GetDetails()
+        {
+            BaseResponse<Airport> response = await _AirportService.GetByIdAsync(ShownAirport.Id);
+
+            if (!response.IsSucces)
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true) await GetDetails();
+                else await CoreMethods.PopPageModel();
+            }
+            else
+            {
+                ShownAirport = response.Data;
+            }
         }
 
         public ICommand EditAirportCommand => new Command(
