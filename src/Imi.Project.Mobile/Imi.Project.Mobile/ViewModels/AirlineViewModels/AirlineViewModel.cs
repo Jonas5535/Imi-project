@@ -32,7 +32,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-
         private ObservableCollection<Airline> airlines;
 
         public ObservableCollection<Airline> Airlines

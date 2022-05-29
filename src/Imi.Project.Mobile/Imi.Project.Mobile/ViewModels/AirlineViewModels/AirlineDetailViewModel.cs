@@ -73,7 +73,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirlineCommand => new Command(
             async () =>
             {
-                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze maatschappij wilt verwijderen", "Ja", "Nee");
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze maatschappij wilt verwijderen?", "Ja", "Nee");
 
                 if (answer is true)
                 {

@@ -260,19 +260,28 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _airportService.AddAsync(_currentAirport); //TODO handle BaseResponse
+                        var response = await _airportService.AddAsync(_currentAirport);
+                        
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
-                        await _airportService.UpdateAsync(_currentAirport); //TODO handle BaseResponse
+                        var response = await _airportService.UpdateAsync(_currentAirport);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
-
-                    await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
-                    await CoreMethods.PopPageModel(_currentAirport);
                 }
             }
         );
+
+        private async Task ShowSucces()
+        {
+            await CoreMethods.DisplayAlert("Opgeslagen", $"De luchthaven {_currentAirport.Name} is opgeslagen", "OK");
+            await CoreMethods.PopPageModel(_currentAirport);
+        }
 
         private async Task RefreshAirport()
         {
@@ -286,6 +295,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 _isNew = false;
                 _currentAirport = await GetCurrentAirport(_currentAirport.Id);
+                if (_currentAirport == null) return; //Needed to cut of the method
                 PageTitle = $"{_currentAirport.Name} bewerken";
             }
             LoadAirportState();
@@ -297,7 +307,17 @@ namespace Imi.Project.Mobile.ViewModels
 
             if (!response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Terug");
+
+                if (answer is true)
+                {
+                    return await GetCurrentAirport(id);
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null; //Needed to cut off the method
+                }
             }
 
             Airport airport = response.Data;

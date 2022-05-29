@@ -260,7 +260,7 @@ namespace Imi.Project.Mobile.ViewModels
 
             if (!response.IsSucces)
             {
-                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opniew proberen", "Terug");
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Terug");
 
                 if (answer is true)
                 {

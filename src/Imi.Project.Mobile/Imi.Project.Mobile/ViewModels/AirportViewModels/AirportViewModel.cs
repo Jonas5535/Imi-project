@@ -13,10 +13,23 @@ namespace Imi.Project.Mobile.ViewModels
     public class AirportViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<Airport> _airportService;
+        bool _hasChanged = true;
 
         public AirportViewModel(ICRUDService<Airport> airportService)
         {
             _airportService = airportService;
+        }
+
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
         }
 
         private ObservableCollection<Airport> airports;
@@ -31,11 +44,23 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        public override void ReverseInit(object returnedData)
+        {
+            _hasChanged = true;
+        }
+
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            await ListInit();
+            if (_hasChanged)
+                await ListInit();
         }
+
+        public ICommand RefreshListCommand => new Command(
+            async () =>
+            {
+                await ListInit();
+            }
+        );
 
         public ICommand OpenAirportDetailPageCommand => new Command<Airport>(
             async (Airport airport) =>
@@ -61,24 +86,38 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAirportCommand => new Command<Airport>(
             async (Airport airport) =>
             {
-                await _airportService.DeleteAsync(airport.Id); //TODO handle BaseResponse
-                await ListInit();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze luchthaven wilt verwijderen?", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    BaseResponse<Airport> response = await _airportService.DeleteAsync(airport.Id);
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await ListInit();
+                }
             }
         );
 
         private async Task ListInit()
         {
+            IsBusy = true;
+
             BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
 
-            if (!response.IsSucces)
+            if (response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
-
+                ObservableCollection<Airport> airports = new ObservableCollection<Airport>(response.Data);
+                Airports = null;
+                Airports = airports;
+                _hasChanged = false;
             }
-
-            ObservableCollection<Airport> airports = new ObservableCollection<Airport>(response.Data);
-            Airports = null;
-            Airports = airports;
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
+                if (answer is true) await ListInit();
+            }
+            IsBusy = false;
         }
     }
 }

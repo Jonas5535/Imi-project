@@ -10,8 +10,6 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 {
     public class WebApiClient
     {
-        private const string _baseUri = "https://192.168.3.168:5001/api";
-
         private static HttpClientHandler ClientHandler()
         {
             var httpClientHandler = new HttpClientHandler();
@@ -37,16 +35,24 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
+                //httpClient.Timeout = TimeSpan.FromSeconds(10);
                 try
                 {
-                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{_baseUri}/{endpoint}");
+                    response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{ApiBaseUri.baseUri}/{endpoint}");
                     return response;
                 }
                 catch (HttpRequestException ex)
                 {
                     response.IsSucces = false;
-                    response.Status = "Server niet beschikbaar";
+                    response.Status = "Server niet bereikbaar";
                     response.ErrorMessage = ex.Message;
+                    return response;
+                }
+                catch (TaskCanceledException)
+                {
+                    response.IsSucces = false;
+                    response.Status = "Time out";
+                    response.ErrorMessage = "Het ophalen van de data is gestopt.";
                     return response;
                 }
                 catch (Exception)
@@ -59,41 +65,67 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             }
         }
 
-        public static async Task<TOut> PutCallApi<TOut, TIn>(string endpoint, TIn entity)
+        public static async Task<BaseResponse<TOut>> PutCallApi<TOut, TIn>(string endpoint, TIn entity)
         {
             return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Put);
         }
 
-        public static async Task<TOut> PostCallApi<TOut, TIn>(string endpoint, TIn entity)
+        public static async Task<BaseResponse<TOut>> PostCallApi<TOut, TIn>(string endpoint, TIn entity)
         {
             return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Post);
         }
 
-        public static async Task<TOut> DeleteCallApi<TOut>(string endpoint)
+        public static async Task<BaseResponse<TOut>> DeleteCallApi<TOut>(string endpoint)
         {
             return await CallApi<TOut, object>(endpoint, null, HttpMethod.Delete);
         }
 
-        private static async Task<TOut> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)
+        private static async Task<BaseResponse<TOut>> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)
         {
-            TOut result = default;
+            BaseResponse<TOut> result = default;
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
+                httpClient.Timeout = TimeSpan.FromSeconds(10);
+
                 HttpResponseMessage response;
-                if (httpMethod == HttpMethod.Post)
+                try
                 {
-                    response = await httpClient.PostAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                    if (httpMethod == HttpMethod.Post)
+                    {
+                        response = await httpClient.PostAsync($"{ApiBaseUri.baseUri}/{endpoint}", entity, GetJsonFormatter());
+                    }
+                    else if (httpMethod == HttpMethod.Put)
+                    {
+                        response = await httpClient.PutAsync($"{ApiBaseUri.baseUri}/{endpoint}", entity, GetJsonFormatter());
+                    }
+                    else
+                    {
+                        response = await httpClient.DeleteAsync($"{ApiBaseUri.baseUri}/{endpoint}");
+                    }
+                    result = await response.Content.ReadAsAsync<BaseResponse<TOut>>();
                 }
-                else if (httpMethod == HttpMethod.Put)
+                catch (HttpRequestException ex)
                 {
-                    response = await httpClient.PutAsync($"{_baseUri}/{endpoint}", entity, GetJsonFormatter());
+                    result.IsSucces = false;
+                    result.Status = "Server niet bereikbaar";
+                    result.ErrorMessage = ex.Message;
+                    return result;
                 }
-                else
+                catch (TaskCanceledException)
                 {
-                    response = await httpClient.DeleteAsync($"{_baseUri}/{endpoint}");
+                    result.IsSucces = false;
+                    result.Status = "Time out";
+                    result.ErrorMessage = "Het ophalen van de data is gestopt.";
+                    return result;
                 }
-                result = await response.Content.ReadAsAsync<TOut>();
+                catch (Exception)
+                {
+                    result.IsSucces = false;
+                    result.Status = "Fout!";
+                    result.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                    return result;
+                }
             }
             return result;
         }
