@@ -177,5 +177,13 @@ namespace Imi.Project.Api.Controllers
             BaseResponseModel<BaseDto> response = new() { Status = StatusConstants.OK, Data = result };
             return Ok(response);
         }
+
+        [HttpPost("{id}/image")]
+        [HttpPut("{id}/image")]
+        public async Task<IActionResult> UploadImage([FromRoute] Guid id, IFormFile file)
+        {
+            var response = await _aircraftService.AddOrUpdateImageAsync(id, file);
+            return Ok(response);
+        }
     }
 }

@@ -255,14 +255,14 @@ namespace Imi.Project.Api.Core.Services
                 return dto;
             }
 
-            //check if image
+            //check if image exists
 
             //SaveImageOnDisk(file);
             aircraftEntity.Image = $"images/{file.FileName}";
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
             dto = aircraftEntity.MaptoListDtoSingle();
-            dto.Image = CreateAbsolutePath(aircraftEntity.Image);
+            dto.Image = CreateAbsolutePath(dto.Image);
             return dto;
         }
 
