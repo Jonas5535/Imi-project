@@ -93,6 +93,7 @@ namespace Imi.Project.Api.Core.Services
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             dto = aircraftEntity.MaptoListDtoSingle();
+
             return dto;
         }
 
@@ -124,6 +125,13 @@ namespace Imi.Project.Api.Core.Services
             }
 
             IEnumerable<AircraftListResponseDto> dtos = aircrafts.MapToListDto();
+
+            foreach (var dto in dtos)
+            {
+                if (!string.IsNullOrWhiteSpace(dto.Image))
+                    dto.Image = CreateAbsolutePath(dto.Image);
+            }
+
             return dtos;
         }
 
@@ -139,6 +147,10 @@ namespace Imi.Project.Api.Core.Services
 
             Aircraft result = await _aircraftRepository.GetByIdAsync(id);
             dto = result.MapToDetailDto();
+
+            if (!string.IsNullOrWhiteSpace(dto.Image))
+                dto.Image = CreateAbsolutePath(dto.Image);
+
             return dto;
         }
 
@@ -147,6 +159,12 @@ namespace Imi.Project.Api.Core.Services
             IEnumerable<Aircraft> result = await _aircraftRepository.ListAllAsync();
 
             IEnumerable<AircraftListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
+            foreach (var dto in dtos)
+            {
+                if (!string.IsNullOrWhiteSpace(dto.Image))
+                    dto.Image = CreateAbsolutePath(dto.Image);
+            }
+
             return dtos;
         }
 
@@ -218,6 +236,10 @@ namespace Imi.Project.Api.Core.Services
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             dto = aircraftEntity.MapToDetailDto();
+
+            if (!string.IsNullOrWhiteSpace(dto.Image))
+                dto.Image = CreateAbsolutePath(dto.Image);
+
             return dto;
         }
 
@@ -240,6 +262,7 @@ namespace Imi.Project.Api.Core.Services
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
             dto = aircraftEntity.MaptoListDtoSingle();
+            dto.Image = CreateAbsolutePath(aircraftEntity.Image);
             return dto;
         }
 

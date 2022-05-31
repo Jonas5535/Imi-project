@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftRequestDto : BaseDto
-    {   
+    {
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         [MinLength(6, ErrorMessage = "{0} must be {1} characters long")]
