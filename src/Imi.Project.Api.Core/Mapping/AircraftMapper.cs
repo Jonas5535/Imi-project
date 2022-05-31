@@ -92,7 +92,6 @@ namespace Imi.Project.Api.Core.Mapping
                     HasSpecialLivery = requestDto.HasSpecialLivery,
                     FirstSeen = requestDto.FirstSeen.Date,
                     LastSeen = requestDto.LastSeen.Date,
-                    //Image = requestDto.Image,         //Not yet in use
                     //Latitude = requestDto.Latitude,   //Not yet in use
                     //Longitude = requestDto.Longitude, //Not yet in use
                     AirlineId = requestDto.AirlineId,
@@ -108,7 +107,6 @@ namespace Imi.Project.Api.Core.Mapping
                 HasSpecialLivery = requestDto.HasSpecialLivery,
                 FirstSeen = requestDto.FirstSeen.Date,
                 LastSeen = requestDto.LastSeen.Date,
-                //Image = requestDto.Image,         //Not yet in use
                 //Latitude = requestDto.Latitude,   //Not yet in use
                 //Longitude = requestDto.Longitude, //Not yet in use
                 AirlineId = requestDto.AirlineId,

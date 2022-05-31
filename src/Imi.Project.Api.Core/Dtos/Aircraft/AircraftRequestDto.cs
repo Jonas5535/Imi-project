@@ -26,10 +26,6 @@ namespace Imi.Project.Api.Core.Dtos
         [CurrentDate(ErrorMessage = "{0} cannot be later than today")]
         public DateTime LastSeen { get; set; }
 
-        // Image is not required as this is just an option
-        //[DataType(DataType.ImageUrl)]
-        //public string Image { get; set; } //Not yet in use
-
         // These two properties are also not required
         // They serve as gps coördinates but not every platform has gps service
         //public double? Longitude { get; set; } //Not yet in use
