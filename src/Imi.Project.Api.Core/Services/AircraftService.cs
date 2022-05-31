@@ -254,8 +254,9 @@ namespace Imi.Project.Api.Core.Services
                 dto.AddNotFound($"No aircrafts with id {id} exist");
                 return dto;
             }
-
-            //check if image exists
+            //TODO Handle empty file
+            //TODO Handle failed upload
+            //TODO check if image exists
 
             //SaveImageOnDisk(file);
             aircraftEntity.Image = $"images/{file.FileName}";

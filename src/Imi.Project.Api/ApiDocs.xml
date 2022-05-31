@@ -87,6 +87,15 @@
             <response code="200">Succesfully deleted the aircraft</response>
             <response code="404">There is no aircraft with the given id</response>
         </member>
+        <member name="M:Imi.Project.Api.Controllers.AircraftsController.UploadImage(System.Guid,Microsoft.AspNetCore.Http.IFormFile)">
+            <summary>
+            Adds an image to an existing aircraft
+            </summary>
+            <param name="id">The id of the aircraft to which you want to couple the image</param>
+            <param name="file">The image file</param>
+            <response code="200">Succesfully added the image to the requested aircraft</response>
+            <response code="404">There is no aircraft with the given id</response>
+        </member>
         <member name="M:Imi.Project.Api.Controllers.AircraftTypesController.Get">
             <summary>
             Gets a list of all aircrafttypes in the database

@@ -178,12 +178,26 @@ namespace Imi.Project.Api.Controllers
             return Ok(response);
         }
 
+        /// <summary>
+        /// Adds an image to an existing aircraft
+        /// </summary>
+        /// <param name="id">The id of the aircraft to which you want to couple the image</param>
+        /// <param name="file">The image file</param>
+        /// <response code="200">Succesfully added the image to the requested aircraft</response>
+        /// <response code="404">There is no aircraft with the given id</response>
         [HttpPost("{id}/image")]
         [HttpPut("{id}/image")]
         public async Task<IActionResult> UploadImage([FromRoute] Guid id, IFormFile file)
         {
-            var response = await _aircraftService.AddOrUpdateImageAsync(id, file);
-            return Ok(response);
+            AircraftListResponseDto result = await _aircraftService.AddOrUpdateImageAsync(id, file);
+
+            if (!result.IsSucces())
+            {
+                return this.HandleErrors(result.GetErrors());
+            }
+
+            BaseResponseModel<AircraftListResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            return Ok(result);
         }
     }
 }
