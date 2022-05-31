@@ -3,6 +3,7 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,8 @@ namespace Imi.Project.Api.Core.Services
         private readonly IAircraftTypeRepository _aircraftTypeRepository;
         private readonly IAirlineRepository _airlineRepository;
         private readonly IAirportRepository _airportRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        //private readonly IWebHostEnvironment _webHostEnvironment;
 
         public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository)
         {
@@ -217,5 +220,57 @@ namespace Imi.Project.Api.Core.Services
             dto = aircraftEntity.MapToDetailDto();
             return dto;
         }
+
+        public async Task<AircraftListResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile file)
+        {
+            AircraftListResponseDto dto = new AircraftListResponseDto();
+
+            Aircraft aircraftEntity = await _aircraftRepository.GetByIdAsync(id);
+
+            if (aircraftEntity == null)
+            {
+                dto.AddNotFound($"No aircrafts with id {id} exist");
+                return dto;
+            }
+
+            //check if image
+
+            //SaveImageOnDisk(file);
+            aircraftEntity.Image = $"images/{file.FileName}";
+            await _aircraftRepository.UpdateAsync(aircraftEntity);
+
+            dto = aircraftEntity.MaptoListDtoSingle();
+            return dto;
+        }
+
+        private string CreateAbsolutePath(string imagePath)
+        {
+            var request = _httpContextAccessor.HttpContext.Request;
+            var scheme = request.Scheme;
+            var rootUrl = request.Host;
+            return $"{scheme}://{rootUrl}/{imagePath}";
+        }
+
+        //private void SaveImageOnDisk(IFormFile file)
+        //{
+        //    var fileType = Path.GetExtension(file.FileName);
+        //    var filePath = _webHostEnvironment.ContentRootPath;
+        //    var fileName = Path.GetFileName(file.FileName);
+
+        //    var routePath = _webHostEnvironment.WebRootPath;
+
+        //    var totalPath = Path.Combine(routePath, "images", fileName);
+
+        //    if (File.Exists(totalPath))
+        //    {
+        //        File.Delete(totalPath);
+        //    }
+
+        //    using (var stream = new FileStream(totalPath, FileMode.Create))
+        //    {
+        //        file.CopyToAsync(stream);
+        //    }
+
+        //}
     }
 }
