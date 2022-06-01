@@ -162,12 +162,13 @@ namespace Imi.Project.Api.Core.Services
         {
             IEnumerable<Aircraft> result = await _aircraftRepository.ListAllAsync();
 
-            IEnumerable<AircraftListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
-            foreach (var dto in dtos)
+            foreach (var aircraft in result)
             {
-                if (!string.IsNullOrWhiteSpace(dto.Image))
-                    dto.Image = CreateAbsolutePath(dto.Image);
+                if (!string.IsNullOrWhiteSpace(aircraft.Image))
+                    aircraft.Image = CreateAbsolutePath(aircraft.Image);
             }
+
+            IEnumerable<AircraftListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
 
             return dtos;
         }
