@@ -260,6 +260,8 @@ namespace Imi.Project.Api.Core.Services
 
             if (file == null)
             {
+                //File.Delete($"{_webHostEnvironment.WebRootPath}/{aircraftEntity.Image}");
+
                 dto.AddBadRequest("There is no file attached to the request. Please attach a file before making the request");
                 return dto;
             }
@@ -294,7 +296,7 @@ namespace Imi.Project.Api.Core.Services
             return $"{scheme}://{rootUrl}/{imagePath}";
         }
 
-        private void SaveImageOnDisk(IFormFile file)
+        private async void SaveImageOnDisk(IFormFile file)
         {
             //var fileType = Path.GetExtension(file.FileName);
             //var filePath = _webHostEnvironment.ContentRootPath;
@@ -307,7 +309,7 @@ namespace Imi.Project.Api.Core.Services
 
             using (var stream = new FileStream(totalPath, FileMode.Create))
             {
-                file.CopyToAsync(stream);
+                await file.CopyToAsync(stream);
             }
         }
 
