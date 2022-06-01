@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 
 namespace Imi.Project.Api.Core.Services
 {
@@ -19,15 +20,16 @@ namespace Imi.Project.Api.Core.Services
         private readonly IAirlineRepository _airlineRepository;
         private readonly IAirportRepository _airportRepository;
         private readonly IHttpContextAccessor _httpContextAccessor;
-        //private readonly IWebHostEnvironment _webHostEnvironment;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository, IHttpContextAccessor httpContextAccessor)
+        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             _aircraftRepository = aircraftRepository;
             _aircraftTypeRepository = aircraftTypeRepository;
             _airlineRepository = airlineRepository;
             _airportRepository = airportRepository;
             _httpContextAccessor = httpContextAccessor;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<AircraftListResponseDto> AddAsync(AircraftRequestDto requestDto)
@@ -260,10 +262,19 @@ namespace Imi.Project.Api.Core.Services
                 dto.AddBadRequest("There is no file attached to the request. Please attach a file before making the request");
                 return dto;
             }
-            //TODO Handle failed upload
+
             //TODO check if image exists
 
-            //SaveImageOnDisk(file);
+            try
+            {
+                SaveImageOnDisk(file);
+            }
+            catch (Exception ex)
+            {
+                dto.AddInternalServerError($"The upload of the image has failed.\nReason: {ex.Message}");
+                return dto;
+            }
+
             aircraftEntity.Image = $"images/{file.FileName}";
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
@@ -283,7 +294,7 @@ namespace Imi.Project.Api.Core.Services
         private void SaveImageOnDisk(IFormFile file)
         {
             //var fileType = Path.GetExtension(file.FileName);
-            var filePath = _webHostEnvironment.ContentRootPath;
+            //var filePath = _webHostEnvironment.ContentRootPath;
             var fileName = Path.GetFileName(file.FileName);
 
             var routePath = _webHostEnvironment.WebRootPath;
@@ -299,7 +310,6 @@ namespace Imi.Project.Api.Core.Services
             {
                 file.CopyToAsync(stream);
             }
-
         }
     }
 }
