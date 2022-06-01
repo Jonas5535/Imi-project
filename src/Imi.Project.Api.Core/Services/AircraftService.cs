@@ -260,24 +260,18 @@ namespace Imi.Project.Api.Core.Services
 
             if (file == null)
             {
-                //File.Delete($"{_webHostEnvironment.WebRootPath}/{aircraftEntity.Image}");
-
                 dto.AddBadRequest("There is no file attached to the request. Please attach a file before making the request");
                 return dto;
             }
 
-            //checks if image exists. If it doesn't exist, it will upload the image. If it does already exist it will only assign the image.
-            if (!File.Exists(GetFilePath(file)))
+            try
             {
-                try
-                {
-                    SaveImageOnDisk(file);
-                }
-                catch (Exception ex)
-                {
-                    dto.AddInternalServerError($"The upload of the image has failed.\nReason: {ex.Message}");
-                    return dto;
-                }
+                await SaveImageOnDisk(file);
+            }
+            catch (Exception ex)
+            {
+                dto.AddInternalServerError($"The upload of the image has failed. Reason: {ex.Message}");
+                return dto;
             }
 
             aircraftEntity.Image = $"images/{file.FileName}";
@@ -297,31 +291,26 @@ namespace Imi.Project.Api.Core.Services
             return $"{scheme}://{rootUrl}/{imagePath}";
         }
 
-        private async void SaveImageOnDisk(IFormFile file)
-        {
-            //var fileType = Path.GetExtension(file.FileName);
-            //var filePath = _webHostEnvironment.ContentRootPath;
-            string totalPath = GetFilePath(file);
-
-            if (File.Exists(totalPath))
-            {
-                File.Delete(totalPath);
-            }
-
-            using (var stream = new FileStream(totalPath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-        }
-
-        private string GetFilePath(IFormFile file)
+        private async Task SaveImageOnDisk(IFormFile file)
         {
             var fileName = Path.GetFileName(file.FileName);
-
             var routePath = _webHostEnvironment.WebRootPath;
 
             var totalPath = Path.Combine(routePath, "images", fileName);
-            return totalPath;
+
+            //checks if image exists. If it doesn't exist, it will upload the image. If it does already exist it will only assign the image.
+            if (!File.Exists(totalPath))
+            {
+                if (!Directory.Exists($"{routePath}/images"))
+                {
+                    Directory.CreateDirectory($"{routePath}/images");
+                }
+
+                using (var stream = new FileStream(totalPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
         }
     }
 }
