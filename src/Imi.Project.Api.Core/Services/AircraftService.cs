@@ -254,7 +254,12 @@ namespace Imi.Project.Api.Core.Services
                 dto.AddNotFound($"No aircrafts with id {id} exist");
                 return dto;
             }
-            //TODO Handle empty file
+
+            if (file == null)
+            {
+                dto.AddBadRequest("There is no file attached to the request. Please attach a file before making the request");
+                return dto;
+            }
             //TODO Handle failed upload
             //TODO check if image exists
 
