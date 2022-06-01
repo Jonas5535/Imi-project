@@ -196,7 +196,7 @@ namespace Imi.Project.Api.Controllers
             }
 
             BaseResponseModel<AircraftListResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
-            return Ok(result);
+            return Ok(response);
         }
     }
 }

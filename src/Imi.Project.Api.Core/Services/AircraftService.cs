@@ -3,13 +3,13 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Hosting;
 
 namespace Imi.Project.Api.Core.Services
 {
@@ -263,16 +263,18 @@ namespace Imi.Project.Api.Core.Services
                 return dto;
             }
 
-            //TODO check if image exists
-
-            try
+            //checks if image exists. If it doesn't exist, it will upload the image. If it does already exist it will only assign the image.
+            if (!File.Exists(GetFilePath(file)))
             {
-                SaveImageOnDisk(file);
-            }
-            catch (Exception ex)
-            {
-                dto.AddInternalServerError($"The upload of the image has failed.\nReason: {ex.Message}");
-                return dto;
+                try
+                {
+                    SaveImageOnDisk(file);
+                }
+                catch (Exception ex)
+                {
+                    dto.AddInternalServerError($"The upload of the image has failed.\nReason: {ex.Message}");
+                    return dto;
+                }
             }
 
             aircraftEntity.Image = $"images/{file.FileName}";
@@ -295,11 +297,7 @@ namespace Imi.Project.Api.Core.Services
         {
             //var fileType = Path.GetExtension(file.FileName);
             //var filePath = _webHostEnvironment.ContentRootPath;
-            var fileName = Path.GetFileName(file.FileName);
-
-            var routePath = _webHostEnvironment.WebRootPath;
-
-            var totalPath = Path.Combine(routePath, "images", fileName);
+            string totalPath = GetFilePath(file);
 
             if (File.Exists(totalPath))
             {
@@ -310,6 +308,16 @@ namespace Imi.Project.Api.Core.Services
             {
                 file.CopyToAsync(stream);
             }
+        }
+
+        private string GetFilePath(IFormFile file)
+        {
+            var fileName = Path.GetFileName(file.FileName);
+
+            var routePath = _webHostEnvironment.WebRootPath;
+
+            var totalPath = Path.Combine(routePath, "images", fileName);
+            return totalPath;
         }
     }
 }
