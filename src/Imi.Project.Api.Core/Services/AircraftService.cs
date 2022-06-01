@@ -281,6 +281,7 @@ namespace Imi.Project.Api.Core.Services
             }
 
             aircraftEntity.Image = $"images/{file.FileName}";
+            aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
             dto = aircraftEntity.MaptoListDtoSingle();
