@@ -6,6 +6,7 @@ using Imi.Project.Api.Core.Mapping;
 using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,12 +21,13 @@ namespace Imi.Project.Api.Core.Services
         private readonly IHttpContextAccessor _httpContextAccessor;
         //private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository)
+        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository, IHttpContextAccessor httpContextAccessor)
         {
             _aircraftRepository = aircraftRepository;
             _aircraftTypeRepository = aircraftTypeRepository;
             _airlineRepository = airlineRepository;
             _airportRepository = airportRepository;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         public async Task<AircraftListResponseDto> AddAsync(AircraftRequestDto requestDto)
@@ -273,26 +275,26 @@ namespace Imi.Project.Api.Core.Services
             return $"{scheme}://{rootUrl}/{imagePath}";
         }
 
-        //private void SaveImageOnDisk(IFormFile file)
-        //{
-        //    var fileType = Path.GetExtension(file.FileName);
-        //    var filePath = _webHostEnvironment.ContentRootPath;
-        //    var fileName = Path.GetFileName(file.FileName);
+        private void SaveImageOnDisk(IFormFile file)
+        {
+            //var fileType = Path.GetExtension(file.FileName);
+            var filePath = _webHostEnvironment.ContentRootPath;
+            var fileName = Path.GetFileName(file.FileName);
 
-        //    var routePath = _webHostEnvironment.WebRootPath;
+            var routePath = _webHostEnvironment.WebRootPath;
 
-        //    var totalPath = Path.Combine(routePath, "images", fileName);
+            var totalPath = Path.Combine(routePath, "images", fileName);
 
-        //    if (File.Exists(totalPath))
-        //    {
-        //        File.Delete(totalPath);
-        //    }
+            if (File.Exists(totalPath))
+            {
+                File.Delete(totalPath);
+            }
 
-        //    using (var stream = new FileStream(totalPath, FileMode.Create))
-        //    {
-        //        file.CopyToAsync(stream);
-        //    }
+            using (var stream = new FileStream(totalPath, FileMode.Create))
+            {
+                file.CopyToAsync(stream);
+            }
 
-        //}
+        }
     }
 }
