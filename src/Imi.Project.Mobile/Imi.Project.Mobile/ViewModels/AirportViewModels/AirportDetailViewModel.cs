@@ -81,7 +81,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (!response.IsSucces)
                         await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
-                    else await CoreMethods.PopPageModel();
+                    else await CoreMethods.PopPageModel(true, false, true);
                 }
             }
         );
