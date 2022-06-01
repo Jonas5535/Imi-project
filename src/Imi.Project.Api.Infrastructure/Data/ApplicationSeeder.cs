@@ -188,7 +188,7 @@ namespace Imi.Project.Api.Infrastructure.Data
                     ModifiedOn = DateTime.Now },
                 new Aircraft{ Id = Guid.NewGuid(), Registration = "PH-EZT", AircraftTypeId = aircraftTypes[24].Id, AirlineId = airlines[5].Id,
                     HasSpecialLivery = false, FirstSeen = new DateTime(2021, 10, 28), LastSeen = new DateTime(2021, 10, 28), AddedOn = DateTime.Now,
-                    ModifiedOn = DateTime.Now },
+                    ModifiedOn = DateTime.Now }, //TODO Change aircraftType to number 25
             };
             #endregion
 

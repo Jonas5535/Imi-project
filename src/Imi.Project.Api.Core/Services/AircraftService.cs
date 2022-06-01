@@ -3,8 +3,11 @@ using Imi.Project.Api.Core.Entities;
 using Imi.Project.Api.Core.Infrastructure.Repositories;
 using Imi.Project.Api.Core.Infrastructure.Services;
 using Imi.Project.Api.Core.Mapping;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -16,13 +19,17 @@ namespace Imi.Project.Api.Core.Services
         private readonly IAircraftTypeRepository _aircraftTypeRepository;
         private readonly IAirlineRepository _airlineRepository;
         private readonly IAirportRepository _airportRepository;
+        private readonly IHttpContextAccessor _httpContextAccessor;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository)
+        public AircraftService(IAircraftRepository aircraftRepository, IAircraftTypeRepository aircraftTypeRepository, IAirlineRepository airlineRepository, IAirportRepository airportRepository, IHttpContextAccessor httpContextAccessor, IWebHostEnvironment webHostEnvironment)
         {
             _aircraftRepository = aircraftRepository;
             _aircraftTypeRepository = aircraftTypeRepository;
             _airlineRepository = airlineRepository;
             _airportRepository = airportRepository;
+            _httpContextAccessor = httpContextAccessor;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         public async Task<AircraftListResponseDto> AddAsync(AircraftRequestDto requestDto)
@@ -90,6 +97,7 @@ namespace Imi.Project.Api.Core.Services
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             dto = aircraftEntity.MaptoListDtoSingle();
+
             return dto;
         }
 
@@ -121,6 +129,13 @@ namespace Imi.Project.Api.Core.Services
             }
 
             IEnumerable<AircraftListResponseDto> dtos = aircrafts.MapToListDto();
+
+            foreach (var dto in dtos)
+            {
+                if (!string.IsNullOrWhiteSpace(dto.Image))
+                    dto.Image = CreateAbsolutePath(dto.Image);
+            }
+
             return dtos;
         }
 
@@ -136,6 +151,10 @@ namespace Imi.Project.Api.Core.Services
 
             Aircraft result = await _aircraftRepository.GetByIdAsync(id);
             dto = result.MapToDetailDto();
+
+            if (!string.IsNullOrWhiteSpace(dto.Image))
+                dto.Image = CreateAbsolutePath(dto.Image);
+
             return dto;
         }
 
@@ -143,7 +162,14 @@ namespace Imi.Project.Api.Core.Services
         {
             IEnumerable<Aircraft> result = await _aircraftRepository.ListAllAsync();
 
+            foreach (var aircraft in result)
+            {
+                if (!string.IsNullOrWhiteSpace(aircraft.Image))
+                    aircraft.Image = CreateAbsolutePath(aircraft.Image);
+            }
+
             IEnumerable<AircraftListResponseDto> dtos = result.OrderByDescending(a => a.ModifiedOn).MapToListDto();
+
             return dtos;
         }
 
@@ -213,7 +239,78 @@ namespace Imi.Project.Api.Core.Services
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             dto = aircraftEntity.MapToDetailDto();
+
+            if (!string.IsNullOrWhiteSpace(dto.Image))
+                dto.Image = CreateAbsolutePath(dto.Image);
+
             return dto;
+        }
+
+        public async Task<AircraftListResponseDto> AddOrUpdateImageAsync(Guid id, IFormFile file)
+        {
+            AircraftListResponseDto dto = new AircraftListResponseDto();
+
+            Aircraft aircraftEntity = await _aircraftRepository.GetByIdAsync(id);
+
+            if (aircraftEntity == null)
+            {
+                dto.AddNotFound($"No aircrafts with id {id} exist");
+                return dto;
+            }
+
+            if (file == null)
+            {
+                dto.AddBadRequest("There is no file attached to the request. Please attach a file before making the request");
+                return dto;
+            }
+
+            try
+            {
+                await SaveImageOnDisk(file);
+            }
+            catch (Exception ex)
+            {
+                dto.AddInternalServerError($"The upload of the image has failed. Reason: {ex.Message}");
+                return dto;
+            }
+
+            aircraftEntity.Image = $"images/{file.FileName}";
+            aircraftEntity.ModifiedOn = DateTime.Now;
+            await _aircraftRepository.UpdateAsync(aircraftEntity);
+
+            dto = aircraftEntity.MaptoListDtoSingle();
+            dto.Image = CreateAbsolutePath(dto.Image);
+            return dto;
+        }
+
+        private string CreateAbsolutePath(string imagePath)
+        {
+            var request = _httpContextAccessor.HttpContext.Request;
+            var scheme = request.Scheme;
+            var rootUrl = request.Host;
+            return $"{scheme}://{rootUrl}/{imagePath}";
+        }
+
+        private async Task SaveImageOnDisk(IFormFile file)
+        {
+            var fileName = Path.GetFileName(file.FileName);
+            var routePath = _webHostEnvironment.WebRootPath;
+
+            var totalPath = Path.Combine(routePath, "images", fileName);
+
+            //checks if image exists. If it doesn't exist, it will upload the image. If it does already exist it will only assign the image.
+            if (!File.Exists(totalPath))
+            {
+                if (!Directory.Exists($"{routePath}/images"))
+                {
+                    Directory.CreateDirectory($"{routePath}/images");
+                }
+
+                using (var stream = new FileStream(totalPath, FileMode.Create))
+                {
+                    await file.CopyToAsync(stream);
+                }
+            }
         }
     }
 }

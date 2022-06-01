@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Imi.Project.Api.Core.Dtos
 {
     public class AircraftRequestDto : BaseDto
-    {   
+    {
         [Required(ErrorMessage = "{0} is required")]
         [DataType(DataType.Text)]
         [MinLength(6, ErrorMessage = "{0} must be {1} characters long")]
@@ -25,10 +25,6 @@ namespace Imi.Project.Api.Core.Dtos
         [DataType(DataType.Date)]
         [CurrentDate(ErrorMessage = "{0} cannot be later than today")]
         public DateTime LastSeen { get; set; }
-
-        // Image is not required as this is just an option
-        //[DataType(DataType.ImageUrl)]
-        //public string Image { get; set; } //Not yet in use
 
         // These two properties are also not required
         // They serve as gps coördinates but not every platform has gps service

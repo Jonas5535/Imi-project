@@ -15,77 +15,80 @@ using System.IO;
 
 namespace Imi.Project.Api
 {
-	public class Startup
-	{
-		public Startup(IConfiguration configuration)
-		{
-			Configuration = configuration;
-		}
+    public class Startup
+    {
+        public Startup(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-		public IConfiguration Configuration { get; }
+        public IConfiguration Configuration { get; }
 
-		// This method gets called by the runtime. Use this method to add services to the container.
-		public void ConfigureServices(IServiceCollection services)
-		{
-			services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+        // This method gets called by the runtime. Use this method to add services to the container.
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-			//Repository classes and interfaces
-			services.AddScoped<IAircraftTypeRepository, AircraftTypeRepository>();
-			services.AddScoped<IAirlineRepository, AirlineRepository>();
-			services.AddScoped<IAirportRepository, AirportRepository>();
-			services.AddScoped<IAircraftRepository, AircraftRepository>();
+            //Repository classes and interfaces
+            services.AddScoped<IAircraftTypeRepository, AircraftTypeRepository>();
+            services.AddScoped<IAirlineRepository, AirlineRepository>();
+            services.AddScoped<IAirportRepository, AirportRepository>();
+            services.AddScoped<IAircraftRepository, AircraftRepository>();
 
-			//Service classes and interfaces
-			services.AddScoped<IAircraftService, AircraftService>();
-			services.AddScoped<IAircraftTypeService, AircraftTypeService>();
-			services.AddScoped<IAirlineService, AirlineService>();
-			services.AddScoped<IAirportService, AirportService>();
+            //Service classes and interfaces
+            services.AddScoped<IAircraftService, AircraftService>();
+            services.AddScoped<IAircraftTypeService, AircraftTypeService>();
+            services.AddScoped<IAirlineService, AirlineService>();
+            services.AddScoped<IAirportService, AirportService>();
 
-			//Register the Swagger generator, defining 1 or more Swagger documents.
-			services.AddSwaggerGen(c =>
-			{
-				c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aircraft API", Version = "v1" });
-				var filePath = Path.Combine(AppContext.BaseDirectory, "ApiDocs.xml");
-				c.IncludeXmlComments(filePath);
-			});
+            services.AddHttpContextAccessor();
 
-			services.AddControllers();
-			services.AddCors();
-		}
+            //Register the Swagger generator, defining 1 or more Swagger documents.
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Aircraft API", Version = "v1" });
+                var filePath = Path.Combine(AppContext.BaseDirectory, "ApiDocs.xml");
+                c.IncludeXmlComments(filePath);
+            });
 
-		// This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-		public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-		{
-			if (env.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
+            services.AddControllers();
+            services.AddCors();
+        }
 
-			// Enable middleware to serve generated Swagger as a JSON endpoint.
-			app.UseSwagger();
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        {
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
 
-			// Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
-			// specifying the Swagger JSON endpoint.
-			app.UseSwaggerUI(c =>
-			{
-				c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aircraft API");
-				c.RoutePrefix = string.Empty;
-			});
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
 
-			app.UseHttpsRedirection();
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Aircraft API");
+                c.RoutePrefix = string.Empty;
+            });
 
-			app.UseRouting();
+            app.UseHttpsRedirection();
 
-			app.UseAuthorization();
+            app.UseStaticFiles();
+            app.UseRouting();
 
-			app.UseEndpoints(endpoints =>
-			{
-				endpoints.MapControllers();
-			});
+            app.UseAuthorization();
 
-			app.UseCors(builder => builder.AllowAnyOrigin()
-				.AllowAnyHeader()
-				.AllowAnyMethod());
-		}
-	}
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllers();
+            });
+
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+        }
+    }
 }
