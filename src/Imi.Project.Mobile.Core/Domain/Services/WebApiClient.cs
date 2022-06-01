@@ -35,7 +35,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {
-                //httpClient.Timeout = TimeSpan.FromSeconds(10);
+                httpClient.Timeout = TimeSpan.FromSeconds(10);
                 try
                 {
                     response = await httpClient.GetFromJsonAsync<BaseResponse<T>>($"{ApiBaseUri.baseUri}/{endpoint}");
