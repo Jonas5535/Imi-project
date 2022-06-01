@@ -146,7 +146,6 @@ namespace Imi.Project.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(AircraftRequestDto requestDto)
         {
-            //TODO Fix bug with updating airport relations
             AircraftDetailResponseDto result = await _aircraftService.UpdateAsync(requestDto);
 
             if (!result.IsSucces())

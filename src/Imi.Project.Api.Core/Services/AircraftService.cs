@@ -82,7 +82,7 @@ namespace Imi.Project.Api.Core.Services
                 }
             }
 
-            Aircraft aircraftEntity = requestDto.MapToEntity();
+            Aircraft aircraftEntity = requestDto.MapToEntity(null);
             aircraftEntity.AddedOn = DateTime.Now;
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.AddAsync(aircraftEntity);
@@ -160,8 +160,8 @@ namespace Imi.Project.Api.Core.Services
 
             // Checking if the user isn't changing the registration to something that already exist,
             // while making sure it doesn't throw an error because the user didn't change the registration
-            Aircraft currentAircraft = aircrafts.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
-            if (aircrafts.Any(a => a.Registration.Equals(requestDto.Registration)) && requestDto.Registration != currentAircraft.Registration)
+            Aircraft aircraftEntity = aircrafts.FirstOrDefault(a => a.Id.Equals(requestDto.Id));
+            if (aircrafts.Any(a => a.Registration.Equals(requestDto.Registration)) && requestDto.Registration != aircraftEntity.Registration)
             {
                 dto.AddConflict($"Record with registration {requestDto.Registration} already exists");
                 return dto;
@@ -206,12 +206,10 @@ namespace Imi.Project.Api.Core.Services
                 }
             }
 
-            Aircraft aircraftEntity = requestDto.MapToEntity();
-            aircraftEntity.AddedOn = currentAircraft.AddedOn;
+            aircraftEntity = requestDto.MapToEntity(aircraftEntity);
             aircraftEntity.ModifiedOn = DateTime.Now;
             await _aircraftRepository.UpdateAsync(aircraftEntity);
 
-            //TODO Fix bug where airports don't update
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
             dto = aircraftEntity.MapToDetailDto();
