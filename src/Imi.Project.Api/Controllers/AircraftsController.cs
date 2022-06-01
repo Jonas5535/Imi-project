@@ -183,7 +183,9 @@ namespace Imi.Project.Api.Controllers
         /// <param name="id">The id of the aircraft to which you want to couple the image</param>
         /// <param name="file">The image file</param>
         /// <response code="200">Succesfully added the image to the requested aircraft</response>
+        /// <response code="400">There is no file attached to the request</response>
         /// <response code="404">There is no aircraft with the given id</response>
+        /// <response code="500">Something went wrong during the upload process of the image</response>
         [HttpPost("{id}/image")]
         [HttpPut("{id}/image")]
         public async Task<IActionResult> UploadImage([FromRoute] Guid id, IFormFile file)
