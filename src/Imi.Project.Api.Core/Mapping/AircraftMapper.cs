@@ -69,7 +69,7 @@ namespace Imi.Project.Api.Core.Mapping
             return dto;
         }
 
-        public static Aircraft MapToEntity(this AircraftRequestDto requestDto)
+        public static Aircraft MapToEntity(this AircraftRequestDto requestDto, Aircraft entity)
         {
             //Bind AirportId and AircraftId from requestDto together in an AircraftAtAirport object
             //so it can be mapped to the SpottedAtAirports prop from aircraft entity.
@@ -83,22 +83,20 @@ namespace Imi.Project.Api.Core.Mapping
             }
 
             // Checking if requestDto contains a new or an existing aircraft
-            if (requestDto.Id != Guid.Empty)
+            if (entity != null)
             {
-                Aircraft aircraftToBeUpdated = new Aircraft
-                {
-                    Id = requestDto.Id,
-                    Registration = requestDto.Registration?.ToUpper(),
-                    HasSpecialLivery = requestDto.HasSpecialLivery,
-                    FirstSeen = requestDto.FirstSeen.Date,
-                    LastSeen = requestDto.LastSeen.Date,
-                    //Latitude = requestDto.Latitude,   //Not yet in use
-                    //Longitude = requestDto.Longitude, //Not yet in use
-                    AirlineId = requestDto.AirlineId,
-                    AircraftTypeId = requestDto.AircraftTypeId,
-                    SpottedAtAirports = airports
-                };
-                return aircraftToBeUpdated;
+                entity.Id = requestDto.Id;
+                entity.Registration = requestDto.Registration?.ToUpper();
+                entity.HasSpecialLivery = requestDto.HasSpecialLivery;
+                entity.FirstSeen = requestDto.FirstSeen.Date;
+                entity.LastSeen = requestDto.LastSeen.Date;
+                //Latitude = requestDto.Latitude,   //Not yet in use
+                //Longitude = requestDto.Longitude, //Not yet in use
+                entity.AirlineId = requestDto.AirlineId;
+                entity.AircraftTypeId = requestDto.AircraftTypeId;
+                entity.SpottedAtAirports = airports;
+
+                return entity;
             }
 
             Aircraft aircraftEntity = new Aircraft

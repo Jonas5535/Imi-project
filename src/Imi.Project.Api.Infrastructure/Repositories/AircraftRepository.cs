@@ -17,7 +17,7 @@ namespace Imi.Project.Api.Infrastructure.Repositories
 
         public override IQueryable<Aircraft> GetAll()
         {
-            return _dbContext.Aircrafts.AsNoTracking()
+            return _dbContext.Aircrafts
                 .Include(a => a.AircraftType)
                 .Include(a => a.Airline)
                 .Include(a => a.SpottedAtAirports)
