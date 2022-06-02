@@ -128,13 +128,13 @@ namespace Imi.Project.Api.Core.Services
                 return dtoList;
             }
 
-            IEnumerable<AircraftListResponseDto> dtos = aircrafts.MapToListDto();
-
-            foreach (var dto in dtos)
+            foreach (var aircraft in aircrafts)
             {
-                if (!string.IsNullOrWhiteSpace(dto.Image))
-                    dto.Image = CreateAbsolutePath(dto.Image);
+                if (!string.IsNullOrWhiteSpace(aircraft.Image))
+                    aircraft.Image = CreateAbsolutePath(aircraft.Image);
             }
+
+            IEnumerable<AircraftListResponseDto> dtos = aircrafts.MapToListDto();
 
             return dtos;
         }
