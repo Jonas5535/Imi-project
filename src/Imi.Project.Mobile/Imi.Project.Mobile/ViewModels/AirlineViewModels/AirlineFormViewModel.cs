@@ -256,7 +256,11 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task<Airline> GetCurrentAirline(Guid id)
         {
+            IsBusy = true;
+
             BaseResponse<Airline> response = await _airlineService.GetByIdAsync(id);
+
+            IsBusy = false;
 
             if (!response.IsSucces)
             {
