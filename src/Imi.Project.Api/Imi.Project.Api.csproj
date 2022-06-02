@@ -29,9 +29,5 @@
     <ProjectReference Include="..\Imi.Project.Api.Infrastructure\Imi.Project.Api.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\" />
-  </ItemGroup>
-
 
 </Project>
