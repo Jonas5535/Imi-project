@@ -17,6 +17,18 @@ namespace Imi.Project.Mobile.ViewModels
             _AirportService = airportService;
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Airport shownAirport;
 
         public Airport ShownAirport
@@ -48,7 +60,11 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task GetDetails()
         {
+            IsBusy = true;
+
             BaseResponse<Airport> response = await _AirportService.GetByIdAsync(ShownAirport.Id);
+
+            IsBusy = false;
 
             if (!response.IsSucces)
             {
@@ -77,7 +93,11 @@ namespace Imi.Project.Mobile.ViewModels
 
                 if (answer is true)
                 {
+                    IsBusy = true;
+
                     BaseResponse<Airport> response = await _AirportService.DeleteAsync(ShownAirport.Id);
+
+                    IsBusy = false;
 
                     if (!response.IsSucces)
                         await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
