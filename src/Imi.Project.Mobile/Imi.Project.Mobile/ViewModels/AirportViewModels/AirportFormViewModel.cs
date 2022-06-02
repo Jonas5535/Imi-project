@@ -274,6 +274,7 @@ namespace Imi.Project.Mobile.ViewModels
                     }
                     IsBusy = false;
                 }
+                else await CoreMethods.DisplayAlert("Mistakes were made... 😱", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
             }
         );
 
