@@ -198,7 +198,7 @@ namespace Imi.Project.Mobile.ViewModels
         {
             get { return height; }
             set
-            { 
+            {
                 height = value;
                 RaisePropertyChanged();
             }
@@ -260,19 +260,28 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _aircraftTypeService.AddAsync(_currentAircraftType); //TODO handle BaseResponse
+                        var response = await _aircraftTypeService.AddAsync(_currentAircraftType);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
-                        await _aircraftTypeService.UpdateAsync(_currentAircraftType); //TODO handle BaseResponse
+                        var response = await _aircraftTypeService.UpdateAsync(_currentAircraftType);
+
+                        if (response.IsSucces) await ShowSucces();
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
-
-                    await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuigtype {_currentAircraftType.Type} is opgeslagen", "Ok");
-                    await CoreMethods.PopPageModel(_currentAircraftType);
                 }
             }
         );
+
+        private async Task ShowSucces()
+        {
+            await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuigtype {_currentAircraftType.Type} is opgeslagen", "Ok");
+            await CoreMethods.PopPageModel(_currentAircraftType);
+        }
 
         private async Task RefreshAircraftType()
         {
@@ -372,7 +381,7 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     HeightError = error.ErrorMessage;
                 }
-                else if (error.PropertyName ==  nameof(aircraftType.EmptyWeight))
+                else if (error.PropertyName == nameof(aircraftType.EmptyWeight))
                 {
                     EmptyWeightError = error.ErrorMessage;
                 }
