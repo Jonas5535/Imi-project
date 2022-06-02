@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:CardView="clr-namespace:CardViewNetStandard;assembly=CardViewNetStandard"
+             xmlns:Pages="clr-namespace:Imi.Project.Mobile.Pages"
              x:Class="Imi.Project.Mobile.Pages.AircraftTypePage"
              x:Name="page"
              BackgroundColor="White"
@@ -11,48 +12,51 @@
         <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAircraftTypeCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
-        <StackLayout>
-            <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding AircraftTypes}" ItemTapped="ListView_ItemTapped">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <ViewCell.ContextActions>
-                                <MenuItem Text="Bewerken" IconImageSource="EditWhite.png"
-                                          Command="{Binding BindingContext.EditAircraftTypeCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
-                                <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png"
-                                          Command="{Binding BindingContext.DeleteAircraftTypeCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
-                            </ViewCell.ContextActions>
-                            <Frame Style="{StaticResource FrameForListView}">
-                                <StackLayout Orientation="Vertical">
-                                    <CardView:CardView BackgroundColor="White" HeightRequest="105">
-                                        <CardView:CardView.CardViewContent>
-                                            <StackLayout Style="{StaticResource InnerStackLayoutForListView}">
-                                                <Grid>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="35"/>
-                                                        <RowDefinition Height="70"/>
-                                                    </Grid.RowDefinitions>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="1.1*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="*"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Merk"/>
-                                                    <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="Type"/>
-                                                    <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="ICAO code"/>
-                                                    <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Brand}"/>
-                                                    <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding Type}"/>
-                                                    <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding ICAOCode}"/>
-                                                </Grid>
-                                            </StackLayout>
-                                        </CardView:CardView.CardViewContent>
-                                    </CardView:CardView>
-                                </StackLayout>
-                            </Frame>
-                        </ViewCell>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
+        <AbsoluteLayout>
+            <StackLayout AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,0,1,1">
+                <ListView Style="{StaticResource ListViewLayout}" ItemsSource="{Binding AircraftTypes}" ItemTapped="ListView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ViewCell.ContextActions>
+                                    <MenuItem Text="Bewerken" IconImageSource="EditWhite.png"
+                                              Command="{Binding BindingContext.EditAircraftTypeCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
+                                    <MenuItem Text="Verwijderen" IconImageSource="DeleteWhite.png"
+                                              Command="{Binding BindingContext.DeleteAircraftTypeCommand, Source={x:Reference page}}" CommandParameter="{Binding .}"/>
+                                </ViewCell.ContextActions>
+                                <Frame Style="{StaticResource FrameForListView}">
+                                    <StackLayout Orientation="Vertical">
+                                        <CardView:CardView BackgroundColor="White" HeightRequest="105">
+                                            <CardView:CardView.CardViewContent>
+                                                <StackLayout Style="{StaticResource InnerStackLayoutForListView}">
+                                                    <Grid>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="35"/>
+                                                            <RowDefinition Height="70"/>
+                                                        </Grid.RowDefinitions>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="1.1*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="*"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label Grid.Row="0" Grid.Column="0" Style="{StaticResource TopLeftListLabel}" Text="Merk"/>
+                                                        <Label Grid.Row="0" Grid.Column="1" Style="{StaticResource TopCenterListLabel}" Text="Type"/>
+                                                        <Label Grid.Row="0" Grid.Column="2" Style="{StaticResource TopRightListLabel}" Text="ICAO code"/>
+                                                        <Label Grid.Row="1" Grid.Column="0" Style="{StaticResource BottomLeftListLabel}" Text="{Binding Brand}"/>
+                                                        <Label Grid.Row="1" Grid.Column="1" Style="{StaticResource BottomCenterListLabel}" Text="{Binding Type}"/>
+                                                        <Label Grid.Row="1" Grid.Column="2" Style="{StaticResource BottomRighttListLabel}" Text="{Binding ICAOCode}"/>
+                                                    </Grid>
+                                                </StackLayout>
+                                            </CardView:CardView.CardViewContent>
+                                        </CardView:CardView>
+                                    </StackLayout>
+                                </Frame>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackLayout>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>

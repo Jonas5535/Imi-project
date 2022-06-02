@@ -20,6 +20,18 @@ namespace Imi.Project.Mobile.ViewModels
             _aircraftTypeService = aircraftTypeService;
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private ObservableCollection<AircraftType> aircraftTypes;
 
         public ObservableCollection<AircraftType> AircraftTypes
@@ -82,6 +94,8 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
+            IsBusy = true;
+
             BaseResponse<ICollection<AircraftType>> response = await _aircraftTypeService.ListAllAsync();
 
             if (response.IsSucces)
@@ -96,7 +110,7 @@ namespace Imi.Project.Mobile.ViewModels
                 bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
                 if (answer is true) await ListInit();
             }
-
+            IsBusy = false;
         }
     }
 }
