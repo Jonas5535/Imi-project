@@ -90,7 +90,11 @@ namespace Imi.Project.Mobile.ViewModels
 
                 if (answer is true)
                 {
+                    IsBusy = true;
+
                     BaseResponse<AircraftType> response = await _aircraftTypeService.DeleteAsync(aircraftType.Id);
+
+                    IsBusy = false;
 
                     if (!response.IsSucces)
                         await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
