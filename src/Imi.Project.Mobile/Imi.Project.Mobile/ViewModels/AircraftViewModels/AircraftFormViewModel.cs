@@ -246,7 +246,7 @@ namespace Imi.Project.Mobile.ViewModels
                     await CoreMethods.DisplayAlert("Opgeslagen", $"De maatschappij {_currentAircraft.Registration} is opgeslagen", "Ok");
                     await CoreMethods.PopPageModel(_currentAircraft);
                 }
-                else await CoreMethods.DisplayAlert("Mistakes were made... 😱", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
+                else await CoreMethods.DisplayAlert("Mistakes were made...", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
             }
         );
 

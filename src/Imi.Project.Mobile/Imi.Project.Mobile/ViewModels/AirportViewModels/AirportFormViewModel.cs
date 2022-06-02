@@ -274,7 +274,7 @@ namespace Imi.Project.Mobile.ViewModels
                     }
                     IsBusy = false;
                 }
-                else await CoreMethods.DisplayAlert("Mistakes were made... 😱", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
+                else await CoreMethods.DisplayAlert("Mistakes were made...", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
             }
         );
 
@@ -304,7 +304,11 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task<Airport> GetCurrentAirport(Guid id)
         {
+            IsBusy = true;
+
             BaseResponse<Airport> response = await _airportService.GetByIdAsync(id);
+
+            IsBusy = false;
 
             if (!response.IsSucces)
             {
