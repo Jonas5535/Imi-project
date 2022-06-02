@@ -70,14 +70,19 @@ namespace Imi.Project.Mobile.ViewModels
         {
             BaseResponse<ICollection<AircraftType>> response = await _aircraftTypeService.ListAllAsync();
 
-            if (!response.IsSucces)
+            if (response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                ObservableCollection<AircraftType> aircraftTypes = new ObservableCollection<AircraftType>(response.Data);
+                AircraftTypes = null;
+                AircraftTypes = aircraftTypes;
+                
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
+                if (answer is true) await ListInit();
             }
 
-            ObservableCollection<AircraftType> aircraftTypes = new ObservableCollection<AircraftType>(response.Data);
-            AircraftTypes = null;
-            AircraftTypes = aircraftTypes;
         }
     }
 }
