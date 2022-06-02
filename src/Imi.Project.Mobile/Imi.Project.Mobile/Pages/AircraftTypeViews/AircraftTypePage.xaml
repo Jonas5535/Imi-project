@@ -9,6 +9,7 @@
              Title="Vliegtuigtypes">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Command="{Binding RefreshListCommand}"/>
         <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Command="{Binding AddAircraftTypeCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>

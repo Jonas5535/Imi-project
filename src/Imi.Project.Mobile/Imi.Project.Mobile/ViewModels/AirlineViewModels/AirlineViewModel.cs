@@ -56,7 +56,7 @@ namespace Imi.Project.Mobile.ViewModels
         }
 
         public ICommand RefreshListCommand => new Command(
-            async() =>
+            async () =>
             {
                 await ListInit();
             }
