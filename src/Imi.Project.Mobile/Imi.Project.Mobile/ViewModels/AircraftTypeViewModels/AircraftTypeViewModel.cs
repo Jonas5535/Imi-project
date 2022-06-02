@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftTypeViewModel : FreshBasePageModel
     {
         private readonly ICRUDService<AircraftType> _aircraftTypeService;
+        bool _hasChanged = true;
 
         public AircraftTypeViewModel(ICRUDService<AircraftType> aircraftTypeService)
         {
@@ -31,10 +32,15 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        public override void ReverseInit(object returnedData)
+        {
+            _hasChanged = true;
+        }
+
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            await ListInit();
+            if (_hasChanged)
+                await ListInit();
         }
 
         public ICommand OpenAircraftTypeDetailPageCommand => new Command<AircraftType>(
@@ -83,7 +89,7 @@ namespace Imi.Project.Mobile.ViewModels
                 ObservableCollection<AircraftType> aircraftTypes = new ObservableCollection<AircraftType>(response.Data);
                 AircraftTypes = null;
                 AircraftTypes = aircraftTypes;
-
+                _hasChanged = false;
             }
             else
             {
