@@ -82,7 +82,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
 
         private static async Task<BaseResponse<TOut>> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)
         {
-            BaseResponse<TOut> result = default;
+            BaseResponse<TOut> result = new BaseResponse<TOut>();
 
             using (HttpClient httpClient = new HttpClient(ClientHandler()))
             {

@@ -8,12 +8,16 @@ namespace Imi.Project.Mobile.Converters
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (value is DateTime date)
+            if (value != null)
             {
-                string shortDate = date.ToShortDateString();
-                return shortDate;
+                if (value is DateTime date)
+                {
+                    string shortDate = date.ToShortDateString();
+                    return shortDate;
+                }
+                throw new ArgumentException($"{nameof(value)} must be of value DateTime)");
             }
-            throw new ArgumentException($"{nameof(value)} must be of value DateTime)");
+            return null;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
