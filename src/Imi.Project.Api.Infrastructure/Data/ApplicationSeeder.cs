@@ -237,6 +237,13 @@ namespace Imi.Project.Api.Infrastructure.Data
                 new AircraftAtAirport{ AircraftId = aircrafts[11].Id, AirportId = airports[8].Id },
                 new AircraftAtAirport{ AircraftId = aircrafts[12].Id, AirportId = airports[8].Id },
                 new AircraftAtAirport{ AircraftId = aircrafts[13].Id, AirportId = airports[6].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[14].Id, AirportId = airports[0].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[14].Id, AirportId = airports[1].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[14].Id, AirportId = airports[5].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[15].Id, AirportId = airports[0].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[15].Id, AirportId = airports[5].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[16].Id, AirportId = airports[0].Id },
+                new AircraftAtAirport{ AircraftId = aircrafts[16].Id, AirportId = airports[1].Id },
             };
             #endregion
 
