@@ -61,8 +61,16 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAircraftTypeCommand => new Command<AircraftType>(
             async (AircraftType aircraftType) =>
             {
-                await _aircraftTypeService.DeleteAsync(aircraftType.Id); ////TODO handle BaseResponse
-                await ListInit();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je dit type wilt verwijderen", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    BaseResponse<AircraftType> response = await _aircraftTypeService.DeleteAsync(aircraftType.Id);
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await ListInit();
+                }
             }
         );
 
@@ -75,7 +83,7 @@ namespace Imi.Project.Mobile.ViewModels
                 ObservableCollection<AircraftType> aircraftTypes = new ObservableCollection<AircraftType>(response.Data);
                 AircraftTypes = null;
                 AircraftTypes = aircraftTypes;
-                
+
             }
             else
             {
