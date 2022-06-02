@@ -295,6 +295,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 _isNew = false;
                 _currentAircraftType = await GetCurrentAircraftType(_currentAircraftType.Id);
+                if (_currentAircraftType == null) return; //Needed to cut off the method
                 PageTitle = $"{_currentAircraftType.Type} bewerken";
             }
             LoadAircraftTypeState();
@@ -302,11 +303,25 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task<AircraftType> GetCurrentAircraftType(Guid id)
         {
+            IsBusy = true;
+
             BaseResponse<AircraftType> response = await _aircraftTypeService.GetByIdAsync(id);
+
+            IsBusy = false;
 
             if (!response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Terug");
+
+                if (answer is true)
+                {
+                    return await GetCurrentAircraftType(id);
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null; //Needed to cut off the method
+                }
             }
 
             AircraftType aircraftType = response.Data;

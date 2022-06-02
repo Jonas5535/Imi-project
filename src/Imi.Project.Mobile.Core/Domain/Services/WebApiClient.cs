@@ -52,7 +52,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 {
                     response.IsSucces = false;
                     response.Status = "Time out";
-                    response.ErrorMessage = "Het ophalen van de data is gestopt.";
+                    response.ErrorMessage = "Het ophalen of opslaan van de data is gestopt.";
                     return response;
                 }
                 catch (Exception)
