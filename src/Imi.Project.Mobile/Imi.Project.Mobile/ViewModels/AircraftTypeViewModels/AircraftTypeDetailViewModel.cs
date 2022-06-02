@@ -1,6 +1,8 @@
 ﻿using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
+using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -29,7 +31,6 @@ namespace Imi.Project.Mobile.ViewModels
 
         public override void Init(object initData)
         {
-            base.Init(initData);
             ShownType = initData as AircraftType;
         }
 
@@ -37,6 +38,28 @@ namespace Imi.Project.Mobile.ViewModels
         {
             ShownType = null;
             ShownType = returnedData as AircraftType;
+        }
+
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
+        {
+            await GetDetails();
+        }
+
+        private async Task GetDetails()
+        {
+            BaseResponse<AircraftType> response = await _aircraftTypeService.GetByIdAsync(ShownType.Id);
+
+            if (!response.IsSucces)
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true) await GetDetails();
+                else await CoreMethods.PopPageModel();
+            }
+            else
+            {
+                ShownType = response.Data;
+            }
         }
 
         public ICommand EditAircraftTypeCommand => new Command(
@@ -57,7 +80,7 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (!response.IsSucces)
                         await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
-                    else await CoreMethods.PopPageModel(true, false , true);
+                    else await CoreMethods.PopPageModel(true, false, true);
                 }
             }
         );
