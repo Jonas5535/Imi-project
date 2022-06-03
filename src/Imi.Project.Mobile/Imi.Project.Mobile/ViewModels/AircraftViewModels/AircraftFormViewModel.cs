@@ -22,10 +22,6 @@ namespace Imi.Project.Mobile.ViewModels
         public event EventHandler LoadAircraftStateInitiated;
         public event EventHandler SaveAircraftStateInitiated;
 
-        public IEnumerable<AircraftType> TypePickerContent { get; set; }
-        public IEnumerable<Airline> AirlinePickerContent { get; set; }
-        public IEnumerable<Airport> AirportPickerContent { get; set; }
-
         public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator)
         {
             _aircraftService = aircraftService;
@@ -53,6 +49,42 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private IEnumerable<AircraftType> typePickerContent;
+
+        public IEnumerable<AircraftType> TypePickerContent
+        {
+            get { return typePickerContent; }
+            set
+            {
+                typePickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private IEnumerable<Airline> airlinePickerContent;
+
+        public IEnumerable<Airline> AirlinePickerContent
+        {
+            get { return airlinePickerContent; }
+            set
+            {
+                airlinePickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private IEnumerable<Airport> airportPickerContent;
+
+        public IEnumerable<Airport> AirportPickerContent
+        {
+            get { return airportPickerContent; }
+            set
+            {
+                airportPickerContent = value;
                 RaisePropertyChanged();
             }
         }
@@ -352,9 +384,92 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task PopulatePickers()
         {
-            TypePickerContent = await _aircraftService.GetAircraftTypes();
-            AirlinePickerContent = await _aircraftService.GetAirlines();
-            AirportPickerContent = await _aircraftService.GetAirports();
+            /* Splitting this method into three different methods so it is easier to test.
+             * It also keeps the code clean and removes the need to call three different methods in the innit method*/
+            IsBusy = true;
+
+            TypePickerContent = await PopulateTypePicker();
+            if (TypePickerContent == null) return; //Needed to cut off the method to ensure it doesn't continue when we left the page
+
+            AirlinePickerContent = await PopulateAirlinePicker();
+            if (AirlinePickerContent == null) return; // Idem above
+
+            AirportPickerContent = await PopulateAirportPicker();
+            if (AirportPickerContent == null) return; // Idem above
+
+            IsBusy = false;
+        }
+
+        private async Task<Airport[]> PopulateAirportPicker()
+        {
+            BaseResponse<Airport[]> response = await _aircraftService.GetAirports();
+
+            if (response.IsSucces)
+            {
+                return response.Data;
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true)
+                {
+                    return await PopulateAirportPicker();
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null;
+                }
+            }
+        }
+
+        private async Task<Airline[]> PopulateAirlinePicker()
+        {
+            BaseResponse<Airline[]> response = await _aircraftService.GetAirlines();
+
+            if (response.IsSucces)
+            {
+                return response.Data;
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true)
+                {
+                    return await PopulateAirlinePicker();
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null;
+                }
+            }
+        }
+
+        private async Task<AircraftType[]> PopulateTypePicker()
+        {
+            BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes();
+
+            if (response.IsSucces)
+            {
+                return response.Data;
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true)
+                {
+                    return await PopulateTypePicker();
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null;
+                }
+            }
         }
 
         private bool Validate(AircraftFormModel aircraft)
