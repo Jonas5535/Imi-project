@@ -19,6 +19,18 @@ namespace Imi.Project.Mobile.ViewModels
             _aircraftService = aircraftService;
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private ObservableCollection<Aircraft> aircrafts;
 
         public ObservableCollection<Aircraft> Aircrafts
@@ -68,8 +80,20 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAircraftCommand => new Command<Aircraft>(
             async (Aircraft aircraft) =>
             {
-                await _aircraftService.DeleteAsync(aircraft.Id); //TODO handle BaseResponse
-                await ListInit();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze maatschappij wilt verwijderen", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    IsBusy = true;
+
+                    BaseResponse<Aircraft> response = await _aircraftService.DeleteAsync(aircraft.Id);
+
+                    IsBusy = false;
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await ListInit();
+                }
             }
         );
 

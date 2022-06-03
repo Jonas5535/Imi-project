@@ -18,7 +18,7 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<IAirlineService, ApiAirlineService>();
             FreshIOC.Container.Register<IAirportService, ApiAirportService>();
             FreshIOC.Container.Register<IAircraftTypeService, ApiAircraftTypeService>();
-            FreshIOC.Container.Register<IAircraftService, MockAircraftService>();
+            FreshIOC.Container.Register<IAircraftService, ApiAircraftService>();
             FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
             FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();
             FreshIOC.Container.Register<IValidator<AircraftType>, AircraftTypeValidator>();

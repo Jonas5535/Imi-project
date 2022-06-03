@@ -1,7 +1,4 @@
-﻿using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
-using Imi.Project.Mobile.Core.Domain.Services.Mocking;
-using Imi.Project.Mobile.ViewModels;
+﻿using Imi.Project.Mobile.ViewModels;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
