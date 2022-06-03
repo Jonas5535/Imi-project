@@ -227,19 +227,19 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SaveAircraftCommand => new Command(
             async () =>
             {
-                SaveAircraftState();
+                AircraftFormModel aircraftToBeSaved = SaveAircraftState();
 
-                if (Validate(_currentAircraft))
+                if (Validate(aircraftToBeSaved))
                 {
                     IsBusy = true;
 
                     if (_isNew)
                     {
-                        await _aircraftService.AddAsync(_currentAircraft); //TODO Handle BaseResponse
+                        await _aircraftService.AddAsync(aircraftToBeSaved); //TODO Handle BaseResponse
                     }
                     else
                     {
-                        await _aircraftService.UpdateAsync(_currentAircraft); //TODO Handle BaseResponse
+                        await _aircraftService.UpdateAsync(aircraftToBeSaved); //TODO Handle BaseResponse
                     }
                     IsBusy = false;
 
@@ -302,7 +302,7 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private void SaveAircraftState()
+        private AircraftFormModel SaveAircraftState()
         {
             AircraftFormModel aircraftToBeSaved = new AircraftFormModel { Id = Guid.NewGuid() };
 
@@ -319,6 +319,8 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 aircraftToBeSaved.AirportIds.Add(airport.Id);
             }
+
+            return aircraftToBeSaved;
         }
 
         private async Task PopulatePickers()
@@ -328,7 +330,7 @@ namespace Imi.Project.Mobile.ViewModels
             AirportPickerContent = await _aircraftService.GetAirports();
         }
 
-        private bool Validate(Aircraft aircraft)
+        private bool Validate(AircraftFormModel aircraft)
         {
             RegistrationError = "";
             LastSeenError = "";
@@ -336,7 +338,7 @@ namespace Imi.Project.Mobile.ViewModels
             AirlineError = "";
             AirportError = "";
 
-            ValidationContext<Aircraft> validationContext = new ValidationContext<Aircraft>(aircraft);
+            ValidationContext<AircraftFormModel> validationContext = new ValidationContext<AircraftFormModel>(aircraft);
             ValidationResult validationResult = _aircraftValidator.Validate(validationContext);
 
             foreach (var error in validationResult.Errors)
@@ -349,15 +351,15 @@ namespace Imi.Project.Mobile.ViewModels
                 {
                     LastSeenError = error.ErrorMessage;
                 }
-                else if (error.PropertyName == nameof(aircraft.AircraftType))
+                else if (error.PropertyName == nameof(aircraft.AircraftTypeId))
                 {
                     AircraftTypeError = error.ErrorMessage;
                 }
-                else if (error.PropertyName == nameof(aircraft.Airline))
+                else if (error.PropertyName == nameof(aircraft.AirlineId))
                 {
                     AirlineError = error.ErrorMessage;
                 }
-                else if (error.PropertyName == nameof(aircraft.Airports))
+                else if (error.PropertyName == nameof(aircraft.AirportIds))
                 {
                     AirportError = error.ErrorMessage;
                 }

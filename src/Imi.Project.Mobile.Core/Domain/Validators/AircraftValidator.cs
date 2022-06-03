@@ -3,7 +3,7 @@ using Imi.Project.Mobile.Core.Domain.Models;
 
 namespace Imi.Project.Mobile.Core.Domain.Validators
 {
-    public class AircraftValidator : AbstractValidator<Aircraft>
+    public class AircraftValidator : AbstractValidator<AircraftFormModel>
     {
         public AircraftValidator()
         {
@@ -17,15 +17,15 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .GreaterThanOrEqualTo(a => a.FirstSeen)
                 .WithMessage("De datum van laatst gezien kan niet vroeger zijn dan de datum van \"Eerst gezien\"");
 
-            RuleFor(aircraft => aircraft.AircraftType)
+            RuleFor(aircraft => aircraft.AircraftTypeId)
                 .NotEmpty()
                 .WithMessage("Het vliegtuigtype mag niet leeg zijn");
 
-            RuleFor(aircraft => aircraft.Airline)
+            RuleFor(aircraft => aircraft.AirlineId)
                 .NotEmpty()
                 .WithMessage("De maatschappij mag niet leeg zijn");
 
-            RuleFor(Aircraft => Aircraft.Airports)
+            RuleFor(Aircraft => Aircraft.AirportIds)
                 .NotEmpty()
                 .WithMessage("De luchthaven mag niet leeg zijn");
         }
