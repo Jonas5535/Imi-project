@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -53,13 +54,34 @@ namespace Imi.Project.Mobile.ViewModels
             ShownAircraft = returnedData as Aircraft;
         }
 
-        protected override void ViewIsAppearing(object sender, EventArgs e)
+        protected override async void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
+            await GetDetails();
 
             // Placed this in ViewIsAppearing instead of in the Init and ReverseInit methods
             // because I need the OnAppearing method of the view to be called first before calling this event.
             ItemSourceSet(this, EventArgs.Empty);
+        }
+
+        private async Task GetDetails()
+        {
+            IsBusy = true;
+
+            BaseResponse<Aircraft> response = await _aircraftService.GetByIdAsync(ShownAircraft.Id);
+
+            IsBusy = false;
+
+            if (!response.IsSucces)
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true) await GetDetails();
+                else await CoreMethods.PopPageModel();
+            }
+            else
+            {
+                ShownAircraft = response.Data;
+            }
         }
 
         public ICommand EditAircraftCommand => new Command(
