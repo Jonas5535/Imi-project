@@ -9,8 +9,9 @@
              Title="Vliegtuigen">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="2" Order="Primary" Command="{Binding AddAircraftCommand}"/>
-        <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="1" Order="Primary" Command="{Binding OpenFilterPageCommand}"/>
+        <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="3" Order="Primary" Command="{Binding AddAircraftCommand}"/>
+        <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="2" Order="Primary" Command="{Binding OpenFilterPageCommand}"/>
+        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Priority="1" Order="Primary" Command="{Binding RefreshListCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
