@@ -17,6 +17,18 @@ namespace Imi.Project.Mobile.ViewModels
             _aircraftService = aircraftService;
         }
 
+        private bool isBusy;
+
+        public bool IsBusy
+        {
+            get { return isBusy; }
+            set
+            {
+                isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private Aircraft shownAircraft;
 
         public Aircraft ShownAircraft
