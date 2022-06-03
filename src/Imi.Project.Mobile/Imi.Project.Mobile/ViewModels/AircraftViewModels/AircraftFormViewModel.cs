@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -13,7 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AircraftFormViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Aircraft> _aircraftService;
+        private readonly IAircraftService _aircraftService;
         private readonly IValidator<Aircraft> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
@@ -26,7 +26,7 @@ namespace Imi.Project.Mobile.ViewModels
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
         public IEnumerable<Airport> AirportPickerContent { get; set; }
 
-        public AircraftFormViewModel(ICRUDService<Aircraft> aircraftService, IValidator<Aircraft> aircraftValidator)
+        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<Aircraft> aircraftValidator)
         {
             _aircraftService = aircraftService;
             _aircraftValidator = aircraftValidator;

@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,13 +10,13 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class FilterViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Aircraft> _aircraftService;
+        private readonly IAircraftService _aircraftService;
 
         public IEnumerable<AircraftType> TypePickerContent { get; set; }
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
         public IEnumerable<Airport> AirportPickerContent { get; set; }
 
-        public FilterViewModel(ICRUDService<Aircraft> aircraftService)
+        public FilterViewModel(IAircraftService aircraftService)
         {
             _aircraftService = aircraftService;
         }

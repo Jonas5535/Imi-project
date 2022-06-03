@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services;
 using Imi.Project.Mobile.Core.Domain.Services.Api;
@@ -18,11 +19,11 @@ namespace Imi.Project.Mobile
             FreshIOC.Container.Register<ICRUDService<Airline>, ApiAirlineService>();
             FreshIOC.Container.Register<ICRUDService<Airport>, ApiAirportService>();
             FreshIOC.Container.Register<ICRUDService<AircraftType>, ApiAircraftTypeService>();
-            FreshIOC.Container.Register<ICRUDService<Aircraft>, MockAircraftService>();
+            FreshIOC.Container.Register<IAircraftService, MockAircraftService>();
             FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
             FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();
             FreshIOC.Container.Register<IValidator<AircraftType>, AircraftTypeValidator>();
-            FreshIOC.Container.Register<IValidator<Aircraft>, AircraftValidator>();
+            FreshIOC.Container.Register<IValidator<AircraftFormModel>, AircraftValidator>();
 
             InitializeComponent();
 

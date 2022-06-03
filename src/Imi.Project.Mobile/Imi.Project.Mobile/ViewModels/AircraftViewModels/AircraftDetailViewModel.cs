@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,10 +9,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AircraftDetailViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Aircraft> _aircraftService;
+        private readonly IAircraftService _aircraftService;
         public event EventHandler ItemSourceSet;
 
-        public AircraftDetailViewModel(ICRUDService<Aircraft> aircraftService)
+        public AircraftDetailViewModel(IAircraftService aircraftService)
         {
             _aircraftService = aircraftService;
         }
