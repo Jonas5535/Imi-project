@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:urisource="clr-namespace:Howest.Prog.Xamarin.UriSourceExtensions;assembly=Howest.Prog.Xamarin.UriSourceExtensions"
              x:Class="Imi.Project.Mobile.Pages.AircraftDetailPage"
              BackgroundColor="White"
              Title="Details">
@@ -27,7 +28,11 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image}" VerticalOptions="FillAndExpand" Aspect="AspectFit"></Image>
+                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image}" VerticalOptions="FillAndExpand" Aspect="AspectFit">
+                    <Image.Behaviors>
+                        <urisource:TlsSourceBehavior IgnoreCertificateErrors="True"/>
+                    </Image.Behaviors>
+                </Image>
                 <Label Text="Registratie" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
                 <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.Registration}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
