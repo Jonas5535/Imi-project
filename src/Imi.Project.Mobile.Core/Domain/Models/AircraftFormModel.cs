@@ -6,6 +6,7 @@ namespace Imi.Project.Mobile.Core.Domain.Models
 {
     public class AircraftFormModel
     {
+        public Guid Id { get; set; }
         public string Registration { get; set; }
         public bool HasSpecialLivery { get; set; }
         public DateTime FirstSeen { get; set; }

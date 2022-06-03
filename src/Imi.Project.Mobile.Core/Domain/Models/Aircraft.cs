@@ -11,6 +11,7 @@ namespace Imi.Project.Mobile.Core.Domain.Models
         public bool HasSpecialLivery { get; set; }
         public DateTime FirstSeen { get; set; }
         public DateTime LastSeen { get; set; }
+        public string Image { get; set; }
         public AircraftType AircraftType { get; set; }
         public Airline Airline { get; set; }
         public ICollection<Airport> Airports { get; set; } = new ObservableCollection<Airport>();

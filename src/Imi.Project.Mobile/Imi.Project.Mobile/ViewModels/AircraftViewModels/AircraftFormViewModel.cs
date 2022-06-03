@@ -255,7 +255,7 @@ namespace Imi.Project.Mobile.ViewModels
             if (_currentAircraft == null)
             {
                 _currentAircraft = new Aircraft();
-                _currentAircraft.Id = Guid.NewGuid();
+                //_currentAircraft.Id = Guid.NewGuid();
                 PageTitle = "Nieuw vliegtuig";
             }
             else
@@ -304,15 +304,21 @@ namespace Imi.Project.Mobile.ViewModels
 
         private void SaveAircraftState()
         {
-            _currentAircraft.Registration = Registration?.ToUpper();
-            _currentAircraft.Airline = Airline;
-            _currentAircraft.AircraftType = AircraftType;
-            _currentAircraft.HasSpecialLivery = HasSpecialLivery;
-            _currentAircraft.FirstSeen = FirstSeen;
-            _currentAircraft.LastSeen = LastSeen;
+            AircraftFormModel aircraftToBeSaved = new AircraftFormModel { Id = Guid.NewGuid() };
+
+            aircraftToBeSaved.Registration = Registration?.ToUpper();
+            aircraftToBeSaved.AirlineId = Airline.Id;
+            aircraftToBeSaved.AircraftTypeId = AircraftType.Id;
+            aircraftToBeSaved.HasSpecialLivery = HasSpecialLivery;
+            aircraftToBeSaved.FirstSeen = FirstSeen;
+            aircraftToBeSaved.LastSeen = LastSeen;
 
             SaveAircraftStateInitiated(this, EventArgs.Empty);
-            _currentAircraft.Airports = Airports;
+
+            foreach (var airport in airports)
+            {
+                aircraftToBeSaved.AirportIds.Add(airport.Id);
+            }
         }
 
         private async Task PopulatePickers()
