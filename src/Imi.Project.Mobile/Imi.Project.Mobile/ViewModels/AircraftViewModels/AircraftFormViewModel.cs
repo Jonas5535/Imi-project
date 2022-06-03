@@ -304,7 +304,10 @@ namespace Imi.Project.Mobile.ViewModels
 
         private AircraftFormModel SaveAircraftState()
         {
-            AircraftFormModel aircraftToBeSaved = new AircraftFormModel { Id = Guid.NewGuid() };
+            AircraftFormModel aircraftToBeSaved = new AircraftFormModel();
+
+            if (_isNew) aircraftToBeSaved.Id = Guid.NewGuid();
+            else aircraftToBeSaved.Id = _currentAircraft.Id;
 
             aircraftToBeSaved.Registration = Registration?.ToUpper();
             aircraftToBeSaved.AirlineId = Airline.Id;

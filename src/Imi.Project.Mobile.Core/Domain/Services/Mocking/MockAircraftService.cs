@@ -97,8 +97,13 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
         public async Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity)
         {
             Aircraft EditedAircraft = _aircraftList.FirstOrDefault(a => a.Id == entity.Id);
-            _aircraftList.Remove(EditedAircraft);
-            _aircraftList.Add(EditedAircraft);
+
+            EditedAircraft.Registration = entity.Registration;
+            EditedAircraft.HasSpecialLivery = entity.HasSpecialLivery;
+            EditedAircraft.FirstSeen = entity.FirstSeen;
+            EditedAircraft.LastSeen = entity.LastSeen;
+            EditedAircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id.Equals(entity.AircraftTypeId));
+            EditedAircraft.Airline = _airlines.FirstOrDefault(a => a.Id.Equals(entity.AirlineId));
 
             BaseResponse<Aircraft> response = new BaseResponse<Aircraft>();
             return await Task.FromResult(response);
