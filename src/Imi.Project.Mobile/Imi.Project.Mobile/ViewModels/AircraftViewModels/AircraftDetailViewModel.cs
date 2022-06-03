@@ -94,8 +94,20 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAircraftCommand => new Command(
             async () =>
             {
-                await _aircraftService.DeleteAsync(ShownAircraft.Id); //TODO Handle BaseResponse
-                await CoreMethods.PopPageModel();
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je dit vliegtuig wilt verwijderen", "Ja", "Nee");
+
+                if (answer is true)
+                {
+                    IsBusy = true;
+
+                    BaseResponse<Aircraft> response = await _aircraftService.DeleteAsync(ShownAircraft.Id);
+
+                    IsBusy = false;
+
+                    if (!response.IsSucces)
+                        await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
+                    else await CoreMethods.PopPageModel(true, false, true);
+                }
             }
         );
     }
