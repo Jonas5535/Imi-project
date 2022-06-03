@@ -235,20 +235,29 @@ namespace Imi.Project.Mobile.ViewModels
 
                     if (_isNew)
                     {
-                        await _aircraftService.AddAsync(aircraftToBeSaved); //TODO Handle BaseResponse
+                        var response = await _aircraftService.AddAsync(aircraftToBeSaved);
+
+                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration);
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
-                        await _aircraftService.UpdateAsync(aircraftToBeSaved); //TODO Handle BaseResponse
+                        var response = await _aircraftService.UpdateAsync(aircraftToBeSaved);
+
+                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration);
+                        else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
-
-                    await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuig {aircraftToBeSaved.Registration} is opgeslagen", "Ok");
-                    await CoreMethods.PopPageModel(_currentAircraft);
                 }
                 else await CoreMethods.DisplayAlert("Mistakes were made...", "Er zijn een aantal velden verkeerd ingevuld. Gelieve deze na te kijken.", "OK");
             }
         );
+
+        private async Task ShowSucces(string registration)
+        {
+            await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuig {registration} is opgeslagen", "Ok");
+            await CoreMethods.PopPageModel(_currentAircraft);
+        }
 
         private async Task RefreshAircraft()
         {
