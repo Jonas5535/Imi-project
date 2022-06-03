@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -10,9 +10,9 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AircraftTypeDetailViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<AircraftType> _aircraftTypeService;
+        private readonly IAircraftTypeService _aircraftTypeService;
 
-        public AircraftTypeDetailViewModel(ICRUDService<AircraftType> aircraftTypeService)
+        public AircraftTypeDetailViewModel(IAircraftTypeService aircraftTypeService)
         {
             _aircraftTypeService = aircraftTypeService;
         }

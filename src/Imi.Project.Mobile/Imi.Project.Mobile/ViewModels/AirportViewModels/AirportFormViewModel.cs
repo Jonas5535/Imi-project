@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -12,11 +12,12 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AirportFormViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Airport> _airportService;
+        private readonly IAirportService _airportService;
         private readonly IValidator<Airport> _airportValidator;
         private Airport _currentAirport;
         private bool _isNew = true;
-        public AirportFormViewModel(ICRUDService<Airport> airportService, IValidator<Airport> airportValidator)
+
+        public AirportFormViewModel(IAirportService airportService, IValidator<Airport> airportValidator)
         {
             _airportService = airportService;
             _airportValidator = airportValidator;
@@ -261,7 +262,7 @@ namespace Imi.Project.Mobile.ViewModels
                     if (_isNew)
                     {
                         var response = await _airportService.AddAsync(_currentAirport);
-                        
+
                         if (response.IsSucces) await ShowSucces();
                         else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }

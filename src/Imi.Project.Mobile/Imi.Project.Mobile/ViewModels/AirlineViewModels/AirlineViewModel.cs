@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,10 +12,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AirlineViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Airline> _airlineService;
+        private readonly IAirlineService _airlineService;
         bool _hasChanged = true;
 
-        public AirlineViewModel(ICRUDService<Airline> airlineService)
+        public AirlineViewModel(IAirlineService airlineService)
         {
             _airlineService = airlineService;
         }
@@ -99,7 +99,7 @@ namespace Imi.Project.Mobile.ViewModels
                     if (!response.IsSucces)
                         await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     else await ListInit();
-                }   
+                }
             }
         );
 

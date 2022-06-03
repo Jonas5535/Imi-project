@@ -2,7 +2,6 @@
 using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using Imi.Project.Mobile.Core.Domain.Services.Api;
 using Imi.Project.Mobile.Core.Domain.Services.Mocking;
 using Imi.Project.Mobile.Core.Domain.Validators;
@@ -16,9 +15,9 @@ namespace Imi.Project.Mobile
         public App()
         {
             //register dependencies
-            FreshIOC.Container.Register<ICRUDService<Airline>, ApiAirlineService>();
-            FreshIOC.Container.Register<ICRUDService<Airport>, ApiAirportService>();
-            FreshIOC.Container.Register<ICRUDService<AircraftType>, ApiAircraftTypeService>();
+            FreshIOC.Container.Register<IAirlineService, ApiAirlineService>();
+            FreshIOC.Container.Register<IAirportService, ApiAirportService>();
+            FreshIOC.Container.Register<IAircraftTypeService, ApiAircraftTypeService>();
             FreshIOC.Container.Register<IAircraftService, MockAircraftService>();
             FreshIOC.Container.Register<IValidator<Airline>, AirlineValidator>();
             FreshIOC.Container.Register<IValidator<Airport>, AirportValidator>();

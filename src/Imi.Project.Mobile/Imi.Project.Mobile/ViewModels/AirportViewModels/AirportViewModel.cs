@@ -1,6 +1,6 @@
 ﻿using FreshMvvm;
+using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
-using Imi.Project.Mobile.Core.Domain.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -12,10 +12,10 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class AirportViewModel : FreshBasePageModel
     {
-        private readonly ICRUDService<Airport> _airportService;
+        private readonly IAirportService _airportService;
         bool _hasChanged = true;
 
-        public AirportViewModel(ICRUDService<Airport> airportService)
+        public AirportViewModel(IAirportService airportService)
         {
             _airportService = airportService;
         }
