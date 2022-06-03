@@ -33,15 +33,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
         private static ICollection<Aircraft> _aircraftList = new List<Aircraft>
         {
             new Aircraft{ Id = Guid.Parse("41a6f6ff-696b-4b62-af8f-199d673aa4af"),Registration = "OO-SNJ", AircraftType = _aircraftTypes[0], Airline = _airlines[0],
-                HasSpecialLivery = false, FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08),
-                Airports = new List<Airport>{ _airports[0], _airports[1], _airports[2]}
+                HasSpecialLivery = false, FirstSeen = new DateTime(2021, 07, 08), LastSeen = new DateTime(2021, 07, 08), Image = "placeholder.png",
+                Airports = new List<Airport>{ _airports[0], _airports[1], _airports[2] }
             },
             new Aircraft{ Id = Guid.Parse("5ee39ee4-9bd8-48c3-8506-264c022a6d79"), Registration = "OO-LOE", AircraftType = _aircraftTypes[1], Airline = _airlines[1],
-                HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08),
+                HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 13), LastSeen = new DateTime(2021, 07, 08), Image = "placeholder.png",
                 Airports = new List<Airport>{ _airports[0], _airports[1] }
             },
             new Aircraft{ Id = Guid.Parse("352608d3-8fe5-49b4-859c-1585ac0c30d0"), Registration = "D-ALCC", AircraftType = _aircraftTypes[2], Airline = _airlines[2],
-                HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25),
+                HasSpecialLivery = false, FirstSeen = new DateTime(2020, 07, 29), LastSeen = new DateTime(2021, 07, 25), Image = "placeholder.png",
                 Airports = new List<Airport>{ _airports[2] }
             }
         };
