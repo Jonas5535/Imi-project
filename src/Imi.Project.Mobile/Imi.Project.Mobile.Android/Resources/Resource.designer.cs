@@ -16916,28 +16916,31 @@ namespace Imi.Project.Mobile.Droid
 			public const int notify_panel_notification_icon_bg = 2131165337;
 			
 			// aapt resource value: 0x7F07009A
-			public const int preference_list_divider_material = 2131165338;
+			public const int placeholder = 2131165338;
 			
 			// aapt resource value: 0x7F07009B
-			public const int Refresh = 2131165339;
-			
-			// aapt resource value: 0x7F07009D
-			public const int SplashLogo = 2131165341;
+			public const int preference_list_divider_material = 2131165339;
 			
 			// aapt resource value: 0x7F07009C
-			public const int splash_screen = 2131165340;
+			public const int Refresh = 2131165340;
 			
 			// aapt resource value: 0x7F07009E
-			public const int test_custom_background = 2131165342;
+			public const int SplashLogo = 2131165342;
+			
+			// aapt resource value: 0x7F07009D
+			public const int splash_screen = 2131165341;
 			
 			// aapt resource value: 0x7F07009F
-			public const int tooltip_frame_dark = 2131165343;
+			public const int test_custom_background = 2131165343;
 			
 			// aapt resource value: 0x7F0700A0
-			public const int tooltip_frame_light = 2131165344;
+			public const int tooltip_frame_dark = 2131165344;
 			
 			// aapt resource value: 0x7F0700A1
-			public const int User = 2131165345;
+			public const int tooltip_frame_light = 2131165345;
+			
+			// aapt resource value: 0x7F0700A2
+			public const int User = 2131165346;
 			
 			static Drawable()
 			{

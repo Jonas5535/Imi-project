@@ -154,6 +154,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Assets\Wide310x150Logo.scale-400.png" />
     <Content Include="Images\Logo_Long.png" />
+    <Content Include="Images\placeholder.png" />
     <Content Include="Images\Refresh.png" />
     <Content Include="Images\AircraftIcon.png" />
     <Content Include="Images\AircraftTypeIcon.png" />
