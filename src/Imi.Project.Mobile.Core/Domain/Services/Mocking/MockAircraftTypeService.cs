@@ -1,4 +1,5 @@
-﻿using Imi.Project.Mobile.Core.Domain.Models;
+﻿using Imi.Project.Mobile.Core.Domain.Interfaces;
+using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 {
-    public class MockAircraftTypeService : ICRUDService<AircraftType>
+    public class MockAircraftTypeService : IAircraftTypeService
     {
         private static ICollection<AircraftType> _aircraftTypeList = new List<AircraftType>
         {
@@ -32,21 +33,6 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
 
             BaseResponse<AircraftType> response = new BaseResponse<AircraftType>();
             return await Task.FromResult(response);
-        }
-
-        public Task<AircraftType[]> GetAircraftTypes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Airline[]> GetAirlines()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Airport[]> GetAirports()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResponse<AircraftType>> GetByIdAsync(Guid id)

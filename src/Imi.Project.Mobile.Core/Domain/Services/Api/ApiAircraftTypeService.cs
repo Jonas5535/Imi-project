@@ -1,11 +1,12 @@
-﻿using Imi.Project.Mobile.Core.Domain.Models;
+﻿using Imi.Project.Mobile.Core.Domain.Interfaces;
+using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Api
 {
-    public class ApiAircraftTypeService : ICRUDService<AircraftType>
+    public class ApiAircraftTypeService : IAircraftTypeService
     {
         private readonly string _baseEndpoint;
 
@@ -23,21 +24,6 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
         public async Task<BaseResponse<AircraftType>> DeleteAsync(Guid id)
         {
             return await WebApiClient.DeleteCallApi<AircraftType>($"{_baseEndpoint}/{id}");
-        }
-
-        public Task<AircraftType[]> GetAircraftTypes()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Airline[]> GetAirlines()
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<Airport[]> GetAirports()
-        {
-            throw new NotImplementedException();
         }
 
         public async Task<BaseResponse<AircraftType>> GetByIdAsync(Guid id)
