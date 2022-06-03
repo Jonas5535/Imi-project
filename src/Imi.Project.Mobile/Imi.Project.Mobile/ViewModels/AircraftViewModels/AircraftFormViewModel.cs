@@ -255,13 +255,13 @@ namespace Imi.Project.Mobile.ViewModels
             if (_currentAircraft == null)
             {
                 _currentAircraft = new Aircraft();
-                //_currentAircraft.Id = Guid.NewGuid();
                 PageTitle = "Nieuw vliegtuig";
             }
             else
             {
                 _isNew = false;
                 _currentAircraft = await GetCurrentAircraft(_currentAircraft.Id);
+                if (_currentAircraft == null) return; //Needed to cut off the method
                 PageTitle = $"{_currentAircraft.Registration} bewerken";
             }
             LoadAircraftState();
@@ -269,11 +269,25 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task<Aircraft> GetCurrentAircraft(Guid id)
         {
+            IsBusy = true;
+
             BaseResponse<Aircraft> response = await _aircraftService.GetByIdAsync(id);
+
+            IsBusy = false;
 
             if (!response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
+
+                if (answer is true)
+                {
+                    return await GetCurrentAircraft(id);
+                }
+                else
+                {
+                    await CoreMethods.PopPageModel();
+                    return null; //Needed to cut off the method
+                }
             }
 
             Aircraft aircraft = response.Data;
