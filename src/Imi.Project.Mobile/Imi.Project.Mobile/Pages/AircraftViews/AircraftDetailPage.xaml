@@ -27,7 +27,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="placeholder.png" VerticalOptions="FillAndExpand" Aspect="AspectFit"></Image>
+                <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image}" VerticalOptions="FillAndExpand" Aspect="AspectFit"></Image>
                 <Label Text="Registratie" Style="{StaticResource TitleLabel}" Margin="25,0,0,0" Grid.Row="1" Grid.Column="0"></Label>
                 <Label Text="Type" Style="{StaticResource TitleLabel}" Grid.Row="1" Grid.Column="1"></Label>
                 <Label Text="{Binding ShownAircraft.Registration}" Style="{StaticResource ContentLabel}" Margin="10,0,0,0" Grid.Row="2" Grid.Column="0"></Label>
