@@ -12,8 +12,8 @@ namespace Imi.Project.Mobile.Core.Domain.Interfaces
         Task<BaseResponse<Aircraft>> AddAsync(AircraftFormModel entity);
         Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity);
         Task<BaseResponse<Aircraft>> DeleteAsync(Guid id);
-        Task<Airline[]> GetAirlines();
-        Task<AircraftType[]> GetAircraftTypes();
-        Task<Airport[]> GetAirports();
+        Task<BaseResponse<Airline[]>> GetAirlines();
+        Task<BaseResponse<AircraftType[]>> GetAircraftTypes();
+        Task<BaseResponse<Airport[]>> GetAirports();
     }
 }
