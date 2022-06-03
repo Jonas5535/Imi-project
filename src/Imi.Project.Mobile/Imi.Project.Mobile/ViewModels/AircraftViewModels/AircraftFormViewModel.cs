@@ -14,7 +14,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftFormViewModel : FreshBasePageModel
     {
         private readonly IAircraftService _aircraftService;
-        private readonly IValidator<Aircraft> _aircraftValidator;
+        private readonly IValidator<AircraftFormModel> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
 
@@ -26,7 +26,7 @@ namespace Imi.Project.Mobile.ViewModels
         public IEnumerable<Airline> AirlinePickerContent { get; set; }
         public IEnumerable<Airport> AirportPickerContent { get; set; }
 
-        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<Aircraft> aircraftValidator)
+        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator)
         {
             _aircraftService = aircraftService;
             _aircraftValidator = aircraftValidator;
@@ -312,6 +312,7 @@ namespace Imi.Project.Mobile.ViewModels
             aircraftToBeSaved.HasSpecialLivery = HasSpecialLivery;
             aircraftToBeSaved.FirstSeen = FirstSeen;
             aircraftToBeSaved.LastSeen = LastSeen;
+            aircraftToBeSaved.AirportIds = new List<Guid>();
 
             SaveAircraftStateInitiated(this, EventArgs.Empty);
 

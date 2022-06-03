@@ -46,9 +46,27 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             }
         };
 
-        public async Task<BaseResponse<Aircraft>> AddAsync(Aircraft entity)
+        public async Task<BaseResponse<Aircraft>> AddAsync(AircraftFormModel entity)
         {
-            _aircraftList.Add(entity);
+            Aircraft aircraft = new Aircraft
+            {
+                Id = entity.Id,
+                Registration = entity.Registration,
+                HasSpecialLivery = entity.HasSpecialLivery,
+                FirstSeen = entity.FirstSeen,
+                LastSeen = entity.LastSeen,
+                AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id.Equals(entity.AircraftTypeId)),
+                Airline = _airlines.FirstOrDefault(a => a.Id.Equals(entity.AirlineId)),
+                Airports = new List<Airport>()
+            };
+
+            foreach (var airportId in entity.AirportIds)
+            {
+                Airport airport = _airports.FirstOrDefault(a => a.Id.Equals(airportId));
+                aircraft.Airports.Add(airport);
+            }
+
+            _aircraftList.Add(aircraft);
             BaseResponse<Aircraft> response = new BaseResponse<Aircraft>();
             return await Task.FromResult(response);
         }
@@ -76,7 +94,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             return await Task.FromResult(response);
         }
 
-        public async Task<BaseResponse<Aircraft>> UpdateAsync(Aircraft entity)
+        public async Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity)
         {
             Aircraft EditedAircraft = _aircraftList.FirstOrDefault(a => a.Id == entity.Id);
             _aircraftList.Remove(EditedAircraft);

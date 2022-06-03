@@ -9,8 +9,8 @@ namespace Imi.Project.Mobile.Core.Domain.Interfaces
     {
         Task<BaseResponse<ICollection<Aircraft>>> ListAllAsync();
         Task<BaseResponse<Aircraft>> GetByIdAsync(Guid id);
-        Task<BaseResponse<Aircraft>> AddAsync(Aircraft entity);
-        Task<BaseResponse<Aircraft>> UpdateAsync(Aircraft entity);
+        Task<BaseResponse<Aircraft>> AddAsync(AircraftFormModel entity);
+        Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity);
         Task<BaseResponse<Aircraft>> DeleteAsync(Guid id);
         Task<Airline[]> GetAirlines();
         Task<AircraftType[]> GetAircraftTypes();
