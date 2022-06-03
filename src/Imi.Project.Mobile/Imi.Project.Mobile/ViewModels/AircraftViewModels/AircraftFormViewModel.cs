@@ -5,6 +5,7 @@ using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -235,17 +236,16 @@ namespace Imi.Project.Mobile.ViewModels
         }
         #endregion
 
-        public async override void Init(object initData)
+        public override void Init(object initData)
         {
             base.Init(initData);
 
             _currentAircraft = initData as Aircraft;
-
-            await PopulatePickers(); // This needs to stay here in order to correctly load the pickers
         }
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
+            await PopulatePickers();
             await RefreshAircraft();
         }
 
@@ -337,22 +337,25 @@ namespace Imi.Project.Mobile.ViewModels
 
         private void LoadAircraftState()
         {
-            Registration = _currentAircraft.Registration;
-            Airline = _currentAircraft.Airline;
-            AircraftType = _currentAircraft.AircraftType;
-            HasSpecialLivery = _currentAircraft.HasSpecialLivery;
-            Airports = _currentAircraft.Airports;
-
-            if (_currentAircraft.FirstSeen != default)
-                FirstSeen = _currentAircraft.FirstSeen;
-            else FirstSeen = DateTime.Today;
-
-            if (_currentAircraft.LastSeen != default)
-                LastSeen = _currentAircraft.LastSeen;
-            else LastSeen = DateTime.Today;
-
-            if (!_isNew)
+            if (_isNew)
             {
+                FirstSeen = DateTime.Today;
+                LastSeen = DateTime.Today;
+            }
+            else
+            {
+                Registration = _currentAircraft.Registration;
+                Airline = AirlinePickerContent.FirstOrDefault(a => a.Id == _currentAircraft.Airline.Id);
+                AircraftType = TypePickerContent.FirstOrDefault(a => a.Id == _currentAircraft.AircraftType.Id);
+                HasSpecialLivery = _currentAircraft.HasSpecialLivery;
+                FirstSeen = _currentAircraft.FirstSeen;
+                LastSeen = _currentAircraft.LastSeen;
+                Airports = new List<Airport>();
+
+                foreach (var airport in _currentAircraft.Airports)
+                {
+                    Airports.Add(AirportPickerContent.FirstOrDefault(a => a.Id == airport.Id));
+                }
                 LoadAircraftStateInitiated(this, EventArgs.Empty);
             }
         }
