@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftViewModel : FreshBasePageModel
     {
         private readonly IAircraftService _aircraftService;
+        bool _hasChanged = true;
 
         public AircraftViewModel(IAircraftService aircraftService)
         {
@@ -43,10 +44,15 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        public override void ReverseInit(object returnedData)
+        {
+            _hasChanged = true;
+        }
+
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            base.ViewIsAppearing(sender, e);
-            await ListInit();
+            if (_hasChanged)
+                await ListInit();
         }
 
         public ICommand OpenAircraftDetailPageCommand => new Command<Aircraft>(
@@ -80,7 +86,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand DeleteAircraftCommand => new Command<Aircraft>(
             async (Aircraft aircraft) =>
             {
-                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je deze maatschappij wilt verwijderen", "Ja", "Nee");
+                bool answer = await CoreMethods.DisplayAlert("Verwijderen?", "Ben je zeker dat je dit vliegtuig wilt verwijderen", "Ja", "Nee");
 
                 if (answer is true)
                 {
@@ -99,16 +105,23 @@ namespace Imi.Project.Mobile.ViewModels
 
         private async Task ListInit()
         {
+            IsBusy = true;
+
             BaseResponse<ICollection<Aircraft>> response = await _aircraftService.ListAllAsync();
 
-            if (!response.IsSucces)
+            if (response.IsSucces)
             {
-                throw new NotImplementedException(); //TODO Handle unsuccesful response
+                ObservableCollection<Aircraft> aircrafts = new ObservableCollection<Aircraft>(response.Data);
+                Aircrafts = null;
+                Aircrafts = aircrafts;
+                _hasChanged = false;
             }
-
-            ObservableCollection<Aircraft> aircrafts = new ObservableCollection<Aircraft>(response.Data);
-            Aircrafts = null;
-            Aircrafts = aircrafts;
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
+                if (answer is true) await ListInit();
+            }
+            IsBusy = false;
         }
     }
 }

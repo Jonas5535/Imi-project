@@ -52,7 +52,7 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </StackLayout>
-            <Pages:BusyView IsVisible="{Binding isBusy}"/>
+            <Pages:BusyView IsVisible="{Binding IsBusy}"/>
         </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
