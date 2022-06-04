@@ -10,15 +10,12 @@ namespace Imi.Project.Mobile.ViewModels
 {
     public class FilterViewModel : FreshBasePageModel
     {
-        private readonly IAircraftService _aircraftService;
         private readonly IAircraftTypeService _aircraftTypeService;
         private readonly IAirlineService _airlineService;
         private FilterModel _filterModel;
 
-        public FilterViewModel(IAircraftService aircraftService, IAircraftTypeService aircraftTypeService,
-            IAirlineService airlineService)
+        public FilterViewModel(IAircraftTypeService aircraftTypeService, IAirlineService airlineService)
         {
-            _aircraftService = aircraftService;
             _aircraftTypeService = aircraftTypeService;
             _airlineService = airlineService;
         }
@@ -60,9 +57,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private string type;
+        private AircraftType type;
 
-        public string Type
+        public AircraftType Type
         {
             get { return type; }
             set
@@ -72,9 +69,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private string airline;
+        private Airline airline;
 
-        public string Airline
+        public Airline Airline
         {
             get { return airline; }
             set
@@ -105,7 +102,8 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand FilterCommand => new Command(
             async () =>
             {
-                await CoreMethods.DisplayAlert("Niet geïmplementeerd", "De filter functie is nog niet geïmplementeerd", "Ok");
+                SaveFilters();
+
                 await CoreMethods.PopPageModel();
             }
         );
@@ -115,8 +113,8 @@ namespace Imi.Project.Mobile.ViewModels
             _filterModel = new FilterModel();
 
             _filterModel.Registration = Registration;
-            _filterModel.Type = Type;
-            _filterModel.Airline = Airline;
+            _filterModel.Type = Type.Type;
+            _filterModel.Airline = Airline.Name;
             _filterModel.SpecialLivery = SpecialLivery;
         }
 
