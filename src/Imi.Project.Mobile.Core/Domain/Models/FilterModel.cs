@@ -5,6 +5,6 @@
         public string Registration { get; set; }
         public string Type { get; set; }
         public string Airline { get; set; }
-        public bool SpecialLivery { get; set; }
+        public bool? SpecialLivery { get; set; }
     }
 }

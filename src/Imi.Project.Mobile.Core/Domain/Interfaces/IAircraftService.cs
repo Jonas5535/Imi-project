@@ -12,5 +12,6 @@ namespace Imi.Project.Mobile.Core.Domain.Interfaces
         Task<BaseResponse<Aircraft>> AddAsync(AircraftFormModel entity);
         Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity);
         Task<BaseResponse<Aircraft>> DeleteAsync(Guid id);
+        Task<BaseResponse<ICollection<Aircraft>>> ListFilteredAsync(FilterModel filters);
     }
 }

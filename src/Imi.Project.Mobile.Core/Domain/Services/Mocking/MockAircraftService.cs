@@ -108,5 +108,10 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             BaseResponse<Aircraft> response = new BaseResponse<Aircraft>();
             return await Task.FromResult(response);
         }
+
+        Task<BaseResponse<ICollection<Aircraft>>> IAircraftService.ListFilteredAsync(FilterModel filters)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

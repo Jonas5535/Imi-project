@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Mobile.Core.Domain.Services.Api
@@ -54,6 +55,30 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
         public async Task<BaseResponse<ICollection<Aircraft>>> ListAllAsync()
         {
             return await WebApiClient.GetApiResult<ICollection<Aircraft>>(_baseEndpoint);
+        }
+
+        public async Task<BaseResponse<ICollection<Aircraft>>> ListFilteredAsync(FilterModel filters)
+        {
+            StringBuilder sb = new StringBuilder();
+
+            if (filters.SpecialLivery != null)
+            {
+                sb.AppendLine($"?hasSpecialLivery={filters.SpecialLivery}");
+            }
+            if (!string.IsNullOrWhiteSpace(filters.Registration))
+            {
+                sb.AppendLine($"&registration={filters.Registration}");
+            }
+            if (!string.IsNullOrWhiteSpace(filters.Type))
+            {
+                sb.AppendLine($"&type={filters.Type}");
+            }
+            if (!string.IsNullOrWhiteSpace(filters.Airline))
+            {
+                sb.AppendLine($"&airlineName={filters.Airline}");
+            }
+
+            return await WebApiClient.GetApiResult<ICollection<Aircraft>>($"{_baseEndpoint}{sb}");
         }
 
         public async Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity)
