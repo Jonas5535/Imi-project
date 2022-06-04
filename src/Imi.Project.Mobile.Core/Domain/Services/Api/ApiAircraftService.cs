@@ -60,10 +60,10 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
         public async Task<BaseResponse<ICollection<Aircraft>>> ListFilteredAsync(FilterModel filters)
         {
             StringBuilder sb = new StringBuilder();
-
+            sb.AppendLine("?");
             if (filters.SpecialLivery != null)
             {
-                sb.AppendLine($"?hasSpecialLivery={filters.SpecialLivery}");
+                sb.AppendLine($"hasSpecialLivery={filters.SpecialLivery}");
             }
             if (!string.IsNullOrWhiteSpace(filters.Registration))
             {

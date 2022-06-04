@@ -2,6 +2,7 @@
 using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -45,6 +46,18 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private IEnumerable<bool?> liveryPickerContent;
+
+        public IEnumerable<bool?> LiveryPickerContent
+        {
+            get { return liveryPickerContent; }
+            set
+            {
+                liveryPickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private string registration;
 
         public string Registration
@@ -81,9 +94,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private bool specialLivery;
+        private bool? specialLivery;
 
-        public bool SpecialLivery
+        public bool? SpecialLivery
         {
             get { return specialLivery; }
             set
@@ -97,6 +110,8 @@ namespace Imi.Project.Mobile.ViewModels
         public async override void Init(object initData)
         {
             await PopulatePickers();
+            _filterModel = initData as FilterModel;
+            if (_filterModel != null) LoadFilters();
         }
 
         public ICommand FilterCommand => new Command(
@@ -107,6 +122,14 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.PopPageModel(_filterModel);
             }
         );
+
+        private void LoadFilters()
+        {
+            Registration = _filterModel.Registration;
+            Type = TypePickerContent.FirstOrDefault(t => t.Type == _filterModel.Type);
+            Airline = AirlinePickerContent.FirstOrDefault(a => a.Name == _filterModel.Airline);
+            SpecialLivery = _filterModel.SpecialLivery;
+        }
 
         private void SaveFilters()
         {
@@ -127,6 +150,8 @@ namespace Imi.Project.Mobile.ViewModels
 
             AirlinePickerContent = await PopulateAirlinePicker();
             if (AirlinePickerContent == null) return; // Idem above
+
+            LiveryPickerContent = new List<bool?> { true, false, null };
         }
 
         private async Task<ICollection<Airline>> PopulateAirlinePicker()

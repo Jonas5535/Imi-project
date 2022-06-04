@@ -110,7 +110,7 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand OpenFilterPageCommand => new Command(
             async () =>
             {
-                await CoreMethods.PushPageModel<FilterViewModel>();
+                await CoreMethods.PushPageModel<FilterViewModel>(_filterModel);
             }
         );
 
