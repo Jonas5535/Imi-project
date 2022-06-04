@@ -13,7 +13,8 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftViewModel : FreshBasePageModel
     {
         private readonly IAircraftService _aircraftService;
-        bool _hasChanged = true;
+        private bool _hasChanged = true;
+        private FilterModel _filterModel;
 
         public AircraftViewModel(IAircraftService aircraftService)
         {
@@ -28,6 +29,18 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 isBusy = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool isFiltered;
+
+        public bool IsFiltered
+        {
+            get { return isFiltered; }
+            set
+            {
+                isFiltered = value;
                 RaisePropertyChanged();
             }
         }
@@ -47,13 +60,19 @@ namespace Imi.Project.Mobile.ViewModels
         public override void ReverseInit(object returnedData)
         {
             _hasChanged = true;
+            
+            _filterModel = returnedData as FilterModel;
+            if (_filterModel != null) IsFiltered = true;
         }
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            if (_hasChanged)
+            if (_hasChanged && !IsFiltered)
                 await ListInit();
+            if (_hasChanged && IsFiltered)
+                await FilteredListInit();
         }
+
 
         public ICommand RefreshListCommand => new Command(
             async () =>
@@ -129,6 +148,11 @@ namespace Imi.Project.Mobile.ViewModels
                 if (answer is true) await ListInit();
             }
             IsBusy = false;
+        }
+
+        private Task FilteredListInit()
+        {
+            throw new NotImplementedException();
         }
     }
 }

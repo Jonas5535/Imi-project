@@ -104,7 +104,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 SaveFilters();
 
-                await CoreMethods.PopPageModel();
+                await CoreMethods.PopPageModel(_filterModel);
             }
         );
 
