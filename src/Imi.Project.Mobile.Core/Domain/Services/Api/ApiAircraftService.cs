@@ -28,7 +28,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
                 response = await WebApiClient.PostCallApi<Aircraft, AircraftFormModel>(_baseEndpoint, entity);
                 if (response.IsSucces == true)
                 {
-                    response = await AddImageAsync(response.Data.Id, image);
+                    response = await AddOrUpdateImageAsync(response.Data.Id, image, HttpMethod.Post);
                 }
                 else
                 {
@@ -58,11 +58,29 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
 
         public async Task<BaseResponse<Aircraft>> UpdateAsync(AircraftFormModel entity)
         {
-            BaseResponse<Aircraft> response = await WebApiClient.PutCallApi<Aircraft, AircraftFormModel>(_baseEndpoint, entity);
+            BaseResponse<Aircraft> response;
+            if (entity.Image != null)
+            {
+                ImageFile image = entity.Image;
+                entity.Image = null;
+
+                response = await WebApiClient.PutCallApi<Aircraft, AircraftFormModel>(_baseEndpoint, entity);
+                if (response.IsSucces == true)
+                {
+                    response = await AddOrUpdateImageAsync(response.Data.Id, image, HttpMethod.Put);
+                }
+                else
+                {
+                    return response;
+                }
+                return response;
+            }    
+
+            response = await WebApiClient.PutCallApi<Aircraft, AircraftFormModel>(_baseEndpoint, entity);
             return response;
         }
 
-        private async Task<BaseResponse<Aircraft>> AddImageAsync(Guid id, ImageFile image)
+        private async Task<BaseResponse<Aircraft>> AddOrUpdateImageAsync(Guid id, ImageFile image, HttpMethod httpMethod)
         {
             BaseResponse<Aircraft> response;
 
@@ -73,7 +91,9 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
 
                 multipartFormContent.Add(fileStreamContent, name: "file", fileName: image.Name);
 
-                response = await WebApiClient.PostCallApiWithImage<Aircraft, MultipartFormDataContent>($"{_baseEndpoint}/{id}/image", multipartFormContent);
+                if (httpMethod == HttpMethod.Post)
+                    response = await WebApiClient.PostCallApiWithImage<Aircraft, MultipartFormDataContent>($"{_baseEndpoint}/{id}/image", multipartFormContent);
+                else response = await WebApiClient.PutCallApiWithImage<Aircraft, MultipartFormDataContent>($"{_baseEndpoint}/{id}/image", multipartFormContent);
             }
             return response;
         }

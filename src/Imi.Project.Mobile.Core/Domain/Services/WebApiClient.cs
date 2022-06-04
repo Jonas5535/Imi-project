@@ -44,7 +44,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 catch (HttpRequestException ex)
                 {
                     response.IsSucces = false;
-                    response.Status = "Server niet bereikbaar";
+                    response.Status = "Communicatiefout";
                     response.ErrorMessage = ex.Message;
                     return response;
                 }
@@ -68,6 +68,11 @@ namespace Imi.Project.Mobile.Core.Domain.Services
         public static async Task<BaseResponse<TOut>> PutCallApi<TOut, TIn>(string endpoint, TIn entity)
         {
             return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Put);
+        }
+
+        public static async Task<BaseResponse<TOut>> PutCallApiWithImage<TOut, TIn>(string endpoint, MultipartFormDataContent image)
+        {
+            return await CallApiWithImage<TOut,TIn>(endpoint, image, HttpMethod.Put);
         }
 
         public static async Task<BaseResponse<TOut>> PostCallApi<TOut, TIn>(string endpoint, TIn entity)
@@ -108,7 +113,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 catch (HttpRequestException ex)
                 {
                     result.IsSucces = false;
-                    result.Status = "Server niet bereikbaar";
+                    result.Status = "Communicatiefout";
                     result.ErrorMessage = ex.Message;
                     return result;
                 }
@@ -158,7 +163,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services
                 catch (HttpRequestException ex)
                 {
                     result.IsSucces = false;
-                    result.Status = "Server niet bereikbaar";
+                    result.Status = "Communicatiefout";
                     result.ErrorMessage = ex.Message;
                     return result;
                 }

@@ -331,14 +331,14 @@ namespace Imi.Project.Mobile.ViewModels
                     {
                         var response = await _aircraftService.AddAsync(aircraftToBeSaved);
 
-                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration);
+                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration, response.Data);
                         else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     else
                     {
                         var response = await _aircraftService.UpdateAsync(aircraftToBeSaved);
 
-                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration);
+                        if (response.IsSucces) await ShowSucces(aircraftToBeSaved.Registration, response.Data);
                         else await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "OK");
                     }
                     IsBusy = false;
@@ -347,10 +347,10 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
-        private async Task ShowSucces(string registration)
+        private async Task ShowSucces(string registration, Aircraft aircraft)
         {
             await CoreMethods.DisplayAlert("Opgeslagen", $"Het vliegtuig {registration} is opgeslagen", "Ok");
-            await CoreMethods.PopPageModel(_currentAircraft);
+            await CoreMethods.PopPageModel(aircraft);
         }
 
         private async Task RefreshAircraft()
