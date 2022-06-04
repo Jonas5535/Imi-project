@@ -109,9 +109,15 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             return await Task.FromResult(response);
         }
 
-        Task<BaseResponse<ICollection<Aircraft>>> IAircraftService.ListFilteredAsync(FilterModel filters)
+        public async Task<BaseResponse<ICollection<Aircraft>>> ListFilteredAsync(FilterModel filters)
         {
-            throw new NotImplementedException();
+            BaseResponse<ICollection<Aircraft>> response = new BaseResponse<ICollection<Aircraft>>
+            {
+                IsSucces = false,
+                Status = "Not Implemented",
+                ErrorMessage = "Filters zijn niet geïmplementeerd"
+            };
+            return await Task.FromResult(response);
         }
     }
 }

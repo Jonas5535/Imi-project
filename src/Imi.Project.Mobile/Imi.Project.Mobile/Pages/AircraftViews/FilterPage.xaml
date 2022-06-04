@@ -17,7 +17,7 @@
                 <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}"
                         ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Airline}"></Picker>
                 <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
-                <Picker HorizontalOptions="StartAndExpand" Style="{StaticResource StandardPicker}" ItemsSource="{Binding LiveryPickerContent}"
+                <Picker HorizontalOptions="StartAndExpand" Style="{StaticResource StandardPicker}" WidthRequest="65" ItemsSource="{Binding LiveryPickerContent}"
                         SelectedItem="{Binding SpecialLivery}"></Picker>
                 <Button Text="Filteren" Style="{StaticResource SquareButton}" Command="{Binding FilterCommand}"></Button>
             </StackLayout>
