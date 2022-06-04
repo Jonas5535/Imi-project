@@ -11,23 +11,23 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
     {
         private static Airline[] _airlines = new Airline[]
         {
-            new Airline{ Id = Guid.Parse("fda5ebe2-57e1-4124-b63f-f5757768465d"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL"},
-            new Airline{ Id = Guid.Parse("33770603-1f1e-4663-ad2e-1235fe24c47d"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF"},
-            new Airline{ Id = Guid.Parse("2d03d2f7-ae21-4824-8a90-68cef74773ea"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC"}
+            new Airline{ Id = Guid.Parse("cd8cf99b-d0c0-4de8-b708-46573523afe5"), Name = "Brussels Airlines", IATACode = "SN", ICAOCode = "BEL"},
+            new Airline{ Id = Guid.Parse("4e0b7e94-455c-485b-87d4-a357459a6ac1"), Name = "TUI Fly", IATACode = "TB", ICAOCode = "JAF"},
+            new Airline{ Id = Guid.Parse("0f1a0904-46f9-406a-afc2-460746623ad6"), Name = "Lufthansa Cargo", IATACode = "LH", ICAOCode = "GEC"}
         };
 
         private static AircraftType[] _aircraftTypes = new AircraftType[]
         {
-            new AircraftType{ Id = Guid.Parse("3b8d2886-08c4-4330-ad1d-603d63c9bce7"), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320"},
-            new AircraftType{ Id = Guid.Parse("59edf443-9114-4a09-9858-75b98fe96e26"), Brand = "Boeing", Type = "787-8", ICAOCode = "B788"},
-            new AircraftType{ Id = Guid.Parse("df710544-7e48-40af-a9d5-b0a309b5ed39"), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11"},
+            new AircraftType{ Id = Guid.Parse("4673e611-2495-4e0c-97e4-4abff97ae018"), Brand = "Airbus", Type = "A320-200", ICAOCode = "A320"},
+            new AircraftType{ Id = Guid.Parse("a0979f14-e054-4928-a581-ddddd5aa2e89"), Brand = "Boeing", Type = "787-8", ICAOCode = "B788"},
+            new AircraftType{ Id = Guid.Parse("e911ec3f-613e-443e-8756-50765d9ac40d"), Brand = "McDonnel Douglas", Type = "MD-11", ICAOCode = "MD11"},
         };
 
         private static Airport[] _airports = new Airport[]
         {
-            new Airport{ Id = Guid.Parse("60f92c32-7c4d-4739-816b-7e014e98e03b"), Name = "Brussels Airport", IATACode = "BRU", ICAOCode = "EBBR"},
-            new Airport{ Id = Guid.Parse("f432e7f3-496c-4ac5-9b95-1be466cc995c"), Name = "Nice Côte d'Azur", IATACode = "NCE", ICAOCode = "LFMN"},
-            new Airport{ Id = Guid.Parse("a73f5cb3-8ca6-45d2-ab96-73e4ba98a6ab"), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA"},
+            new Airport{ Id = Guid.Parse("41abe261-28a4-4d52-8da6-023ab750f21a"), Name = "Brussels Airport", IATACode = "BRU", ICAOCode = "EBBR"},
+            new Airport{ Id = Guid.Parse("f6604525-b25b-4380-81f8-c65a80514ae1"), Name = "Nice Côte d'Azur", IATACode = "NCE", ICAOCode = "LFMN"},
+            new Airport{ Id = Guid.Parse("fd41f824-25f5-41b2-be69-12ea56655f77"), Name = "Tokyo Narita Intl. Airport", IATACode = "NRT", ICAOCode = "RJAA"},
         };
 
         private static ICollection<Aircraft> _aircraftList = new List<Aircraft>

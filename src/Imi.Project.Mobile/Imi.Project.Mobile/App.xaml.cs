@@ -3,7 +3,6 @@ using FreshMvvm;
 using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using Imi.Project.Mobile.Core.Domain.Services.Api;
-using Imi.Project.Mobile.Core.Domain.Services.Mocking;
 using Imi.Project.Mobile.Core.Domain.Validators;
 using Imi.Project.Mobile.ViewModels;
 using Xamarin.Forms;
@@ -15,6 +14,7 @@ namespace Imi.Project.Mobile
         public App()
         {
             //register dependencies
+            //When using mock services, put every interface on the mock service to avoid bugs
             FreshIOC.Container.Register<IAirlineService, ApiAirlineService>();
             FreshIOC.Container.Register<IAirportService, ApiAirportService>();
             FreshIOC.Container.Register<IAircraftTypeService, ApiAircraftTypeService>();
