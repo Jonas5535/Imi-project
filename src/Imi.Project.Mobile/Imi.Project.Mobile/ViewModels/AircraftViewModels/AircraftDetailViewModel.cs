@@ -99,13 +99,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        public ICommand RefreshPageCommand => new Command(
-            async () =>
-            {
-                await GetDetails();
-            }
-        );
-
         public ICommand EditAircraftCommand => new Command(
             async () =>
             {

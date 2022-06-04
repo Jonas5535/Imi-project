@@ -10,7 +10,6 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Verwijderen" IconImageSource="DeleteBlack.png" Priority="3" Order="Primary" Command="{Binding DeleteAircraftCommand}"/>
         <ToolbarItem Text="Bewerken" IconImageSource="EditBlack.png" Priority="2" Order="Primary" Command="{Binding EditAircraftCommand}"/>
-        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Priority="1" Order="Primary" Command="{Binding RefreshPageCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
