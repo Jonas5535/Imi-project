@@ -1,18 +1,13 @@
 ﻿using FluentValidation;
 using Imi.Project.Mobile.Core.Domain.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace Imi.Project.Mobile.Core.Domain.Validators
 {
     public class AircraftValidator : AbstractValidator<AircraftFormModel>
     {
-        //private readonly ICollection<Guid> _airportIds;
-
-        public AircraftValidator(/*ICollection<Guid> airportIds*/)
+        public AircraftValidator()
         {
-            //_airportIds = airportIds;
             RuleFor(aircraft => aircraft.Registration)
                 .NotEmpty()
                 .WithMessage("Het registratienummer mag niet leeg zijn")
@@ -37,10 +32,5 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
                 .Must(a => a.Distinct().Count() == a.Count)
                 .WithMessage("De luchthavens moeten uniek zijn");
         }
-
-        //public bool IsUnique()
-        //{
-        //    return _airportIds.Distinct().Count() == _airportIds.Count;
-        //}
     }
 }
