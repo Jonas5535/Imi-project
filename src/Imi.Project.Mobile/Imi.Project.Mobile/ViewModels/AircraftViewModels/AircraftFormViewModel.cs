@@ -5,6 +5,7 @@ using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -99,9 +100,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private FileResult image;
+        private Stream image;
 
-        public FileResult Image
+        public Stream Image
         {
             get { return image; }
             set
@@ -293,14 +294,16 @@ namespace Imi.Project.Mobile.ViewModels
 
                 try
                 {
-                    Image = await FilePicker.PickAsync(options);
-                    if (Image != null)
-                        ImageTitle = Image.FileName;
+                    var result = await FilePicker.PickAsync(options);
+                    if (result != null)
+                        ImageTitle = result.FileName;
                     else ImageTitle = null;
-                }
-                catch (Exception ex)
-                {
 
+                    Image = await result.OpenReadAsync();
+                }
+                catch (Exception)
+                {
+                    await CoreMethods.DisplayAlert("Fout!", "Er is iets misgelopen tijdens het selecteren van een foto", "OK");
                 }
             }
         );
@@ -425,9 +428,11 @@ namespace Imi.Project.Mobile.ViewModels
             else aircraftToBeSaved.Id = _currentAircraft.Id;
 
             aircraftToBeSaved.Registration = Registration?.ToUpper();
-            aircraftToBeSaved.AirlineId = Airline.Id;
-            aircraftToBeSaved.AircraftTypeId = AircraftType.Id;
+
+            if (Airline != null) aircraftToBeSaved.AirlineId = Airline.Id;
+            if (AircraftType != null) aircraftToBeSaved.AircraftTypeId = AircraftType.Id;
             aircraftToBeSaved.HasSpecialLivery = HasSpecialLivery;
+            aircraftToBeSaved.Image = Image;
             aircraftToBeSaved.FirstSeen = FirstSeen;
             aircraftToBeSaved.LastSeen = LastSeen;
             aircraftToBeSaved.AirportIds = new List<Guid>();
