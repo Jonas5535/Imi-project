@@ -108,23 +108,5 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             BaseResponse<Aircraft> response = new BaseResponse<Aircraft>();
             return await Task.FromResult(response);
         }
-
-        public async Task<BaseResponse<Airline[]>> GetAirlines()
-        {
-            BaseResponse<Airline[]> response = new BaseResponse<Airline[]> { Data = _airlines};
-            return await Task.FromResult(response);
-        }
-
-        public async Task<BaseResponse<AircraftType[]>> GetAircraftTypes()
-        {
-            BaseResponse<AircraftType[]> response = new BaseResponse<AircraftType[]> { Data = _aircraftTypes };
-            return await Task.FromResult(response);
-        }
-
-        public async Task<BaseResponse<Airport[]>> GetAirports()
-        {
-            BaseResponse<Airport[]> response = new BaseResponse<Airport[]> { Data = _airports };
-            return await Task.FromResult(response);
-        }
     }
 }

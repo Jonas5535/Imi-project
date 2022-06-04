@@ -15,6 +15,9 @@ namespace Imi.Project.Mobile.ViewModels
     public class AircraftFormViewModel : FreshBasePageModel
     {
         private readonly IAircraftService _aircraftService;
+        private readonly IAirportService _airportService;
+        private readonly IAirlineService _airlineService;
+        private readonly IAircraftTypeService _aircraftTypeService;
         private readonly IValidator<AircraftFormModel> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
@@ -23,10 +26,14 @@ namespace Imi.Project.Mobile.ViewModels
         public event EventHandler LoadAircraftStateInitiated;
         public event EventHandler SaveAircraftStateInitiated;
 
-        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator)
+        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator, IAirportService airportService, 
+            IAirlineService airlineService, IAircraftTypeService aircraftTypeService)
         {
             _aircraftService = aircraftService;
             _aircraftValidator = aircraftValidator;
+            _airportService = airportService;
+            _airlineService = airlineService;
+            _aircraftTypeService = aircraftTypeService;
         }
 
         #region FullProperties
@@ -403,9 +410,9 @@ namespace Imi.Project.Mobile.ViewModels
             IsBusy = false;
         }
 
-        private async Task<Airport[]> PopulateAirportPicker()
+        private async Task<ICollection<Airport>> PopulateAirportPicker()
         {
-            BaseResponse<Airport[]> response = await _aircraftService.GetAirports();
+            BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
 
             if (response.IsSucces)
             {
@@ -427,9 +434,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private async Task<Airline[]> PopulateAirlinePicker()
+        private async Task<ICollection<Airline>> PopulateAirlinePicker()
         {
-            BaseResponse<Airline[]> response = await _aircraftService.GetAirlines();
+            BaseResponse<ICollection<Airline>> response = await _airlineService.ListAllAsync();
 
             if (response.IsSucces)
             {
@@ -451,9 +458,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private async Task<AircraftType[]> PopulateTypePicker()
+        private async Task<ICollection<AircraftType>> PopulateTypePicker()
         {
-            BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes();
+            BaseResponse<ICollection<AircraftType>> response = await _aircraftTypeService.ListAllAsync();
 
             if (response.IsSucces)
             {

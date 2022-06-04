@@ -11,14 +11,53 @@ namespace Imi.Project.Mobile.ViewModels
     public class FilterViewModel : FreshBasePageModel
     {
         private readonly IAircraftService _aircraftService;
+        private readonly IAircraftTypeService _aircraftTypeService;
+        private readonly IAirportService _airportService;
+        private readonly IAirlineService _airlineService;
 
-        public IEnumerable<AircraftType> TypePickerContent { get; set; }
-        public IEnumerable<Airline> AirlinePickerContent { get; set; }
-        public IEnumerable<Airport> AirportPickerContent { get; set; }
-
-        public FilterViewModel(IAircraftService aircraftService)
+        public FilterViewModel(IAircraftService aircraftService, IAircraftTypeService aircraftTypeService, IAirportService airportService,
+            IAirlineService airlineService)
         {
             _aircraftService = aircraftService;
+            _aircraftTypeService = aircraftTypeService;
+            _airportService = airportService;
+            _airlineService = airlineService;
+        }
+
+        private IEnumerable<AircraftType> typePickerContent;
+
+        public IEnumerable<AircraftType> TypePickerContent
+        {
+            get { return typePickerContent; }
+            set
+            {
+                typePickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private IEnumerable<Airline> airlinePickerContent;
+
+        public IEnumerable<Airline> AirlinePickerContent
+        {
+            get { return airlinePickerContent; }
+            set
+            {
+                airlinePickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private IEnumerable<Airport> airportPickerContent;
+
+        public IEnumerable<Airport> AirportPickerContent
+        {
+            get { return airportPickerContent; }
+            set
+            {
+                airportPickerContent = value;
+                RaisePropertyChanged();
+            }
         }
 
         public async override void Init(object initData)
@@ -48,9 +87,9 @@ namespace Imi.Project.Mobile.ViewModels
             if (AirportPickerContent == null) return; // Idem above
         }
 
-        private async Task<Airport[]> PopulateAirportPicker()
+        private async Task<ICollection<Airport>> PopulateAirportPicker()
         {
-            BaseResponse<Airport[]> response = await _aircraftService.GetAirports();
+            BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
 
             if (response.IsSucces)
             {
@@ -72,9 +111,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private async Task<Airline[]> PopulateAirlinePicker()
+        private async Task<ICollection<Airline>> PopulateAirlinePicker()
         {
-            BaseResponse<Airline[]> response = await _aircraftService.GetAirlines();
+            BaseResponse<ICollection<Airline>> response = await _airlineService.ListAllAsync();
 
             if (response.IsSucces)
             {
@@ -96,9 +135,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private async Task<AircraftType[]> PopulateTypePicker()
+        private async Task<ICollection<AircraftType>> PopulateTypePicker()
         {
-            BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes();
+            BaseResponse<ICollection<AircraftType>> response = await _aircraftTypeService.ListAllAsync();
 
             if (response.IsSucces)
             {

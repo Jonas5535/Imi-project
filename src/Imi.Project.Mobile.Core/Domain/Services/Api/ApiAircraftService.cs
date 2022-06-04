@@ -25,21 +25,6 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
             return await WebApiClient.GetApiResult<Aircraft>($"{_baseEndpoint}/{id}");
         }
 
-        public async Task<BaseResponse<AircraftType[]>> GetAircraftTypes()
-        {
-            return await WebApiClient.GetApiResult<AircraftType[]>("aircraftTypes");
-        }
-
-        public async Task<BaseResponse<Airline[]>> GetAirlines()
-        {
-            return await WebApiClient.GetApiResult<Airline[]>("airlines");
-        }
-
-        public async Task<BaseResponse<Airport[]>> GetAirports()
-        {
-            return await WebApiClient.GetApiResult<Airport[]>("airports");
-        }
-
         public async Task<BaseResponse<Aircraft>> GetByIdAsync(Guid id)
         {
             return await WebApiClient.GetApiResult<Aircraft>($"{_baseEndpoint}/{id}");
