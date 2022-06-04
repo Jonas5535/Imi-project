@@ -13,6 +13,7 @@ namespace Imi.Project.Mobile.ViewModels
         private readonly IAircraftService _aircraftService;
         private readonly IAircraftTypeService _aircraftTypeService;
         private readonly IAirlineService _airlineService;
+        private FilterModel _filterModel;
 
         public FilterViewModel(IAircraftService aircraftService, IAircraftTypeService aircraftTypeService,
             IAirlineService airlineService)
@@ -22,6 +23,7 @@ namespace Imi.Project.Mobile.ViewModels
             _airlineService = airlineService;
         }
 
+        #region Properties
         private IEnumerable<AircraftType> typePickerContent;
 
         public IEnumerable<AircraftType> TypePickerContent
@@ -46,6 +48,55 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private string registration;
+
+        public string Registration
+        {
+            get { return registration; }
+            set
+            {
+                registration = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string type;
+
+        public string Type
+        {
+            get { return type; }
+            set
+            {
+                type = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string airline;
+
+        public string Airline
+        {
+            get { return airline; }
+            set
+            {
+                airline = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool specialLivery;
+
+        public bool SpecialLivery
+        {
+            get { return specialLivery; }
+            set
+            {
+                specialLivery = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
+
         public async override void Init(object initData)
         {
             await PopulatePickers();
@@ -58,6 +109,16 @@ namespace Imi.Project.Mobile.ViewModels
                 await CoreMethods.PopPageModel();
             }
         );
+
+        private void SaveFilters()
+        {
+            _filterModel = new FilterModel();
+
+            _filterModel.Registration = Registration;
+            _filterModel.Type = Type;
+            _filterModel.Airline = Airline;
+            _filterModel.SpecialLivery = SpecialLivery;
+        }
 
         private async Task PopulatePickers()
         {

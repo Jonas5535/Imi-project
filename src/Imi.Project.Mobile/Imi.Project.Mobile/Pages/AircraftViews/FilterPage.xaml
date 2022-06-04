@@ -9,15 +9,15 @@
         <ScrollView>
             <StackLayout>
                 <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
-                <Entry Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                <Entry Placeholder="bv: OO-ABC" Text="{Binding Registration}" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
                 <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                 <Picker Title="Kies een type" Style="{StaticResource StandardPicker}"
-                        ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}"></Picker>
+                        ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}" SelectedItem="{Binding Type}"></Picker>
                 <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                 <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}"
-                        ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}"></Picker>
+                        ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Airline}"></Picker>
                 <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
-                <Switch HorizontalOptions="StartAndExpand" Margin="15,5,0,0"></Switch>
+                <Switch HorizontalOptions="StartAndExpand" Margin="15,5,0,0" IsToggled="{Binding SpecialLivery}"></Switch>
                 <Button Text="Filteren" Style="{StaticResource SquareButton}" Command="{Binding FilterCommand}"></Button>
             </StackLayout>
         </ScrollView>
