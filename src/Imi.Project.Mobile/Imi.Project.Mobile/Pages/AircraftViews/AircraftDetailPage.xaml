@@ -8,8 +8,9 @@
              Title="Details">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Command="{Binding DeleteAircraftCommand}"/>
-        <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary" Command="{Binding EditAircraftCommand}"/>
+        <ToolbarItem Text="Verwijderen" IconImageSource="DeleteBlack.png" Priority="3" Order="Primary" Command="{Binding DeleteAircraftCommand}"/>
+        <ToolbarItem Text="Bewerken" IconImageSource="EditBlack.png" Priority="2" Order="Primary" Command="{Binding EditAircraftCommand}"/>
+        <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Priority="1" Order="Primary" Command="{Binding RefreshPageCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>
@@ -30,7 +31,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image, Converter={StaticResource PlaceholderCheck}}" VerticalOptions="FillAndExpand" Aspect="AspectFit">
+                    <Image x:Name="imgAircraft" Grid.Row="0" Grid.ColumnSpan="2" VerticalOptions="FillAndExpand" Aspect="AspectFit">
                         <Image.Behaviors>
                             <urisource:TlsSourceBehavior IgnoreCertificateErrors="True"/>
                         </Image.Behaviors>

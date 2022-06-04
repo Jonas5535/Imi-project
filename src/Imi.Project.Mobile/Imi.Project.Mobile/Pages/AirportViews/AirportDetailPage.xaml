@@ -9,8 +9,8 @@
              Title="Details">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Delete" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Command="{Binding DeleteAirportCommand}"/>
-        <ToolbarItem Text="Edit" IconImageSource="EditBlack.png" Priority="1" Order="Primary" Command="{Binding EditAirportCommand}"/>
+        <ToolbarItem Text="Verwijderen" IconImageSource="DeleteBlack.png" Priority="2" Order="Primary" Command="{Binding DeleteAirportCommand}"/>
+        <ToolbarItem Text="Bewerken" IconImageSource="EditBlack.png" Priority="1" Order="Primary" Command="{Binding EditAirportCommand}"/>
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>

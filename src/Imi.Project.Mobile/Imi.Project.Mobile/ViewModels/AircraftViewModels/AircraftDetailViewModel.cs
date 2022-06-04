@@ -12,6 +12,7 @@ namespace Imi.Project.Mobile.ViewModels
     {
         private readonly IAircraftService _aircraftService;
         public event EventHandler ItemSourceSet;
+        public event EventHandler ImageSourceChanged;
 
         public AircraftDetailViewModel(IAircraftService aircraftService)
         {
@@ -42,6 +43,18 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private string imageUri;
+
+        public string ImageUri
+        {
+            get { return imageUri; }
+            set
+            {
+                imageUri = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public override void Init(object initData)
         {
             base.Init(initData);
@@ -61,6 +74,7 @@ namespace Imi.Project.Mobile.ViewModels
             // Placed this in ViewIsAppearing instead of in the Init and ReverseInit methods
             // because I need the OnAppearing method of the view to be called first before calling this event.
             ItemSourceSet(this, EventArgs.Empty);
+            ImageSourceChanged(this, EventArgs.Empty);
         }
 
         private async Task GetDetails()
@@ -81,8 +95,16 @@ namespace Imi.Project.Mobile.ViewModels
             else
             {
                 ShownAircraft = response.Data;
+                ImageUri = ShownAircraft.Image;
             }
         }
+
+        public ICommand RefreshPageCommand => new Command(
+            async () =>
+            {
+                await GetDetails();
+            }
+        );
 
         public ICommand EditAircraftCommand => new Command(
             async () =>
