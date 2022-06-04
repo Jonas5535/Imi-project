@@ -12,15 +12,13 @@ namespace Imi.Project.Mobile.ViewModels
     {
         private readonly IAircraftService _aircraftService;
         private readonly IAircraftTypeService _aircraftTypeService;
-        private readonly IAirportService _airportService;
         private readonly IAirlineService _airlineService;
 
-        public FilterViewModel(IAircraftService aircraftService, IAircraftTypeService aircraftTypeService, IAirportService airportService,
+        public FilterViewModel(IAircraftService aircraftService, IAircraftTypeService aircraftTypeService,
             IAirlineService airlineService)
         {
             _aircraftService = aircraftService;
             _aircraftTypeService = aircraftTypeService;
-            _airportService = airportService;
             _airlineService = airlineService;
         }
 
@@ -48,18 +46,6 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private IEnumerable<Airport> airportPickerContent;
-
-        public IEnumerable<Airport> AirportPickerContent
-        {
-            get { return airportPickerContent; }
-            set
-            {
-                airportPickerContent = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public async override void Init(object initData)
         {
             await PopulatePickers();
@@ -82,33 +68,6 @@ namespace Imi.Project.Mobile.ViewModels
 
             AirlinePickerContent = await PopulateAirlinePicker();
             if (AirlinePickerContent == null) return; // Idem above
-
-            AirportPickerContent = await PopulateAirportPicker();
-            if (AirportPickerContent == null) return; // Idem above
-        }
-
-        private async Task<ICollection<Airport>> PopulateAirportPicker()
-        {
-            BaseResponse<ICollection<Airport>> response = await _airportService.ListAllAsync();
-
-            if (response.IsSucces)
-            {
-                return response.Data;
-            }
-            else
-            {
-                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw", "Terug");
-
-                if (answer is true)
-                {
-                    return await PopulateAirportPicker();
-                }
-                else
-                {
-                    await CoreMethods.PopPageModel();
-                    return null;
-                }
-            }
         }
 
         private async Task<ICollection<Airline>> PopulateAirlinePicker()
