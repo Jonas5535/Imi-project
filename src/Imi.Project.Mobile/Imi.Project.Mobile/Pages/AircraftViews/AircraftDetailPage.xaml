@@ -30,7 +30,7 @@
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image}" VerticalOptions="FillAndExpand" Aspect="AspectFit">
+                    <Image Grid.Row="0" Grid.ColumnSpan="2" Source="{Binding ShownAircraft.Image, Converter={StaticResource PlaceholderCheck}}" VerticalOptions="FillAndExpand" Aspect="AspectFit">
                         <Image.Behaviors>
                             <urisource:TlsSourceBehavior IgnoreCertificateErrors="True"/>
                         </Image.Behaviors>
