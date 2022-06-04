@@ -73,7 +73,6 @@ namespace Imi.Project.Mobile.ViewModels
                 await FilteredListInit();
         }
 
-
         public ICommand RefreshListCommand => new Command(
             async () =>
             {
@@ -150,9 +149,24 @@ namespace Imi.Project.Mobile.ViewModels
             IsBusy = false;
         }
 
-        private Task FilteredListInit()
+        private async Task FilteredListInit()
         {
-            throw new NotImplementedException();
+            IsBusy = true;
+
+            BaseResponse<ICollection<Aircraft>> response = await _aircraftService.ListFilteredAsync(_filterModel);
+
+            if (response.IsSucces)
+            {
+                ObservableCollection<Aircraft> aircrafts = new ObservableCollection<Aircraft>(response.Data);
+                Aircrafts = null;
+                Aircrafts = aircrafts;
+                _hasChanged = false;
+            }
+            else
+            {
+                bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
+                if (answer is true) await FilteredListInit();
+            }
         }
     }
 }
