@@ -63,6 +63,7 @@ namespace Imi.Project.Mobile.ViewModels
             
             _filterModel = returnedData as FilterModel;
             if (_filterModel != null) IsFiltered = true;
+            else IsFiltered = false;
         }
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
@@ -76,7 +77,10 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand RefreshListCommand => new Command(
             async () =>
             {
-                await ListInit();
+                if (!IsFiltered)
+                    await ListInit();
+                if (IsFiltered)
+                    await FilteredListInit();
             }    
         );
 
@@ -167,6 +171,7 @@ namespace Imi.Project.Mobile.ViewModels
                 bool answer = await CoreMethods.DisplayAlert(response.Status, response.ErrorMessage, "Opnieuw proberen", "Stoppen");
                 if (answer is true) await FilteredListInit();
             }
+            IsBusy = false;
         }
     }
 }

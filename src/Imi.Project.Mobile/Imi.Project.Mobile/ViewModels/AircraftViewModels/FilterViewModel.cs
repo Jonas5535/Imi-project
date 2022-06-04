@@ -113,8 +113,8 @@ namespace Imi.Project.Mobile.ViewModels
             _filterModel = new FilterModel();
 
             _filterModel.Registration = Registration;
-            _filterModel.Type = Type.Type;
-            _filterModel.Airline = Airline.Name;
+            if (Type != null) _filterModel.Type = Type.Type;
+            if (Airline != null) _filterModel.Airline = Airline.Name;
             _filterModel.SpecialLivery = SpecialLivery;
         }
 
