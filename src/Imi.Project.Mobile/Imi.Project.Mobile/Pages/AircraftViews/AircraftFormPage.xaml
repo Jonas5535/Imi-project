@@ -16,11 +16,19 @@
                 <StackLayout>
                     <Label Text="Afbeelding" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                     <StackLayout Orientation="Horizontal">
-                        <Button Text="Selecteer" Margin="15,10,0,0" BackgroundColor="{StaticResource MainYellow}" TextColor="Black" CornerRadius="10"></Button>
-                        <Label Text="test" Style="{StaticResource FormLabel}" Margin="15,25,0,0"></Label>
+                        <Button Text="Selecteer" Margin="15,10,0,0" BackgroundColor="{StaticResource MainYellow}" TextColor="Black" CornerRadius="10"
+                                Command="{Binding SelectImageCommand}"></Button>
+                        <Label Text="{Binding ImageTitle}" Style="{StaticResource FormLabel}" Margin="15,25,0,0"></Label>
                     </StackLayout>
                     <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                     <Entry Text="{Binding Registration}" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6">
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding RegistrationError}"

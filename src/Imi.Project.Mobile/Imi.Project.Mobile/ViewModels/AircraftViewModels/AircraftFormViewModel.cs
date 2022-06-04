@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Imi.Project.Mobile.ViewModels
@@ -21,6 +22,7 @@ namespace Imi.Project.Mobile.ViewModels
         private readonly IValidator<AircraftFormModel> _aircraftValidator;
         private Aircraft _currentAircraft;
         private bool _isNew = true;
+        private bool _skipLoad = false;
 
         public event EventHandler AddPickerClicked;
         public event EventHandler LoadAircraftStateInitiated;
@@ -93,6 +95,30 @@ namespace Imi.Project.Mobile.ViewModels
             set
             {
                 airportPickerContent = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private FileResult image;
+
+        public FileResult Image
+        {
+            get { return image; }
+            set
+            {
+                image = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string imageTitle;
+
+        public string ImageTitle
+        {
+            get { return imageTitle; }
+            set
+            {
+                imageTitle = value;
                 RaisePropertyChanged();
             }
         }
@@ -252,9 +278,32 @@ namespace Imi.Project.Mobile.ViewModels
 
         protected async override void ViewIsAppearing(object sender, EventArgs e)
         {
-            await PopulatePickers();
-            await RefreshAircraft();
+            if (_skipLoad is false)
+            {
+                await PopulatePickers();
+                await RefreshAircraft();
+            }
         }
+
+        public ICommand SelectImageCommand => new Command(
+            async () =>
+            {
+                var options = new PickOptions { FileTypes = FilePickerFileType.Images};
+                _skipLoad = true; // Needed to prevent reloading of the form, which could lead to errors
+
+                try
+                {
+                    Image = await FilePicker.PickAsync(options);
+                    if (Image != null)
+                        ImageTitle = Image.FileName;
+                    else ImageTitle = null;
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        );
 
         public ICommand AddAirportPickerCommand => new Command(
             () =>
