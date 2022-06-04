@@ -348,6 +348,7 @@ namespace Imi.Project.Mobile.ViewModels
             {
                 FirstSeen = DateTime.Today;
                 LastSeen = DateTime.Today;
+                Airports = new List<Airport>();
             }
             else
             {

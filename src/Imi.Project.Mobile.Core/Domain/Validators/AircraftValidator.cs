@@ -27,7 +27,8 @@ namespace Imi.Project.Mobile.Core.Domain.Validators
 
             RuleFor(Aircraft => Aircraft.AirportIds)
                 .NotEmpty()
-                .WithMessage("De luchthaven mag niet leeg zijn");
+                .WithMessage("De luchthaven mag niet leeg zijn")
+                ;
         }
     }
 }
