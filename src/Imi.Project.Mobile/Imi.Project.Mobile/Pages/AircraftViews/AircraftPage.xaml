@@ -12,7 +12,7 @@
         <ToolbarItem Text="Toevoegen" IconImageSource="Add.png" Priority="4" Order="Primary" Command="{Binding AddAircraftCommand}"/>
         <ToolbarItem Text="Filter" IconImageSource="Filter.png" Priority="3" Order="Primary" Command="{Binding OpenFilterPageCommand}"/>
         <ToolbarItem Text="Herladen" IconImageSource="Refresh.png" Priority="2" Order="Primary" Command="{Binding RefreshListCommand}"/>
-        <ToolbarItem Text="Filters resetten" IconImageSource="Clear.png" Priority="1" Order="Primary" />
+        <ToolbarItem Text="Filters resetten" IconImageSource="Clear.png" Priority="1" Order="Primary" Command="{Binding ClearFiltersCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <AbsoluteLayout>

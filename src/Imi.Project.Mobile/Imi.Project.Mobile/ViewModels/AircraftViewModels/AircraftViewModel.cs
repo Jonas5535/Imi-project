@@ -84,6 +84,22 @@ namespace Imi.Project.Mobile.ViewModels
             }    
         );
 
+        public ICommand ClearFiltersCommand => new Command(
+            () =>
+            {
+                if (IsFiltered)
+                {
+                    IsFiltered = false;
+                    _filterModel = null;
+                    RefreshListCommand.Execute(null);
+                }
+                else
+                {
+                    CoreMethods.DisplayAlert("Info", "Er zijn momenteel geen filters om uit te zetten. Mischien kan je ze eens proberen. 😉", "OK");
+                }
+            }
+        );
+
         public ICommand OpenAircraftDetailPageCommand => new Command<Aircraft>(
             async (Aircraft aircraft) =>
             {
