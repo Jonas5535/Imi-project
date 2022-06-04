@@ -12,6 +12,7 @@ namespace Imi.Project.Mobile.Pages
     public partial class AircraftFormPage : ContentPage
     {
         private List<Picker> pickers = new List<Picker>();
+        private bool _skipLoad = false;
 
         public AircraftFormPage()
         {
@@ -20,13 +21,17 @@ namespace Imi.Project.Mobile.Pages
 
         protected override void OnAppearing()
         {
-            pickers.Add(pckAirport);
-            base.OnAppearing();
+            if (_skipLoad is false) //Needed to avoid weird bugs caused by double loading
+            {
+                pickers.Add(pckAirport);
+                base.OnAppearing();
 
-            AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
-            viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
-            viewModel.LoadAircraftStateInitiated += ViewModel_LoadAircraftStateInitiated;
-            viewModel.SaveAircraftStateInitiated += ViewModel_SaveAircraftStateInitiated;
+                AircraftFormViewModel viewModel = BindingContext as AircraftFormViewModel;
+                viewModel.AddPickerClicked += ViewModel_AddPickerClicked;
+                viewModel.LoadAircraftStateInitiated += ViewModel_LoadAircraftStateInitiated;
+                viewModel.SaveAircraftStateInitiated += ViewModel_SaveAircraftStateInitiated;
+                _skipLoad = true;
+            }
         }
 
         private Picker AddPicker()

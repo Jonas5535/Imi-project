@@ -75,9 +75,59 @@ namespace Imi.Project.Mobile.Core.Domain.Services
             return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Post);
         }
 
+        public static async Task<BaseResponse<TOut>> PostCallApiWithImage<TOut, TIn>(string endpoint, MultipartFormDataContent image)
+        {
+            return await CallApiWithImage<TOut, TIn>(endpoint, image, HttpMethod.Post);
+        }
+
         public static async Task<BaseResponse<TOut>> DeleteCallApi<TOut>(string endpoint)
         {
             return await CallApi<TOut, object>(endpoint, null, HttpMethod.Delete);
+        }
+
+        private static async Task<BaseResponse<TOut>> CallApiWithImage<TOut, Tin>(string endpoint, MultipartFormDataContent image, HttpMethod httpMethod)
+        {
+            BaseResponse<TOut> result = new BaseResponse<TOut>();
+
+            using (HttpClient httpClient = new HttpClient(ClientHandler()))
+            {
+                HttpResponseMessage response;
+
+                try
+                {
+                    if (httpMethod == HttpMethod.Post)
+                    {
+                        response = await httpClient.PostAsync($"{ApiBaseUri.baseUri}/{endpoint}", image);
+                    }
+                    else
+                    {
+                        response = await httpClient.PutAsync($"{ApiBaseUri.baseUri}/{endpoint}", image);
+                    }
+                    result = await response.Content.ReadAsAsync<BaseResponse<TOut>>();
+                }
+                catch (HttpRequestException ex)
+                {
+                    result.IsSucces = false;
+                    result.Status = "Server niet bereikbaar";
+                    result.ErrorMessage = ex.Message;
+                    return result;
+                }
+                catch (TaskCanceledException)
+                {
+                    result.IsSucces = false;
+                    result.Status = "Time out";
+                    result.ErrorMessage = "Het ophalen van de data is gestopt.";
+                    return result;
+                }
+                catch (Exception)
+                {
+                    result.IsSucces = false;
+                    result.Status = "Fout!";
+                    result.ErrorMessage = "Er is iets misgelopen tijdens het ophalen van de data";
+                    return result;
+                }
+            }
+            return result;
         }
 
         private static async Task<BaseResponse<TOut>> CallApi<TOut, TIn>(string endpoint, TIn entity, HttpMethod httpMethod)

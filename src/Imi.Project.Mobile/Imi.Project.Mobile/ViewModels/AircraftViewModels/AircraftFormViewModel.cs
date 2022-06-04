@@ -5,7 +5,6 @@ using Imi.Project.Mobile.Core.Domain.Interfaces;
 using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -29,7 +28,7 @@ namespace Imi.Project.Mobile.ViewModels
         public event EventHandler LoadAircraftStateInitiated;
         public event EventHandler SaveAircraftStateInitiated;
 
-        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator, IAirportService airportService, 
+        public AircraftFormViewModel(IAircraftService aircraftService, IValidator<AircraftFormModel> aircraftValidator, IAirportService airportService,
             IAirlineService airlineService, IAircraftTypeService aircraftTypeService)
         {
             _aircraftService = aircraftService;
@@ -100,9 +99,9 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
-        private Stream image;
+        private ImageFile image;
 
-        public Stream Image
+        public ImageFile Image
         {
             get { return image; }
             set
@@ -289,17 +288,21 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand SelectImageCommand => new Command(
             async () =>
             {
-                var options = new PickOptions { FileTypes = FilePickerFileType.Images};
+                var options = new PickOptions { FileTypes = FilePickerFileType.Images };
                 _skipLoad = true; // Needed to prevent reloading of the form, which could lead to errors
 
                 try
                 {
                     var result = await FilePicker.PickAsync(options);
                     if (result != null)
-                        ImageTitle = result.FileName;
+                    {
+                        Image = new ImageFile();
+                        Image.Name = result.FileName;
+                        Image.ContentType = result.ContentType;
+                        Image.Data = await result.OpenReadAsync();
+                        ImageTitle = result.FileName; //Needed to show selected image on UI
+                    }
                     else ImageTitle = null;
-
-                    Image = await result.OpenReadAsync();
                 }
                 catch (Exception)
                 {
