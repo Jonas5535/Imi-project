@@ -55,6 +55,8 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
                 HasSpecialLivery = entity.HasSpecialLivery,
                 FirstSeen = entity.FirstSeen,
                 LastSeen = entity.LastSeen,
+                Latitude = entity.Latitude,
+                Longitude = entity.Longitude,
                 AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id.Equals(entity.AircraftTypeId)),
                 Airline = _airlines.FirstOrDefault(a => a.Id.Equals(entity.AirlineId)),
                 Airports = new List<Airport>()
@@ -102,6 +104,8 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Mocking
             EditedAircraft.HasSpecialLivery = entity.HasSpecialLivery;
             EditedAircraft.FirstSeen = entity.FirstSeen;
             EditedAircraft.LastSeen = entity.LastSeen;
+            EditedAircraft.Latitude = entity.Latitude;
+            EditedAircraft.Longitude = entity.Longitude;
             EditedAircraft.AircraftType = _aircraftTypes.FirstOrDefault(a => a.Id.Equals(entity.AircraftTypeId));
             EditedAircraft.Airline = _airlines.FirstOrDefault(a => a.Id.Equals(entity.AirlineId));
 
