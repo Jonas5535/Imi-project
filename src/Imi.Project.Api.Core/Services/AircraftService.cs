@@ -122,9 +122,6 @@ namespace Imi.Project.Api.Core.Services
             if (!aircrafts.Any())
             {
                 List<AircraftListResponseDto> dtoList = new List<AircraftListResponseDto>();
-                AircraftListResponseDto dto = new AircraftListResponseDto();
-                dto.AddNotFound("There were no aircrafts found that meet your search requirements");
-                dtoList.Add(dto);
                 return dtoList;
             }
 

@@ -180,6 +180,8 @@ namespace Imi.Project.Mobile.ViewModels
                 ObservableCollection<Aircraft> aircrafts = new ObservableCollection<Aircraft>(response.Data);
                 Aircrafts = null;
                 Aircrafts = aircrafts;
+                if (response.Data.Count == 0)
+                    await CoreMethods.DisplayAlert("Oeps", "Er zijn geen vliegtuigen gevonden die aan uw zoek criteria voldoen", "OK");
                 _hasChanged = false;
             }
             else
