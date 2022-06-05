@@ -105,14 +105,10 @@ else
 			Guid id = (Guid)item;
 			BaseResponse<AircraftListViewModel> response = await _aircraftService.DeleteAsync(id);
 
-			response.IsSucces = false;
-			response.Status = "Communicatiefout";
-			response.ErrorMessage = "De server is niet bereikbaar";
-
 			if (response.IsSucces)
 			{
 				await ShowList();
-				
+
 				if (showDetails)
 				{
 					GoBack();
@@ -145,11 +141,26 @@ else
 		}
 		else
 		{
-			BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync((Guid)item); //TODO Handle BaseResponse
-			AircraftDetailViewModel aircraft = response.Data;
-			LoadAircraftFormModel(aircraft);
-			isNew = false;
-			formPageTitle = $"{formModel.Registration} bewerken";
+			BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync((Guid)item);
+
+			if (response.IsSucces)
+			{
+				AircraftDetailViewModel aircraft = response.Data;
+				LoadAircraftFormModel(aircraft);
+				isNew = false;
+				formPageTitle = $"{formModel.Registration} bewerken";
+			}
+			else
+			{
+				bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{errorQuestion}");
+
+				if (confirmed)
+				{
+					await ShowForm(item);
+					return;
+				}
+				else return;
+			}
 		}
 
 		selectTypes = await GetTypesForInputSelect();
@@ -161,11 +172,23 @@ else
 	{
 		if (isNew)
 		{
-			await _aircraftService.AddAsync(formModel);
+			BaseResponse<AircraftListViewModel> response = await _aircraftService.AddAsync(formModel);
+
+			if (!response.IsSucces)
+			{
+				await _jsRuntime.InvokeVoidAsync("alert", $"{response.Status}\n{response.ErrorMessage}");
+				return;
+			}
 		}
 		else
 		{
-			await _aircraftService.UpdateAsync(formModel);
+			BaseResponse<AircraftListViewModel> response = await _aircraftService.UpdateAsync(formModel);
+
+			if (!response.IsSucces)
+			{
+				await _jsRuntime.InvokeVoidAsync("alert", $"{response.Status}\n{response.ErrorMessage}");
+				return;
+			}
 		}
 		await ShowList();
 		GoBack();
