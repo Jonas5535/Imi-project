@@ -9,16 +9,26 @@
         <ScrollView>
             <StackLayout>
                 <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
-                <Entry Placeholder="bv: OO-ABC" Text="{Binding Registration}" Style="{StaticResource StandardEntry}" MaxLength="6"></Entry>
+                <Entry Placeholder="bv: OO-ABC" Text="{Binding Registration}" Style="{StaticResource StandardEntry}" MaxLength="6"
+                       ClearButtonVisibility="WhileEditing"></Entry>
                 <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
-                <Picker Title="Kies een type" Style="{StaticResource StandardPicker}"
-                        ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}" SelectedItem="{Binding Type}"></Picker>
+                <StackLayout Orientation="Horizontal">
+                    <Picker Title="Kies een type" Style="{StaticResource StandardPicker}" WidthRequest="297" Margin="15,0,0,0"
+                            ItemsSource="{Binding TypePickerContent}" ItemDisplayBinding="{Binding Type}" SelectedItem="{Binding Type}"></Picker>
+                    <Button Text="X" WidthRequest="50"></Button>
+                </StackLayout>
                 <Label Text="Maatschappij" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
-                <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}"
-                        ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Airline}"></Picker>
+                <StackLayout Orientation="Horizontal">
+                    <Picker Title="Kies een airline" Style="{StaticResource StandardPicker}" WidthRequest="297" Margin="15,0,0,0"
+                            ItemsSource="{Binding AirlinePickerContent}" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding Airline}"></Picker>
+                    <Button Text="X" WidthRequest="50"></Button>
+                </StackLayout>
                 <Label Text="Special Livery" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
-                <Picker HorizontalOptions="StartAndExpand" Style="{StaticResource StandardPicker}" WidthRequest="65" ItemsSource="{Binding LiveryPickerContent}"
-                        SelectedItem="{Binding SpecialLivery}"></Picker>
+                <StackLayout Orientation="Horizontal">
+                    <Picker Style="{StaticResource StandardPicker}" WidthRequest="297" Margin="15,0,0,0"
+                            ItemsSource="{Binding LiveryPickerContent}" SelectedItem="{Binding SpecialLivery}"></Picker>
+                    <Button Text="X" WidthRequest="50"></Button>
+                </StackLayout>
                 <Button Text="Filteren" Style="{StaticResource SquareButton}" Command="{Binding FilterCommand}"></Button>
             </StackLayout>
         </ScrollView>
