@@ -89,9 +89,9 @@ namespace Imi.Project.Api.Core.Services
             return dtos;
         }
 
-        public async Task<AirlineDetailResponseDto> UpdateAsync(AirlineRequestDto requestDto)
+        public async Task<AirlineListResponseDto> UpdateAsync(AirlineRequestDto requestDto)
         {
-            AirlineDetailResponseDto dto = new AirlineDetailResponseDto();
+            AirlineListResponseDto dto = new AirlineListResponseDto();
             IQueryable<Airline> airlines = _airlineRepository.GetAll();
 
             if (!airlines.Any(a => a.Id.Equals(requestDto.Id)))
@@ -114,7 +114,7 @@ namespace Imi.Project.Api.Core.Services
             airlineEntity.ModifiedOn = DateTime.Now;
             await _airlineRepository.UpdateAsync(airlineEntity);
 
-            dto = airlineEntity.MapToDetailDto();
+            dto = airlineEntity.MapToListDtoSingle();
             return dto;
         }
     }

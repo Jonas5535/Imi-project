@@ -146,14 +146,14 @@ namespace Imi.Project.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> Put(AircraftRequestDto requestDto)
         {
-            AircraftDetailResponseDto result = await _aircraftService.UpdateAsync(requestDto);
+            AircraftListResponseDto result = await _aircraftService.UpdateAsync(requestDto);
 
             if (!result.IsSucces())
             {
                 return this.HandleErrors(result.GetErrors());
             }
 
-            BaseResponseModel<AircraftDetailResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
+            BaseResponseModel<AircraftListResponseDto> response = new() { Status = StatusConstants.OK, Data = result };
             return Ok(response);
         }
 

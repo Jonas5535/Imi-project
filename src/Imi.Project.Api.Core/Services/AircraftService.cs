@@ -170,9 +170,9 @@ namespace Imi.Project.Api.Core.Services
             return dtos;
         }
 
-        public async Task<AircraftDetailResponseDto> UpdateAsync(AircraftRequestDto requestDto)
+        public async Task<AircraftListResponseDto> UpdateAsync(AircraftRequestDto requestDto)
         {
-            AircraftDetailResponseDto dto = new AircraftDetailResponseDto();
+            AircraftListResponseDto dto = new AircraftListResponseDto();
             IQueryable<Aircraft> aircrafts = _aircraftRepository.GetAll();
 
             if (!aircrafts.Any(a => a.Id.Equals(requestDto.Id)))
@@ -235,7 +235,7 @@ namespace Imi.Project.Api.Core.Services
 
             // Get the just added aircraft from the database so the airline, aircrafttype and airport props are filled in so it can be shown in the result.
             aircraftEntity = _aircraftRepository.GetAll().SingleOrDefault(i => i.Id == aircraftEntity.Id);
-            dto = aircraftEntity.MapToDetailDto();
+            dto = aircraftEntity.MaptoListDtoSingle();
 
             if (!string.IsNullOrWhiteSpace(dto.Image))
                 dto.Image = CreateAbsolutePath(dto.Image);

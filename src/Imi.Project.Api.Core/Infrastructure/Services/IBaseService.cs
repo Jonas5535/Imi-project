@@ -10,7 +10,7 @@ namespace Imi.Project.Api.Core.Infrastructure.Services
         Task<IEnumerable<T>> ListAllAsync();
         Task<D> GetByIdAsync(Guid id);
         Task<T> AddAsync(R requestDto);
-        Task<D> UpdateAsync(R requestDto);
+        Task<T> UpdateAsync(R requestDto);
         Task<BaseDto> DeleteAsync(Guid id);
     }
 }

@@ -96,9 +96,9 @@ namespace Imi.Project.Api.Core.Services
             return dtos;
         }
 
-        public async Task<AircraftTypeDetailResponseDto> UpdateAsync(AircraftTypeRequestDto requestDto)
+        public async Task<AircraftTypeListResponseDto> UpdateAsync(AircraftTypeRequestDto requestDto)
         {
-            AircraftTypeDetailResponseDto dto = new AircraftTypeDetailResponseDto();
+            AircraftTypeListResponseDto dto = new AircraftTypeListResponseDto();
             IQueryable<AircraftType> types = _aircraftTypeRepository.GetAll();
 
             if (!types.Any(a => a.Id.Equals(requestDto.Id)))
@@ -127,7 +127,7 @@ namespace Imi.Project.Api.Core.Services
             aircraftTypeEntity.ModifiedOn = DateTime.Now;
             await _aircraftTypeRepository.UpdateAsync(aircraftTypeEntity);
 
-            dto = aircraftTypeEntity.MapToDetailDto();
+            dto = aircraftTypeEntity.MapToListDtoSingle();
             return dto;
         }
     }

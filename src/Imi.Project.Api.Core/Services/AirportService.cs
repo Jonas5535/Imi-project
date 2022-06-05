@@ -91,9 +91,9 @@ namespace Imi.Project.Api.Core.Services
             return dtos;
         }
 
-        public async Task<AirportDetailResponseDto> UpdateAsync(AirportRequestDto requestDto)
+        public async Task<AirportListResponseDto> UpdateAsync(AirportRequestDto requestDto)
         {
-            AirportDetailResponseDto dto = new AirportDetailResponseDto();
+            AirportListResponseDto dto = new AirportListResponseDto();
             IQueryable<Airport> airports = _airportRepository.GetAll();
 
             if (!airports.Any(a => a.Id.Equals(requestDto.Id)))
@@ -116,7 +116,7 @@ namespace Imi.Project.Api.Core.Services
             airportEntity.ModifiedOn = DateTime.Now;
             await _airportRepository.UpdateAsync(airportEntity);
 
-            dto = airportEntity.MapToDetailDto();
+            dto = airportEntity.MapToListDtoSingle();
             return dto;
         }
     }
