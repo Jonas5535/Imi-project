@@ -43,7 +43,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 AirportIds = new List<Guid>{ _airports[1].Id }, Image = "/Images/CRUD/IMG_1891.JPG"},
         };
 
-        public Task AddAsync(AircraftFormViewModel item)
+        public Task<BaseResponse<AircraftListViewModel>> AddAsync(AircraftFormViewModel item)
         {
             Aircraft aircraft = new Aircraft
             {
@@ -58,15 +58,19 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             };
 
             _aircrafts.Add(aircraft);
-            return Task.CompletedTask;
+
+            BaseResponse<AircraftListViewModel> response = new BaseResponse<AircraftListViewModel>();
+            return Task.FromResult(response);
         }
 
-        public Task DeleteAsync(Guid id)
+        public Task<BaseResponse<AircraftListViewModel>> DeleteAsync(Guid id)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
             if (aircraft == null) throw new ArgumentException("aircraft not found");
             _aircrafts.Remove(aircraft);
-            return Task.CompletedTask;
+
+            BaseResponse<AircraftListViewModel> response = new BaseResponse<AircraftListViewModel>();
+            return Task.FromResult(response);
         }
 
         public async Task<AircraftType[]> GetAircraftTypes()
@@ -84,7 +88,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(_airports);
         }
 
-        public async Task<AircraftDetailViewModel> GetByIdAsync(Guid id)
+        public async Task<BaseResponse<AircraftDetailViewModel>> GetByIdAsync(Guid id)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == id);
             if (aircraft == null) throw new ArgumentException("aircraft not found");
@@ -111,10 +115,11 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 result.Airports.Add(airport);
             }
 
-            return await Task.FromResult(result);
+            BaseResponse<AircraftDetailViewModel> response = new BaseResponse<AircraftDetailViewModel> { Data = result, Status = "OK" };
+            return await Task.FromResult(response);
         }
 
-        public async Task<IEnumerable<AircraftListViewModel>> ListAllAsync()
+        public async Task<BaseResponse<IEnumerable<AircraftListViewModel>>> ListAllAsync()
         {
             List<AircraftListViewModel> aircrafts;
 
@@ -127,10 +132,11 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
                 Airline = _airlines.FirstOrDefault(al => al.Id.Equals(a.AirlineId)),
             }).ToList();
 
-            return await Task.FromResult(aircrafts);
+            BaseResponse<IEnumerable<AircraftListViewModel>> response = new BaseResponse<IEnumerable<AircraftListViewModel>> { Data = aircrafts, Status = "OK" };
+            return await Task.FromResult(response);
         }
 
-        public Task UpdateAsync(AircraftFormViewModel item)
+        public Task<BaseResponse<AircraftDetailViewModel>> UpdateAsync(AircraftFormViewModel item)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == item.Id);
             if (aircraft == null) throw new ArgumentException("Aircraft not found");
@@ -141,7 +147,9 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             aircraft.FirstSeen = item.FirstSeen;
             aircraft.LastSeen = item.LastSeen;
             aircraft.AirportIds = item.AirportIds;
-            return Task.CompletedTask;
+
+            BaseResponse<AircraftDetailViewModel> response = new BaseResponse<AircraftDetailViewModel>();
+            return Task.FromResult(response);
         }
     }
 }

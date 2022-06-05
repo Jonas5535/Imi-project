@@ -11,7 +11,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
         Task<BaseResponse<IEnumerable<AircraftListViewModel>>> ListAllAsync();
         Task<BaseResponse<AircraftDetailViewModel>> GetByIdAsync(Guid id);
         Task<BaseResponse<AircraftListViewModel>> AddAsync(AircraftFormViewModel item);
-        Task<BaseResponse<AircraftListViewModel>> UpdateAsync(AircraftFormViewModel item);
+        Task<BaseResponse<AircraftDetailViewModel>> UpdateAsync(AircraftFormViewModel item);
         Task<BaseResponse<AircraftListViewModel>> DeleteAsync(Guid id);
         Task<Airline[]> GetAirlines();
         Task<AircraftType[]> GetAircraftTypes();

@@ -52,7 +52,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             throw new NotImplementedException();
         }
 
-        public Task<BaseResponse<AircraftListViewModel>> UpdateAsync(AircraftFormViewModel item)
+        public Task<BaseResponse<AircraftDetailViewModel>> UpdateAsync(AircraftFormViewModel item)
         {
             throw new NotImplementedException();
         }
