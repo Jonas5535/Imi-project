@@ -196,6 +196,30 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        private double? longitude;
+
+        public double? Longitude
+        {
+            get { return longitude; }
+            set
+            {
+                longitude = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private double? latitude;
+
+        public double? Latitude
+        {
+            get { return latitude; }
+            set
+            {
+                latitude = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private AircraftType aircraftType;
 
         public AircraftType AircraftType
