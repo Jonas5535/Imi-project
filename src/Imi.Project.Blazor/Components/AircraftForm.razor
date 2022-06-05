@@ -1,4 +1,5 @@
-﻿<div class="d-flex">
+﻿@using System.IO
+<div class="d-flex">
 	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left" @onclick="e => OnBackClicked.InvokeAsync()"></button>
 	<h1 class="d-inline align-self-center mr-auto">@PageTitle</h1>
 </div>
@@ -152,10 +153,18 @@
 		ImageFile image = new ImageFile
 		{
 			Name = e.File.Name,
-			ContentType = e.File.ContentType
+			ContentType = e.File.ContentType,
+			Size = e.File.Size
 		};
 
-		image.Data = e.File.OpenReadStream(maxFileSize);
+		try
+		{
+			image.Data = e.File.OpenReadStream(maxFileSize);
+		}
+		catch (IOException)
+		{
+			image.Data = null;
+		}
 		Model.Image = image;
 	}
 }
