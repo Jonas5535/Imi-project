@@ -26,10 +26,10 @@ namespace Imi.Project.Api.Core.Dtos
         [CurrentDate(ErrorMessage = "{0} cannot be later than today")]
         public DateTime LastSeen { get; set; }
 
-        // These two properties are also not required
+        // These two properties are not required
         // They serve as gps coördinates but not every platform has gps service
-        //public double? Longitude { get; set; } //Not yet in use
-        //public double? Latitude { get; set; } //Not yet in use
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
 
         [Required(ErrorMessage = "{0} is required")]
         public Guid AirlineId { get; set; }

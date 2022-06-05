@@ -90,8 +90,8 @@ namespace Imi.Project.Api.Core.Mapping
                 entity.HasSpecialLivery = requestDto.HasSpecialLivery;
                 entity.FirstSeen = requestDto.FirstSeen.Date;
                 entity.LastSeen = requestDto.LastSeen.Date;
-                //Latitude = requestDto.Latitude,   //Not yet in use
-                //Longitude = requestDto.Longitude, //Not yet in use
+                entity.Latitude = requestDto.Latitude;
+                entity.Longitude = requestDto.Longitude;
                 entity.AirlineId = requestDto.AirlineId;
                 entity.AircraftTypeId = requestDto.AircraftTypeId;
                 entity.SpottedAtAirports = airports;
@@ -105,8 +105,8 @@ namespace Imi.Project.Api.Core.Mapping
                 HasSpecialLivery = requestDto.HasSpecialLivery,
                 FirstSeen = requestDto.FirstSeen.Date,
                 LastSeen = requestDto.LastSeen.Date,
-                //Latitude = requestDto.Latitude,   //Not yet in use
-                //Longitude = requestDto.Longitude, //Not yet in use
+                Latitude = requestDto.Latitude,
+                Longitude = requestDto.Longitude,
                 AirlineId = requestDto.AirlineId,
                 AircraftTypeId = requestDto.AircraftTypeId,
                 SpottedAtAirports = airports
