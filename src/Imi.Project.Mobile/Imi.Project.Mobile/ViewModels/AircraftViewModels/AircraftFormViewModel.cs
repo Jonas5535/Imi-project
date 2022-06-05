@@ -6,6 +6,7 @@ using Imi.Project.Mobile.Core.Domain.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Essentials;
@@ -23,6 +24,7 @@ namespace Imi.Project.Mobile.ViewModels
         private Aircraft _currentAircraft;
         private bool _isNew = true;
         private bool _skipLoad = false;
+        CancellationTokenSource cts;
 
         public event EventHandler AddPickerClicked;
         public event EventHandler LoadAircraftStateInitiated;
@@ -309,6 +311,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         }
 
+        protected override void ViewIsDisappearing(object sender, EventArgs e)
+        {
+            if (cts != null && !cts.IsCancellationRequested)
+                cts.Cancel();
+            base.ViewIsDisappearing(sender, e);
+        }
+
         public ICommand SelectImageCommand => new Command(
             async () =>
             {
@@ -338,7 +347,34 @@ namespace Imi.Project.Mobile.ViewModels
         public ICommand GetGpsLocationCommand => new Command(
             async () =>
             {
-                
+                try
+                {
+                    var request = new GeolocationRequest(GeolocationAccuracy.Medium, TimeSpan.FromSeconds(10));
+                    cts = new CancellationTokenSource();
+                    var location = await Geolocation.GetLocationAsync(request, cts.Token);
+
+                    if (location != null)
+                    {
+                        Longitude = location.Longitude;
+                        Latitude = location.Latitude;
+                    }
+                }
+                catch (FeatureNotSupportedException)
+                {
+                    await CoreMethods.DisplayAlert("Niet ondersteund", "Het opvragen van de huidige locatie wordt niet ondersteund op dit platform", "OK");
+                }
+                catch (FeatureNotEnabledException)
+                {
+                    await CoreMethods.DisplayAlert("Niet ingeschakeld", "Uw locatie is uitgeschakeld. Gelieve deze in te schakelen om deze functie te gebruiken", "OK");
+                }
+                catch (PermissionException)
+                {
+                    await CoreMethods.DisplayAlert("Geen toestemming", "De app heeft geen toestemming om uw locatie uit te lezen. Gelieve locatieservices toe te staan voor deze app in de instellingen van uw apparaat", "OK");
+                }
+                catch (Exception ex)
+                {
+                    await CoreMethods.DisplayAlert("Fout!", ex.Message, "OK");
+                }
             }
         );
 
