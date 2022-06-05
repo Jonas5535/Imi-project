@@ -335,6 +335,13 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand GetGpsLocationCommand => new Command(
+            async () =>
+            {
+                
+            }
+        );
+
         public ICommand AddAirportPickerCommand => new Command(
             () =>
             {

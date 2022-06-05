@@ -80,7 +80,7 @@
                         </Grid.ColumnDefinitions>
                         <Label Grid.Row="0" Text="{Binding Longitude}" TextColor="Black" HorizontalTextAlignment="Center"></Label>
                         <Label Grid.Row="1" Text="{Binding Latitude}" TextColor="Black" HorizontalTextAlignment="Center"></Label>
-                        <Button Grid.Column="1" Grid.RowSpan="2" Text="GPS"></Button>
+                        <Button Grid.Column="1" Grid.RowSpan="2" Text="GPS" Command="{Binding GetGpsLocationCommand}"></Button>
                     </Grid>
                     <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
                     <Label Style="{StaticResource ErrorMessage}"
