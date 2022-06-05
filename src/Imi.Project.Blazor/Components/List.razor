@@ -1,6 +1,6 @@
 ﻿<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem">
-	<div class="card-body" @onclick="e => OnCardClicked.InvokeAsync(Model)">
-		<img class="card-img-top" src="@GetImage()" alt="Foto van @Model.Registration" />
+	<div class="card-body pb-2" @onclick="e => OnCardClicked.InvokeAsync(Model)">
+		<img class="card-img-top pl-2" src="@GetImage()" alt="Foto van @Model.Registration" style="width: 21rem" />
 		<div class="row align-items-center mt-3">
 			<div class="col text-center">Registratie</div>
 			<div class="col text-center">Type</div>

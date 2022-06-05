@@ -25,7 +25,7 @@ namespace Imi.Project.Blazor
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddTransient<IAircraftService, MockAircraftService>();
+            services.AddTransient<IAircraftService, ApiAircraftService>();
             services.AddTransient<IMemoryService, MemoryService>();
         }
 

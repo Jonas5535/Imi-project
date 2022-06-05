@@ -2,6 +2,6 @@
 {
     public static class ApiBaseUri
     {
-        public const string ApiBaseAddress = "https://192.168.50.100:5001/Api/";
+        public const string ApiBaseAddress = "https://localhost:5001/Api";
     }
 }
