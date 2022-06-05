@@ -25,7 +25,7 @@ else
 {
 	<div class="d-flex">
 		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
-		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(null)"></button>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(Guid.Empty)"></button>
 	</div>
 	<div class="row">
 		@foreach (var aircraft in aircrafts)
@@ -76,14 +76,13 @@ else
 		}
 	}
 
-	public async Task ShowDetails(object item)
+	public async Task ShowDetails(AircraftListViewModel aircraft)
 	{
-		AircraftListViewModel receivedModel = item as AircraftListViewModel;
-		BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync(receivedModel.Id);
+		BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync(aircraft.Id);
 
 		if (response.IsSucces)
 		{
-			aircraft = response.Data;
+			this.aircraft = response.Data;
 			showDetails = true;
 		}
 		else
@@ -92,18 +91,17 @@ else
 
 			if (confirmed)
 			{
-				await ShowDetails(item);
+				await ShowDetails(aircraft);
 			}
 		}
 	}
 
-	public async Task DeleteAsync(object item)
+	public async Task DeleteAsync(Guid id)
 	{
 		bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", "Ben je zeker dat je dit vliegtuig wilt verwijderen?");
 
 		if (confirmed)
 		{
-			Guid id = (Guid)item;
 			BaseResponse<AircraftListViewModel> response = await _aircraftService.DeleteAsync(id);
 
 			if (response.IsSucces)
@@ -129,9 +127,9 @@ else
 		formModel = null;
 	}
 
-	public async Task ShowForm(object item)
+	public async Task ShowForm(Guid id)
 	{
-		if (item == null)
+		if (id == Guid.Empty)
 		{
 			isNew = true;
 			formModel = new AircraftFormViewModel();
@@ -142,7 +140,7 @@ else
 		}
 		else
 		{
-			BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync((Guid)item);
+			BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync(id);
 
 			if (response.IsSucces)
 			{
@@ -157,7 +155,7 @@ else
 
 				if (confirmed)
 				{
-					await ShowForm(item);
+					await ShowForm(id);
 					return;
 				}
 				else return;

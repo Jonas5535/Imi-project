@@ -27,11 +27,11 @@
 	[Parameter]
 	public AircraftListViewModel Model { get; set; }
 	[Parameter]
-	public EventCallback<object> OnDeleteClicked { get; set; }
+	public EventCallback<Guid> OnDeleteClicked { get; set; }
 	[Parameter]
-	public EventCallback<object> OnCardClicked { get; set; }
+	public EventCallback<AircraftListViewModel> OnCardClicked { get; set; }
 	[Parameter]
-	public EventCallback<object> OnEditClicked { get; set; }
+	public EventCallback<Guid> OnEditClicked { get; set; }
 
 	private string GetImage()
 	{

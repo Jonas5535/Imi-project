@@ -53,9 +53,9 @@
 	[Parameter]
 	public EventCallback OnBackClicked { get; set; }
 	[Parameter]
-	public EventCallback<object> OnDeleteClicked { get; set; }
+	public EventCallback<Guid> OnDeleteClicked { get; set; }
 	[Parameter]
-	public EventCallback<object> OnEditClicked { get; set; }
+	public EventCallback<Guid> OnEditClicked { get; set; }
 
 	private string ConvertBoolToYesNo()
 	{

@@ -47,9 +47,8 @@ else
 		hasStarted = true;
 	}
 
-	public async Task HandleSelection(object item)
+	public async Task HandleSelection(MemoryCardModel card)
 	{
-		MemoryCardModel card = item as MemoryCardModel;
 		if (!card.MatchFound)
 		{
 			isBusy = true;
