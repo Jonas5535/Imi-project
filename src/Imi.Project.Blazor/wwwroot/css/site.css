@@ -209,6 +209,28 @@ app {
     opacity: 0.5;
 }
 
+.spinner {
+    border: 16px solid var(--Lighter-yellow);
+    border-top: 16px solid var(--Yellow);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 40%;
+    left: 55%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }

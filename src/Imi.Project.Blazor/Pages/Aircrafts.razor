@@ -27,20 +27,27 @@ else
 		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
 		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(Guid.Empty)"></button>
 	</div>
-	<div class="row">
-		@foreach (var aircraft in aircrafts)
-		{
-			<List Model="aircraft"
-			  OnCardClicked="ShowDetails"
-			  OnDeleteClicked="DeleteAsync"
-			  OnEditClicked="ShowForm">
-			</List>
-		}
-	</div>
+	@if (aircrafts == null)
+	{
+		<Spinner/>
+	}
+	else
+	{
+		<div class="row">
+			@foreach (var aircraft in aircrafts)
+			{
+				<List Model="aircraft"
+				  OnCardClicked="ShowDetails"
+				  OnDeleteClicked="DeleteAsync"
+				  OnEditClicked="ShowForm">
+				</List>
+			}
+		</div>
+	}
 }
 
 @code {
-	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
+	private IEnumerable<AircraftListViewModel> aircrafts;
 	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
 	private bool isNew = true;
@@ -63,6 +70,7 @@ else
 
 		if (response.IsSucces)
 		{
+			aircrafts = new List<AircraftListViewModel>();
 			aircrafts = response.Data;	
 		}
 		else
