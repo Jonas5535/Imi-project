@@ -49,6 +49,7 @@ else
 	private IEnumerable<InputSelectItem> selectTypes;
 	private IEnumerable<InputSelectItem> selectAirlines;
 	private IEnumerable<InputSelectItem> selectAirports;
+	private const string errorQuestion = "Wilt u de data opnieuw proberen laden?";
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -57,16 +58,42 @@ else
 
 	public async Task ShowList()
 	{
-		BaseResponse<IEnumerable<AircraftListViewModel>> response = await _aircraftService.ListAllAsync(); //TODO Handle BaseResponse
-		aircrafts = response.Data;
+		BaseResponse<IEnumerable<AircraftListViewModel>> response = await _aircraftService.ListAllAsync();
+
+		if (response.IsSucces)
+		{
+			aircrafts = response.Data;	
+		}
+		else
+		{
+			bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{errorQuestion}");
+
+			if (confirmed)
+			{
+				await ShowList();
+			}
+		}
 	}
 
 	public async Task ShowDetails(object item)
 	{
-		AircraftListViewModel receivedModel = item as AircraftListViewModel; //TODO Handle BaseResponse
+		AircraftListViewModel receivedModel = item as AircraftListViewModel;
 		BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync(receivedModel.Id);
-		aircraft = response.Data;
-		showDetails = true;
+
+		if (response.IsSucces)
+		{
+			aircraft = response.Data;
+			showDetails = true;
+		}
+		else
+		{
+			bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{errorQuestion}");
+
+			if (confirmed)
+			{
+				await ShowDetails(item);
+			}
+		}
 	}
 
 	public async Task DeleteAsync(object item)
@@ -76,13 +103,25 @@ else
 		if (confirmed)
 		{
 			Guid id = (Guid)item;
-			await _aircraftService.DeleteAsync(id);
-			await ShowList();
-		}
+			BaseResponse<AircraftListViewModel> response = await _aircraftService.DeleteAsync(id);
 
-		if (showDetails)
-		{
-			GoBack();
+			response.IsSucces = false;
+			response.Status = "Communicatiefout";
+			response.ErrorMessage = "De server is niet bereikbaar";
+
+			if (response.IsSucces)
+			{
+				await ShowList();
+				
+				if (showDetails)
+				{
+					GoBack();
+				}
+			}
+			else
+			{
+				await _jsRuntime.InvokeVoidAsync("alert", $"{response.Status}\n{response.ErrorMessage}");
+			}
 		}
 	}
 
