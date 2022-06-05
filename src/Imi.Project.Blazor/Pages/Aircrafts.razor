@@ -1,5 +1,5 @@
 ﻿@page "/aircraft"
-@inject ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel> _aircraftService
+@inject IAircraftService _aircraftService
 @inject IJSRuntime _jsRuntime
 
 @if (formModel != null)

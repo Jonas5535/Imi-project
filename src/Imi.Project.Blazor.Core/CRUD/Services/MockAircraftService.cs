@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Imi.Project.Blazor.Core.CRUD.Services
 {
-    public class MockAircraftService : ICRUDService<AircraftListViewModel, AircraftDetailViewModel, AircraftFormViewModel>
+    public class MockAircraftService : IAircraftService
     {
         private static Airline[] _airlines = new Airline[]
         {
