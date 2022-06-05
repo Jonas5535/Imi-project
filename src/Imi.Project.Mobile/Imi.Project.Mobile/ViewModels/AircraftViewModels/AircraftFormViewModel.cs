@@ -337,6 +337,10 @@ namespace Imi.Project.Mobile.ViewModels
                     }
                     else ImageTitle = null;
                 }
+                catch (PermissionException)
+                {
+                    await CoreMethods.DisplayAlert("Geen toestemming", "De app heeft geen toestemming om uw bestanden te openen. Gelieve media toegang toe te staan voor deze app in de instellingen van uw apparaat", "OK");
+                }
                 catch (Exception)
                 {
                     await CoreMethods.DisplayAlert("Fout!", "Er is iets misgelopen tijdens het selecteren van een foto", "OK");
@@ -480,6 +484,8 @@ namespace Imi.Project.Mobile.ViewModels
                 HasSpecialLivery = _currentAircraft.HasSpecialLivery;
                 FirstSeen = _currentAircraft.FirstSeen;
                 LastSeen = _currentAircraft.LastSeen;
+                Longitude = _currentAircraft.Longitude;
+                Latitude = _currentAircraft.Latitude;
                 Airports = new List<Airport>();
 
                 foreach (var airport in _currentAircraft.Airports)
@@ -505,6 +511,8 @@ namespace Imi.Project.Mobile.ViewModels
             aircraftToBeSaved.Image = Image;
             aircraftToBeSaved.FirstSeen = FirstSeen;
             aircraftToBeSaved.LastSeen = LastSeen;
+            aircraftToBeSaved.Longitude = Longitude;
+            aircraftToBeSaved.Latitude = latitude;
             aircraftToBeSaved.AirportIds = new List<Guid>();
 
             SaveAircraftStateInitiated(this, EventArgs.Empty);
