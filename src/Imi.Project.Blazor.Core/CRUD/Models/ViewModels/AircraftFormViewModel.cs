@@ -33,6 +33,11 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
         [CurrentDate(ErrorMessage = "De datum van {0} mag niet later zijn dan vandaag")]
         public DateTime LastSeen { get; set; }
 
+        [Display(Name = "Afbeelding")]
+        [DataType(DataType.Upload, ErrorMessage = "{0} moet een bestand zijn")]
+        [FileExtensions(Extensions = "jpg,png,jpeg", ErrorMessage = "{0} moet van het type jpg, png of jpeg zijn")]
+        public ImageFile Image { get; set; }
+
         [Display(Name = "Vliegtuigtype")]
         [Required(ErrorMessage = "{0} is verplicht")]
         [NotEmptyGuid(ErrorMessage = "{0} is verplicht")] //Needed to trigger validation failure when user doesn't select value
