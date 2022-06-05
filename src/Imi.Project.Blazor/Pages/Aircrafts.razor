@@ -134,7 +134,9 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()
 	{
-		AircraftType[] types = await _aircraftService.GetAircraftTypes();
+		BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes(); //TODO Handle BaseResponse
+
+		AircraftType[] types = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
 		int i = 1;
 
@@ -149,7 +151,9 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetAirlinesForInputSelect()
 	{
-		Airline[] airlines = await _aircraftService.GetAirlines();
+		BaseResponse<Airline[]> response = await _aircraftService.GetAirlines(); //TODO handle baseresponse
+
+		Airline[] airlines = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
 		int i = 1;
 
@@ -164,7 +168,9 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetAirportsForInputSelect()
 	{
-		Airport[] airports = await _aircraftService.GetAirports();
+		BaseResponse<Airport[]> response = await _aircraftService.GetAirports(); //TODO Handle baseresponse
+
+		Airport[] airports = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
 		int i = 1;
 
