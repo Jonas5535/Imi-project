@@ -12,6 +12,7 @@
             <conv:DateTimeToShortDateConverter x:Key="ShortDate"/>
             <conv:ValueToValueWithParamConverter x:Key="AddParameter"/>
             <conv:BoolToYesNoConverter x:Key="ConvertToYesNo"/>
+            <conv:NullToPlaceholderConverter x:Key="CheckForContent"/>
 
             <Color x:Key="MainYellow">#fdd31d</Color>
 
