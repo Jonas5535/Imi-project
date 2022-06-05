@@ -197,6 +197,7 @@ else
 			if (!response.IsSucces)
 			{
 				await _jsRuntime.InvokeVoidAsync("alert", $"{response.Status}\n{response.ErrorMessage}");
+				isBusy = false;
 				return;
 			}
 		}
@@ -207,6 +208,7 @@ else
 			if (!response.IsSucces)
 			{
 				await _jsRuntime.InvokeVoidAsync("alert", $"{response.Status}\n{response.ErrorMessage}");
+				isBusy = false;
 				return;
 			}
 		}

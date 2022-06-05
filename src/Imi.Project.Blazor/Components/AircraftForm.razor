@@ -8,6 +8,11 @@
 	<DataAnnotationsValidator />
 	<ValidationSummary />
 
+	<div class="form-group mt-3">
+		<label for="image">Afbeelding:</label>
+		<InputFile id="image" OnChange="OnInputFileChange" class="form-control-file w-auto" accept=".png,.jpg,.jpeg"/>
+		<ValidationMessage For="@(() => Model.Image)"/>
+	</div>
 	<div class="form-group">
 		<label for="registration">Registratienummer:</label>
 		<InputText id="registration" @bind-Value="Model.Registration" class="form-control w-auto" />
@@ -138,5 +143,19 @@
 			lastSeenError = null;
 			return true;
 		}
+	}
+
+	private void OnInputFileChange(InputFileChangeEventArgs e)
+	{
+		long maxFileSize = 2000000;
+
+		ImageFile image = new ImageFile
+		{
+			Name = e.File.Name,
+			ContentType = e.File.ContentType
+		};
+
+		image.Data = e.File.OpenReadStream(maxFileSize);
+		Model.Image = image;
 	}
 }
