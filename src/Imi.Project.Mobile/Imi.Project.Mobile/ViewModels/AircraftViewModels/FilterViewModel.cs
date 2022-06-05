@@ -123,6 +123,27 @@ namespace Imi.Project.Mobile.ViewModels
             }
         );
 
+        public ICommand ClearTypePickerCommand => new Command(
+            () =>
+            {
+                Type = null;
+            }
+        );
+
+        public ICommand ClearAirlinePickerCommand => new Command(
+            () =>
+            {
+                Airline = null;
+            }
+        );
+
+        public ICommand ClearSpecialLiveryCommand => new Command(
+            () =>
+            {
+                SpecialLivery = null;
+            }
+        );
+
         private void LoadFilters()
         {
             Registration = _filterModel.Registration;
@@ -151,7 +172,7 @@ namespace Imi.Project.Mobile.ViewModels
             AirlinePickerContent = await PopulateAirlinePicker();
             if (AirlinePickerContent == null) return; // Idem above
 
-            LiveryPickerContent = new List<bool?> { true, false, null };
+            LiveryPickerContent = new List<bool?> { true, false };
         }
 
         private async Task<ICollection<Airline>> PopulateAirlinePicker()
