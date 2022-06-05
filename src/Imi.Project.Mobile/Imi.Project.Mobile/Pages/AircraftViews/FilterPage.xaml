@@ -10,7 +10,15 @@
             <StackLayout>
                 <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                 <Entry Placeholder="bv: OO-ABC" Text="{Binding Registration}" Style="{StaticResource StandardEntry}" MaxLength="6"
-                       ClearButtonVisibility="WhileEditing"></Entry>
+                       ClearButtonVisibility="WhileEditing">
+                    <Entry.Keyboard>
+                        <Keyboard x:FactoryMethod="Create">
+                            <x:Arguments>
+                                <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                            </x:Arguments>
+                        </Keyboard>
+                    </Entry.Keyboard>
+                </Entry>
                 <Label Text="Type" Style="{StaticResource FormLabel}" Margin="15,0,0,0"></Label>
                 <StackLayout Orientation="Horizontal">
                     <Picker Title="Kies een type" Style="{StaticResource StandardPicker}" WidthRequest="297" Margin="15,0,0,0"
