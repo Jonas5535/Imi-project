@@ -8,11 +8,11 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
 {
     public interface IAircraftService
     {
-        Task<IEnumerable<AircraftListViewModel>> ListAllAsync();
-        Task<AircraftDetailViewModel> GetByIdAsync(Guid id);
-        Task AddAsync(AircraftFormViewModel item);
-        Task UpdateAsync(AircraftFormViewModel item);
-        Task DeleteAsync(Guid id);
+        Task<BaseResponse<IEnumerable<AircraftListViewModel>>> ListAllAsync();
+        Task<BaseResponse<AircraftDetailViewModel>> GetByIdAsync(Guid id);
+        Task<BaseResponse<AircraftListViewModel>> AddAsync(AircraftFormViewModel item);
+        Task<BaseResponse<AircraftListViewModel>> UpdateAsync(AircraftFormViewModel item);
+        Task<BaseResponse<AircraftListViewModel>> DeleteAsync(Guid id);
         Task<Airline[]> GetAirlines();
         Task<AircraftType[]> GetAircraftTypes();
         Task<Airport[]> GetAirports();
