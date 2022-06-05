@@ -16,9 +16,14 @@
 	<div class="form-group">
 		<label for="type">Type:</label>
 		<InputSelect id="type" @bind-Value="Model.AircraftTypeId" class="form-control w-auto">
-			@foreach (var type in Types)
-			{
-				<option value="@type.Value">@type.Label</option>
+			@{
+				if (Types != null)
+				{
+					foreach (var type in Types)
+					{
+							<option value="@type.Value">@type.Label</option>
+					}
+				}
 			}
 		</InputSelect>
 		<ValidationMessage For="@(() => Model.AircraftTypeId)" />
@@ -26,9 +31,14 @@
 	<div class="form-group">
 		<label for="airline">Maatschappij:</label>
 		<InputSelect id="airline" @bind-Value="Model.AirlineId" class="form-control w-auto">
-			@foreach (var airline in Airlines)
-			{
-				<option value="@airline.Value">@airline.Label</option>
+			@{
+				if (Airlines != null)
+				{
+					foreach (var airline in Airlines)
+					{
+						<option value="@airline.Value">@airline.Label</option>
+					}
+				}
 			}
 		</InputSelect>
 		<ValidationMessage For="@(() => Model.AirlineId)" />
@@ -52,9 +62,14 @@
 	<div class="form-group">
 		<label for="airport">Luchthavens:</label>
 		<InputSelect id="airport" @bind-Value="SelectedAirport" class="form-control w-auto">
-			@foreach (var airport in Airports)
-			{
-				<option value="@airport.Value">@airport.Label</option>
+			@{
+				if (Airports != null)
+				{
+					foreach (var airport in Airports)
+					{
+						<option value="@airport.Value">@airport.Label</option>
+					}
+				}
 			}
 		</InputSelect>
 		<ValidationMessage For="@(() => Model.AirportIds)" />

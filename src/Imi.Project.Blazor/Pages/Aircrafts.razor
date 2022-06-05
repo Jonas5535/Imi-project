@@ -50,6 +50,7 @@ else
 	private IEnumerable<InputSelectItem> selectAirlines;
 	private IEnumerable<InputSelectItem> selectAirports;
 	private const string errorQuestion = "Wilt u de data opnieuw proberen laden?";
+	private const string SecondErrorQuestion = "Wilt u terugkeren naar de lijst?";
 
 	protected override async Task OnInitializedAsync()
 	{
@@ -164,7 +165,11 @@ else
 		}
 
 		selectTypes = await GetTypesForInputSelect();
+		if (selectTypes == null) return;
+
 		selectAirlines = await GetAirlinesForInputSelect();
+		if (selectAirlines == null) return;
+
 		selectAirports = await GetAirportsForInputSelect();
 	}
 
@@ -196,7 +201,19 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetTypesForInputSelect()
 	{
-		BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes(); //TODO Handle BaseResponse
+		BaseResponse<AircraftType[]> response = await _aircraftService.GetAircraftTypes();
+
+		if (!response.IsSucces)
+		{
+			bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{SecondErrorQuestion}");
+
+			if (confirmed)
+			{
+				GoBack();
+				return null;
+			}
+			else return null;
+		}
 
 		AircraftType[] types = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
@@ -213,7 +230,19 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetAirlinesForInputSelect()
 	{
-		BaseResponse<Airline[]> response = await _aircraftService.GetAirlines(); //TODO handle baseresponse
+		BaseResponse<Airline[]> response = await _aircraftService.GetAirlines();
+
+		if (!response.IsSucces)
+		{
+			bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{SecondErrorQuestion}");
+
+			if (confirmed)
+			{
+				GoBack();
+				return null;
+			}
+			else return null;
+		}
 
 		Airline[] airlines = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
@@ -230,7 +259,19 @@ else
 
 	private async Task<IEnumerable<InputSelectItem>> GetAirportsForInputSelect()
 	{
-		BaseResponse<Airport[]> response = await _aircraftService.GetAirports(); //TODO Handle baseresponse
+		BaseResponse<Airport[]> response = await _aircraftService.GetAirports();
+
+		if (!response.IsSucces)
+		{
+			bool confirmed = await _jsRuntime.InvokeAsync<bool>("confirm", $"{response.Status}\n{response.ErrorMessage}\n{SecondErrorQuestion}");
+
+			if (confirmed)
+			{
+				GoBack();
+				return null;
+			}
+			else return null;
+		}
 
 		Airport[] airports = response.Data;
 		List<InputSelectItem> items = new List<InputSelectItem>();
