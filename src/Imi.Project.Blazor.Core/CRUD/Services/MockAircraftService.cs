@@ -73,19 +73,22 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return Task.FromResult(response);
         }
 
-        public async Task<AircraftType[]> GetAircraftTypes()
+        public async Task<BaseResponse<AircraftType[]>> GetAircraftTypes()
         {
-            return await Task.FromResult(_aircraftTypes);
+            BaseResponse<AircraftType[]> response = new BaseResponse<AircraftType[]> { Data = _aircraftTypes };
+            return await Task.FromResult(response);
         }
 
-        public async Task<Airline[]> GetAirlines()
+        public async Task<BaseResponse<Airline[]>> GetAirlines()
         {
-            return await Task.FromResult(_airlines);
+            BaseResponse<Airline[]> response = new BaseResponse<Airline[]> { Data = _airlines };
+            return await Task.FromResult(response);
         }
 
-        public async Task<Airport[]> GetAirports()
+        public async Task<BaseResponse<Airport[]>> GetAirports()
         {
-            return await Task.FromResult(_airports);
+            BaseResponse<Airport[]> response = new BaseResponse<Airport[]> { Data = _airports };
+            return await Task.FromResult(response);
         }
 
         public async Task<BaseResponse<AircraftDetailViewModel>> GetByIdAsync(Guid id)
@@ -136,7 +139,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             return await Task.FromResult(response);
         }
 
-        public Task<BaseResponse<AircraftDetailViewModel>> UpdateAsync(AircraftFormViewModel item)
+        public Task<BaseResponse<AircraftListViewModel>> UpdateAsync(AircraftFormViewModel item)
         {
             Aircraft aircraft = _aircrafts.SingleOrDefault(a => a.Id == item.Id);
             if (aircraft == null) throw new ArgumentException("Aircraft not found");
@@ -148,7 +151,7 @@ namespace Imi.Project.Blazor.Core.CRUD.Services
             aircraft.LastSeen = item.LastSeen;
             aircraft.AirportIds = item.AirportIds;
 
-            BaseResponse<AircraftDetailViewModel> response = new BaseResponse<AircraftDetailViewModel>();
+            BaseResponse<AircraftListViewModel> response = new BaseResponse<AircraftListViewModel>();
             return Task.FromResult(response);
         }
     }
