@@ -51,6 +51,18 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center"/>
             </Style>
 
+            <Style x:Key="BannerLabel" TargetType="Label">
+                <Setter Property="BackgroundColor" Value="{StaticResource MainYellow}"/>
+                <Setter Property="FontSize" Value="Medium"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="TextColor" Value="Black"/>
+            </Style>
+
             <!--#region Form styles-->
             <Style x:Key="FormLabel" TargetType="Label">
                 <Setter Property="TextColor" Value="Black"/>

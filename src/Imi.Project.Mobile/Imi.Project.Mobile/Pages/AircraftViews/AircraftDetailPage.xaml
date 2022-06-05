@@ -23,6 +23,8 @@
                         <RowDefinition Height="65"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="65"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="auto"/>
                     </Grid.RowDefinitions>
@@ -52,9 +54,23 @@
                            Margin="25,0,0,0" Grid.Row="6" Grid.Column="0"></Label>
                     <Label Text="{Binding ShownAircraft.LastSeen, Converter={StaticResource ShortDate}}" Style="{StaticResource ContentLabel}"
                            Grid.Row="6" Grid.Column="1"></Label>
-                    <Label Text="Luchthavens" BackgroundColor="{StaticResource MainYellow}" FontSize="Medium" FontAttributes="Bold" HorizontalOptions="FillAndExpand"
-                            HorizontalTextAlignment="Center" VerticalTextAlignment="Center" TextColor="Black" Grid.Row="7" Grid.ColumnSpan="2"/>
-                    <StackLayout Grid.Row="8" Grid.ColumnSpan="2" Margin="0,-6,0,0">
+                    <Label Text="Gezien op locatie" Style="{StaticResource BannerLabel}" Grid.Row="7" Grid.ColumnSpan="2"></Label>
+                    <Grid Grid.Row="8" Grid.ColumnSpan="2" Margin="15,0,0,15">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Label Grid.Row="0" Grid.Column="0" Text="Longitude:" TextColor="Black" Style="{StaticResource TitleLabel}"></Label>
+                        <Label Grid.Row="1" Grid.Column="0" Text="{Binding ShownAircraft.Longitude}" TextColor="Black" Style="{StaticResource ContentLabel}"></Label>
+                        <Label Grid.Row="0" Grid.Column="1" Text="Latitude:" TextColor="Black" Style="{StaticResource TitleLabel}"></Label>
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding ShownAircraft.Latitude}" TextColor="Black" Style="{StaticResource ContentLabel}"></Label>
+                    </Grid>
+                    <Label Text="Luchthavens" Style="{StaticResource BannerLabel}" Grid.Row="9" Grid.ColumnSpan="2"/>
+                    <StackLayout Grid.Row="10" Grid.ColumnSpan="2" Margin="0,-6,0,0">
                         <ListView x:Name="lvAirports" HasUnevenRows="True" SelectionMode="None" ItemsSource="{Binding ShownAircraft.Airports}">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
