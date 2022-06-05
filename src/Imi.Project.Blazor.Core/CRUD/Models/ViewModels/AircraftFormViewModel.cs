@@ -35,7 +35,8 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
 
         [Display(Name = "Afbeelding")]
         [DataType(DataType.Upload, ErrorMessage = "{0} moet een bestand zijn")]
-        [FileExtensions(Extensions = "jpg,png,jpeg", ErrorMessage = "{0} moet van het type jpg, png of jpeg zijn")]
+        //[FileExtensions(Extensions = "jpg,png,jpeg", ErrorMessage = "{0} moet van het type jpg, png of jpeg zijn")]
+        [CheckFileType(ErrorMessage = "{0} moet van het type jpg of png zijn")]
         public ImageFile Image { get; set; }
 
         [Display(Name = "Vliegtuigtype")]
