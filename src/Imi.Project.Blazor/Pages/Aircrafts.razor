@@ -2,7 +2,11 @@
 @inject IAircraftService _aircraftService
 @inject IJSRuntime _jsRuntime
 
-@if (formModel != null)
+@if (isBusy)
+{
+	<Spinner/>
+}
+else if (formModel != null)
 {
 	<AircraftForm Model="formModel"
 			  PageTitle="@formPageTitle"
@@ -27,23 +31,16 @@ else
 		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
 		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(Guid.Empty)"></button>
 	</div>
-	@if (aircrafts == null)
-	{
-		<Spinner/>
-	}
-	else
-	{
-		<div class="row">
-			@foreach (var aircraft in aircrafts)
-			{
-				<List Model="aircraft"
-				  OnCardClicked="ShowDetails"
-				  OnDeleteClicked="DeleteAsync"
-				  OnEditClicked="ShowForm">
-				</List>
-			}
-		</div>
-	}
+	<div class="row">
+		@foreach (var aircraft in aircrafts)
+		{
+			<List Model="aircraft"
+				OnCardClicked="ShowDetails"
+				OnDeleteClicked="DeleteAsync"
+				OnEditClicked="ShowForm">
+			</List>
+		}
+	</div>
 }
 
 @code {
@@ -51,6 +48,7 @@ else
 	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
 	private bool isNew = true;
+	private bool isBusy;
 	private string formPageTitle;
 	private AircraftFormViewModel formModel;
 	private IEnumerable<InputSelectItem> selectTypes;
@@ -66,7 +64,9 @@ else
 
 	public async Task ShowList()
 	{
+		isBusy = true;
 		BaseResponse<IEnumerable<AircraftListViewModel>> response = await _aircraftService.ListAllAsync();
+		isBusy = false;
 
 		if (response.IsSucces)
 		{
@@ -86,7 +86,9 @@ else
 
 	public async Task ShowDetails(AircraftListViewModel aircraft)
 	{
+		isBusy = true;
 		BaseResponse<AircraftDetailViewModel> response = await _aircraftService.GetByIdAsync(aircraft.Id);
+		isBusy = false;
 
 		if (response.IsSucces)
 		{
@@ -110,7 +112,9 @@ else
 
 		if (confirmed)
 		{
+			isBusy = true; //The spinner doesn't appear on screen when isBusy is set to true on this line of code. Which is very weird.
 			BaseResponse<AircraftListViewModel> response = await _aircraftService.DeleteAsync(id);
+			isBusy = false;
 
 			if (response.IsSucces)
 			{
@@ -137,6 +141,8 @@ else
 
 	public async Task ShowForm(Guid id)
 	{
+		isBusy = true;
+
 		if (id == Guid.Empty)
 		{
 			isNew = true;
@@ -177,10 +183,12 @@ else
 		if (selectAirlines == null) return;
 
 		selectAirports = await GetAirportsForInputSelect();
+		isBusy = false;
 	}
 
 	public async Task SaveAsync()
 	{
+		isBusy = true;
 		if (isNew)
 		{
 			BaseResponse<AircraftListViewModel> response = await _aircraftService.AddAsync(formModel);
@@ -201,6 +209,7 @@ else
 				return;
 			}
 		}
+		isBusy = false;
 		await ShowList();
 		GoBack();
 	}
