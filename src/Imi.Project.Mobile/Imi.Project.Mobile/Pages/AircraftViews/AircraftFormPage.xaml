@@ -22,7 +22,13 @@
                     </StackLayout>
                     <Label Text="Registratienummer" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                     <Entry Text="{Binding Registration}" Placeholder="bv: OO-ABC" Style="{StaticResource StandardEntry}" MaxLength="6">
-                      
+                        <Entry.Keyboard>
+                            <Keyboard x:FactoryMethod="Create">
+                                <x:Arguments>
+                                    <KeyboardFlags>CapitalizeCharacter</KeyboardFlags>
+                                </x:Arguments>
+                            </Keyboard>
+                        </Entry.Keyboard>
                     </Entry>
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding RegistrationError}"
@@ -70,19 +76,25 @@
                     <Label HorizontalOptions="EndAndExpand" Style="{StaticResource ErrorMessage}"
                            Text="{Binding LastSeenError}"
                            IsVisible="{Binding LastSeenError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
-                    <Grid>
+                    <Label Text="Locatie" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
+                    <Grid Margin="0,0,10,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="20"/>
                             <RowDefinition Height="20"/>
                         </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
-                        <Label Grid.Row="0" Text="{Binding Longitude}" TextColor="Black" HorizontalTextAlignment="Center"></Label>
-                        <Label Grid.Row="1" Text="{Binding Latitude}" TextColor="Black" HorizontalTextAlignment="Center"></Label>
-                        <Button Grid.Column="1" Grid.RowSpan="2" Text="GPS" Command="{Binding GetGpsLocationCommand}"></Button>
+                        <Label Grid.Column="0" Text="Longitude:" TextColor="Black" HorizontalTextAlignment="Center" Margin="15,0,0,0"></Label>
+                        <Label Grid.Column="0" Grid.Row="1" Text="Latitude:" TextColor="Black" HorizontalTextAlignment="Center" Margin="15,0,0,0"></Label>
+                        <Label Grid.Column="1" Grid.Row="0" Text="{Binding Longitude}" TextColor="Black" FontAttributes="Bold"></Label>
+                        <Label Grid.Column="1" Grid.Row="1" Text="{Binding Latitude}" TextColor="Black" FontAttributes="Bold"></Label>
+                        <Button Grid.Column="2" Grid.RowSpan="2" ImageSource="GPS.png" Margin="38,-3,38,-3" CornerRadius="30"
+                                BackgroundColor="{StaticResource MainYellow}" Command="{Binding GetGpsLocationCommand}"></Button>
                     </Grid>
-                    <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,10,0,0"></Label>
+                    <Label Text="Luchthavens" Style="{StaticResource FormLabel}" Margin="15,15,0,0"></Label>
                     <Label Style="{StaticResource ErrorMessage}"
                            Text="{Binding AirportError}"
                            IsVisible="{Binding AirportError, Converter={StaticResource ErrorLabelVisibilty}}"></Label>
