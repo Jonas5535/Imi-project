@@ -4,7 +4,7 @@
 
 @if (isBusy)
 {
-	<Spinner/>
+	<Spinner />
 }
 else if (formModel != null)
 {
@@ -29,22 +29,23 @@ else
 {
 	<div class="d-flex">
 		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-reload" @onclick="e => ReloadList()"></button>
 		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus" @onclick="e => ShowForm(Guid.Empty)"></button>
 	</div>
 	<div class="row">
 		@foreach (var aircraft in aircrafts)
 		{
 			<List Model="aircraft"
-				OnCardClicked="ShowDetails"
-				OnDeleteClicked="DeleteAsync"
-				OnEditClicked="ShowForm">
+		  OnCardClicked="ShowDetails"
+		  OnDeleteClicked="DeleteAsync"
+		  OnEditClicked="ShowForm">
 			</List>
 		}
 	</div>
 }
 
 @code {
-	private IEnumerable<AircraftListViewModel> aircrafts;
+	private IEnumerable<AircraftListViewModel> aircrafts = new List<AircraftListViewModel>();
 	private AircraftDetailViewModel aircraft;
 	private bool showDetails = false;
 	private bool isNew = true;
@@ -70,8 +71,7 @@ else
 
 		if (response.IsSucces)
 		{
-			aircrafts = new List<AircraftListViewModel>();
-			aircrafts = response.Data;	
+			aircrafts = response.Data;
 		}
 		else
 		{
@@ -112,7 +112,8 @@ else
 
 		if (confirmed)
 		{
-			isBusy = true; //The spinner doesn't appear on screen when isBusy is set to true on this line of code. Which is very weird.
+			isBusy = true;
+			StateHasChanged(); //Manually trigger StateHasChanged so the spinner appears
 			BaseResponse<AircraftListViewModel> response = await _aircraftService.DeleteAsync(id);
 			isBusy = false;
 
@@ -321,5 +322,11 @@ else
 			ids.Add(airport.Id);
 		}
 		formModel.AirportIds = ids;
+	}
+
+	private async void ReloadList()
+	{
+		await ShowList();
+		StateHasChanged(); //Manually trigger StateHasChanged so the spinner appears
 	}
 }
