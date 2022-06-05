@@ -39,6 +39,9 @@ namespace Imi.Project.Blazor.Core.CRUD.Models.ViewModels
         [CheckFileSize(ErrorMessage = "De grootte van de {0} moet kleiner of gelijk zijn aan 2MB")]
         public ImageFile Image { get; set; }
 
+        public double? Longitude { get; set; }
+        public double? Latitude { get; set; }
+
         [Display(Name = "Vliegtuigtype")]
         [Required(ErrorMessage = "{0} is verplicht")]
         [NotEmptyGuid(ErrorMessage = "{0} is verplicht")] //Needed to trigger validation failure when user doesn't select value
