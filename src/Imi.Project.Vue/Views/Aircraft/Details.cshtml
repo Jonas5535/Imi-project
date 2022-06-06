@@ -1,0 +1,64 @@
+﻿@{
+	ViewData["Title"] = "Detail";
+}
+
+<div id="app">
+	<div class="d-flex">
+	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left""></button>
+	<h1 class="d-inline align-self-center mr-auto">Details</h1>
+</div>
+
+<div class="row mt-4">
+	<div class="col-lg-6 mb-4">
+		<img class="img-fluid" src="" alt="Foto van " />
+	</div>
+	<div class="col-lg-6 my-auto">
+		<div class="row">
+			<div class="col-6 font-weight-bold text-center">Registratie</div>
+			<div class="col-6 font-weight-bold text-center">Type</div>
+		</div>
+		<div class="row mt-2 mb-lg-5 mb-0">
+			<div class="col-6 text-center"></div>
+			<div class="col-6 text-center"></div>
+		</div>
+		<div class="row mt-lg-5 mt-4">
+			<div class="col-6 font-weight-bold text-center">Maatschappij</div>
+			<div class="col-6 font-weight-bold text-center">Special livery</div>
+		</div>
+		<div class="row mt-2 mb-lg-5 mb-0">
+			<div class="col-6 text-center"></div>
+			<div class="col-6 text-center"></div>
+		</div>
+		<div class="row mt-lg-5 mt-4">
+			<div class="col-6 font-weight-bold text-center">Eerst gezien</div>
+			<div class="col-6 font-weight-bold text-center">Laatst gezien</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-6 text-center"></div>
+			<div class="col-6 text-center"></div>
+		</div>
+	</div>
+</div>
+<div class="row">
+	<div class="col-12 font-weight-bold text-center bg-yellow mt-4">Luchthavens</div>
+</div>
+<div class="row mb-2">
+	
+		<div class="col-12 text-center bg-light-yellow py-1"></div>
+	
+</div>
+</div>
+
+@section scripts{
+	<script src="~/lib/vue/vue.js"></script>
+	<script src="~/lib/axios/axios.min.js"></script>
+
+	<script>
+		var app = new Vue({
+			el: "#app",
+            data: {
+
+			},
+		})
+	</script>
+}

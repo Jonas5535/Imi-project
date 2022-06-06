@@ -1,6 +1,7 @@
 ﻿using Imi.Project.Vue.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Diagnostics;
 
 namespace Imi.Project.Vue.Controllers
@@ -17,6 +18,11 @@ namespace Imi.Project.Vue.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        public IActionResult Details(Guid id)
+        {
+            return View(id);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
