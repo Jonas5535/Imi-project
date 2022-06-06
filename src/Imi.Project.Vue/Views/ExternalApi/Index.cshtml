@@ -13,7 +13,7 @@
 	</section>
 	<section v-else>
 		<div class="d-flex mt-3">
-			<img src="/Images/placeholder.png" class="mx-auto" style="width: 1000px"/>
+			<img v-bind:src="image" class="mx-auto" style="width: 1000px"/>
 		</div>
 	</section>
 </div>
@@ -23,11 +23,32 @@
 	<script src="~/lib/axios/axios.min.js"></script>
 
 	<script>
+		var apiUrl = 'https://api.waifu.im/random/?&gif=false&is_nsfw=false';
 
 		var app = new Vue({
 			el: "#app",
             data: {
                 hasError: null,
+				image: null,
+			},
+            created: function() {
+                var self = this;
+                self.fetchImage();
+			},
+            methods: {
+                fetchImage: function() {
+                    var self = this;
+                    self.hasError = false;
+
+					axios.get(apiUrl)
+                        .then(function(response) {
+                            self.image = response.data.images[0].url;
+						})
+                        .catch(error => {
+							console.log(error);
+                            self.hasError = true;
+						})
+				}
 			},
 		})
 	</script>
