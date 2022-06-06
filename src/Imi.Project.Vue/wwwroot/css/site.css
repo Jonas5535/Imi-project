@@ -33,6 +33,34 @@
         box-shadow: 2px 2px 5px #999;
     }
 
+.btn-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.spinner {
+    border: 16px solid var(--Lighter-yellow);
+    border-top: 16px solid var(--Yellow);
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+    animation: spin 700ms linear infinite;
+    top: 40%;
+    left: 55%;
+    position: absolute;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}
+
 a.navbar-brand {
   white-space: normal;
   text-align: center;

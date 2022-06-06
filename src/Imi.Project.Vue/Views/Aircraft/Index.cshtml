@@ -2,35 +2,45 @@
 	ViewData["Title"] = "Vliegtuigen";
 }
 
-<h1>Vliegtuigen</h1>
+<div class="d-flex">
+		<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-reload"></button>
+		<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus"></button>
+</div>
 
 <div id="app" >
-	<div class="row">
-		<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem" v-for="aircraft in aircrafts">
-			<div class="card-body">
-				<img class="card-img-top" v-bind:src="aircraft.image" alt="Foto van placeholder" />
-				<div class="row align-items-center mt-3">
-					<div class="col text-center">Registratie</div>
-					<div class="col text-center">Type</div>
-					<div class="col text-center">Maatschappij</div>
-					<div class="w-100"></div>
-					<div class="col text-center font-weight-bold pt-2">{{aircraft.registration}}</div>
-					<div class="col text-center font-weight-bold pt-2">{{aircraft.aircraftType.type}}</div>
-					<div class="col text-center font-weight-bold pt-2">{{aircraft.airline.name}}</div>
-				</div>
-			</div>
-			<div>
-				<div class="row text-center">
-					<div class="col">
-						<button class="btn oi oi-pencil"></button>
+	<section v-if="hasError">
+		<p>De data kan helaas niet geladen worden op dit moment. Probeer het later nog eens</p>
+	</section>
+	<section v-else>
+		<div v-if="isBusy" class="spinner"></div>
+		<div v-else class="row">
+			<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem" v-for="aircraft in aircrafts">
+				<div class="card-body pb-2">
+					<img class="card-img-top" v-bind:src="aircraft.image" v-bind:alt="aircraft.registration" style="width: 21rem" />
+					<div class="row align-items-center mt-3">
+						<div class="col text-center">Registratie</div>
+						<div class="col text-center">Type</div>
+						<div class="col text-center">Maatschappij</div>
+						<div class="w-100"></div>
+						<div class="col text-center font-weight-bold pt-2">{{aircraft.registration}}</div>
+						<div class="col text-center font-weight-bold pt-2">{{aircraft.aircraftType.type}}</div>
+						<div class="col text-center font-weight-bold pt-2">{{aircraft.airline.name}}</div>
 					</div>
-					<div class="col">
-						<button class="btn oi oi-trash"></button>
+				</div>
+				<div>
+					<div class="row text-center">
+						<div class="col">
+							<button class="btn oi oi-pencil"></button>
+						</div>
+						<div class="col">
+							<button class="btn oi oi-trash"></button>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</section>
 </div>
 @section scripts{
 	<script src="~/lib/vue/vue.js"></script>
@@ -43,6 +53,8 @@
 			el: "#app",
             data: {
 				aircrafts: null,
+                isBusy: false,
+				hasError: false,
 			},
             created: function() {
                 var self = this;
@@ -51,6 +63,7 @@
             methods: {
                 fetchAircrafts: function() {
                     var self = this;
+                    self.isBusy = true;
 
 					axios.get(apiURL)
                         .then(function(response) {
@@ -61,9 +74,11 @@
 								alert(response.data.errorMessage);
 							}
 						})
-						.catch(function (error){
-								console.error(error);
-						});
+                        .catch(error => {
+							console.log(error)
+                            self.hasError = true
+						})
+						.finally(() => self.isBusy = false)
 				}
 			}
 		});
