@@ -1,33 +1,72 @@
-﻿<h1>Vliegtuigen</h1>
+﻿@{
+	ViewData["Title"] = "Vliegtuigen";
+}
 
-<div class="row">
-	<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem">
-		<div class="card-body">
-			<img class="card-img-top" src="\Images\placeholder.png" alt="Foto van placeholder" />
-			<div class="row align-items-center mt-3">
-				<div class="col text-center">Registratie</div>
-				<div class="col text-center">Type</div>
-				<div class="col text-center">Maatschappij</div>
-				<div class="w-100"></div>
-				<div class="col text-center font-weight-bold pt-2">OO-ABC</div>
-				<div class="col text-center font-weight-bold pt-2">A320</div>
-				<div class="col text-center font-weight-bold pt-2">Brussels Airlines</div>
-			</div>
-		</div>
-		<div>
-			<div class="row text-center">
-				<div class="col">
-					<button class="btn oi oi-pencil"></button>
+<h1>Vliegtuigen</h1>
+
+<div id="app" >
+	<div class="row">
+		<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem" v-for="aircraft in aircrafts">
+			<div class="card-body">
+				<img class="card-img-top" v-bind:src="aircraft.image" alt="Foto van placeholder" />
+				<div class="row align-items-center mt-3">
+					<div class="col text-center">Registratie</div>
+					<div class="col text-center">Type</div>
+					<div class="col text-center">Maatschappij</div>
+					<div class="w-100"></div>
+					<div class="col text-center font-weight-bold pt-2">{{aircraft.registration}}</div>
+					<div class="col text-center font-weight-bold pt-2">{{aircraft.aircraftType.type}}</div>
+					<div class="col text-center font-weight-bold pt-2">{{aircraft.airline.name}}</div>
 				</div>
-				<div class="col">
-					<button class="btn oi oi-trash"></button>
+			</div>
+			<div>
+				<div class="row text-center">
+					<div class="col">
+						<button class="btn oi oi-pencil"></button>
+					</div>
+					<div class="col">
+						<button class="btn oi oi-trash"></button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-
 @section scripts{
 	<script src="~/lib/vue/vue.js"></script>
 	<script src="~/lib/axios/axios.min.js"></script>
+
+	<script>
+		var apiURL = 'https://localhost:5001/Api/aircrafts'
+
+		var app = new Vue({
+			el: "#app",
+            data: {
+				aircrafts: null,
+			},
+            created: function() {
+                var self = this;
+				self.fetchAircrafts();
+			},
+            methods: {
+                fetchAircrafts: function() {
+                    var self = this;
+
+					axios.get(apiURL)
+                        .then(function(response) {
+                            if (response.data.isSucces == true) {
+                                self.aircrafts = response.data.data;
+                            }
+                            else {
+								alert(response.data.errorMessage);
+							}
+						})
+						.catch(function (error){
+								console.error(error);
+						});
+				}
+			}
+		});
+	</script>
+		
 }

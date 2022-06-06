@@ -76,8 +76,13 @@ namespace Imi.Project.Api
 
             app.UseHttpsRedirection();
 
-            app.UseStaticFiles();
             app.UseRouting();
+
+            app.UseCors(builder => builder.AllowAnyOrigin()
+                .AllowAnyHeader()
+                .AllowAnyMethod());
+
+            app.UseStaticFiles();
 
             app.UseAuthorization();
 
@@ -86,9 +91,6 @@ namespace Imi.Project.Api
                 endpoints.MapControllers();
             });
 
-            app.UseCors(builder => builder.AllowAnyOrigin()
-                .AllowAnyHeader()
-                .AllowAnyMethod());
         }
     }
 }
