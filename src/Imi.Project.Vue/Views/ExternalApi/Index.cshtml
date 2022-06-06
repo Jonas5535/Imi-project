@@ -14,7 +14,7 @@
 	<section v-else>
 		<div v-if="isBusy" class="spinner"></div>
 		<div v-else class="d-flex mt-3">
-			<img v-bind:src="image" class="mx-auto" style="width: 400px"/>
+			<a v-bind:href="image" target="_blank" class="mx-auto"><img v-bind:src="image" style="width: 400px"/></a>
 		</div>
 	</section>
 </div>
