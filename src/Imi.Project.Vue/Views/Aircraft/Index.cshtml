@@ -16,7 +16,7 @@
 		<div v-else class="row">
 			<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem" v-for="aircraft in aircrafts">
 				<div class="card-body pb-2">
-					<img class="card-img-top" v-bind:src="aircraft.image" v-bind:alt="aircraft.registration" style="width: 21rem" />
+					<img class="card-img-top" v-bind:src="hasImage(aircraft)" v-bind:alt="aircraft.registration" style="width: 21rem" />
 					<div class="row align-items-center mt-3">
 						<div class="col text-center">Registratie</div>
 						<div class="col text-center">Type</div>
@@ -78,6 +78,15 @@
                         .finally(() => self.isBusy = false)
 				},
 
+                hasImage: function(currentAircraft) {
+                    if (currentAircraft.image == null) {
+                        return "/Images/placeholder.png";
+                    }
+                    else {
+                        return currentAircraft.image;
+					}
+				},
+
 				deleteAircraft: function(currentAircraft) {
                     var self = this;
                     var url = `${apiUrl}/${currentAircraft.id}`;
@@ -100,7 +109,7 @@
 							})
 							.catch(error => {
 								console.log(error);
-								alert("Er is iets misgelopen tijdens het verwijderen van het vliegtuig. Zie de console voor meer info")
+                                alert("Er is iets misgelopen tijdens het verwijderen van het vliegtuig. Zie de console voor meer info");
 							})
 					}
 				}
