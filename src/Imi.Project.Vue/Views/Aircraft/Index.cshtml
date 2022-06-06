@@ -8,7 +8,7 @@
 			<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-reload" v-on:click="fetchAircrafts"></button>
 	</div>
 
-	<section v-if="hasError">
+	<section v-if="hasError" class="mt-5">
 		<p>De data kan helaas niet geladen worden op dit moment. Probeer het later nog eens</p>
 	</section>
 	<section v-else>
