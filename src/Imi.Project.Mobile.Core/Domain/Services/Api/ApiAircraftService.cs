@@ -63,7 +63,7 @@ namespace Imi.Project.Mobile.Core.Domain.Services.Api
             sb.AppendLine("?");
             if (filters.SpecialLivery != null)
             {
-                sb.AppendLine($"hasSpecialLivery={filters.SpecialLivery}");
+                sb.AppendLine($"&hasSpecialLivery={filters.SpecialLivery}");
             }
             if (!string.IsNullOrWhiteSpace(filters.Registration))
             {
