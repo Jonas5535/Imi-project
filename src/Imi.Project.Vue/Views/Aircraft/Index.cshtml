@@ -15,18 +15,20 @@
 		<div v-if="isBusy" class="spinner"></div>
 		<div v-else class="row">
 			<div class="card mt-4 mx-1 mb-2 d-inline-block crud-card" style="width: 24rem" v-for="aircraft in aircrafts">
-				<div class="card-body pb-2">
-					<img class="card-img-top" v-bind:src="hasImage(aircraft)" v-bind:alt="aircraft.registration" style="width: 21rem" />
-					<div class="row align-items-center mt-3">
-						<div class="col text-center">Registratie</div>
-						<div class="col text-center">Type</div>
-						<div class="col text-center">Maatschappij</div>
-						<div class="w-100"></div>
-						<div class="col text-center font-weight-bold pt-2">{{aircraft.registration}}</div>
-						<div class="col text-center font-weight-bold pt-2">{{aircraft.aircraftType.type}}</div>
-						<div class="col text-center font-weight-bold pt-2">{{aircraft.airline.name}}</div>
+				<a class="text-dark" v-bind:href="goToDetailPage(aircraft)">
+					<div class="card-body pb-2">
+						<img class="card-img-top" v-bind:src="hasImage(aircraft)" v-bind:alt="aircraft.registration" style="width: 21rem" />
+						<div class="row align-items-center mt-3">
+							<div class="col text-center">Registratie</div>
+							<div class="col text-center">Type</div>
+							<div class="col text-center">Maatschappij</div>
+							<div class="w-100"></div>
+							<div class="col text-center font-weight-bold pt-2">{{aircraft.registration}}</div>
+							<div class="col text-center font-weight-bold pt-2">{{aircraft.aircraftType.type}}</div>
+							<div class="col text-center font-weight-bold pt-2">{{aircraft.airline.name}}</div>
+						</div>
 					</div>
-				</div>
+				</a>
 				<div>
 					<div class="row text-center">
 						<div class="col">
@@ -85,6 +87,10 @@
                     else {
                         return currentAircraft.image;
 					}
+				},
+
+                goToDetailPage: function(currentAircraft) { 
+                    return `https://localhost:5004/Aircraft/details/${currentAircraft.id}`;
 				},
 
 				deleteAircraft: function(currentAircraft) {
