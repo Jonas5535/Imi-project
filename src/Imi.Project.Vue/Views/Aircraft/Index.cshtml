@@ -6,7 +6,6 @@
 	<div class="d-flex">
 			<h1 class="d-inline align-self-center mr-auto">Vliegtuigen</h1>
 			<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-reload" v-on:click="fetchAircrafts"></button>
-			<button class="btn btn-circle align-self-center mb-2 mr-2 oi oi-plus"></button>
 	</div>
 
 	<section v-if="hasError">
@@ -31,10 +30,7 @@
 				<div>
 					<div class="row text-center">
 						<div class="col">
-							<button class="btn oi oi-pencil"></button>
-						</div>
-						<div class="col">
-							<button class="btn oi oi-trash"></button>
+							<button class="btn oi oi-trash" v-on:click="deleteAircraft(aircraft)"></button>
 						</div>
 					</div>
 				</div>
@@ -47,7 +43,7 @@
 	<script src="~/lib/axios/axios.min.js"></script>
 
 	<script>
-		var apiURL = 'https://localhost:5001/Api/aircrafts'
+		var apiUrl = 'https://localhost:5001/Api/aircrafts'
 
 		var app = new Vue({
 			el: "#app",
@@ -66,13 +62,13 @@
                     self.isBusy = true;
                     self.hasError = false;
 
-                    axios.get(apiURL)
+                    axios.get(apiUrl)
                         .then(function(response) {
                             if (response.data.isSucces == true) {
                                 self.aircrafts = response.data.data;
                             }
                             else {
-                                alert(response.data.errorMessage);
+                                alert(`${response.data.status}\n${response.data.errorMessage}`);
                             }
                         })
                         .catch(error => {
@@ -80,6 +76,33 @@
                             self.hasError = true;
                         })
                         .finally(() => self.isBusy = false)
+				},
+
+				deleteAircraft: function(currentAircraft) {
+                    var self = this;
+                    var url = `${apiUrl}/${currentAircraft.id}`;
+
+                    var confirmed = confirm("Ben je zeker dat je dit vliegtuig wilt verwijderen?");
+
+                    if (confirmed) {
+						axios.delete(url)
+							.then(function(response) {
+								if (response.data.isSucces == true) {
+									self.aircrafts.forEach(function(aircraft, i) {
+										if (aircraft.id == currentAircraft.id) {
+											self.aircrafts.splice(i, 1);
+										}
+									})
+								}
+								else {
+									alert(`${response.data.status}\n${response.data.errorMessage}`);
+								}
+							})
+							.catch(error => {
+								console.log(error);
+								alert("Er is iets misgelopen tijdens het verwijderen van het vliegtuig. Zie de console voor meer info")
+							})
+					}
 				}
 			}
 		});
