@@ -4,49 +4,53 @@
 
 <div id="app">
 	<div class="d-flex">
-	<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left""></button>
-	<h1 class="d-inline align-self-center mr-auto">Details</h1>
-</div>
+		<button class="btn btn-circle align-self-center mb-2 mr-4 oi oi-arrow-left"></button>
+		<h1 class="d-inline align-self-center mr-auto">Details</h1>
+	</div>
 
-<div class="row mt-4">
-	<div class="col-lg-6 mb-4">
-		<img class="img-fluid" src="" alt="Foto van " />
-	</div>
-	<div class="col-lg-6 my-auto">
+	<section v-if="hasError">
+		<p>De data kan helaas niet geladen worden op dit moment. Probeer het later nog eens</p>
+	</section>
+	<section v-else>
+		<div v-if="isBusy" class="spinner"></div>
+		<div v-else class="row mt-4">
+			<div class="col-lg-6 mb-4">
+				<img class="img-fluid" src="" alt="" />
+			</div>
+			<div class="col-lg-6 my-auto">
+				<div class="row">
+					<div class="col-6 font-weight-bold text-center">Registratie</div>
+					<div class="col-6 font-weight-bold text-center">Type</div>
+				</div>
+				<div class="row mt-2 mb-lg-5 mb-0">
+					<div class="col-6 text-center">{{aircraft.registration}}</div>
+					<div class="col-6 text-center">{{aircraft.aircraftType.brand}}{{aircraft.aircraftType.type}}</div>
+				</div>
+				<div class="row mt-lg-5 mt-4">
+					<div class="col-6 font-weight-bold text-center">Maatschappij</div>
+					<div class="col-6 font-weight-bold text-center">Special livery</div>
+				</div>
+				<div class="row mt-2 mb-lg-5 mb-0">
+					<div class="col-6 text-center">{{aircraft.airline.name}}</div>
+					<div class="col-6 text-center">{{aircraft.hasSpecialLivery}}</div>
+				</div>
+				<div class="row mt-lg-5 mt-4">
+					<div class="col-6 font-weight-bold text-center">Eerst gezien</div>
+					<div class="col-6 font-weight-bold text-center">Laatst gezien</div>
+				</div>
+				<div class="row mt-2">
+					<div class="col-6 text-center">{{aircraft.firstSeen}}</div>
+					<div class="col-6 text-center">{{aircraft.lastSeen}}</div>
+				</div>
+			</div>
+		</div>
 		<div class="row">
-			<div class="col-6 font-weight-bold text-center">Registratie</div>
-			<div class="col-6 font-weight-bold text-center">Type</div>
+			<div class="col-12 font-weight-bold text-center bg-yellow mt-4">Luchthavens</div>
 		</div>
-		<div class="row mt-2 mb-lg-5 mb-0">
-			<div class="col-6 text-center"></div>
-			<div class="col-6 text-center"></div>
+		<div class="row mb-2">
+			<div class="col-12 text-center bg-light-yellow py-1" v-for="airport in aircraft.airports"></div>
 		</div>
-		<div class="row mt-lg-5 mt-4">
-			<div class="col-6 font-weight-bold text-center">Maatschappij</div>
-			<div class="col-6 font-weight-bold text-center">Special livery</div>
-		</div>
-		<div class="row mt-2 mb-lg-5 mb-0">
-			<div class="col-6 text-center"></div>
-			<div class="col-6 text-center"></div>
-		</div>
-		<div class="row mt-lg-5 mt-4">
-			<div class="col-6 font-weight-bold text-center">Eerst gezien</div>
-			<div class="col-6 font-weight-bold text-center">Laatst gezien</div>
-		</div>
-		<div class="row mt-2">
-			<div class="col-6 text-center"></div>
-			<div class="col-6 text-center"></div>
-		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="col-12 font-weight-bold text-center bg-yellow mt-4">Luchthavens</div>
-</div>
-<div class="row mb-2">
-	
-		<div class="col-12 text-center bg-light-yellow py-1"></div>
-	
-</div>
+	</section>
 </div>
 
 @section scripts{
@@ -54,11 +58,50 @@
 	<script src="~/lib/axios/axios.min.js"></script>
 
 	<script>
+		var apiUrl = 'https://localhost:5001/Api/aircrafts';
+
 		var app = new Vue({
 			el: "#app",
             data: {
-
+				aircraft: null,
+				id: null,
+				isBusy: false,
+				hasError: false,
 			},
-		})
+			created: function() {
+				var self = this;
+				self.id = self.getIdFromUrl();
+				self.fetchAircraft();
+			},
+			methods: {
+				getIdFromUrl: function() {
+					return Window.location.pathname.split('/')[2];
+					//This somehow returns undefined even though there clearly is a property named pathname that contains a value when checking it with debugging
+				},
+
+				fetchAircraft: function() {
+					var self = this;
+					var url = `${apiUrl}/${id}`;
+
+					self.isBusy = true;
+					self.hasError = false;
+
+					axios.get(url)
+						.then(function(response) {
+							if (response.data.isSucces == true) {
+								self.aircraft = response.data.data;
+							}
+							else {
+								alert(`${response.data.status}\n${response.data.errorMessage}`);
+							}
+						})
+						.catch(error => {
+							console.log(error);
+							self.hasError = true;
+						})
+						.finally(() => self.isBusy = false)
+				},
+			}
+		});
 	</script>
 }
