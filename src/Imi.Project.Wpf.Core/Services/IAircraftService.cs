@@ -8,10 +8,10 @@ namespace Imi.Project.Wpf.Core.Services
     {
         Task<ApiBaseResponse<IEnumerable<ApiAircraftListResponse>>> ListAllAsync();
         Task<ApiBaseResponse<ApiAircraftDetailResponse>> GetByIdAsync(string id);
-        //Task<ApiBaseResponse<object>> DeleteAsync(string id);
-        //Task<ApiBaseResponse<IEnumerable<ApiAirlineResponse>>> GetAirlines();
-        //Task<ApiBaseResponse<IEnumerable<ApiAirportResponse>>> GetAirports();
-        //Task<ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>>> GetAircraftTypes();
+        Task<ApiBaseResponse<ApiAircraftListResponse>> DeleteAsync(string id);
+        Task<ApiBaseResponse<IEnumerable<ApiAirlineResponse>>> GetAirlines();
+        Task<ApiBaseResponse<IEnumerable<ApiAirportResponse>>> GetAirports();
+        Task<ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>>> GetAircraftTypes();
         //Task<ApiBaseResponse<object>> AddAsync(ApiAircraftRequest aircraft);
     }
 }

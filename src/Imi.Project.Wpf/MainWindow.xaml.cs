@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
-using Imi.Project.Wpf.Core;
 using Imi.Project.Wpf.Core.ApiModels;
+using Imi.Project.Wpf.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -116,13 +116,13 @@ namespace Imi.Project.Wpf
 
             ApiBaseResponse<IEnumerable<ApiAircraftListResponse>> response = await _aircraftService.ListAllAsync();
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 PopulateAircraftsInListBox(response.Data);
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
             }
         }
         #endregion
@@ -148,7 +148,7 @@ namespace Imi.Project.Wpf
         {
             ApiBaseResponse<IEnumerable<ApiAirportResponse>> response = await _aircraftService.GetAirports();
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 cmbAirport.ItemsSource = response.Data;
                 _airportComboBoxContent = response.Data;
@@ -156,7 +156,7 @@ namespace Imi.Project.Wpf
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
                 return false;
             }
         }
@@ -165,7 +165,7 @@ namespace Imi.Project.Wpf
         {
             ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>> response = await _aircraftService.GetAircraftTypes();
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 cmbType.ItemsSource = response.Data;
                 _typeComboBoxContent = response.Data;
@@ -173,7 +173,7 @@ namespace Imi.Project.Wpf
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
                 return false;
             }
         }
@@ -182,7 +182,7 @@ namespace Imi.Project.Wpf
         {
             ApiBaseResponse<IEnumerable<ApiAirlineResponse>> response = await _aircraftService.GetAirlines();
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 cmbAirline.ItemsSource = response.Data;
                 _airlineComboBoxContent = response.Data;
@@ -190,7 +190,7 @@ namespace Imi.Project.Wpf
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
                 return false;
             }
         }
@@ -236,7 +236,7 @@ namespace Imi.Project.Wpf
             for (int i = 1; i < requestedAircraft.Airports.Count; i++)
             {
                 ComboBox newComboBox = AddComboBox();
-                selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports[i].Id));
+                selectedAirport = _airportComboBoxContent.FirstOrDefault(a => a.Id.Equals(requestedAircraft.Airports.ElementAtOrDefault(i).Id));
                 newComboBox.SelectedItem = selectedAirport;
             }
         }
@@ -279,13 +279,13 @@ namespace Imi.Project.Wpf
         {
             ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 return response.Data;
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
                 return null;
             }
         }
@@ -399,7 +399,7 @@ namespace Imi.Project.Wpf
 
             ApiBaseResponse<ApiAircraftDetailResponse> response = await _aircraftService.GetByIdAsync(aircraft.Id);
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 ShowAircraftDetails(response.Data);
                 btnDelete.IsEnabled = true;
@@ -407,7 +407,7 @@ namespace Imi.Project.Wpf
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
             }
         }
 
@@ -415,16 +415,16 @@ namespace Imi.Project.Wpf
         {
             ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
 
-            ApiBaseResponse<object> response = await _aircraftService.DeleteAsync(aircraft.Id);
+            ApiBaseResponse<ApiAircraftListResponse> response = await _aircraftService.DeleteAsync(aircraft.Id);
 
-            if (response.Status == HttpStatusCode.OK)
+            if (response.IsSucces)
             {
                 ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
                 await LoadAircrafts();
             }
             else
             {
-                ShowFeedback(true, response.Reason.ToString(), response.ErrorMessage);
+                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
             }
         }
 

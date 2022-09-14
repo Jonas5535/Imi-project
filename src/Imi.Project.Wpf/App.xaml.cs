@@ -1,4 +1,4 @@
-﻿using Imi.Project.Wpf.Core;
+﻿using Imi.Project.Wpf.Core.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using System;
