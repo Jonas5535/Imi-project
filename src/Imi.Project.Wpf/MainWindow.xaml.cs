@@ -1,10 +1,8 @@
-﻿using FluentValidation;
-using Imi.Project.Wpf.Core.ApiModels;
+﻿using Imi.Project.Wpf.Core.ApiModels;
 using Imi.Project.Wpf.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -146,7 +144,7 @@ namespace Imi.Project.Wpf
 
         private async Task<bool> PopulateAirportComboBox()
         {
-            ApiBaseResponse<IEnumerable<ApiAirportResponse>> response = await _aircraftService.GetAirports();
+            ApiBaseResponse<ApiAirportResponse[]> response = await _aircraftService.GetAirports();
 
             if (response.IsSucces)
             {
@@ -163,7 +161,7 @@ namespace Imi.Project.Wpf
 
         private async Task<bool> PopulateTypeComboBox()
         {
-            ApiBaseResponse<IEnumerable<ApiAircraftTypeResponse>> response = await _aircraftService.GetAircraftTypes();
+            ApiBaseResponse<ApiAircraftTypeResponse[]> response = await _aircraftService.GetAircraftTypes();
 
             if (response.IsSucces)
             {
@@ -180,7 +178,7 @@ namespace Imi.Project.Wpf
 
         private async Task<bool> PopulateAirlineComboBox()
         {
-            ApiBaseResponse<IEnumerable<ApiAirlineResponse>> response = await _aircraftService.GetAirlines();
+            ApiBaseResponse<ApiAirlineResponse[]> response = await _aircraftService.GetAirlines();
 
             if (response.IsSucces)
             {
@@ -478,7 +476,9 @@ namespace Imi.Project.Wpf
 
         private async void BtnSave_Click(object sender, RoutedEventArgs e)
         {
-            SaveAircraftState();
+            MessageBox.Show("Deze functie is helaas niet beschikbaar", "Onbeschikbaar", MessageBoxButton.OK, MessageBoxImage.Information);
+
+            //SaveAircraftState();
 
             //if (Validate(_currentAircraft)) error met di van validator
             //{

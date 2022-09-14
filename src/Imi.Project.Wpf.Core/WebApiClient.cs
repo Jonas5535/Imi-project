@@ -55,6 +55,16 @@ namespace Imi.Project.Wpf.Core
             }
         }
 
+        public static async Task<ApiBaseResponse<TOut>> PutCallApi<TOut, TIn>(string endpoint, TIn entity)
+        {
+            return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Put);
+        }
+
+        public static async Task<ApiBaseResponse<TOut>> PostCallApi<TOut, TIn>(string endpoint, TIn entity)
+        {
+            return await CallApi<TOut, TIn>(endpoint, entity, HttpMethod.Post);
+        }
+
         public static async Task<ApiBaseResponse<TOut>> DeleteCallApi<TOut>(string endpoint)
         {
             return await CallApi<TOut, object>(endpoint, null, HttpMethod.Delete);
