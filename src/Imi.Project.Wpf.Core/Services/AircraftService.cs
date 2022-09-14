@@ -1,12 +1,6 @@
-﻿using Imi.Project.Shared;
-using Imi.Project.Wpf.Core.ApiModels;
+﻿using Imi.Project.Wpf.Core.ApiModels;
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Net.Http;
-using System.Text;
-using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Imi.Project.Wpf.Core.Services
@@ -32,7 +26,7 @@ namespace Imi.Project.Wpf.Core.Services
 
         public async Task<ApiBaseResponse<ApiAircraftListResponse>> DeleteAsync(string id)
         {
-            throw new NotImplementedException();
+            return await WebApiClient.DeleteCallApi<ApiAircraftListResponse>($"{_baseEndpoint}/{id}");
         }
 
         public async Task<ApiBaseResponse<IEnumerable<ApiAirlineResponse>>> GetAirlines()
