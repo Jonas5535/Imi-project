@@ -18,11 +18,3 @@ Ik kan deze informatie ook aanpassen en een admin kan zelfs info verwijderen. Lu
 
 Verder is het mogelijk om te filteren op registratie, vliegtuigtype, luchthaven, maatschappij en op livery. Ik krijg dan een lijst te zien van alle vliegtuigen die aan deze filters voldoen. Als ik een speciefiek vliegtuig zoek, dan kan ik zijn registratienummer ingeven in een zoekbalk.
 
-## Extra info
-Plaats hier de nodig informatie om het
-project te kunnen uitvoeren:
-
-- API keys of nodige secrets
-- Logingegevens
-- Database configuraties
-- ...
