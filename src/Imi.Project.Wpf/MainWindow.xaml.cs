@@ -413,18 +413,24 @@ namespace Imi.Project.Wpf
 
         private async void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
+            MessageBoxResult result = MessageBox.Show("Ben je zeker dat je dit vliegtuig wilt verwijderen?", "Verwijderen?", MessageBoxButton.YesNo,
+               MessageBoxImage.Question, MessageBoxResult.No);
 
-            ApiBaseResponse<ApiAircraftListResponse> response = await _aircraftService.DeleteAsync(aircraft.Id);
+            if (result == MessageBoxResult.Yes)
+            {
+                ApiAircraftListResponse aircraft = lstAircrafts.SelectedItem as ApiAircraftListResponse;
 
-            if (response.IsSucces)
-            {
-                ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
-                await LoadAircrafts();
-            }
-            else
-            {
-                ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
+                ApiBaseResponse<ApiAircraftListResponse> response = await _aircraftService.DeleteAsync(aircraft.Id);
+
+                if (response.IsSucces)
+                {
+                    ShowFeedback(false, "Succes", "Het vliegtuig is met succes verwijderd");
+                    await LoadAircrafts();
+                }
+                else
+                {
+                    ShowFeedback(true, response.Status.ToString(), response.ErrorMessage);
+                }
             }
         }
 
